@@ -36,6 +36,10 @@ a:hover { text-decoration: underline; }
   padding: 56px 20px 40px;
 }
 
+img {
+  max-width: 100%;
+}
+
 .hero { padding: 18px 0 34px; }
 /* Hero identity row */
 .idRow {
@@ -62,6 +66,8 @@ a:hover { text-decoration: underline; }
   object-fit: cover;
   display: block;
 }
+.idText .h1 { margin: 0; }
+.idText .sub { margin: 6px 0 0; }
 
 /* Make it a touch smaller on tiny screens */
 @media (max-width: 420px) {
@@ -120,16 +126,32 @@ a:hover { text-decoration: underline; }
 }
 
 .btnPrimary { background: rgba(255, 255, 255, 0.10); }
-/* grids used on home */
-.grid2 {
+
+/* --- Layout helpers --- */
+
+/* Slightly tighter padding on small screens */
+@media (max-width: 520px) {
+  .wrap {
+    padding: 40px 16px 32px;
+  }
+  .hero {
+    padding: 14px 0 26px;
+  }
+}
+
+/* --- Grids (used on home) --- */
+.grid,
+.grid2,
+.grid3 {
   display: grid;
   gap: 16px;
+}
+
+.grid2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid3 {
-  display: grid;
-  gap: 16px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -140,43 +162,19 @@ a:hover { text-decoration: underline; }
   }
 }
 
-/* ensure images inside cards never overflow */
-.cardMedia {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.20);
-}
-
-.cardImg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-/* ---- Grids (fix: you use grid2/grid3 in home page) ---- */
-.grid2, .grid3, .grid {
-  display: grid;
-  gap: 16px;
-}
-.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-@media (max-width: 920px) {
-  .grid3 { grid-template-columns: 1fr; }
-  .grid2 { grid-template-columns: 1fr; }
-}
-
-/* ---- Cards ---- */
+/* --- Cards --- */
 .card {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
   box-shadow: var(--shadow);
   padding: 18px 18px 16px;
-  min-height: 180px; /* less huge on mobile */
+  min-height: 180px; /* keeps mobile from feeling cramped */
 }
 
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
 
 .footer {
   margin-top: 40px;
@@ -184,23 +182,56 @@ a:hover { text-decoration: underline; }
   border-top: 1px solid var(--border);
 }
 
-/* ---- Project card (home page) ---- */
-.cardLink { display: grid; gap: 12px; }
-.cardHead { display: grid; gap: 4px; }
-.cardTitle { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
-.cardTag { margin: 0; font-size: 0.95rem; color: var(--muted); }
-.cardDesc { margin: 0; color: var(--muted); line-height: 1.5; }
+/* --- Project card (home page) --- */
+.cardLink {
+  display: grid;
+  gap: 12px;
+}
 
+.cardHead {
+  display: grid;
+  gap: 4px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+.cardTag {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.cardDesc {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/*
+  Media wrapper for `next/image` with `fill`.
+  `position: relative` + a stable `aspect-ratio` prevents layout shift.
+*/
 .cardMedia {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.20);
   position: relative;
-  aspect-ratio: 1200 / 630; /* consistent OG ratio */
+  aspect-ratio: 1200 / 630;
 }
 
-.cardImg { object-fit: cover; }
+/* `fill` renders an <img>; these apply to the actual image element */
+.cardImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
 
 .cardActions {
   display: flex;

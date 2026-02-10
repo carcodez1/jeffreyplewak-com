@@ -22,16 +22,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description:
-      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
     url: "/projects/kprovengine",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "KProvEngine" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description:
-      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
     images: [OG_IMAGE],
   },
 };
@@ -58,8 +56,8 @@ export default function Page() {
             <p className="pSub">Deterministic provenance pipelines for AI-assisted, human-reviewed workflows.</p>
 
             <p className="pLede">
-              Governance-first and local-only by design: reproducible runs, explicit human review, and reviewable artifacts
-              suitable for audit and traceability—without over-claiming autonomy.
+              Governance-first and local-only by design: reproducible runs, explicit human review, and reviewable artifacts suitable for audit and
+              traceability—without over-claiming autonomy.
             </p>
 
             <nav className="pCtas" aria-label="Project links">
@@ -90,8 +88,8 @@ export default function Page() {
                 <div className="pCardHint">V1 pipeline + evidence outputs</div>
               </div>
 
-              {/* IMPORTANT: fill image must be inside a positioned box */}
-              <div className="pMedia pMedia169">
+              {/* Next/Image fill requires a positioned parent with an explicit height (we use aspect-ratio). */}
+              <div className="pMedia pMedia169" aria-label="KProvEngine architecture diagram">
                 <Image
                   src={DIAGRAM}
                   alt="KProvEngine V1 pipeline and evidence flow"
@@ -99,6 +97,7 @@ export default function Page() {
                   className="pMediaImg"
                   priority
                   sizes="(max-width: 980px) 100vw, 420px"
+                  style={{ objectFit: "contain" }}
                 />
               </div>
 
@@ -117,8 +116,8 @@ export default function Page() {
         <div className="pGrid2">
           <div className="pCard">
             <p className="pP0">
-              Modern AI-assisted workflows often lose provenance, deterministic behavior, and explicit human accountability.
-              Outputs may be useful, but they’re difficult to audit, reproduce, or defend in regulated or high-risk contexts.
+              Modern AI-assisted workflows often lose provenance, deterministic behavior, and explicit human accountability. Outputs may be useful,
+              but they’re difficult to audit, reproduce, or defend in regulated or high-risk contexts.
             </p>
           </div>
           <div className="pCard">
@@ -246,9 +245,7 @@ python -m kprovengine.cli input.txt --out runs`}</pre>
             Architecture doc →
           </a>
         </div>
-        <div className="pFootnote">
-          V1 is intentionally stable. Rich walkthrough media (GIF/video) belongs in V2 after the interface settles.
-        </div>
+        <div className="pFootnote">V1 is intentionally stable. Rich walkthrough media (GIF/video) belongs in V2 after the interface settles.</div>
       </footer>
     </main>
   );

@@ -39,11 +39,9 @@ export default function Page() {
             />
           </div>
 
-          <div>
-            <h1 className="h1" style={{ margin: 0 }}>
-              Jeffrey R. Plewak
-            </h1>
-            <p className="sub" style={{ margin: "6px 0 0" }}>
+          <div className="idText">
+            <h1 className="h1">Jeffrey R. Plewak</h1>
+            <p className="sub">
               Senior Software Engineer — platform, full-stack, and compliance-critical systems.
             </p>
           </div>
@@ -70,8 +68,7 @@ export default function Page() {
       <section className="section">
         <h2 className="h2">Focus</h2>
         <p className="lede">
-          I build production systems where correctness, traceability, and operational clarity
-          are non-negotiable.
+          I build production systems where correctness, traceability, and operational clarity are non-negotiable.
         </p>
 
         <div className="grid3">
@@ -84,25 +81,19 @@ export default function Page() {
 
           <div className="card">
             <h3>Full-Stack Delivery</h3>
-            <p className="muted">
-              Pragmatic front-ends paired with robust backends. No demo-ware.
-            </p>
+            <p className="muted">Pragmatic front-ends paired with robust backends. No demo-ware.</p>
           </div>
 
           <div className="card">
             <h3>Compliance & Reliability</h3>
-            <p className="muted">
-              Deterministic builds, traceable artifacts, and audit-ready workflows.
-            </p>
+            <p className="muted">Deterministic builds, traceable artifacts, and audit-ready workflows.</p>
           </div>
         </div>
       </section>
 
       <section className="section">
         <h2 className="h2">Selected Work</h2>
-        <p className="lede">
-          Representative systems that reflect how I design and ship software.
-        </p>
+        <p className="lede">Representative systems that reflect how I design and ship software.</p>
 
         <div className="grid2">
           <article className="card cardLink">
@@ -112,17 +103,18 @@ export default function Page() {
             </div>
 
             <p className="cardDesc">
-              Local-only provenance engine for AI-assisted workflows. Deterministic
-              pipeline stages, explicit human review, and reproducible run artifacts.
+              Local-only provenance engine for AI-assisted workflows. Deterministic pipeline stages, explicit human
+              review, and reproducible run artifacts.
             </p>
 
-            <div className="cardMedia">
+            <div className="cardMedia" aria-label="KProvEngine preview">
               <Image
                 src="/projects/kprovengine/og.png"
                 alt="KProvEngine project preview"
-                width={1200}
-                height={630}
+                fill
                 className="cardImg"
+                sizes="(max-width: 920px) 100vw, 50vw"
+                priority={false}
               />
             </div>
 
