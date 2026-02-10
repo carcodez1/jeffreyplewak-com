@@ -2,13 +2,19 @@
    Scope: /projects/*
    Rules:
    - All project page selectors are prefixed with .p*
-   - Any Image using `fill` MUST be inside .pMedia (position:relative + aspect-ratio)
+   - Any next/image using `fill` MUST be inside .pMedia (position:relative + aspect-ratio)
 */
 
 .pWrap {
   max-width: 1080px;
   margin: 0 auto;
   padding: 48px 20px 84px;
+}
+
+@media (max-width: 520px) {
+  .pWrap {
+    padding: 32px 16px 64px;
+  }
 }
 
 .pHero {
@@ -140,6 +146,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
+
 @media (max-width: 900px) {
   .pGrid2 {
     grid-template-columns: 1fr;
@@ -149,7 +156,11 @@
 .pCard {
   border-radius: 16px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
   box-shadow: var(--shadow);
   padding: 14px 16px;
 }
@@ -221,7 +232,7 @@
   line-height: 1.45;
 }
 
-/* Media: REQUIRED wrapper for next/image fill */
+/* Media wrapper for next/image fill */
 .pMedia {
   position: relative;
   width: 100%;
@@ -235,6 +246,7 @@
 .pMedia169 { aspect-ratio: 16 / 9; }
 .pMediaOg  { aspect-ratio: 1200 / 630; }
 
+/* Next Image `fill` renders an <img>; this applies to the img */
 .pMediaImg {
   object-fit: contain;
   object-position: center;
