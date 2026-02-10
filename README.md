@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jeffreyplewak-com
 
-## Getting Started
+This is my personal portfolio and project showcase for **Jeffrey R. Plewak**, Senior Software Engineer.
 
-First, run the development server:
+This repository is for me  and others to share. V1.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Overview
+
+This site is intentionally minimal, static-first, and explicit in structure.
+
+Primary objectives:
+
+- Clear, recruiter-friendly presentation
+- Emphasis on system design, engineering judgment, and real projects
+- Strong SEO and social sharing defaults
+- Excellent performance and accessibility
+- Low operational complexity
+
+The site is suitable for direct production deployment and long-term maintenance.
+
+## Tech Stack
+
+- Framework: Next.js (App Router)
+- Language: TypeScript
+- Styling: Hand-authored CSS (no runtime framework)
+- Images: next/image with explicit aspect-ratio control
+- Deployment: Vercel
+- Node: 20.x
+- npm: 10.x
+
+## Project Structure
+
+```
+src/
+  app/
+    layout.tsx
+    page.tsx
+    globals.css
+    robots.ts
+    sitemap.ts
+    projects/
+      layout.tsx
+      projects.css
+      kprovengine/
+        page.tsx
+        opengraph-image.png
+
+public/
+  og-image.png
+  favicon.png
+  icon-192.png
+  icon-512.png
+  assets/
+    images/
+      avatar.jpeg
+  projects/
+    kprovengine/
+      og.png
+      architecture.png
+  downloads/
+    jeffrey-plewak-resume.pdf
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Description |
+|------|-------------|
+| / | Home / landing page |
+| /projects/kprovengine | KProvEngine project deep dive |
+| /robots.txt | Search engine directives |
+| /sitemap.xml | Sitemap |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All routes are statically generated.
 
-## Learn More
+## Styling Model
 
-To learn more about Next.js, take a look at the following resources:
+- globals.css  
+  Typography, layout containers, cards, grids, buttons, home page components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- projects/projects.css  
+  Scoped to /projects/* with strict selector prefixes and explicit next/image rules.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## SEO & Metadata
 
-## Deploy on Vercel
+Configured using the Next.js App Router metadata APIs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Canonical URLs
+- Open Graph metadata
+- Twitter cards
+- Static OG images
+- Sitemap and robots.txt
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Local Development
+
+Requirements:
+
+- Node.js ≥ 20
+- npm ≥ 10
+
+Install and run:
+
+```
+npm ci
+npm run dev
+```
+
+Production build:
+
+```
+npm run build
+npm run start
+```
+
+## Deployment
+
+Designed for deployment on Vercel.
+
+Recommended settings:
+
+- Framework preset: Next.js
+- Build command: next build
+- Node version: 20.x
+
+After deployment:
+
+- Assign production domain
+- Verify metadata base URL
+- Confirm sitemap and robots endpoints
+
+## Versioning
+
+This repository represents a stable v1 baseline suitable for production.
+
+## License
+
+© Jeffrey R. Plewak. All rights reserved.
