@@ -1,65 +1,156 @@
+// src/app/page.tsx
 import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Jeffrey R. Plewak — Senior Software Engineer",
+  description:
+    "Senior software engineer focused on platform, full-stack, and compliance-critical systems. Python, cloud, and reliability-first delivery.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Jeffrey R. Plewak — Senior Software Engineer",
+    description:
+      "Platform, full-stack, and compliance-critical systems. Reliability-first engineering.",
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jeffrey R. Plewak — Senior Software Engineer",
+    description:
+      "Platform, full-stack, and compliance-critical systems. Reliability-first engineering.",
+  },
+};
+
+export default function Page() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <main className="wrap">
+      <header className="hero">
+        <div className="idRow">
+          <div className="avatar" aria-label="Jeffrey R. Plewak">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/assets/images/avatar.jpeg"
+              alt="Jeffrey R. Plewak"
+              width={56}
+              height={56}
+              className="avatarImg"
+              priority
             />
-            Deploy Now
+          </div>
+
+          <div>
+            <h1 className="h1" style={{ margin: 0 }}>
+              Jeffrey R. Plewak
+            </h1>
+            <p className="sub" style={{ margin: "6px 0 0" }}>
+              Senior Software Engineer — platform, full-stack, and compliance-critical systems.
+            </p>
+          </div>
+        </div>
+
+        <div className="ctaRow">
+          <a className="btn btnPrimary" href="/downloads/jeffrey-plewak-resume.pdf" download>
+            Résumé
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            className="btn"
+            href="https://www.linkedin.com/in/jeffreyplewak"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Documentation
+            LinkedIn
+          </a>
+          <a className="btn" href="mailto:plewak.jeff@gmail.com">
+            Email
           </a>
         </div>
-      </main>
-    </div>
+      </header>
+
+      <section className="section">
+        <h2 className="h2">Focus</h2>
+        <p className="lede">
+          I build production systems where correctness, traceability, and operational clarity
+          are non-negotiable.
+        </p>
+
+        <div className="grid3">
+          <div className="card">
+            <h3>Platform & Backend</h3>
+            <p className="muted">
+              Python-first services, APIs, and data pipelines with clear contracts and observability.
+            </p>
+          </div>
+
+          <div className="card">
+            <h3>Full-Stack Delivery</h3>
+            <p className="muted">
+              Pragmatic front-ends paired with robust backends. No demo-ware.
+            </p>
+          </div>
+
+          <div className="card">
+            <h3>Compliance & Reliability</h3>
+            <p className="muted">
+              Deterministic builds, traceable artifacts, and audit-ready workflows.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <h2 className="h2">Selected Work</h2>
+        <p className="lede">
+          Representative systems that reflect how I design and ship software.
+        </p>
+
+        <div className="grid2">
+          <article className="card cardLink">
+            <div className="cardHead">
+              <h3 className="cardTitle">KProvEngine</h3>
+              <p className="cardTag">Governance-first · Deterministic · Reviewable</p>
+            </div>
+
+            <p className="cardDesc">
+              Local-only provenance engine for AI-assisted workflows. Deterministic
+              pipeline stages, explicit human review, and reproducible run artifacts.
+            </p>
+
+            <div className="cardMedia">
+              <Image
+                src="/projects/kprovengine/og.png"
+                alt="KProvEngine project preview"
+                width={1200}
+                height={630}
+                className="cardImg"
+              />
+            </div>
+
+            <div className="cardActions">
+              <Link className="btn btnPrimary" href="/projects/kprovengine">
+                Project page
+              </Link>
+              <a
+                className="btn"
+                href="https://github.com/carcodez1/KProvEngine"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+          </article>
+
+          <article className="card">
+            <h3>Additional work</h3>
+            <p className="muted">More systems and case studies available on request.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <p className="muted">© {new Date().getFullYear()} Jeffrey R. Plewak</p>
+      </footer>
+    </main>
   );
 }

@@ -1,0 +1,15 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Plewak;Jeffrey;;;
+FN:Jeffrey Plewak
+TITLE:Senior Software Engineer
+ROLE:AI Platforms, Cloud Systems, Compliance-Critical Software
+ORG:Independent / Consulting
+TEL;TYPE=WORK,VOICE:+1-561-316-7986
+EMAIL;TYPE=INTERNET,WORK:plewak.jeff@gmail.com
+URL:https://jeffreyplewak.com
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/jeffreyplewak
+URL;TYPE=GitHub:https://github.com/carcodez1
+ADR;TYPE=WORK:;;North Carolina;;;USA
+NOTE:Senior software engineer with 15+ years experience building reliable AI, cloud, and compliance-first systems across finance, defense, and enterprise platforms.
+END:VCARD
