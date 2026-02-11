@@ -1,12 +1,14 @@
+// src/app/sitemap.ts
 import type { MetadataRoute } from "next";
 
+const baseUrl = "https://www.jeffreyplewak.com";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.jeffreyplewak.com";
-  const now = new Date();
+  const now = new Date().toISOString();
 
   return [
-    { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${base}/projects/kprovengine`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/projects`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/`, lastModified: now },
+    { url: `${baseUrl}/projects`, lastModified: now },
+    { url: `${baseUrl}/projects/kprovengine`, lastModified: now },
   ];
 }
