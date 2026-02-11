@@ -24,11 +24,18 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
       "Platform, full-stack, and compliance-critical systems. Reliability-first engineering.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Jeffrey R. Plewak" }],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Jeffrey R. Plewak — Senior Software Engineer",
+      },
+    ],
   },
 
   twitter: {
