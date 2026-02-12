@@ -6,14 +6,13 @@ import "./projects.css";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "Selected engineering projects demonstrating platform design, determinism, and audit-ready systems.",
-  alternates: { canonical: "/projects" },
+  description: "Selected engineering projects demonstrating platform design, determinism, and audit-ready systems.",
+  alternates: { canonical: "/projects" }
 };
 
 export default function ProjectsPage() {
   return (
-    <main className="pWrap">
+    <main className="pWrap" id="main">
       <header className="pHero">
         <div className="pCrumb">
           <Link href="/" className="pBack">
@@ -22,30 +21,24 @@ export default function ProjectsPage() {
         </div>
 
         <h1 className="pH1">Projects</h1>
-        <p className="pLede">
-          Representative systems that reflect how I design, scope, and ship
-          production software.
-        </p>
+        <p className="pLede">Representative systems that reflect how I design, scope, and ship production software.</p>
       </header>
 
-      <section className="pSection">
+      <section className="pSection" aria-label="Project list">
         <div className="pGrid2">
-          {/* KProvEngine */}
-          <article className="pCard">
+          <article className="pCard" aria-labelledby="proj-kprovengine">
             <div className="pCardHead">
-              <div className="pCardTitle">KProvEngine</div>
-              <div className="pCardHint">
-                Deterministic · Governance-first · Human review
+              <div id="proj-kprovengine" className="pCardTitle">
+                KProvEngine
               </div>
+              <div className="pCardHint">Deterministic · Governance-first · Human review</div>
             </div>
 
             <p className="pMuted">
-              Local-only provenance engine for AI-assisted workflows with
-              deterministic execution, explicit human review, and audit-grade
-              artifacts.
+              Local-only provenance engine for AI-assisted workflows with deterministic execution, explicit human review, and audit-grade artifacts.
             </p>
 
-            <div className="pMedia pMediaOg" style={{ marginTop: 12 }}>
+            <div className="pMedia pMediaOg" style={{ marginTop: 12 }} aria-label="KProvEngine preview image">
               <Image
                 src="/projects/kprovengine/og.png"
                 alt="KProvEngine project preview"
@@ -55,28 +48,19 @@ export default function ProjectsPage() {
               />
             </div>
 
-            <div className="pCtas" style={{ marginTop: 14 }}>
+            <div className="pCtas" style={{ marginTop: 14 }} aria-label="KProvEngine actions">
               <Link className="pBtn pBtnPrimary" href="/projects/kprovengine">
                 View project
               </Link>
-              <a
-                className="pBtn"
-                href="https://github.com/carcodez1/KProvEngine"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="pBtn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
             </div>
           </article>
 
-          {/* Future slot */}
-          <article className="pCard pCardTight">
+          <article className="pCard pCardTight" aria-label="More projects">
             <div className="pCardTitle">More coming</div>
-            <p className="pMuted">
-              Additional case studies will appear here as systems reach a
-              publishable, defensible state.
-            </p>
+            <p className="pMuted">Additional case studies will appear here as systems reach a publishable, defensible state.</p>
           </article>
         </div>
       </section>

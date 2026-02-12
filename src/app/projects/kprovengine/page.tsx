@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import "../projects.css";
+import { kprovengineSourceCodeJsonLd } from "@/lib/jsonld";
 
 const LINKS = {
   home: "/",
   repo: "https://github.com/carcodez1/KProvEngine",
   readme: "https://github.com/carcodez1/KProvEngine#readme",
-  archDoc: "https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md",
+  archDoc: "https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md"
 } as const;
 
 const OG_IMAGE = "/projects/kprovengine/og.png";
@@ -24,19 +25,24 @@ export const metadata: Metadata = {
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
     description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
     url: "/projects/kprovengine",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "KProvEngine" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "KProvEngine" }]
   },
   twitter: {
     card: "summary_large_image",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
     description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
-    images: [OG_IMAGE],
-  },
+    images: [OG_IMAGE]
+  }
 };
 
 export default function Page() {
   return (
-    <main className="pWrap">
+    <main className="pWrap" id="main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(kprovengineSourceCodeJsonLd()) }}
+      />
+
       <header className="pHero">
         <div className="pCrumb">
           <Link href={LINKS.home} className="pBack">
@@ -53,11 +59,10 @@ export default function Page() {
               </span>
             </div>
 
-            <p className="pSub">Deterministic provenance pipelines for AI-assisted, human-reviewed workflows.</p>
+            <p className="pSub">Deterministic provenance for AI-assisted workflows that require explicit human review.</p>
 
             <p className="pLede">
-              Governance-first and local-only by design: reproducible runs, explicit human review, and reviewable artifacts suitable for audit and
-              traceability—without over-claiming autonomy.
+              Local-first by design: reproducible runs, captured review decisions, and evidence artifacts you can audit, diff, and defend.
             </p>
 
             <nav className="pCtas" aria-label="Project links">
@@ -73,11 +78,28 @@ export default function Page() {
             </nav>
 
             <div className="pMetaRow" aria-label="Quick tags">
-              <span className="pPill">Python</span>
-              <span className="pPill">Determinism</span>
-              <span className="pPill">Provenance</span>
-              <span className="pPill">HITL review</span>
-              <span className="pPill">SBOM/SLSA posture</span>
+              <ul className="pPillRow" role="list">
+                <li className="pPill">Python</li>
+                <li className="pPill">Determinism</li>
+                <li className="pPill">Provenance</li>
+                <li className="pPill">Human-in-the-loop</li>
+                <li className="pPill">Audit-ready outputs</li>
+              </ul>
+            </div>
+
+            <div className="pCard pCardTight pInlineNote">
+              <div className="pCalloutTitle">What you get (V1)</div>
+              <ul className="pList">
+                <li>
+                  <strong>Reproducible run directory</strong> with deterministic stages: normalize → parse → extract → render
+                </li>
+                <li>
+                  <strong>Evidence artifacts</strong> (manifest + hashes + provenance + toolchain disclosure)
+                </li>
+                <li>
+                  <strong>Explicit review record</strong> captured as an artifact (human accountability)
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -88,7 +110,6 @@ export default function Page() {
                 <div className="pCardHint">V1 pipeline + evidence outputs</div>
               </div>
 
-              {/* Next/Image fill requires a positioned parent with an explicit height (we use aspect-ratio). */}
               <div className="pMedia pMedia169" aria-label="KProvEngine architecture diagram">
                 <Image
                   src={DIAGRAM}
@@ -112,20 +133,20 @@ export default function Page() {
       </header>
 
       <section className="pSection">
-        <h2 className="pH2">Problem</h2>
+        <h2 className="pH2">Why this exists</h2>
         <div className="pGrid2">
           <div className="pCard">
             <p className="pP0">
-              Modern AI-assisted workflows often lose provenance, deterministic behavior, and explicit human accountability. Outputs may be useful,
-              but they’re difficult to audit, reproduce, or defend in regulated or high-risk contexts.
+              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can’t reliably reproduce results,
+              explain what happened, or separate human judgment from automation.
             </p>
           </div>
           <div className="pCard">
             <ul className="pList">
-              <li>“What produced this output?” isn’t answerable with artifacts.</li>
-              <li>Runs aren’t reproducible end-to-end (hidden state, network calls, drift).</li>
-              <li>Human responsibility is implied instead of captured.</li>
-              <li>Audit defense becomes narrative, not evidence.</li>
+              <li>“What produced this output?” must be answerable with artifacts, not narrative.</li>
+              <li>Runs should be reproducible end-to-end (no hidden state, no surprise network calls).</li>
+              <li>Human responsibility must be captured explicitly, not implied.</li>
+              <li>Audit defense should be evidence-backed and reviewable.</li>
             </ul>
           </div>
         </div>
@@ -154,7 +175,7 @@ export default function Page() {
                 <strong>Core stages:</strong> normalize → parse → extract → render
               </li>
               <li>Deterministic + side-effect constrained</li>
-              <li>Clear separation between core logic and adapters</li>
+              <li>Clear separation between core logic and optional adapters</li>
             </ul>
           </div>
 
@@ -165,10 +186,10 @@ export default function Page() {
                 <strong>Adapters (optional):</strong> OCR and LLM integrations
               </li>
               <li>
-                <strong>Non-authoritative by design:</strong> assists extraction; never treated as source of truth
+                <strong>Non-authoritative by design:</strong> can assist extraction; never treated as source of truth
               </li>
               <li>
-                <strong>Evidence artifacts:</strong> manifests, hashes, provenance, toolchain disclosure, review artifacts
+                <strong>Evidence artifacts:</strong> manifest, hashes, provenance, toolchain disclosure, review artifacts
               </li>
             </ul>
           </div>
@@ -183,13 +204,24 @@ export default function Page() {
       </section>
 
       <section className="pSection">
-        <h2 className="pH2">Key design decisions</h2>
+        <h2 className="pH2">Evidence outputs (what’s actually captured)</h2>
         <div className="pCard">
-          <ul className="pList pListMuted">
-            <li>AI tooling is isolated behind adapters and never treated as a source of truth.</li>
-            <li>All outputs are derived from explicit inputs and recorded execution metadata.</li>
-            <li>Human review is modeled as a first-class artifact, not an afterthought.</li>
-            <li>CI enforces scope and governance to prevent over-claiming functionality.</li>
+          <ul className="pList">
+            <li>
+              <strong>manifest.json</strong> — file inventory + expected outputs
+            </li>
+            <li>
+              <strong>hashes</strong> — content hashes for inputs/outputs
+            </li>
+            <li>
+              <strong>provenance</strong> — execution metadata (what ran, when, with what versions)
+            </li>
+            <li>
+              <strong>toolchain disclosure</strong> — dependency/tool versions that impact reproducibility
+            </li>
+            <li>
+              <strong>human review artifact</strong> — explicit reviewer decision record
+            </li>
           </ul>
         </div>
       </section>
@@ -202,18 +234,6 @@ export default function Page() {
             <li>Autonomous or agent-driven behavior</li>
             <li>Claims of compliance certification</li>
             <li>Workflow orchestration beyond a single deterministic run</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="pSection">
-        <h2 className="pH2">What this demonstrates</h2>
-        <div className="pCard">
-          <ul className="pList">
-            <li>Platform-oriented system design</li>
-            <li>Governance-aware engineering judgment</li>
-            <li>Clear separation of authority vs automation</li>
-            <li>Audit-friendly artifact generation</li>
           </ul>
         </div>
       </section>
@@ -235,7 +255,7 @@ python -m kprovengine.cli input.txt --out runs`}</pre>
         </div>
       </section>
 
-      <footer className="pFooter">
+      <footer className="pFooter" aria-label="Project footer">
         <div className="pFooterRow">
           <a className="pLink" href={LINKS.repo} target="_blank" rel="noopener noreferrer">
             GitHub repository →

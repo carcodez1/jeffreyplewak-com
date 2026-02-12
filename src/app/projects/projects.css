@@ -6,24 +6,18 @@
 */
 
 .pWrap {
-  max-width: 1080px;
+  max-width: var(--max);
   margin: 0 auto;
   padding: 48px 20px 84px;
 }
 
 @media (max-width: 520px) {
-  .pWrap {
-    padding: 32px 16px 64px;
-  }
+  .pWrap { padding: 32px 16px 64px; }
 }
 
-.pHero {
-  padding: 6px 0 22px;
-}
+.pHero { padding: 6px 0 22px; }
 
-.pCrumb {
-  margin-bottom: 14px;
-}
+.pCrumb { margin-bottom: 14px; }
 
 .pBack {
   color: var(--muted);
@@ -42,9 +36,7 @@
 }
 
 @media (max-width: 980px) {
-  .pHeroGrid {
-    grid-template-columns: 1fr;
-  }
+  .pHeroGrid { grid-template-columns: 1fr; }
 }
 
 .pTitleRow {
@@ -109,7 +101,9 @@
   transform: translateY(-1px);
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.18);
+  text-decoration: none;
 }
+
 .pBtnPrimary {
   background: rgba(37, 99, 235, 0.18);
   border-color: rgba(37, 99, 235, 0.40);
@@ -122,6 +116,15 @@
   margin-top: 10px;
 }
 
+.pPillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .pPill {
   font-size: 12px;
   padding: 6px 10px;
@@ -131,9 +134,7 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
-.pSection {
-  margin-top: 26px;
-}
+.pSection { margin-top: 26px; }
 
 .pH2 {
   margin: 0 0 12px;
@@ -148,34 +149,22 @@
 }
 
 @media (max-width: 900px) {
-  .pGrid2 {
-    grid-template-columns: 1fr;
-  }
+  .pGrid2 { grid-template-columns: 1fr; }
 }
 
 .pCard {
   border-radius: 16px;
   border: 1px solid var(--border);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.02)
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   box-shadow: var(--shadow);
   padding: 14px 16px;
 }
 
-.pCardTight {
-  padding: 12px 14px;
-}
+.pCardTight { padding: 12px 14px; }
 
-.pCardHead {
-  margin-bottom: 10px;
-}
+.pCardHead { margin-bottom: 10px; }
 
-.pCardTitle {
-  font-weight: 600;
-}
+.pCardTitle { font-weight: 600; }
 
 .pCardHint {
   color: var(--muted);
@@ -183,40 +172,27 @@
   margin-top: 4px;
 }
 
-.pCalloutTitle {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
+.pCalloutTitle { font-weight: 600; margin-bottom: 8px; }
 
 .pList {
   margin: 0;
   padding-left: 18px;
   line-height: 1.55;
 }
-.pListMuted {
-  color: var(--muted);
-}
+.pListMuted { color: var(--muted); }
 
-.pP0 {
-  margin: 0;
-}
+.pP0 { margin: 0; }
 
-.pMuted {
-  color: var(--muted);
-}
+.pMuted { color: var(--muted); }
 
-.pInlineNote {
-  margin-top: 12px;
-}
+.pInlineNote { margin-top: 12px; }
 
 .pLink {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.pLink:hover {
-  opacity: 0.92;
-}
+.pLink:hover { opacity: 0.92; }
 
 /* Code */
 .pCode {
@@ -242,19 +218,15 @@
   background: rgba(0, 0, 0, 0.20);
 }
 
-/* Choose a ratio per asset */
 .pMedia169 { aspect-ratio: 16 / 9; }
 .pMediaOg  { aspect-ratio: 1200 / 630; }
 
-/* Next Image `fill` renders an <img>; this applies to the img */
 .pMediaImg {
   object-fit: contain;
   object-position: center;
 }
 
-.pMiniLinks {
-  margin-top: 10px;
-}
+.pMiniLinks { margin-top: 10px; }
 
 .pFooter {
   margin-top: 36px;
@@ -270,9 +242,7 @@
   flex-wrap: wrap;
 }
 
-.pDot {
-  opacity: 0.65;
-}
+.pDot { opacity: 0.65; }
 
 .pFootnote {
   margin-top: 10px;

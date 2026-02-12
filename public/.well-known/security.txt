@@ -1,0 +1,4 @@
+Contact: mailto:plewak.jeff@gmail.com
+Preferred-Languages: en
+Canonical: https://www.jeffreyplewak.com/.well-known/security.txt
+Policy: https://www.jeffreyplewak.com/
