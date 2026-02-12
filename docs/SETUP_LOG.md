@@ -1,6 +1,4 @@
-Now add the second doc file:
 
-```md
 # docs/DECISIONS.md
 # Decisions (V1)
 
