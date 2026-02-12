@@ -1,33 +1,27 @@
-// src/components/SiteFooter.tsx
-const LINKS = {
-  github: "https://github.com/carcodez1",
-  linkedin: "https://www.linkedin.com/in/jeffreyplewak",
-  email: "mailto:plewak.jeff@gmail.com",
-  calendly: "https://calendly.com/YOUR_PUBLIC_SLUG",
-} as const;
-
 export function SiteFooter() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="siteFooter" role="contentinfo">
+    <footer className="siteFooter">
       <div className="siteFooterInner">
         <div>
           <div className="footerTitle">Jeffrey R. Plewak</div>
-          <div className="footerSub">Platform • AI Provenance • Reliability</div>
-          <div className="footerCopy">© {new Date().getFullYear()}</div>
+          <div className="footerSub">Senior Software Engineer — platform, full-stack, compliance-critical systems.</div>
+          <div className="footerCopy">© {year}</div>
         </div>
 
-        <div className="footerRight" aria-label="Links">
-          <a className="footerLink" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a className="footerLink" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
-          <a className="footerLink" href={LINKS.email}>
+        <div className="footerLinks" aria-label="Footer links">
+          <a className="footerLink" href="mailto:plewak.jeff@gmail.com">
             Email
           </a>
-          <a className="footerLink" href={LINKS.calendly} target="_blank" rel="noopener noreferrer">
-            Schedule
+          <a className="footerLink" href="https://calendly.com/plewak-jeff" target="_blank" rel="noopener noreferrer">
+            Calendly
+          </a>
+          <a className="footerLink" href="https://www.linkedin.com/in/jeffreyplewak" target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a className="footerLink" href="https://github.com/carcodez1" target="_blank" rel="noopener noreferrer">
+            GitHub
           </a>
         </div>
       </div>

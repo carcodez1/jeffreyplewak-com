@@ -1,9 +1,9 @@
-// src/app/projects/kprovengine/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import "../projects.css";
 import { kprovengineSourceCodeJsonLd } from "@/lib/jsonld";
+import { getNonce } from "@/lib/nonce";
 
 const LINKS = {
   home: "/",
@@ -35,12 +35,16 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Page() {
+export default async function Page() {
+  const nonce = await getNonce();
+  const jsonLd = kprovengineSourceCodeJsonLd();
+
   return (
     <main className="pWrap" id="main">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(kprovengineSourceCodeJsonLd()) }}
+        nonce={nonce || undefined}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <header className="pHero">
@@ -137,13 +141,13 @@ export default function Page() {
         <div className="pGrid2">
           <div className="pCard">
             <p className="pP0">
-              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can’t reliably reproduce results,
+              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can't reliably reproduce results,
               explain what happened, or separate human judgment from automation.
             </p>
           </div>
           <div className="pCard">
             <ul className="pList">
-              <li>“What produced this output?” must be answerable with artifacts, not narrative.</li>
+              <li>"What produced this output?" must be answerable with artifacts, not narrative.</li>
               <li>Runs should be reproducible end-to-end (no hidden state, no surprise network calls).</li>
               <li>Human responsibility must be captured explicitly, not implied.</li>
               <li>Audit defense should be evidence-backed and reviewable.</li>
@@ -204,7 +208,7 @@ export default function Page() {
       </section>
 
       <section className="pSection">
-        <h2 className="pH2">Evidence outputs (what’s actually captured)</h2>
+        <h2 className="pH2">Evidence outputs (what's actually captured)</h2>
         <div className="pCard">
           <ul className="pList">
             <li>

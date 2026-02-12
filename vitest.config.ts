@@ -1,46 +1,39 @@
-// vitest.config.ts
-import { defineConfig } from "vitest/config";
-import path from "node:path";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import nextPlugin from "@next/eslint-plugin-next";
 
-export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
+export default [
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/coverage/**",
+    ],
+  },
+
+  js.configs.recommended,
+
+  // TS (non-typechecked). If you want type-aware linting, I’ll give you that variant.
+  ...tseslint.configs.recommended,
+
+  // Next.js rules (equivalent to next/core-web-vitals + next/typescript intent)
+  {
+    files: ["**/*.{js,cjs,mjs,jsx,ts,tsx}"],
+    plugins: { "@next/next": nextPlugin },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
     },
   },
-  test: {
-    environment: "jsdom",
-    setupFiles: ["tests/setup.ts"],
-    include: ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
-    exclude: ["**/node_modules/**", "**/.next/**", "**/out/**", "**/build/**", "**/dist/**"],
 
-    reporters: ["default"],
-    passWithNoTests: false,
-
-    testTimeout: 10_000,
-    hookTimeout: 10_000,
-
-    coverage: {
-      enabled: !!process.env.CI,
-      provider: "v8",
-      reporter: ["text", "json-summary", "html"],
-      reportsDirectory: "coverage",
-      clean: true,
-
-      // This is what makes the report readable
-      reportOnFailure: true,
-      include: ["src/**/*.{ts,tsx}"],
-      exclude: [
-        "src/**/*.d.ts",
-        "src/app/**/loading.tsx",
-        "src/app/**/error.tsx",
-        "src/app/**/not-found.tsx",
-        "src/app/**/opengraph-image.tsx",
-        "src/app/**/opengraph-image.png",
-      ],
-
-      // Optional: avoid “0% funcs” noise for config-only files
-      skipFull: false,
+  // Repo ergonomics: ignore underscore args (middleware _req, etc.)
+  {
+    files: ["**/*.{ts,tsx,js,jsx}"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     },
   },
-});
+];

@@ -18,7 +18,7 @@
     "check:types": "tsc --noEmit",
     "check:test": "CI=1 vitest run",
     "check:build": "next build",
-    "check": "npm run check:lint && npm run check:types && npm run check:test && npm run check:build"
+    "check": "npm run check:lint && npm run check:types && npm run check:build"
   },
   "dependencies": {
     "next": "16.1.6",

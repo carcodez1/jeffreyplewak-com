@@ -1,4 +1,3 @@
-// src/app/projects/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -21,7 +20,9 @@ export default function ProjectsPage() {
         </div>
 
         <h1 className="pH1">Projects</h1>
-        <p className="pLede">Representative systems that reflect how I design, scope, and ship production software.</p>
+        <p className="pLede">
+          Representative systems that reflect how I design, scope, and ship production software.
+        </p>
       </header>
 
       <section className="pSection" aria-label="Project list">
@@ -35,16 +36,18 @@ export default function ProjectsPage() {
             </div>
 
             <p className="pMuted">
-              Local-only provenance engine for AI-assisted workflows with deterministic execution, explicit human review, and audit-grade artifacts.
+              Local-only provenance engine for AI-assisted workflows with deterministic execution, explicit human review,
+              and audit-grade artifacts.
             </p>
 
-            <div className="pMedia pMediaOg" style={{ marginTop: 12 }} aria-label="KProvEngine preview image">
+            <div className="pMedia pMedia169" aria-label="KProvEngine architecture diagram">
               <Image
-                src="/projects/kprovengine/og.png"
-                alt="KProvEngine project preview"
+                src="/projects/kprovengine/architecture.png"
+                alt="KProvEngine pipeline architecture"
                 fill
+                priority
                 className="pMediaImg"
-                sizes="(max-width: 900px) 100vw, 520px"
+                sizes="(max-width: 980px) 100vw, 420px"
               />
             </div>
 
@@ -52,7 +55,12 @@ export default function ProjectsPage() {
               <Link className="pBtn pBtnPrimary" href="/projects/kprovengine">
                 View project
               </Link>
-              <a className="pBtn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
+              <a
+                className="pBtn"
+                href="https://github.com/carcodez1/KProvEngine"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 GitHub
               </a>
             </div>
@@ -60,7 +68,9 @@ export default function ProjectsPage() {
 
           <article className="pCard pCardTight" aria-label="More projects">
             <div className="pCardTitle">More coming</div>
-            <p className="pMuted">Additional case studies will appear here as systems reach a publishable, defensible state.</p>
+            <p className="pMuted">
+              Additional case studies will appear here as systems reach a publishable, defensible state.
+            </p>
           </article>
         </div>
       </section>

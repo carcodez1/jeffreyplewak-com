@@ -1,4 +1,10 @@
-/* src/app/globals.css */
+/* src/app/globals.css
+   Goals:
+   - Deterministic, no duplicate/conflicting selectors
+   - Mobile-first + desktop clean
+   - No network-dependent background assets (no console noise)
+   - Single source of truth for header/footer/icon styling
+*/
 
 :root {
   --bg0: #070a12;
@@ -31,14 +37,19 @@ html {
   scroll-padding-top: var(--headerH);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 body {
   margin: 0;
   color: var(--text);
-  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
   background: var(--bg0);
 }
 
-/* Background: subtle, non-AI */
+/* Background: subtle + stable across browsers; no external assets */
 body::before {
   content: "";
   position: fixed;
@@ -49,10 +60,10 @@ body::before {
     radial-gradient(50rem 35rem at 85% 25%, rgba(120, 255, 200, 0.10), transparent 55%),
     radial-gradient(55rem 40rem at 55% 90%, rgba(255, 140, 200, 0.08), transparent 55%),
     linear-gradient(180deg, var(--bg1), var(--bg0) 55%, var(--bg2));
-  animation: bg-drift 18s ease-in-out infinite alternate;
   transform: translateZ(0);
 }
 
+/* Light “texture” without images (no network dependency) */
 body::after {
   content: "";
   position: fixed;
@@ -60,24 +71,20 @@ body::after {
   z-index: -1;
   pointer-events: none;
   opacity: 0.06;
-  background-image: url("/assets/background/bg.jpg");
-  background-size: 512px 512px;
-  mix-blend-mode: overlay;
-}
-
-@keyframes bg-drift {
-  from { filter: hue-rotate(0deg) saturate(1); transform: scale(1.02); }
-  to   { filter: hue-rotate(10deg) saturate(1.05); transform: scale(1.06); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  body::before { animation: none; }
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.14) 0, rgba(0,0,0,0.14) 1px, transparent 1px, transparent 4px);
 }
 
 /* Links */
 a { color: var(--text); text-decoration: none; }
 a:hover { text-decoration: underline; }
+.inlineLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.inlineLink:hover { opacity: 0.92; }
 
 /* Skip link */
 .skipLink {
@@ -92,10 +99,10 @@ a:hover { text-decoration: underline; }
 }
 .skipLink:focus { left: 1rem; top: 1rem; }
 
-/* Main wrapper padding below sticky header */
-.appMain { min-height: 60vh; }
+/* Ensure anchor targets land below sticky header */
+#main { scroll-margin-top: calc(var(--headerH) + 12px); }
 
-/* Layout */
+/* Layout wrapper */
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
@@ -172,8 +179,8 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
 }
 .btnPrimary {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(140, 180, 255, 0.22);
+  background: rgba(140, 180, 255, 0.14);
+  border-color: rgba(140, 180, 255, 0.28);
 }
 
 /* Grids */
@@ -198,6 +205,7 @@ a:hover { text-decoration: underline; }
   transform: translateY(-2px);
   border-color: rgba(140, 180, 255, 0.18);
 }
+
 @media (prefers-reduced-motion: reduce) {
   .btn, .card { transition: none; }
   .card:hover { transform: none; }
@@ -217,6 +225,7 @@ a:hover { text-decoration: underline; }
 }
 .cardBullets li { margin: 4px 0; }
 
+/* next/image fill wrapper */
 .cardMedia {
   border-radius: 12px;
   overflow: hidden;
@@ -233,6 +242,9 @@ a:hover { text-decoration: underline; }
   object-fit: cover;
   object-position: center;
 }
+
+/* Use for diagrams so they don't crop */
+.cardImgContain { object-fit: contain; }
 
 .cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -256,6 +268,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   gap: 14px;
+  min-height: var(--headerH);
 }
 
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -286,8 +299,17 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
 }
 
-.siteActions { display: flex; gap: 8px; align-items: center; }
+/* Header actions visibility */
+.siteActionsDesktop { display: inline-flex; gap: 8px; align-items: center; }
+.siteActionsMobile  { display: none; gap: 8px; align-items: center; }
 
+@media (max-width: 520px) {
+  .siteHeaderInner { padding: 12px 16px; }
+  .siteNav { display: none; }
+  .siteActionsDesktop { display: none; }
+  .siteActionsMobile  { display: inline-flex; }
+}
+/* Icon button + mask-based icons */
 .iconBtn {
   width: 36px;
   height: 36px;
@@ -297,17 +319,42 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.10);
   background: rgba(255, 255, 255, 0.03);
+  color: rgba(255,255,255,0.92); /* default icon color */
 }
 .iconBtn:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(140, 180, 255, 0.22);
+  text-decoration: none;
 }
+
+.iconMask {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.35));
+}
+
+.icon--social { width: 18px; height: 18px; }
+.icon--mail { transform: scale(1.12); transform-origin: center; }
+
+/* Brand colors live on the button wrapper; icons inherit currentColor */
+.brandGithub   { color: #ffffff; }
+.brandLinkedIn { color: #0A66C2; }
+.brandCalendly { color: #006BFF; }
+.brandMail     { color: rgba(255,255,255,0.92); }
 
 /* Mobile: reduce chrome */
 @media (max-width: 520px) {
   .siteHeaderInner { padding: 12px 16px; }
   .siteNav { display: none; }
-  .siteActions { display: none; } /* reduce cognitive load; floater also hidden */
+  .siteActionsDesktop { display: none; }
 }
 
 /* -------------------------
@@ -334,49 +381,19 @@ a:hover { text-decoration: underline; }
 .footerCopy { color: var(--muted); margin-top: 10px; font-size: 0.9rem; }
 
 .footerLinks {
-  display: grid;
-  gap: 8px;
-  justify-items: end;
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
-.footerLink { color: var(--muted); }
-.footerLink:hover { color: var(--text); text-decoration: none; }
+
+.footerLink { color: var(--muted); text-decoration: none; }
+.footerLink:hover { color: var(--text); text-decoration: underline; }
 
 @media (max-width: 520px) {
   .siteFooterInner { padding: 0 16px; flex-direction: column; }
-  .footerLinks { justify-items: start; }
+  .footerLinks { justify-content: flex-start; }
 }
-
-/* -------------------------
-   Icons (mask-based, brand color)
-------------------------- */
-.iconMask {
-  display: inline-block;
-  background-color: currentColor;
-
-  /* provided by component inline style: --icon-url */
-  -webkit-mask-image: var(--icon-url);
-  mask-image: var(--icon-url);
-
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-
-  -webkit-mask-position: center;
-  mask-position: center;
-
-  -webkit-mask-size: contain;
-  mask-size: contain;
-
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.35));
-}
-
-/* Brand colors */
-.icon--github   { color: #ffffff; } /* white mark on dark UI */
-.icon--linkedin { color: #0A66C2; }
-.icon--calendly { color: #006BFF; }
-.icon--mail     { color: #22c55e; }
-
-/* Slight bump: envelope often looks optically smaller */
-.icon--mail { transform: scale(1.12); transform-origin: center; }
 
 /* -------------------------
    Social Floater (desktop only)
@@ -384,7 +401,7 @@ a:hover { text-decoration: underline; }
 .socialFloater {
   position: fixed;
   right: 18px;
-  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  bottom: max(18px, env(safe-area-inset-bottom));
   z-index: 70;
   display: grid;
   gap: 10px;
@@ -417,10 +434,7 @@ a:hover { text-decoration: underline; }
 .floaterBtnTop { border-color: rgba(120, 255, 200, 0.18); }
 .floaterTopGlyph { width: 18px; display: inline-flex; justify-content: center; color: rgba(255,255,255,0.92); }
 
-/* Hide floater on mobile to reduce repetition */
+/* Hide floater on mobile */
 @media (max-width: 520px) {
   .socialFloater { display: none; }
 }
-
-/* Ensure anchor targets are visible below sticky header */
-#main { scroll-margin-top: 80px; }
