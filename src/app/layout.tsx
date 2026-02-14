@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 import { SITE_URL, siteGraphJsonLd } from "@/lib/jsonld";
@@ -20,33 +19,45 @@ export const metadata: Metadata = {
     template: "%s — Jeffrey R. Plewak",
   },
   description:
-    "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
+    "Senior backend & platform engineering. Deterministic AI provenance systems. Reliability-focused architecture.",
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
     url: SITE_URL,
+    siteName: "Jeffrey R. Plewak",
     title: "Jeffrey R. Plewak — Senior Software Engineer",
-    description: "Platform engineering and deterministic AI systems.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    description:
+      "Senior backend & platform engineering. Deterministic AI systems. Production architecture.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Jeffrey R. Plewak" }],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Jeffrey R. Plewak — Senior Software Engineer",
+    description:
+      "Senior backend & platform engineering. Deterministic AI systems. Production architecture.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const nonce = await getNonce();
   const nonceAttr = nonce || undefined;
 
   return (
     <html lang="en">
       <head>
-        <Script
+        <script
           id="site-jsonld"
           type="application/ld+json"
           nonce={nonceAttr}
-          strategy="beforeInteractive"
+          // JSON-LD must be raw JSON string, not an object
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
         />
       </head>
