@@ -7,18 +7,20 @@
   },
   "scripts": {
     "dev": "next dev",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
+    "check:types": "npm run -s typecheck && npm run -s typecheck:tests",
     "test": "vitest run",
-    "test:watch": "vitest",
     "test:ci": "CI=1 vitest run",
     "check:lint": "eslint .",
-    "check:types": "tsc --noEmit",
     "check:test": "CI=1 vitest run",
     "check:build": "next build",
-    "check": "npm run check:lint && npm run check:types && npm run check:build"
+    "check": "npm run -s check:lint && npm run -s check:types && npm run -s check:test && npm run -s check:build",
+    "diagrams:render": "node scripts/render-diagrams.mjs",
+    "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams"
   },
   "dependencies": {
     "next": "16.1.6",

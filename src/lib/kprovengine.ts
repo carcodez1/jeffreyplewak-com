@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/jsonld";
+import { SITE_URL } from "./jsonld";
 
 export const kprovengineMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -10,10 +10,12 @@ export const kprovengineMetadata: Metadata = {
     type: "article",
     url: `${SITE_URL}/projects/kprovengine`,
     title: "KProvEngine",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    description:
+      "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows.",
+    images: [{ url: "/projects/kprovengine/opengraph-image.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og-image.png"],
+    images: ["/projects/kprovengine/opengraph-image.png"],
   },
 };

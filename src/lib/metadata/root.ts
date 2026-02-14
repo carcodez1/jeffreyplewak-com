@@ -1,6 +1,8 @@
+// src/lib/metadata/root.ts
+import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/jsonld";
 
-export const rootMetadata = {
+export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "Jeffrey R. Plewak — Senior Software Engineer",
@@ -8,9 +10,7 @@ export const rootMetadata = {
   },
   description:
     "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
-  alternates: {
-    canonical: SITE_URL,
-  },
+  alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
     url: SITE_URL,
@@ -35,8 +35,5 @@ export const rootMetadata = {
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     images: ["/og-image.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-} as const;
+  robots: { index: true, follow: true },
+};
