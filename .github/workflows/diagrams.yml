@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - "src/content/diagrams/**/*.mmd"
+      - "scripts/render-diagrams.mjs"
       - ".github/workflows/diagrams.yml"
-      - "scripts/render-diagrams.cjs"
   workflow_dispatch: {}
 
 permissions:
@@ -30,16 +30,19 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "20.19.6"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Render diagrams
-        run: node scripts/render-diagrams.cjs
+        run: npm run diagrams:render
 
       - name: Commit SVGs (if changed)
         shell: bash
         run: |
           set -euo pipefail
-
           if git diff --quiet -- public/diagrams; then
             echo "No diagram changes to commit."
             exit 0
