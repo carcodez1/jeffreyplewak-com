@@ -1,0 +1,16 @@
+flowchart LR
+  A[Input Artifacts] --> B[Normalize]
+  B --> C[Parse]
+  C --> D[Extract]
+  D --> E[Render]
+  E --> F[Evidence Bundle]
+
+  subgraph Artifacts[Evidence Artifacts]
+    M[manifest.json\nSHA-256 manifest]
+    P[provenance.json\nexecution metadata]
+    T[toolchain.json\ntool/version disclosure]
+    H[human_review.json\nallowed PENDING]
+    X[hashes.txt\ncontent hashes]
+  end
+
+  F --> Artifacts
