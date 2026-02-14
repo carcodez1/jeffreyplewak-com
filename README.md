@@ -1,136 +1,66 @@
 # jeffreyplewak-com
 
-This is my personal portfolio and project showcase for **Jeffrey R. Plewak**, Senior Software Engineer.
+Personal site and engineering portfolio for **Jeffrey R. Plewak**.
 
-This repository is for me  and others to share. V1.
+This repository contains the production source for https://jeffreyplewak.com and is maintained with explicit attention to performance, determinism, and operational clarity.
 
-## Overview
+---
 
-This site is intentionally minimal, static-first, and explicit in structure.
+## Purpose
 
-Primary objectives:
+This site is intentionally:
 
-- Clear, recruiter-friendly presentation
-- Emphasis on system design, engineering judgment, and real projects
-- Strong SEO and social sharing defaults
-- Excellent performance and accessibility
-- Low operational complexity
+- Static-first
+- Minimal in runtime dependencies
+- Explicit in structure
+- Fast, stable, and recruiter-readable
+- Operationally low-risk
 
-The site is suitable for direct production deployment and long-term maintenance.
+It reflects real engineering judgment rather than design noise or framework churn.
+
+---
+
+## Architecture Principles
+
+1. Static where possible
+2. Deterministic builds
+3. No unnecessary client-side JavaScript
+4. Explicit metadata and SEO configuration
+5. Strict commit discipline and branch isolation
+6. CI automation for generated artifacts
+
+The site favors long-term maintainability over novelty.
+
+---
 
 ## Tech Stack
 
 - Framework: Next.js (App Router)
 - Language: TypeScript
-- Styling: Hand-authored CSS (no runtime framework)
-- Images: next/image with explicit aspect-ratio control
-- Deployment: Vercel
+- Styling: Hand-authored CSS (no runtime CSS framework)
+- Images: next/image with controlled layout behavior
 - Node: 20.x
-- npm: 10.x
+- Package Manager: npm 10.x
+- Deployment: Vercel
+- CI: GitHub Actions
+- Diagram rendering: Mermaid CLI (SVG output committed via workflow)
 
-## Project Structure
+---
 
-```
-src/
-  app/
-    layout.tsx
-    page.tsx
-    globals.css
-    robots.ts
-    sitemap.ts
-    projects/
-      layout.tsx
-      projects.css
-      kprovengine/
-        page.tsx
-        opengraph-image.png
+## Repository Structure
 
-public/
-  og-image.png
-  favicon.png
-  icon-192.png
-  icon-512.png
-  assets/
-    images/
-      avatar.jpeg
-  projects/
-    kprovengine/
-      og.png
-      architecture.png
-  downloads/
-    jeffrey-plewak-resume.pdf
-```
 
-## Routes
-
-| Route | Description |
-|------|-------------|
-| / | Home / landing page |
-| /projects/kprovengine | KProvEngine project deep dive |
-| /robots.txt | Search engine directives |
-| /sitemap.xml | Sitemap |
-
-All routes are statically generated.
-
-## Styling Model
-
-- globals.css  
-  Typography, layout containers, cards, grids, buttons, home page components.
-
-- projects/projects.css  
-  Scoped to /projects/* with strict selector prefixes and explicit next/image rules.
-
-## SEO & Metadata
-
-Configured using the Next.js App Router metadata APIs.
-
-- Canonical URLs
-- Open Graph metadata
-- Twitter cards
-- Static OG images
-- Sitemap and robots.txt
-
-## Local Development
-
-Requirements:
-
-- Node.js ≥ 20
-- npm ≥ 10
-
-Install and run:
-
-```
-npm ci
-npm run dev
-```
-
-Production build:
-
-```
-npm run build
-npm run start
-```
-
-## Deployment
-
-Designed for deployment on Vercel.
-
-Recommended settings:
-
-- Framework preset: Next.js
-- Build command: next build
-- Node version: 20.x
-
-After deployment:
-
-- Assign production domain
-- Verify metadata base URL
-- Confirm sitemap and robots endpoints
-
-## Versioning
-
-This repository represents a stable v1 baseline suitable for production.
 
 ## License
 
-© Jeffrey R. Plewak. All rights reserved.
+This repository uses a dual-license structure.
+
+### Source Code
+Licensed under the MIT License (see `LICENSE`).
+
+### Portfolio Content & Identity
+All branding, written content, diagrams, resume materials, images,
+and personal identifiers are protected under a separate professional
+portfolio license (see `LICENSE-PORTFOLIO`).
+
+This repository is not licensed as a portfolio template.
