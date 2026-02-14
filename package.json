@@ -14,6 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ci": "CI=1 vitest run",
+    "check:lint": "npm run lint",
+    "check:test": "npm run test:ci",
     "check:types": "npm run typecheck && npm run typecheck:tests",
     "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
     "check:build": "next build",
@@ -22,7 +24,8 @@
     "diagrams:clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('public/diagrams',{recursive:true,force:true}))\"",
     "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams",
     "audit:report": "npm audit --audit-level=moderate",
-    "yaml:syntax": "node -e \"import('node:fs').then(fs=>import('yaml').then(y=>{y.parse(fs.readFileSync('.github/workflows/diagrams.yml','utf8')); console.log('YAML_SYNTAX_OK');}))\""
+    "yaml:syntax": "node -e \"import('node:fs').then(fs=>import('yaml').then(y=>{y.parse(fs.readFileSync('.github/workflows/diagrams.yml','utf8')); console.log('YAML_SYNTAX_OK');}))\"",
+    "prepush": "npm run check && npm run diagrams:check"
   },
   "dependencies": {
     "next": "16.1.6",
