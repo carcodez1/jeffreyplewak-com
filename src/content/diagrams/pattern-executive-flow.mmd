@@ -1,0 +1,17 @@
+flowchart TB
+  A[Executive Summary] --> B[Architecture]
+  B --> C[Controls]
+  C --> D[Deliverables]
+  D --> E[Verification]
+
+  subgraph Controls[Controls]
+    C1[Deterministic build]
+    C2[Hash manifest]
+    C3[Provenance metadata]
+    C4[Human review gate]
+  end
+
+  B -.-> C1
+  D -.-> C2
+  D -.-> C3
+  E -.-> C4

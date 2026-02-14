@@ -3,22 +3,29 @@
   "version": "0.1.1",
   "private": true,
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.19.0 <21"
   },
   "scripts": {
     "dev": "next dev",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ci": "CI=1 vitest run",
-    "check:lint": "eslint .",
-    "check:types": "tsc --noEmit",
-    "check:test": "CI=1 vitest run",
+    "check:lint": "npm run lint",
+    "check:test": "npm run test:ci",
+    "check:types": "npm run typecheck && npm run typecheck:tests",
+    "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
     "check:build": "next build",
-    "check": "npm run check:lint && npm run check:types && npm run check:build"
+    "check": "npm run check:lint && npm run check:types && npm run check:test && npm run check:build",
+    "diagrams:render": "node scripts/render-diagrams.mjs",
+    "diagrams:clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('public/diagrams',{recursive:true,force:true}))\"",
+    "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams",
+    "audit:report": "npm audit --audit-level=moderate",
+    "yaml:syntax": "node -e \"import('node:fs').then(fs=>import('yaml').then(y=>{y.parse(fs.readFileSync('.github/workflows/diagrams.yml','utf8')); console.log('YAML_SYNTAX_OK');}))\"",
+    "prepush": "npm run check && npm run diagrams:check"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -26,6 +33,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "11.6.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -43,6 +51,7 @@
     "typescript": "^5",
     "vite": "^6.4.1",
     "vitest": "^4.0.18",
-    "vitest-axe": "^0.1.0"
+    "vitest-axe": "^0.1.0",
+    "yaml": "2.8.2"
   }
 }
