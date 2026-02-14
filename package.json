@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "private": true,
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.19.0 <21"
   },
   "scripts": {
     "dev": "next dev",
@@ -14,13 +14,16 @@
     "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
     "check:types": "npm run -s typecheck && npm run -s typecheck:tests",
     "test": "vitest run",
+    "test:watch": "vitest",
     "test:ci": "CI=1 vitest run",
-    "check:lint": "eslint .",
-    "check:test": "CI=1 vitest run",
-    "check:build": "next build",
-    "check": "npm run -s check:lint && npm run -s check:types && npm run -s check:test && npm run -s check:build",
+    "check:test": "npm run -s test:ci",
+    "check:lint": "npm run -s lint",
+    "check:build": "npm run -s build",
     "diagrams:render": "node scripts/render-diagrams.mjs",
-    "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams"
+    "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams",
+    "diagrams:clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('public/diagrams',{recursive:true,force:true}))\"",
+    "check": "npm run -s check:lint && npm run -s check:types && npm run -s check:test && npm run -s check:build",
+    "prepush": "npm run -s check && npm run -s diagrams:check"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -28,6 +31,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "11.6.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -47,6 +51,7 @@
     "vite": "^6.4.1",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.18",
-    "vitest-axe": "^0.1.0"
+    "vitest-axe": "^0.1.0",
+    "yaml": "2.8.2"
   }
 }
