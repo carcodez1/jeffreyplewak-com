@@ -1,0 +1,4 @@
+flowchart LR
+  A[Source .mmd] --> B[npx @mermaid-js/mermaid-cli]
+  B --> C[public/diagrams/*.svg]
+  C --> D[git diff --exit-code]

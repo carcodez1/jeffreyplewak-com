@@ -3,7 +3,11 @@ import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
+  plugins: [
+    tsconfigPaths({
+      projects: ["./tsconfig.json", "./tsconfig.tests.json"],
+    }),
+  ],
   test: {
     environment: "jsdom",
     globals: true,
@@ -12,9 +16,5 @@ export default defineConfig({
     restoreMocks: true,
     mockReset: true,
     clearMocks: true,
-    coverage: {
-      provider: "v8",
-      reporter: ["text", "lcov"],
-    },
   },
 });
