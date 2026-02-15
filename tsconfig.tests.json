@@ -1,14 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "vitest/globals"],
     "noEmit": true,
-    "skipLibCheck": true
+    "types": ["vitest/globals", "node"],
+    "lib": ["dom", "dom.iterable", "es2022"]
   },
-  "include": [
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "vitest.config.ts"
-  ],
+  "include": ["tests/**/*.ts", "tests/**/*.tsx", "vitest.config.ts"],
   "exclude": ["node_modules", ".next"]
 }
