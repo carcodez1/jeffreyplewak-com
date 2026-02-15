@@ -1,14 +1,29 @@
-export const SITE_URL = "https://jeffreyplewak.com";
+// src/lib/jsonld.ts
+
+export const SITE_URL = "https://www.jeffreyplewak.com" as const;
+
+/**
+ * Normalize base URL for stable @id values.
+ * Ensures no trailing slash.
+ */
+function baseUrl(): string {
+  return SITE_URL.replace(/\/+$/, "");
+}
 
 export function siteGraphJsonLd() {
+  const base = baseUrl();
+  const personId = `${base}/#person`;
+  const websiteId = `${base}/#website`;
+  const orgId = `${base}/#org`;
+
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Person",
-        "@id": `${SITE_URL}/#person`,
+        "@id": personId,
         name: "Jeffrey R. Plewak",
-        url: SITE_URL,
+        url: base,
         jobTitle: "Senior Software Engineer",
         description:
           "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
@@ -18,18 +33,28 @@ export function siteGraphJsonLd() {
         ],
       },
       {
+        // Optional but helps connect “publisher” cleanly.
+        "@type": "Organization",
+        "@id": orgId,
+        name: "Jeffrey R. Plewak",
+        url: base,
+      },
+      {
         "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
-        url: SITE_URL,
+        "@id": websiteId,
+        url: base,
         name: "Jeffrey R. Plewak",
         description: "Platform engineering and deterministic AI systems.",
-        author: { "@id": `${SITE_URL}/#person` },
+        publisher: { "@id": orgId },
       },
     ],
   };
 }
 
 export function kprovengineSourceCodeJsonLd() {
+  const base = baseUrl();
+  const personId = `${base}/#person`;
+
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
@@ -38,11 +63,7 @@ export function kprovengineSourceCodeJsonLd() {
       "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows with local-first execution and audit-grade artifacts.",
     codeRepository: "https://github.com/carcodez1/KProvEngine",
     programmingLanguage: "Python",
-    author: {
-      "@type": "Person",
-      name: "Jeffrey Plewak",
-      url: SITE_URL,
-    },
+    author: { "@id": personId },
     datePublished: "2025-01-15",
     license: "https://github.com/carcodez1/KProvEngine/blob/main/LICENSE",
   };

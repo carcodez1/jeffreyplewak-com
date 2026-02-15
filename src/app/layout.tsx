@@ -1,11 +1,14 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
+import type { ReactNode } from "react";
 import Script from "next/script";
 import "./globals.css";
 
-import { SITE_URL, siteGraphJsonLd } from "@/lib/jsonld";
+import { siteGraphJsonLd } from "@/lib/jsonld";
 import { getNonce } from "@/lib/nonce";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+
+export { rootMetadata as metadata } from "@/lib/metadata/root";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -13,29 +16,11 @@ export const viewport: Viewport = {
   themeColor: "#0b0f17",
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Jeffrey R. Plewak — Senior Software Engineer",
-    template: "%s — Jeffrey R. Plewak",
-  },
-  description:
-    "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
-  openGraph: {
-    type: "website",
-    url: SITE_URL,
-    title: "Jeffrey R. Plewak — Senior Software Engineer",
-    description: "Platform engineering and deterministic AI systems.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["/og-image.png"],
-  },
-  robots: { index: true, follow: true },
-};
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const nonce = await getNonce();
   const nonceAttr = nonce || undefined;
 
@@ -47,7 +32,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           nonce={nonceAttr}
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteGraphJsonLd()),
+          }}
         />
       </head>
       <body>
