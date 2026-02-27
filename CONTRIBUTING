@@ -1,0 +1,63 @@
+# Contributing to KProvEngine (OSS Core)
+
+## 1. Scope
+
+This repository contains the **public OSS core (V1)** of KProvEngine.
+
+It provides:
+
+- Deterministic CLI behavior
+- Stable JSON output contracts
+- Reproducible artifact layout
+- No cloud dependencies
+- No enterprise control logic
+
+Enterprise extensions are out of scope.
+
+---
+
+## 2. Governance Model
+
+Maintainer-led model.
+
+- Repository owner has final merge authority.
+- Breaking changes require prior issue discussion.
+- Public interfaces are contract-locked (see OSS_GOVERNANCE.md).
+
+---
+
+## 3. Public Contract Surfaces (V1 LOCKED)
+
+The following are considered stable public interfaces:
+
+- CLI flags and exit codes
+- JSON output schema (see `/schemas`)
+- Package entrypoints
+- Artifact directory structure
+
+Breaking changes require:
+
+1. Major version bump
+2. Schema update
+3. Test update
+4. Governance documentation update
+
+No exceptions.
+
+---
+
+## 4. Development Workflow
+
+### 4.1 Branching
+
+- `main` is protected.
+- Work must occur in feature or chore branches.
+- Pull requests required.
+
+### 4.2 Required Gates
+
+Before submitting a PR:
+make preflight
+tox
+
+

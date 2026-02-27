@@ -1,139 +1,211 @@
+// src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Jeffrey R. Plewak — Senior Software Engineer",
-  description:
-    "Senior software engineer focused on platform, full-stack, and compliance-critical systems. Python backend, cloud automation, and reliability-first delivery.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    title: "Jeffrey R. Plewak — Senior Software Engineer",
-    description:
-      "Platform, full-stack, and compliance-critical systems. Reliability-first engineering.",
-    url: "/",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jeffrey R. Plewak — Senior Software Engineer",
-    description:
-      "Platform, full-stack, and compliance-critical systems. Reliability-first engineering.",
-    images: ["/og-image.png"],
-  },
-};
 
 export default function Page() {
+  const CALENDLY_URL = "https://calendly.com/plewak-jeff";
+
   return (
     <main id="main" className="wrap">
-      <header className="hero">
-        <div className="idRow">
-          <div className="avatar">
-            <Image
-              src="/assets/images/avatar.jpeg"
-              alt="Jeffrey R. Plewak"
-              width={56}
-              height={56}
-              className="avatarImg"
-              priority
-            />
+      <header className="hero" aria-label="Intro">
+        <div className="heroGrid">
+          <div className="heroLeft">
+            <div className="idRow" style={{ marginBottom: 12 }}>
+              <div className="avatar">
+                <Image
+                  src="/assets/images/avatar.jpeg"
+                  alt="Jeffrey R. Plewak"
+                  width={56}
+                  height={56}
+                  className="avatarImg"
+                  priority
+                />
+              </div>
+
+              <div className="idText">
+                <p className="muted" style={{ margin: 0, fontSize: "0.95rem" }}>
+                  Jeffrey R. Plewak
+                </p>
+
+                <h1 className="h1" style={{ marginTop: 4 }}>
+                  Compliance-critical engineering and{" "}
+                  <span className="h1Accent">provenance-first AI workflows</span>.
+                </h1>
+              </div>
+            </div>
+
+            <p className="sub" style={{ marginBottom: 14 }}>
+              Senior software engineer and consultant focused on platform, full-stack,
+              and reliability-first delivery—where traceability and determinism matter.
+            </p>
+
+            <div className="ctaRow btnGroupTight" aria-label="Primary actions">
+              <a
+                className="btn btnPrimary"
+                href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
+              >
+                Email
+              </a>
+
+              <Link className="btn" href="/projects">
+                View projects
+              </Link>
+
+              <a
+                className="btn btnTertiary"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book a call
+              </a>
+
+              <a className="btn btnTertiary" href="#work">
+                Featured
+              </a>
+
+              <a className="btn btnTertiary" href="#contact">
+                Work with me
+              </a>
+            </div>
+
+            <div className="credStrip" aria-label="Experience across">
+              <div className="credLabel">
+                <span>Experience across</span>
+                <span className="credRule" aria-hidden="true" />
+              </div>
+
+              <div className="credLogos">
+                <a
+                  className="credLogoLink"
+                  href="https://www.lockheedmartin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Lockheed Martin"
+                >
+                  <Image
+                    src="/assets/logos/lockheed-martin.svg"
+                    alt="Lockheed Martin"
+                    width={110}
+                    height={22}
+                    className="credLogo"
+                  />
+                </a>
+
+                <a
+                  className="credLogoLink"
+                  href="https://www.jpmorganchase.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="JPMorgan Chase"
+                >
+                  <Image
+                    src="/assets/logos/jp-morgan-chase.svg"
+                    alt="JPMorgan Chase"
+                    width={130}
+                    height={22}
+                    className="credLogo"
+                  />
+                </a>
+
+                <a
+                  className="credLogoLink"
+                  href="https://www.ibm.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="IBM"
+                >
+                  <Image
+                    src="/assets/logos/ibm.svg"
+                    alt="IBM"
+                    width={60}
+                    height={22}
+                    className="credLogo"
+                  />
+                </a>
+
+                <a
+                  className="credLogoLink"
+                  href="https://aws.amazon.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="AWS"
+                >
+                  <Image
+                    src="/assets/logos/aws.svg"
+                    alt="AWS"
+                    width={54}
+                    height={22}
+                    className="credLogo"
+                  />
+                </a>
+
+                <a
+                  className="credLogoLink"
+                  href="https://www.expediagroup.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Expedia Group"
+                >
+                  <Image
+                    src="/assets/logos/expedia.svg"
+                    alt="Expedia Group"
+                    width={92}
+                    height={22}
+                    className="credLogo"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div className="ctaRow" style={{ marginTop: 12 }}>
+              <a
+                className="btn btnTertiary"
+                href="/downloads/jeffrey-plewak-resume.pdf"
+                download
+              >
+                Résumé
+              </a>
+
+              <a
+                className="btn btnTertiary"
+                href="https://www.linkedin.com/in/jeffreyplewak"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
           </div>
 
-          <div className="idText">
-            <h1 className="h1">Jeffrey R. Plewak</h1>
-            <p className="sub">
-              Senior Software Engineer — platform, full-stack, and
-              compliance-critical systems.
-            </p>
-            <p className="muted">
-              I design provenance-aware AI workflows and production-grade web
-              systems where traceability, determinism, and operational clarity
-              matter.
+          <div className="heroRight" aria-label="Portrait">
+            <div className="portraitHalo" aria-hidden="true" />
+            <div className="portraitFrame">
+              <Image
+                src="/assets/images/jeffrey-plewak-portrait.webp"
+                alt="Portrait of Jeffrey R. Plewak"
+                fill
+                priority
+                sizes="(max-width: 920px) 100vw, 420px"
+                style={{ objectFit: "cover", objectPosition: "50% 30%" }}
+              />
+            </div>
+
+            <p className="muted" style={{ marginTop: 10, fontSize: "0.95rem" }}>
+              Remote-first • North Carolina • Available for consulting and senior roles
             </p>
           </div>
-        </div>
-
-        <div className="ctaRow" aria-label="Primary actions">
-          <a
-            className="btn btnPrimary"
-            href="/downloads/jeffrey-plewak-resume.pdf"
-            download
-          >
-            Résumé
-          </a>
-
-          <a
-            className="btn"
-            href="https://www.linkedin.com/in/jeffreyplewak"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>
-
-          <a className="btn" href="mailto:plewak.jeff@gmail.com">
-            Email
-          </a>
-
-          <Link className="btn" href="/projects">
-            Projects
-          </Link>
         </div>
       </header>
 
-      <section className="section" id="focus" aria-label="Focus">
-        <h2 className="h2">Focus</h2>
+      <section className="section" id="work" aria-label="Featured work">
+        <h2 className="h2">Featured</h2>
         <p className="lede">
-          Production systems where correctness and operational clarity matter
-          most.
-        </p>
-
-        <ul className="grid3" role="list">
-          <li className="card">
-            <h3>Platform &amp; Backend</h3>
-            <p className="muted">
-              Python-first services, APIs, and data pipelines with explicit
-              contracts and observability.
-            </p>
-          </li>
-
-          <li className="card">
-            <h3>Full-Stack Delivery</h3>
-            <p className="muted">
-              Pragmatic front-ends paired with resilient backends. No demo
-              abstractions.
-            </p>
-          </li>
-
-          <li className="card">
-            <h3>Compliance &amp; Reliability</h3>
-            <p className="muted">
-              Deterministic builds, traceable artifacts, and audit-ready
-              workflows.
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section className="section" id="work" aria-label="Selected work">
-        <h2 className="h2">Selected Work</h2>
-        <p className="lede">
-          Systems that reflect how I design, scope, and ship production
-          software.
+          A representative system that shows how I design for auditability and production use.
         </p>
 
         <div className="grid2">
-          <article
-            className="card cardLink"
-            aria-labelledby="kprovengine-title"
-          >
+          <article className="card cardLink" aria-labelledby="kprovengine-title">
             <div className="cardHead">
               <h3 id="kprovengine-title" className="cardTitle">
                 KProvEngine
@@ -144,8 +216,8 @@ export default function Page() {
             </div>
 
             <p className="cardDesc">
-              Deterministic provenance engine for AI-assisted workflows that
-              require explicit human review and reproducible evidence artifacts.
+              Deterministic provenance engine for AI-assisted workflows that require explicit
+              human review and reproducible evidence artifacts.
             </p>
 
             <ul className="cardBullets">
@@ -154,10 +226,7 @@ export default function Page() {
               <li>Adapters are non-authoritative (no over-claiming)</li>
             </ul>
 
-            <div
-              className="cardMedia"
-              aria-label="KProvEngine architecture diagram"
-            >
+            <div className="cardMedia" aria-label="KProvEngine architecture diagram">
               <Image
                 src="/projects/kprovengine/architecture.png"
                 alt="KProvEngine pipeline architecture"
@@ -194,53 +263,70 @@ export default function Page() {
           </article>
 
           <article className="card">
-            <h3>More work available</h3>
+            <h3>What I do</h3>
             <p className="muted">
-              Additional case studies are shared when systems reach a
-              publishable, defensible state.{" "}
-              <a
-                className="inlineLink"
-                href="mailto:plewak.jeff@gmail.com?subject=Work%20inquiry"
-              >
-                Ask for details
-              </a>
-              .
+              I help teams ship systems that are defensible under scrutiny: clear contracts,
+              deterministic builds, traceable artifacts, and reliable operations.
             </p>
+
+            <div className="cardActions">
+              <a
+                className="btn btnPrimary"
+                href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry"
+              >
+                Start a conversation
+              </a>
+
+              <a
+                className="btn btnTertiary"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book a call
+              </a>
+
+              <Link className="btn" href="/projects">
+                Browse projects
+              </Link>
+            </div>
           </article>
         </div>
       </section>
 
-      <section className="section" id="contact" aria-label="Work with me">
-        <h2 className="h2">Work with me</h2>
+      <section className="section" id="focus" aria-label="Focus">
+        <h2 className="h2">Focus</h2>
         <p className="lede">
-          Open to remote roles, consulting, and short-term contracts.
+          Production systems where correctness and operational clarity matter most.
         </p>
 
         <ul className="grid3" role="list">
           <li className="card">
-            <h3>AI &amp; Provenance</h3>
-            <p className="muted">
-              Local-first, audit-ready AI workflows with explicit human review
-              and evidence artifacts.
-            </p>
-          </li>
-
-          <li className="card">
             <h3>Platform &amp; Backend</h3>
             <p className="muted">
-              Python/TypeScript services, APIs, and pipelines with clear
-              contracts and reliability-first practices.
+              Python-first services, APIs, and data pipelines with explicit contracts and observability.
             </p>
           </li>
 
           <li className="card">
-            <h3>SEO-Conscious Web Systems</h3>
+            <h3>Full-Stack Delivery</h3>
             <p className="muted">
-              Next.js systems built for Core Web Vitals, structured data, and
-              clean information architecture.
+              Pragmatic front-ends paired with resilient backends. No demo abstractions.
+            </p>
+          </li>
+
+          <li className="card">
+            <h3>Compliance &amp; Reliability</h3>
+            <p className="muted">
+              Deterministic builds, traceable artifacts, and audit-ready workflows.
             </p>
           </li>
         </ul>
+      </section>
+
+      <section className="section" id="contact" aria-label="Work with me">
+        <h2 className="h2">Work with me</h2>
+        <p className="lede">Open to remote roles, consulting, and short-term contracts.</p>
 
         <div className="ctaRow">
           <a
@@ -249,6 +335,19 @@ export default function Page() {
           >
             Project inquiry
           </a>
+
+          <a
+            className="btn btnTertiary"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book a call
+          </a>
+
+          <Link className="btn" href="/projects">
+            View projects
+          </Link>
 
           <a
             className="btn"

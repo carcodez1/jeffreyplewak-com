@@ -1,10 +1,11 @@
 // src/lib/jsonld.ts
-
 export const SITE_URL = "https://www.jeffreyplewak.com" as const;
 
+export const LINKEDIN_URL = "https://www.linkedin.com/in/jeffreyplewak" as const;
+export const GITHUB_URL = "https://github.com/carcodez1" as const;
+
 /**
- * Normalize base URL for stable @id values.
- * Ensures no trailing slash.
+ * Normalize base URL for stable @id values (no trailing slash).
  */
 function baseUrl(): string {
   return SITE_URL.replace(/\/+$/, "");
@@ -12,6 +13,7 @@ function baseUrl(): string {
 
 export function siteGraphJsonLd() {
   const base = baseUrl();
+
   const personId = `${base}/#person`;
   const websiteId = `${base}/#website`;
   const orgId = `${base}/#org`;
@@ -27,13 +29,9 @@ export function siteGraphJsonLd() {
         jobTitle: "Senior Software Engineer",
         description:
           "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
-        sameAs: [
-          "https://github.com/carcodez1",
-          "https://www.linkedin.com/in/jeffrey-plewak/",
-        ],
+        sameAs: [GITHUB_URL, LINKEDIN_URL],
       },
       {
-        // Optional but helps connect “publisher” cleanly.
         "@type": "Organization",
         "@id": orgId,
         name: "Jeffrey R. Plewak",
@@ -45,7 +43,17 @@ export function siteGraphJsonLd() {
         url: base,
         name: "Jeffrey R. Plewak",
         description: "Platform engineering and deterministic AI systems.",
+        inLanguage: "en-US",
         publisher: { "@id": orgId },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${base}/#home`,
+        url: base,
+        name: "Jeffrey R. Plewak — Senior Software Engineer",
+        isPartOf: { "@id": websiteId },
+        inLanguage: "en-US",
+        mainEntity: { "@id": personId },
       },
     ],
   };

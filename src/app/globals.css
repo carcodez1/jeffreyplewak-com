@@ -1,32 +1,35 @@
 /* src/app/globals.css
-   Goals:
-   - Deterministic, no duplicate/conflicting selectors
-   - Mobile-first + desktop clean
-   - No network-dependent background assets (no console noise)
-   - Single source of truth for header/footer/icon styling
+   Theme: Option A (neutral light + charcoal + single accent)
+   Audience: engineers + hiring managers (2026) — polished, restrained, credible
+   Rules:
+   - No gimmicks: minimal gradients, no heavy glow
+   - Logos: neutral by default, brand-on-hover
 */
 
 :root {
-  --bg0: #070a12;
-  --bg1: #0b1324;
-  --bg2: #111b33;
+  --bg0: #ffffff;
+  --bg1: #f6f7fb;
+  --bg2: #eef0f6;
 
-  --panel: rgba(255, 255, 255, 0.05);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.68);
-  --border: rgba(255, 255, 255, 0.10);
-  --shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  --panel: rgba(17, 24, 39, 0.03);
+  --text: rgba(17, 24, 39, 0.94);
+  --muted: rgba(17, 24, 39, 0.66);
+  --border: rgba(17, 24, 39, 0.12);
 
   --radius: 18px;
   --max: 980px;
-
-  /* Sticky header height (anchor offset) */
   --headerH: 64px;
 
-  /* Accent */
-  --accent: rgba(140, 180, 255, 0.95);
-  --accent2: rgba(180, 120, 255, 0.90);
-  --accent3: rgba(120, 255, 200, 0.85);
+  /* Single accent */
+  --accent: #2563eb; /* blue */
+  --accentBorder: rgba(37, 99, 235, 0.24);
+
+  --shadowSm: 0 10px 28px rgba(17, 24, 39, 0.08);
+  --shadowMd: 0 18px 45px rgba(17, 24, 39, 0.10);
+  --shadowLg: 0 26px 70px rgba(17, 24, 39, 0.12);
+
+  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.22);
+  --divider: rgba(17, 24, 39, 0.10);
 }
 
 * { box-sizing: border-box; }
@@ -44,49 +47,55 @@ html {
 body {
   margin: 0;
   color: var(--text);
-  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
     "Apple Color Emoji", "Segoe UI Emoji";
   background: var(--bg0);
 }
 
-/* Background: subtle + stable across browsers; no external assets */
+/* Calm background: subtle, no “marketing glow” */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60rem 40rem at 15% 20%, rgba(120, 140, 255, 0.12), transparent 55%),
-    radial-gradient(50rem 35rem at 85% 25%, rgba(120, 255, 200, 0.10), transparent 55%),
-    radial-gradient(55rem 40rem at 55% 90%, rgba(255, 140, 200, 0.08), transparent 55%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 55%, var(--bg2));
+    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.07), transparent 58%),
+    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.04), transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
   transform: translateZ(0);
 }
 
-/* Light “texture” without images (no network dependency) */
+/* Light texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.04;
   background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 1px, transparent 1px, transparent 3px),
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.14) 0, rgba(0,0,0,0.14) 1px, transparent 1px, transparent 4px);
+    repeating-linear-gradient(0deg, rgba(17,24,39,0.08) 0, rgba(17,24,39,0.08) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(17,24,39,0.10) 0, rgba(17,24,39,0.10) 1px, transparent 1px, transparent 4px);
 }
 
-/* Links */
-a { color: var(--text); text-decoration: none; }
+::selection { background: rgba(37, 99, 235, 0.18); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focusRing);
+  border-radius: 10px;
+}
+
+a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }
+
 .inlineLink {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.inlineLink:hover { opacity: 0.92; }
+.inlineLink:hover { color: var(--accent); opacity: 1; }
 
-/* Skip link */
 .skipLink {
   position: absolute;
   left: -9999px;
@@ -96,25 +105,54 @@ a:hover { text-decoration: underline; }
   background: #fff;
   color: #000;
   border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadowMd);
 }
 .skipLink:focus { left: 1rem; top: 1rem; }
 
-/* Ensure anchor targets land below sticky header */
 #main { scroll-margin-top: calc(var(--headerH) + 12px); }
 
-/* Layout wrapper */
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 44px 20px 40px;
 }
-
 @media (max-width: 520px) {
   .wrap { padding: 34px 16px 32px; }
 }
 
 /* Hero */
-.hero { padding: 18px 0 26px; }
+.hero { padding: 0; }
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 56px;
+}
+
+@media (max-width: 920px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 52px;
+    padding-bottom: 32px;
+  }
+}
+
+.heroLeft { min-width: 0; }
+
+.heroRight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (max-width: 920px) {
+  .heroRight { align-items: center; }
+}
 
 .idRow {
   display: flex;
@@ -128,24 +166,37 @@ a:hover { text-decoration: underline; }
   height: 56px;
   border-radius: 999px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.03);
   flex: 0 0 auto;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  box-shadow: var(--shadowSm);
 }
 
 .avatarImg { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.h1 { font-size: 34px; letter-spacing: -0.02em; margin: 0 0 8px; }
+.h1 {
+  font-size: 42px;
+  line-height: 1.10;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+/* professional “accent edge” */
+.h1Accent {
+  color: var(--accent);
+}
+
+@media (max-width: 520px) {
+  .h1 { font-size: 34px; line-height: 1.12; }
+}
 
 .sub {
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   color: var(--muted);
   max-width: 72ch;
 }
 
 .section { margin-top: 18px; }
-
 .h2 { font-size: 18px; margin: 0 0 6px; }
 
 .lede {
@@ -157,30 +208,77 @@ a:hover { text-decoration: underline; }
 .muted { color: var(--muted); }
 
 /* Buttons */
-.ctaRow { display: flex; gap: 10px; flex-wrap: wrap; }
+.ctaRow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btnGroupTight { margin-top: 18px; gap: 12px; }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
+  height: 40px;
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(17, 24, 39, 0.02);
   color: var(--text);
-  text-decoration: none;
   transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+  white-space: nowrap;
 }
 .btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(17, 24, 39, 0.04);
+  border-color: rgba(17, 24, 39, 0.18);
   transform: translateY(-1px);
   text-decoration: none;
 }
+
+/* Primary CTA: restrained, accepted for engineers */
 .btnPrimary {
-  background: rgba(140, 180, 255, 0.14);
-  border-color: rgba(140, 180, 255, 0.28);
+  border-color: var(--accentBorder);
+  background: rgba(37, 99, 235, 0.10);
+}
+.btnPrimary:hover {
+  background: rgba(37, 99, 235, 0.14);
+  border-color: rgba(37, 99, 235, 0.30);
+}
+
+.btnTertiary {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+.btnTertiary:hover {
+  color: var(--text);
+  background: rgba(17, 24, 39, 0.04);
+  transform: none;
+}
+
+/* Portrait */
+.portraitHalo {
+  position: absolute;
+  width: 420px;
+  height: 480px;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.09), transparent 74%);
+  filter: blur(44px);
+  z-index: 0;
+  transform: translate(-6%, -6%);
+  pointer-events: none;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(17,24,39,0.14);
+  background: #fff;
+  box-shadow: var(--shadowLg);
+  z-index: 1;
+}
+.portraitFrame img {
+  object-fit: cover;
+  object-position: 50% 30%;
 }
 
 /* Grids */
@@ -195,71 +293,58 @@ a:hover { text-decoration: underline; }
 .card {
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--panel), rgba(255, 255, 255, 0.02));
-  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, var(--panel), rgba(17, 24, 39, 0.015));
+  box-shadow: var(--shadowMd);
   padding: 18px 18px 16px;
   min-height: 160px;
   transition: transform 180ms ease, border-color 180ms ease;
 }
 .card:hover {
   transform: translateY(-2px);
-  border-color: rgba(140, 180, 255, 0.18);
+  border-color: rgba(37, 99, 235, 0.22);
 }
-
 @media (prefers-reduced-motion: reduce) {
   .btn, .card { transition: none; }
-  .card:hover { transform: none; }
+  .btn:hover, .card:hover { transform: none; }
 }
 
 .cardLink { display: grid; gap: 12px; }
 .cardHead { display: grid; gap: 4px; }
 .cardTitle { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
 .cardTag { margin: 0; font-size: 0.95rem; color: var(--muted); }
-.cardDesc { margin: 0; color: var(--muted); line-height: 1.5; }
+.cardDesc { margin: 0; color: var(--muted); line-height: 1.55; }
 
 .cardBullets {
   margin: 0;
   padding-left: 18px;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .cardBullets li { margin: 4px 0; }
 
-/* next/image fill wrapper */
 .cardMedia {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(17, 24, 39, 0.03);
   position: relative;
   aspect-ratio: 1200 / 630;
 }
-
-.cardImg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Use for diagrams so they don't crop */
+.cardImg { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .cardImgContain { object-fit: contain; }
-
 .cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* -------------------------
-   Site Header (single source)
+   Header
 ------------------------- */
 .siteHeader {
   position: sticky;
   top: 0;
   z-index: 60;
   backdrop-filter: blur(10px);
-  background: rgba(7, 10, 18, 0.72);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(17, 24, 39, 0.10);
 }
-
 .siteHeaderInner {
   max-width: var(--max);
   margin: 0 auto;
@@ -270,46 +355,42 @@ a:hover { text-decoration: underline; }
   gap: 14px;
   min-height: var(--headerH);
 }
-
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-
+.brand { display: inline-flex; align-items: center; gap: 10px; }
 .brandMark {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, var(--accent), rgba(90, 120, 255, 0.25));
-  box-shadow: 0 0 0 3px rgba(90, 120, 255, 0.12);
+  background: radial-gradient(circle at 30% 30%, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.20));
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
 }
-
 .brandText { font-weight: 650; letter-spacing: -0.01em; }
 
 .siteNav { display: flex; gap: 12px; align-items: center; }
-
 .navLink {
   color: var(--muted);
-  text-decoration: none;
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
 }
 .navLink:hover {
   color: var(--text);
-  border-color: rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(17, 24, 39, 0.10);
+  background: rgba(17, 24, 39, 0.03);
   text-decoration: none;
 }
 
-/* Header actions visibility */
+/* Action clusters */
 .siteActionsDesktop { display: inline-flex; gap: 8px; align-items: center; }
 .siteActionsMobile  { display: none; gap: 8px; align-items: center; }
-
+.headerCta { display: inline-flex; }
 @media (max-width: 520px) {
   .siteHeaderInner { padding: 12px 16px; }
   .siteNav { display: none; }
   .siteActionsDesktop { display: none; }
   .siteActionsMobile  { display: inline-flex; }
+  .headerCta { display: none; }
 }
-/* Icon button + mask-based icons */
+
 .iconBtn {
   width: 36px;
   height: 36px;
@@ -317,13 +398,13 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255,255,255,0.92); /* default icon color */
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(17, 24, 39, 0.02);
+  color: rgba(17,24,39,0.90);
 }
 .iconBtn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(140, 180, 255, 0.22);
+  background: rgba(17, 24, 39, 0.04);
+  border-color: rgba(37, 99, 235, 0.22);
   text-decoration: none;
 }
 
@@ -338,32 +419,93 @@ a:hover { text-decoration: underline; }
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.35));
+  filter: drop-shadow(0 1px 0 rgba(17,24,39,0.18));
 }
 
 .icon--social { width: 18px; height: 18px; }
 .icon--mail { transform: scale(1.12); transform-origin: center; }
 
-/* Brand colors live on the button wrapper; icons inherit currentColor */
-.brandGithub   { color: #ffffff; }
+.brandGithub   { color: rgba(17,24,39,0.92); }
 .brandLinkedIn { color: #0A66C2; }
 .brandCalendly { color: #006BFF; }
-.brandMail     { color: rgba(255,255,255,0.92); }
-
-/* Mobile: reduce chrome */
-@media (max-width: 520px) {
-  .siteHeaderInner { padding: 12px 16px; }
-  .siteNav { display: none; }
-  .siteActionsDesktop { display: none; }
-}
+.brandMail     { color: rgba(17,24,39,0.92); }
 
 /* -------------------------
-   Site Footer (minimal)
+   Employer credibility strip (logos)
+   Neutral -> brand color on hover/focus (more professional)
+------------------------- */
+.credStrip {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.credLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.credRule {
+  height: 1px;
+  background: var(--divider);
+  flex: 1;
+}
+
+.credLogos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.credLogoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.credLogoLink:hover,
+.credLogoLink:focus-visible {
+  background: rgba(17,24,39,0.03);
+  border-color: rgba(17,24,39,0.10);
+  text-decoration: none;
+}
+
+/* Default: neutral */
+.credLogo {
+  height: 18px;
+  width: auto;
+  opacity: 0.88;
+  filter: grayscale(1) contrast(1.08);
+  transition: opacity 120ms ease, filter 120ms ease;
+}
+
+/* On hover/focus: restore color */
+.credLogoLink:hover .credLogo,
+.credLogoLink:focus-visible .credLogo {
+  opacity: 1;
+  filter: none;
+}
+
+/* Optional: brand accent tint on hover (subtle, not permanent) */
+.credLogoLink:hover { box-shadow: 0 8px 20px rgba(17,24,39,0.06); }
+
+/* -------------------------
+   Footer
 ------------------------- */
 .siteFooter {
   margin-top: 44px;
   padding: 28px 0 44px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(17, 24, 39, 0.10);
 }
 
 .siteFooterInner {
@@ -387,54 +529,207 @@ a:hover { text-decoration: underline; }
   justify-content: flex-end;
 }
 
-.footerLink { color: var(--muted); text-decoration: none; }
+.footerLink { color: var(--muted); }
 .footerLink:hover { color: var(--text); text-decoration: underline; }
 
 @media (max-width: 520px) {
   .siteFooterInner { padding: 0 16px; flex-direction: column; }
   .footerLinks { justify-content: flex-start; }
 }
+/* -------------------------
+   Header refinements (CTA alignment)
+------------------------- */
+.btnHeader {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 0.95rem;
+}
+
+.btnSecondary {
+  border-color: rgba(17, 24, 39, 0.16);
+  background: rgba(17, 24, 39, 0.00);
+  color: var(--muted);
+}
+
+.btnSecondary:hover {
+  color: var(--text);
+  background: rgba(17, 24, 39, 0.03);
+  border-color: rgba(17, 24, 39, 0.22);
+  transform: translateY(-1px);
+}
+
+.headerDivider {
+  width: 1px;
+  height: 22px;
+  background: rgba(17, 24, 39, 0.12);
+  margin: 0 2px;
+}
+
+/* Mobile: keep header compact */
+@media (max-width: 520px) {
+  .btnHeader { height: 36px; padding: 0 10px; }
+}
 
 /* -------------------------
-   Social Floater (desktop only)
+   Footer upgrade (grid + hierarchy)
 ------------------------- */
-.socialFloater {
-  position: fixed;
-  right: 18px;
-  bottom: max(18px, env(safe-area-inset-bottom));
-  z-index: 70;
+.siteFooterGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.footerHead {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.footerAddr {
+  margin: 0;
+  font-style: normal;
+}
+
+.footerHint {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.footerCtas {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footerLinksStack {
   display: grid;
   gap: 10px;
 }
 
-.floaterBtn {
+@media (max-width: 920px) {
+  .siteFooterGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* -------------------------
+   Credibility marquee (CSS-only, SEO-safe)
+   Requires markup change shown below.
+------------------------- */
+.credStrip {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.credLabel {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.credRule {
+  height: 1px;
+  background: var(--divider);
+  flex: 1;
+}
+
+/* viewport */
+.credMarquee {
+  position: relative;
+  overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(7, 10, 18, 0.70);
-  backdrop-filter: blur(10px);
-  text-decoration: none;
-  box-shadow: 0 12px 34px rgba(0,0,0,0.35);
-  transform: translateZ(0);
-  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+  border: 1px solid rgba(17, 24, 39, 0.10);
+  background: rgba(255, 255, 255, 0.55);
 }
 
-.floaterBtn:hover {
-  transform: translateY(-1px);
-  background: rgba(7, 10, 18, 0.78);
-  border-color: rgba(255,255,255,0.18);
+/* fade edges */
+.credMarquee::before,
+.credMarquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.credMarquee::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.90), rgba(255,255,255,0));
+}
+
+.credMarquee::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(255,255,255,0.90), rgba(255,255,255,0));
+}
+
+/* moving track */
+.credTrack {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: max-content;
+  padding: 10px 12px;
+  animation: credScroll 22s linear infinite;
+}
+
+.credMarquee:hover .credTrack,
+.credMarquee:focus-within .credTrack {
+  animation-play-state: paused;
+}
+
+@keyframes credScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* logo items */
+.credLogoLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.credLogoLink:hover,
+.credLogoLink:focus-visible {
+  background: rgba(17,24,39,0.03);
+  border-color: rgba(17,24,39,0.10);
+  box-shadow: 0 8px 20px rgba(17,24,39,0.06);
   text-decoration: none;
 }
 
-.floaterText { font-size: 13px; color: var(--muted); }
+/* Default: neutral */
+.credLogo {
+  height: 18px;
+  width: auto;
+  opacity: 0.88;
+  filter: grayscale(1) contrast(1.08);
+  transition: opacity 120ms ease, filter 120ms ease;
+}
 
-.floaterBtnTop { border-color: rgba(120, 255, 200, 0.18); }
-.floaterTopGlyph { width: 18px; display: inline-flex; justify-content: center; color: rgba(255,255,255,0.92); }
+/* On hover/focus: restore color */
+.credLogoLink:hover .credLogo,
+.credLogoLink:focus-visible .credLogo {
+  opacity: 1;
+  filter: none;
+}
 
-/* Hide floater on mobile */
-@media (max-width: 520px) {
-  .socialFloater { display: none; }
+/* Reduced motion: stop marquee */
+@media (prefers-reduced-motion: reduce) {
+  .credTrack { animation: none; }
 }

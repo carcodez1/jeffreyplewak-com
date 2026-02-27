@@ -1,6 +1,6 @@
+// src/app/layout.tsx
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import "./globals.css";
 
 import { siteGraphJsonLd } from "@/lib/jsonld";
@@ -16,25 +16,18 @@ export const viewport: Viewport = {
   themeColor: "#0b0f17",
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
   const nonce = await getNonce();
   const nonceAttr = nonce || undefined;
 
   return (
     <html lang="en">
       <head>
-        <Script
+        <script
           id="site-jsonld"
           type="application/ld+json"
           nonce={nonceAttr}
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(siteGraphJsonLd()),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
         />
       </head>
       <body>

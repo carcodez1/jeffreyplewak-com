@@ -2,6 +2,10 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/jsonld";
 
+/**
+ * Root metadata must use absolute URLs for canonical + OpenGraph URL.
+ * Tests enforce that canonical and OG url equal SITE_URL.
+ */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
