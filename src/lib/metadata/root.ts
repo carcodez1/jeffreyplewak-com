@@ -5,6 +5,9 @@ import { SITE_URL } from "@/lib/jsonld";
 /**
  * Root metadata must use absolute URLs for canonical + OpenGraph URL.
  * Tests enforce that canonical and OG url equal SITE_URL.
+ *
+ * Hardening:
+ * - Use absolute OG/Twitter image URLs to avoid host ambiguity in preview bots.
  */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -25,7 +28,7 @@ export const rootMetadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.png",
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "Jeffrey R. Plewak — Senior Software Engineer",
@@ -37,7 +40,7 @@ export const rootMetadata: Metadata = {
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
-    images: ["/og-image.png"],
+    images: [`${SITE_URL}/og-image.png`],
   },
   robots: { index: true, follow: true },
 };

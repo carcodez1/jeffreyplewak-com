@@ -6,7 +6,7 @@ export default function Page() {
   const CALENDLY_URL = "https://calendly.com/plewak-jeff";
 
   return (
-    <main id="main" className="wrap">
+    <div className="wrap">
       <header className="hero" aria-label="Intro">
         <div className="heroGrid">
           <div className="heroLeft">
@@ -35,15 +35,12 @@ export default function Page() {
             </div>
 
             <p className="sub" style={{ marginBottom: 14 }}>
-              Senior software engineer and consultant focused on platform, full-stack,
-              and reliability-first delivery—where traceability and determinism matter.
+              Senior software engineer and consultant focused on platform, full-stack, and
+              reliability-first delivery—where traceability and determinism matter.
             </p>
 
             <div className="ctaRow btnGroupTight" aria-label="Primary actions">
-              <a
-                className="btn btnPrimary"
-                href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
-              >
+              <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry">
                 Email
               </a>
 
@@ -51,12 +48,7 @@ export default function Page() {
                 View projects
               </Link>
 
-              <a
-                className="btn btnTertiary"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                 Book a call
               </a>
 
@@ -115,13 +107,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                   aria-label="IBM"
                 >
-                  <Image
-                    src="/assets/logos/ibm.svg"
-                    alt="IBM"
-                    width={60}
-                    height={22}
-                    className="credLogo"
-                  />
+                  <Image src="/assets/logos/ibm.svg" alt="IBM" width={60} height={22} className="credLogo" />
                 </a>
 
                 <a
@@ -131,13 +117,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                   aria-label="AWS"
                 >
-                  <Image
-                    src="/assets/logos/aws.svg"
-                    alt="AWS"
-                    width={54}
-                    height={22}
-                    className="credLogo"
-                  />
+                  <Image src="/assets/logos/aws.svg" alt="AWS" width={54} height={22} className="credLogo" />
                 </a>
 
                 <a
@@ -159,11 +139,7 @@ export default function Page() {
             </div>
 
             <div className="ctaRow" style={{ marginTop: 12 }}>
-              <a
-                className="btn btnTertiary"
-                href="/downloads/jeffrey-plewak-resume.pdf"
-                download
-              >
+              <a className="btn btnTertiary" href="/downloads/jeffrey-plewak-resume.pdf" download>
                 Résumé
               </a>
 
@@ -210,14 +186,12 @@ export default function Page() {
               <h3 id="kprovengine-title" className="cardTitle">
                 KProvEngine
               </h3>
-              <p className="cardTag">
-                Python · Deterministic Pipeline · Provenance · Human Review
-              </p>
+              <p className="cardTag">Python · Deterministic Pipeline · Provenance · Human Review</p>
             </div>
 
             <p className="cardDesc">
-              Deterministic provenance engine for AI-assisted workflows that require explicit
-              human review and reproducible evidence artifacts.
+              Deterministic provenance engine for AI-assisted workflows that require explicit human review and reproducible
+              evidence artifacts.
             </p>
 
             <ul className="cardBullets">
@@ -242,12 +216,7 @@ export default function Page() {
                 Project page
               </Link>
 
-              <a
-                className="btn"
-                href="https://github.com/carcodez1/KProvEngine"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="btn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
 
@@ -265,24 +234,16 @@ export default function Page() {
           <article className="card">
             <h3>What I do</h3>
             <p className="muted">
-              I help teams ship systems that are defensible under scrutiny: clear contracts,
-              deterministic builds, traceable artifacts, and reliable operations.
+              I help teams ship systems that are defensible under scrutiny: clear contracts, deterministic builds, traceable
+              artifacts, and reliable operations.
             </p>
 
             <div className="cardActions">
-              <a
-                className="btn btnPrimary"
-                href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry"
-              >
+              <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry">
                 Start a conversation
               </a>
 
-              <a
-                className="btn btnTertiary"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
                 Book a call
               </a>
 
@@ -296,9 +257,7 @@ export default function Page() {
 
       <section className="section" id="focus" aria-label="Focus">
         <h2 className="h2">Focus</h2>
-        <p className="lede">
-          Production systems where correctness and operational clarity matter most.
-        </p>
+        <p className="lede">Production systems where correctness and operational clarity matter most.</p>
 
         <ul className="grid3" role="list">
           <li className="card">
@@ -310,16 +269,12 @@ export default function Page() {
 
           <li className="card">
             <h3>Full-Stack Delivery</h3>
-            <p className="muted">
-              Pragmatic front-ends paired with resilient backends. No demo abstractions.
-            </p>
+            <p className="muted">Pragmatic front-ends paired with resilient backends. No demo abstractions.</p>
           </li>
 
           <li className="card">
             <h3>Compliance &amp; Reliability</h3>
-            <p className="muted">
-              Deterministic builds, traceable artifacts, and audit-ready workflows.
-            </p>
+            <p className="muted">Deterministic builds, traceable artifacts, and audit-ready workflows.</p>
           </li>
         </ul>
       </section>
@@ -329,19 +284,11 @@ export default function Page() {
         <p className="lede">Open to remote roles, consulting, and short-term contracts.</p>
 
         <div className="ctaRow">
-          <a
-            className="btn btnPrimary"
-            href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
-          >
+          <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry">
             Project inquiry
           </a>
 
-          <a
-            className="btn btnTertiary"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
             Book a call
           </a>
 
@@ -349,16 +296,11 @@ export default function Page() {
             View projects
           </Link>
 
-          <a
-            className="btn"
-            href="https://www.linkedin.com/in/jeffreyplewak"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a className="btn" href="https://www.linkedin.com/in/jeffreyplewak" target="_blank" rel="noopener noreferrer">
             Connect on LinkedIn
           </a>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
