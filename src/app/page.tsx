@@ -1,6 +1,7 @@
 // src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function Page() {
   const CALENDLY_URL = "https://calendly.com/plewak-jeff";
@@ -40,7 +41,10 @@ export default function Page() {
             </p>
 
             <div className="ctaRow btnGroupTight" aria-label="Primary actions">
-              <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry">
+              <a
+                className="btn btnPrimary"
+                href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
+              >
                 Email
               </a>
 
@@ -48,7 +52,12 @@ export default function Page() {
                 View projects
               </Link>
 
-              <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn btnTertiary"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Book a call
               </a>
 
@@ -77,7 +86,7 @@ export default function Page() {
                 >
                   <Image
                     src="/assets/logos/lockheed-martin.svg"
-                    alt="Lockheed Martin"
+                    alt=""
                     width={110}
                     height={22}
                     className="credLogo"
@@ -93,7 +102,7 @@ export default function Page() {
                 >
                   <Image
                     src="/assets/logos/jp-morgan-chase.svg"
-                    alt="JPMorgan Chase"
+                    alt=""
                     width={130}
                     height={22}
                     className="credLogo"
@@ -107,7 +116,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                   aria-label="IBM"
                 >
-                  <Image src="/assets/logos/ibm.svg" alt="IBM" width={60} height={22} className="credLogo" />
+                  <Image src="/assets/logos/ibm.svg" alt="" width={60} height={22} className="credLogo" />
                 </a>
 
                 <a
@@ -117,7 +126,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                   aria-label="AWS"
                 >
-                  <Image src="/assets/logos/aws.svg" alt="AWS" width={54} height={22} className="credLogo" />
+                  <Image src="/assets/logos/aws.svg" alt="" width={54} height={22} className="credLogo" />
                 </a>
 
                 <a
@@ -129,7 +138,7 @@ export default function Page() {
                 >
                   <Image
                     src="/assets/logos/expedia.svg"
-                    alt="Expedia Group"
+                    alt=""
                     width={92}
                     height={22}
                     className="credLogo"
@@ -139,7 +148,11 @@ export default function Page() {
             </div>
 
             <div className="ctaRow" style={{ marginTop: 12 }}>
-              <a className="btn btnTertiary" href="/downloads/jeffrey-plewak-resume.pdf" download>
+              <a
+                className="btn btnTertiary"
+                href="/downloads/jeffrey-plewak-resume.pdf"
+                download
+              >
                 Résumé
               </a>
 
@@ -205,7 +218,6 @@ export default function Page() {
                 src="/projects/kprovengine/architecture.png"
                 alt="KProvEngine pipeline architecture"
                 fill
-                priority
                 className="cardImg cardImgContain"
                 sizes="(max-width: 920px) 100vw, (max-width: 1200px) 50vw, 480px"
               />
@@ -216,7 +228,12 @@ export default function Page() {
                 Project page
               </Link>
 
-              <a className="btn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn"
+                href="https://github.com/carcodez1/KProvEngine"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 GitHub
               </a>
 
@@ -239,11 +256,19 @@ export default function Page() {
             </p>
 
             <div className="cardActions">
-              <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry">
+              <a
+                className="btn btnPrimary"
+                href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry"
+              >
                 Start a conversation
               </a>
 
-              <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <a
+                className="btn btnTertiary"
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Book a call
               </a>
 
@@ -256,23 +281,31 @@ export default function Page() {
       </section>
 
       <section className="section" id="focus" aria-label="Focus">
+        <ScrollReveal
+          selector=".focusCard"
+          visibleClass="focusCard--visible"
+          threshold={0.2}
+          rootMargin="0px 0px -10% 0px"
+          toggle
+        />
+
         <h2 className="h2">Focus</h2>
         <p className="lede">Production systems where correctness and operational clarity matter most.</p>
 
         <ul className="grid3" role="list">
-          <li className="card">
+          <li className="card focusCard">
             <h3>Platform &amp; Backend</h3>
             <p className="muted">
               Python-first services, APIs, and data pipelines with explicit contracts and observability.
             </p>
           </li>
 
-          <li className="card">
+          <li className="card focusCard">
             <h3>Full-Stack Delivery</h3>
             <p className="muted">Pragmatic front-ends paired with resilient backends. No demo abstractions.</p>
           </li>
 
-          <li className="card">
+          <li className="card focusCard">
             <h3>Compliance &amp; Reliability</h3>
             <p className="muted">Deterministic builds, traceable artifacts, and audit-ready workflows.</p>
           </li>
@@ -284,11 +317,19 @@ export default function Page() {
         <p className="lede">Open to remote roles, consulting, and short-term contracts.</p>
 
         <div className="ctaRow">
-          <a className="btn btnPrimary" href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry">
+          <a
+            className="btn btnPrimary"
+            href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
+          >
             Project inquiry
           </a>
 
-          <a className="btn btnTertiary" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn btnTertiary"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Book a call
           </a>
 
@@ -296,7 +337,12 @@ export default function Page() {
             View projects
           </Link>
 
-          <a className="btn" href="https://www.linkedin.com/in/jeffreyplewak" target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn"
+            href="https://www.linkedin.com/in/jeffreyplewak"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Connect on LinkedIn
           </a>
         </div>

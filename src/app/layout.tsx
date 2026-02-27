@@ -1,7 +1,6 @@
 // src/app/layout.tsx
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import "./globals.css";
 
 import { siteGraphJsonLd } from "@/lib/jsonld";
@@ -24,13 +23,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <Script
+        <script
           id="site-jsonld"
           type="application/ld+json"
           nonce={nonceAttr}
-          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
+        />
+        {/* Progressive enhancement marker: enables motion styles only when JS is available. */}
+        <script
+          id="js-enabled"
+          nonce={nonceAttr}
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(siteGraphJsonLd()),
+            __html: `document.documentElement.classList.add('js');`,
           }}
         />
       </head>

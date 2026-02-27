@@ -1,0 +1,24 @@
+:root {
+  --bg0: #ffffff;
+  --bg1: #f6f7fb;
+  --bg2: #eef0f6;
+
+  --panel: rgba(17, 24, 39, 0.03);
+  --text: rgba(17, 24, 39, 0.94);
+  --muted: rgba(17, 24, 39, 0.66);
+  --border: rgba(17, 24, 39, 0.12);
+
+  --radius: 18px;
+  --max: 980px;
+  --headerH: 64px;
+
+  --accent: #2563eb;
+  --accentBorder: rgba(37, 99, 235, 0.24);
+
+  --shadowSm: 0 10px 28px rgba(17, 24, 39, 0.08);
+  --shadowMd: 0 18px 45px rgba(17, 24, 39, 0.10);
+  --shadowLg: 0 26px 70px rgba(17, 24, 39, 0.12);
+
+  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.22);
+  --divider: rgba(17, 24, 39, 0.10);
+}

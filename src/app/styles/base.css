@@ -1,0 +1,77 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--headerH);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg0);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.07), transparent 58%),
+    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.04), transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
+  transform: translateZ(0);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background:
+    repeating-linear-gradient(0deg, rgba(17,24,39,0.08) 0, rgba(17,24,39,0.08) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(17,24,39,0.10) 0, rgba(17,24,39,0.10) 1px, transparent 1px, transparent 4px);
+}
+
+::selection { background: rgba(37, 99, 235, 0.18); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focusRing);
+  border-radius: 10px;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.inlineLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.inlineLink:hover { color: var(--accent); opacity: 1; }
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  color: #000;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadowMd);
+}
+.skipLink:focus { left: 1rem; top: 1rem; }
+
+#main { scroll-margin-top: calc(var(--headerH) + 12px); }

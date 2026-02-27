@@ -1,0 +1,129 @@
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 44px 20px 40px;
+}
+
+@media (max-width: 520px) {
+  .wrap { padding: 34px 16px 32px; }
+}
+
+/* Hero layout */
+.hero { padding: 0; }
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: 56px;
+}
+
+@media (max-width: 920px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 52px;
+    padding-bottom: 32px;
+  }
+}
+
+.heroLeft { min-width: 0; }
+
+.heroRight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+@media (max-width: 920px) {
+  .heroRight { align-items: center; }
+}
+
+.idRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(17,24,39,0.14);
+  background: rgba(17,24,39,0.03);
+  flex: 0 0 auto;
+  box-shadow: var(--shadowSm);
+}
+
+.avatarImg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.h1 {
+  font-size: 42px;
+  line-height: 1.10;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+.h1Accent { color: var(--accent); }
+
+@media (max-width: 520px) {
+  .h1 { font-size: 34px; line-height: 1.12; }
+}
+
+.sub {
+  margin: 0 0 12px;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+.section { margin-top: 18px; }
+.h2 { font-size: 18px; margin: 0 0 6px; }
+
+.lede {
+  margin: 0 0 16px;
+  color: var(--muted);
+  max-width: 80ch;
+}
+
+.muted { color: var(--muted); }
+
+/* Portrait */
+.portraitHalo {
+  position: absolute;
+  width: 420px;
+  height: 480px;
+  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.09), transparent 74%);
+  filter: blur(44px);
+  z-index: 0;
+  transform: translate(-6%, -6%);
+  pointer-events: none;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(17,24,39,0.14);
+  background: #fff;
+  box-shadow: var(--shadowLg);
+  z-index: 1;
+}
+.portraitFrame img {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+/* Grids */
+.grid2, .grid3 { display: grid; gap: 16px; }
+.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 920px) {
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+}

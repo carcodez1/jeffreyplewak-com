@@ -1,0 +1,30 @@
+/* Focus reveal (scroll) */
+.focusCard {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 420ms ease-out,
+    transform 420ms ease-out,
+    border-color 180ms ease-out,
+    box-shadow 180ms ease-out;
+  will-change: opacity, transform;
+}
+
+.focusCard--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.focusCard--visible:hover {
+  transform: translate3d(0, -3px, 0);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+/* Reduced motion: always readable */
+@media (prefers-reduced-motion: reduce) {
+  .focusCard {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
