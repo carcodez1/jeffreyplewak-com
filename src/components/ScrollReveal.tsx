@@ -1,13 +1,32 @@
-// src/components/ScrollReveal.tsx
 "use client";
 
 import { useEffect } from "react";
 
 type Props = {
+  /**
+   * CSS selector for elements to observe, e.g. ".focusCard"
+   */
   selector: string;
+
+  /**
+   * Class added when element is in view, e.g. "focusCard--visible"
+   */
   visibleClass: string;
+
+  /**
+   * Intersection threshold (0..1). Default 0.2 feels natural for cards.
+   */
   threshold?: number;
+
+  /**
+   * Root margin for earlier/later reveal, e.g. "0px 0px -10% 0px"
+   */
   rootMargin?: string;
+
+  /**
+   * If true, remove visibleClass when leaving viewport (re-animates on scroll back).
+   * If false, reveal once and keep.
+   */
   toggle?: boolean;
 };
 
@@ -36,11 +55,10 @@ export function ScrollReveal({
           }
         }
       },
-      { threshold, rootMargin }
+      { root: null, rootMargin, threshold }
     );
 
     for (const el of els) observer.observe(el);
-
     return () => observer.disconnect();
   }, [selector, visibleClass, threshold, rootMargin, toggle]);
 

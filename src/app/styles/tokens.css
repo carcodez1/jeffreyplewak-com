@@ -1,4 +1,8 @@
+/* src/app/styles/tokens.css */
+
 :root {
+  color-scheme: light dark;
+
   --bg0: #ffffff;
   --bg1: #f6f7fb;
   --bg2: #eef0f6;
@@ -9,7 +13,7 @@
   --border: rgba(17, 24, 39, 0.12);
 
   --radius: 18px;
-  --max: 980px;
+  --max: 1240px;
   --headerH: 64px;
 
   --accent: #2563eb;
@@ -21,4 +25,24 @@
 
   --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.22);
   --divider: rgba(17, 24, 39, 0.10);
+}
+
+/* Theme toggle target */
+:root[data-theme="dark"] {
+  --bg0: #0b0f17;
+  --bg1: #0d1422;
+  --bg2: #0a0f1a;
+
+  --panel: rgba(255, 255, 255, 0.04);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.64);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.30);
+  --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.36);
+  --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.44);
+
+  --divider: rgba(255, 255, 255, 0.12);
+  --accentBorder: rgba(37, 99, 235, 0.34);
+  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.28);
 }

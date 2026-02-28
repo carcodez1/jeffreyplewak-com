@@ -1,407 +1,98 @@
-/* src/app/globals.css
-   Theme: Option A (neutral light + charcoal + single accent)
-   Audience: engineers + hiring managers (2026) — polished, restrained, credible
-   Rules:
-   - No gimmicks: minimal gradients, no heavy glow
-   - Logos: neutral by default, brand-on-hover
+/*
+  src/app/globals.css
+  Purpose:
+  - Single entrypoint for global styles (App Router)
+  - Keeps styles split for maintainability, but ships as one global sheet
 */
 
+@import "./styles/tokens.css";
+@import "./styles/base.css";
+@import "./styles/layout.css";
+@import "./styles/components.css";
+@import "./styles/animations.css";
+
+/* ------------------------------------------------------------------
+   2026 refinements / overrides (kept small; prefer editing /styles/*)
+-------------------------------------------------------------------*/
+
+/* Wider content on modern monitors (reduces "tiny island" effect). */
 :root {
-  --bg0: #ffffff;
-  --bg1: #f6f7fb;
-  --bg2: #eef0f6;
-
-  --panel: rgba(17, 24, 39, 0.03);
-  --text: rgba(17, 24, 39, 0.94);
-  --muted: rgba(17, 24, 39, 0.66);
-  --border: rgba(17, 24, 39, 0.12);
-
-  --radius: 18px;
-
-  /* WIDER for modern desktop/tablet without harming readability */
-  --max: 1120px; /* was 980px */
-
-  --headerH: 64px;
-
-  /* Single accent */
-  --accent: #2563eb; /* blue */
-  --accentBorder: rgba(37, 99, 235, 0.24);
-
-  --shadowSm: 0 10px 28px rgba(17, 24, 39, 0.08);
-  --shadowMd: 0 18px 45px rgba(17, 24, 39, 0.10);
-  --shadowLg: 0 26px 70px rgba(17, 24, 39, 0.12);
-
-  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.22);
-  --divider: rgba(17, 24, 39, 0.10);
+  --max: 1240px;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--headerH);
+/* Typography scale: keep readable, avoid looking undersized on wide screens. */
+.h1 {
+  font-size: clamp(34px, 3.1vw, 48px);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-
-body {
-  margin: 0;
-  color: var(--text);
-  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  background: var(--bg0);
-}
-
-/* Calm background: subtle, no “marketing glow” */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.07), transparent 58%),
-    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.04), transparent 60%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
-  transform: translateZ(0);
-}
-
-/* Light texture */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.04;
-  background:
-    repeating-linear-gradient(0deg, rgba(17,24,39,0.08) 0, rgba(17,24,39,0.08) 1px, transparent 1px, transparent 3px),
-    repeating-linear-gradient(90deg, rgba(17,24,39,0.10) 0, rgba(17,24,39,0.10) 1px, transparent 1px, transparent 4px);
-}
-
-::selection { background: rgba(37, 99, 235, 0.18); }
-
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focusRing);
-  border-radius: 10px;
-}
-
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.inlineLink {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.inlineLink:hover { color: var(--accent); opacity: 1; }
-
-.skipLink {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  z-index: 1000;
-  padding: 0.75rem 1rem;
-  background: #fff;
-  color: #000;
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadowMd);
-}
-.skipLink:focus { left: 1rem; top: 1rem; }
-
-#main { scroll-margin-top: calc(var(--headerH) + 12px); }
 
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 44px 20px 40px;
+  padding: 56px 24px 48px;
 }
 
 @media (max-width: 520px) {
   .wrap { padding: 34px 16px 32px; }
 }
 
-@media (min-width: 1200px) {
-  .wrap { padding: 56px 24px 52px; }
+@media (min-width: 1280px) {
+  .wrap { padding-left: 32px; padding-right: 32px; }
 }
-
-/* Hero */
-.hero { padding: 0; }
-
-.heroGrid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 64px;
-  align-items: center;
-  padding-top: 80px;
-  padding-bottom: 56px;
-}
-
-@media (max-width: 920px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 52px;
-    padding-bottom: 32px;
-  }
-}
-
-@media (max-width: 1024px) and (min-width: 921px) {
-  .heroGrid { gap: 40px; }
-}
-
-.heroLeft { min-width: 0; }
-
-.heroRight {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-@media (max-width: 920px) {
-  .heroRight { align-items: center; }
-}
-
-.idRow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 10px;
-}
-
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
-  overflow: hidden;
-  border: 1px solid rgba(17,24,39,0.14);
-  background: rgba(17,24,39,0.03);
-  flex: 0 0 auto;
-  box-shadow: var(--shadowSm);
-}
-
-.avatarImg { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.h1 {
-  font-size: 42px;
-  line-height: 1.10;
-  letter-spacing: -0.02em;
-  margin: 0 0 12px;
-}
-
-.h1Accent { color: var(--accent); }
-
-@media (max-width: 520px) {
-  .h1 { font-size: 34px; line-height: 1.12; }
-}
-
-.sub {
-  margin: 0 0 12px;
-  color: var(--muted);
-  max-width: 72ch;
-}
-
-.section { margin-top: 18px; }
-.h2 { font-size: 18px; margin: 0 0 6px; }
-
-.lede {
-  margin: 0 0 16px;
-  color: var(--muted);
-  max-width: 80ch;
-}
-
-.muted { color: var(--muted); }
-
-/* Buttons */
-.ctaRow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.btnGroupTight { margin-top: 18px; gap: 12px; }
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(17, 24, 39, 0.02);
-  color: var(--text);
-  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
-  white-space: nowrap;
-}
-.btn:hover {
-  background: rgba(17, 24, 39, 0.04);
-  border-color: rgba(17, 24, 39, 0.18);
-  transform: translateY(-1px);
-  text-decoration: none;
-}
-
-.btnPrimary {
-  border-color: var(--accentBorder);
-  background: rgba(37, 99, 235, 0.10);
-}
-.btnPrimary:hover {
-  background: rgba(37, 99, 235, 0.14);
-  border-color: rgba(37, 99, 235, 0.30);
-}
-
-.btnTertiary {
-  background: transparent;
-  border-color: transparent;
-  color: var(--muted);
-}
-.btnTertiary:hover {
-  color: var(--text);
-  background: rgba(17, 24, 39, 0.04);
-  transform: none;
-}
-
-/* Portrait */
-.portraitHalo {
-  position: absolute;
-  width: 420px;
-  height: 480px;
-  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.09), transparent 74%);
-  filter: blur(44px);
-  z-index: 0;
-  transform: translate(-6%, -6%);
-  pointer-events: none;
-}
-
-/* Subtle “alive” motion (CSS-only) */
-@keyframes haloFloat {
-  0%   { transform: translate(-6%, -6%) translate3d(0, 10px, 0); opacity: 0.85; }
-  50%  { transform: translate(-6%, -6%) translate3d(0, -6px, 0); opacity: 1; }
-  100% { transform: translate(-6%, -6%) translate3d(0, 10px, 0); opacity: 0.85; }
-}
-.portraitHalo { animation: haloFloat 14s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) {
-  .portraitHalo { animation: none; }
-}
-
+/* Portrait sizing: responsive without hard 420px ceiling. */
 .portraitFrame {
-  position: relative;
-  width: 420px;
-  max-width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(17,24,39,0.14);
-  background: #fff;
-  box-shadow: var(--shadowLg);
-  z-index: 1;
-}
-.portraitFrame img {
-  object-fit: cover;
-  object-position: 50% 30%;
+  width: clamp(320px, 34vw, 480px);
 }
 
 @media (max-width: 1024px) and (min-width: 921px) {
-  .portraitFrame { width: 380px; }
-  .portraitHalo  { width: 380px; height: 440px; }
+  .portraitFrame { width: clamp(320px, 34vw, 420px); }
+  .portraitHalo  { width: clamp(320px, 34vw, 420px); height: clamp(380px, 40vw, 480px); }
 }
 
-/* Grids */
-.grid2, .grid3 { display: grid; gap: 16px; }
-.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-@media (max-width: 920px) {
-  .grid2, .grid3 { grid-template-columns: 1fr; }
-}
+/* Dark theme defaults (system) + explicit override (manual toggle). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg0: #0b0f17;
+    --bg1: #0f1626;
+    --bg2: #0a1020;
 
-/* Cards */
-.card {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--panel), rgba(17, 24, 39, 0.015));
-  box-shadow: var(--shadowMd);
-  padding: 18px 18px 16px;
-  min-height: 160px;
-  transition: transform 180ms ease, border-color 180ms ease;
-}
-.card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.22);
-}
-@media (prefers-reduced-motion: reduce) {
-  .btn, .card { transition: none; }
-  .btn:hover, .card:hover { transform: none; }
-}
+    --panel: rgba(255, 255, 255, 0.05);
+    --text: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.66);
+    --border: rgba(255, 255, 255, 0.14);
 
-.cardLink { display: grid; gap: 12px; }
-.cardHead { display: grid; gap: 4px; }
-.cardTitle { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
-.cardTag { margin: 0; font-size: 0.95rem; color: var(--muted); }
-.cardDesc { margin: 0; color: var(--muted); line-height: 1.55; }
+    --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.35);
+    --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.45);
+    --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.55);
 
-.cardBullets {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.55;
-}
-.cardBullets li { margin: 4px 0; }
-
-.cardMedia {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(17, 24, 39, 0.12);
-  background: rgba(17, 24, 39, 0.03);
-  position: relative;
-  aspect-ratio: 1200 / 630;
-}
-.cardImg { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
-.cardImgContain { object-fit: contain; }
-.cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-/* -------------------------
-   Focus reveal (scroll)
-   - SAFE FALLBACK: visible by default
-   - Animated only when JS adds .js to <html>
-------------------------- */
-.focusCard {
-  opacity: 1;
-  transform: none;
-}
-
-/* JS-enhanced behavior */
-.js .focusCard {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 420ms ease-out,
-    transform 420ms ease-out,
-    border-color 180ms ease-out,
-    box-shadow 180ms ease-out;
-  will-change: opacity, transform;
-}
-
-.js .focusCard--visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.js .focusCard--visible:hover {
-  transform: translate3d(0, -3px, 0);
-  border-color: rgba(37, 99, 235, 0.22);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js .focusCard {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    --divider: rgba(255, 255, 255, 0.12);
   }
 }
 
-/* -------------------------
-   Header / footer (unchanged from your current approach)
-   NOTE: keep your existing SiteHeader/SiteFooter CSS below if present.
-------------------------- */
+:root[data-theme="light"] { color-scheme: light; }
 
-/* If you already have SiteHeader/SiteFooter CSS blocks below this point,
-   keep them. If not, leave this file as-is. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg0: #0b0f17;
+  --bg1: #0f1626;
+  --bg2: #0a1020;
+
+  --panel: rgba(255, 255, 255, 0.05);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.66);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.35);
+  --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.45);
+  --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.55);
+
+  --divider: rgba(255, 255, 255, 0.12);
+}
+
+/* Accessibility: user requested more contrast. */
+@media (prefers-contrast: more) {
+  :root {
+    --border: color-mix(in srgb, var(--text) 28%, transparent);
+    --divider: color-mix(in srgb, var(--text) 22%, transparent);
+    --focusRing: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+}

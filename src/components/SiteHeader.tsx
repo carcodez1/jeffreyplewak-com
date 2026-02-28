@@ -34,9 +34,14 @@ export function SiteHeader() {
           </Link>
         </nav>
 
-        {/* Desktop: CTA(s) + icons */}
+        {/* Desktop */}
         <div className="siteActions siteActionsDesktop" aria-label="Actions (desktop)">
-          <a className="btn btnPrimary btnHeader" href={LINKS.resume} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn btnPrimary btnHeader"
+            href={LINKS.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Résumé
           </a>
 
@@ -76,9 +81,14 @@ export function SiteHeader() {
           </a>
         </div>
 
-        {/* Mobile: one CTA + two icons (keep minimal) */}
+        {/* Mobile */}
         <div className="siteActions siteActionsMobile" aria-label="Actions (mobile)">
-          <a className="btn btnPrimary btnHeader" href={LINKS.resume} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn btnPrimary btnHeader"
+            href={LINKS.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Résumé
           </a>
 
