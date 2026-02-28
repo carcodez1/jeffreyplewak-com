@@ -1,91 +1,53 @@
-/* src/app/styles/layout.css */
+/* src/app/styles/layout.css
+   Layout + page scaffolding.
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+   RULES:
+   - NO token definitions here. Tokens live in tokens.css.
+   - NO theme branching here. Theme differences come ONLY from tokens.css.
+   - NO resets or accessibility primitives here (focus/selection/skipLink). Those live in base.css.
+*/
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--headerH);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-
-body {
-  margin: 0;
-  color: var(--text);
-  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  background: var(--bg0);
-}
-
-/* Calm background */
+/* Ambient background glow (token-driven) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
+  pointer-events: none;
+
   background:
-    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.07), transparent 58%),
-    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.04), transparent 60%),
+    radial-gradient(60rem 40rem at 15% 18%, var(--bgGlowA), transparent 58%),
+    radial-gradient(55rem 40rem at 85% 22%, var(--bgGlowB), transparent 60%),
     linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
+
   transform: translateZ(0);
 }
 
-:root[data-theme="dark"] body::before {
-  background:
-    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.12), transparent 58%),
-    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.06), transparent 60%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
-}
-
-/* Light texture */
+/* Subtle texture (token-driven via --text) */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.04;
+
+  opacity: 0.05;
   background:
-    repeating-linear-gradient(0deg, rgba(17,24,39,0.08) 0, rgba(17,24,39,0.08) 1px, transparent 1px, transparent 3px),
-    repeating-linear-gradient(90deg, rgba(17,24,39,0.10) 0, rgba(17,24,39,0.10) 1px, transparent 1px, transparent 4px);
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--text) 10%, transparent) 0,
+      color-mix(in srgb, var(--text) 10%, transparent) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--text) 12%, transparent) 0,
+      color-mix(in srgb, var(--text) 12%, transparent) 1px,
+      transparent 1px,
+      transparent 4px
+    );
 }
-
-:root[data-theme="dark"] body::after {
-  opacity: 0.06;
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 3px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.10) 0, rgba(255,255,255,0.10) 1px, transparent 1px, transparent 4px);
-}
-
-::selection { background: rgba(37, 99, 235, 0.18); }
-
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focusRing);
-  border-radius: 10px;
-}
-
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.skipLink {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  z-index: 1000;
-  padding: 0.75rem 1rem;
-  background: var(--bg0);
-  color: var(--text);
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadowMd);
-}
-.skipLink:focus { left: 1rem; top: 1rem; }
-
-#main { scroll-margin-top: calc(var(--headerH) + 12px); }
 
 .appMain {
   min-height: calc(100dvh - var(--headerH));
@@ -98,11 +60,15 @@ a:hover { text-decoration: underline; }
 }
 
 @media (max-width: 520px) {
-  .wrap { padding: 34px 16px 32px; }
+  .wrap {
+    padding: 34px 16px 32px;
+  }
 }
 
 /* Hero */
-.hero { padding: 0; }
+.hero {
+  padding: 0;
+}
 
 .heroGrid {
   display: grid;
@@ -122,7 +88,9 @@ a:hover { text-decoration: underline; }
   }
 }
 
-.heroLeft { min-width: 0; }
+.heroLeft {
+  min-width: 0;
+}
 
 .heroRight {
   position: relative;
@@ -130,8 +98,11 @@ a:hover { text-decoration: underline; }
   flex-direction: column;
   align-items: flex-start;
 }
+
 @media (max-width: 920px) {
-  .heroRight { align-items: center; }
+  .heroRight {
+    align-items: center;
+  }
 }
 
 .idRow {
@@ -146,18 +117,20 @@ a:hover { text-decoration: underline; }
   height: 56px;
   border-radius: 999px;
   overflow: hidden;
-  border: 1px solid rgba(17,24,39,0.14);
-  background: rgba(17,24,39,0.03);
+
+  border: 1px solid var(--border);
+  background: var(--surface0);
+
   flex: 0 0 auto;
   box-shadow: var(--shadowSm);
 }
 
-:root[data-theme="dark"] .avatar {
-  border-color: rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.06);
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-
-.avatarImg { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .h1 {
   font-size: clamp(34px, 3.2vw, 54px);
@@ -166,7 +139,9 @@ a:hover { text-decoration: underline; }
   margin: 0 0 12px;
 }
 
-.h1Accent { color: var(--accent); }
+.h1Accent {
+  color: var(--accent);
+}
 
 .sub {
   margin: 0 0 12px;
@@ -174,9 +149,14 @@ a:hover { text-decoration: underline; }
   max-width: 72ch;
 }
 
-.section { margin-top: 18px; }
+.section {
+  margin-top: 18px;
+}
 
-.h2 { font-size: 18px; margin: 0 0 6px; }
+.h2 {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
 
 .lede {
   margin: 0 0 16px;
@@ -184,22 +164,46 @@ a:hover { text-decoration: underline; }
   max-width: 80ch;
 }
 
-.muted { color: var(--muted); }
-
-/* Buttons */
-.ctaRow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.btnGroupTight { margin-top: 18px; gap: 12px; }
-
-/* Grids */
-.grid2, .grid3 { display: grid; gap: 16px; }
-.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-@media (max-width: 920px) {
-  .grid2, .grid3 { grid-template-columns: 1fr; }
+.muted {
+  color: var(--muted);
 }
 
-/* IMPORTANT: reset list styling (fixes bullet dots) */
+/* Buttons row layout (structure only) */
+.ctaRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btnGroupTight {
+  margin-top: 18px;
+  gap: 12px;
+}
+
+/* Grids */
+.grid2,
+.grid3 {
+  display: grid;
+  gap: 16px;
+}
+
+.grid2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 920px) {
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reset list styling for grid lists */
 ul.grid3,
 ul[role="list"] {
   list-style: none;
@@ -212,7 +216,7 @@ ul[role="list"] {
   position: absolute;
   width: 420px;
   height: 480px;
-  background: radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.09), transparent 74%);
+  background: radial-gradient(circle at 40% 40%, var(--bgGlowA), transparent 74%);
   filter: blur(44px);
   z-index: 0;
   transform: translate(-6%, -6%);
@@ -224,13 +228,24 @@ ul[role="list"] {
 }
 
 @keyframes haloFloat {
-  0%   { transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1); opacity: 0.90; }
-  50%  { transform: translate(-6%, -6%) translate3d(0, -6px, 0) scale(1.02); opacity: 1; }
-  100% { transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1); opacity: 0.90; }
+  0% {
+    transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-6%, -6%) translate3d(0, -6px, 0) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1);
+    opacity: 0.9;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .portraitHalo { animation: none; }
+  .js .portraitHalo {
+    animation: none;
+  }
 }
 
 .portraitFrame {
@@ -239,14 +254,12 @@ ul[role="list"] {
   aspect-ratio: 4 / 5;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(17,24,39,0.14);
+
+  border: 1px solid var(--border);
   background: var(--bg0);
+
   box-shadow: var(--shadowLg);
   z-index: 1;
-}
-
-:root[data-theme="dark"] .portraitFrame {
-  border-color: rgba(255,255,255,0.16);
 }
 
 .portraitFrame img {

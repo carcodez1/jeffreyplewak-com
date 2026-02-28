@@ -69,95 +69,58 @@ export default function Page() {
                 Work with me
               </a>
             </div>
+{/* Experience across */}
+<div className="credStrip" aria-label="Experience across">
+  <div className="credLabel">
+    <span>Experience across</span>
+    <span className="credRule" aria-hidden="true" />
+  </div>
 
-            <div className="credStrip" aria-label="Experience across">
-              <div className="credLabel">
-                <span>Experience across</span>
-                <span className="credRule" aria-hidden="true" />
-              </div>
+  <div className="credMarquee" aria-label="Employer logos (auto-scrolling)">
+    <div className="credTrack">
+      {/* Track A */}
+      <a className="credLogoLink" href="https://www.lockheedmartin.com" target="_blank" rel="noopener noreferrer" aria-label="Lockheed Martin">
+        <Image src="/assets/logos/lockheed-martin.svg" alt="Lockheed Martin" width={110} height={22} className="credLogo" />
+      </a>
 
-              <div className="credLogos">
-                <a
-                  className="credLogoLink"
-                  href="https://www.lockheedmartin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Lockheed Martin"
-                >
-                  <Image
-                    src="/assets/logos/lockheed-martin.svg"
-                    alt="Lockheed Martin"
-                    width={110}
-                    height={22}
-                    className="credLogo"
-                  />
-                </a>
+      <a className="credLogoLink" href="https://www.jpmorganchase.com" target="_blank" rel="noopener noreferrer" aria-label="JPMorgan Chase">
+        <Image src="/assets/logos/jp-morgan-chase.svg" alt="JPMorgan Chase" width={130} height={22} className="credLogo" />
+      </a>
 
-                <a
-                  className="credLogoLink"
-                  href="https://www.jpmorganchase.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="JPMorgan Chase"
-                >
-                  <Image
-                    src="/assets/logos/jp-morgan-chase.svg"
-                    alt="JPMorgan Chase"
-                    width={130}
-                    height={22}
-                    className="credLogo"
-                  />
-                </a>
+      <a className="credLogoLink" href="https://www.ibm.com" target="_blank" rel="noopener noreferrer" aria-label="IBM">
+        <Image src="/assets/logos/ibm.svg" alt="IBM" width={60} height={22} className="credLogo" />
+      </a>
 
-                <a
-                  className="credLogoLink"
-                  href="https://www.ibm.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="IBM"
-                >
-                  <Image
-                    src="/assets/logos/ibm.svg"
-                    alt="IBM"
-                    width={60}
-                    height={22}
-                    className="credLogo"
-                  />
-                </a>
+      <a className="credLogoLink" href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" aria-label="AWS">
+        <Image src="/assets/logos/aws.svg" alt="AWS" width={54} height={22} className="credLogo" />
+      </a>
 
-                <a
-                  className="credLogoLink"
-                  href="https://aws.amazon.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="AWS"
-                >
-                  <Image
-                    src="/assets/logos/aws.svg"
-                    alt="AWS"
-                    width={54}
-                    height={22}
-                    className="credLogo"
-                  />
-                </a>
+      <a className="credLogoLink" href="https://www.expediagroup.com" target="_blank" rel="noopener noreferrer" aria-label="Expedia Group">
+        <Image src="/assets/logos/expedia.svg" alt="Expedia Group" width={92} height={22} className="credLogo" />
+      </a>
 
-                <a
-                  className="credLogoLink"
-                  href="https://www.expediagroup.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Expedia Group"
-                >
-                  <Image
-                    src="/assets/logos/expedia.svg"
-                    alt="Expedia Group"
-                    width={92}
-                    height={22}
-                    className="credLogo"
-                  />
-                </a>
-              </div>
-            </div>
+      {/* Track B (duplicate) */}
+      <span aria-hidden="true" style={{ display: "contents" }}>
+        <a className="credLogoLink" href="https://www.lockheedmartin.com" target="_blank" rel="noopener noreferrer" aria-label="Lockheed Martin">
+          <Image src="/assets/logos/lockheed-martin.svg" alt="" width={110} height={22} className="credLogo" />
+        </a>
+        <a className="credLogoLink" href="https://www.jpmorganchase.com" target="_blank" rel="noopener noreferrer" aria-label="JPMorgan Chase">
+          <Image src="/assets/logos/jp-morgan-chase.svg" alt="" width={130} height={22} className="credLogo" />
+        </a>
+        <a className="credLogoLink" href="https://www.ibm.com" target="_blank" rel="noopener noreferrer" aria-label="IBM">
+          <Image src="/assets/logos/ibm.svg" alt="" width={60} height={22} className="credLogo" />
+        </a>
+        <a className="credLogoLink" href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" aria-label="AWS">
+          <Image src="/assets/logos/aws.svg" alt="" width={54} height={22} className="credLogo" />
+        </a>
+        <a className="credLogoLink" href="https://www.expediagroup.com" target="_blank" rel="noopener noreferrer" aria-label="Expedia Group">
+          <Image src="/assets/logos/expedia.svg" alt="" width={92} height={22} className="credLogo" />
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
 
             <div className="ctaRow" style={{ marginTop: 12 }}>
               <a

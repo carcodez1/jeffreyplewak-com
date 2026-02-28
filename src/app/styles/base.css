@@ -1,77 +1,121 @@
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+/* src/app/styles/base.css
+   Base layer: reset + element defaults + accessibility primitives.
+
+   RULES:
+   - No token definitions here (no --*).
+   - No page layout scaffolding here (NO wrap/hero/grid). That belongs to layout.css.
+   - Accessibility primitives (focus, selection, skipLink) live here.
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
 
 html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: var(--headerH);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
   color: var(--text);
-  font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+  font: 16px / 1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
     "Apple Color Emoji", "Segoe UI Emoji";
   background: var(--bg0);
+  overflow-x: hidden;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(60rem 40rem at 15% 18%, rgba(37, 99, 235, 0.07), transparent 58%),
-    radial-gradient(55rem 40rem at 85% 22%, rgba(37, 99, 235, 0.04), transparent 60%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
-  transform: translateZ(0);
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.04;
-  background:
-    repeating-linear-gradient(0deg, rgba(17,24,39,0.08) 0, rgba(17,24,39,0.08) 1px, transparent 1px, transparent 3px),
-    repeating-linear-gradient(90deg, rgba(17,24,39,0.10) 0, rgba(17,24,39,0.10) 1px, transparent 1px, transparent 4px);
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
 }
 
-::selection { background: rgba(37, 99, 235, 0.18); }
+code,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
+hr {
+  border: 0;
+  border-top: 1px solid var(--divider);
+}
+
+/* Selection (token-driven) */
+::selection {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--textStrong);
+}
+
+/* Focus-visible (forced-colors safe) */
 :focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   box-shadow: var(--focusRing);
   border-radius: 10px;
 }
 
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.inlineLink {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
 }
-.inlineLink:hover { color: var(--accent); opacity: 1; }
 
+/* Skip link (token-driven; works for dark) */
 .skipLink {
   position: absolute;
-  left: -9999px;
-  top: 0;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+
   z-index: 1000;
   padding: 0.75rem 1rem;
-  background: #fff;
-  color: #000;
+  background: var(--bg0);
+  color: var(--textStrong);
   border-radius: 0.5rem;
   border: 1px solid var(--border);
   box-shadow: var(--shadowMd);
+  text-decoration: none;
 }
-.skipLink:focus { left: 1rem; top: 1rem; }
 
-#main { scroll-margin-top: calc(var(--headerH) + 12px); }
+.skipLink:focus,
+.skipLink:focus-visible {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  inset-block-start: 1rem;
+  inset-inline-start: 1rem;
+}

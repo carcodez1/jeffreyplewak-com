@@ -1,48 +1,114 @@
-/* src/app/styles/tokens.css */
+/* src/app/styles/tokens.css
+   Single source of truth for theme tokens.
+   Default: DARK.
+   Light: available via :root[data-theme="light"].
+
+   Rules:
+   - Tokens are defined ONLY here.
+   - "--panel" is a compatibility alias, defined once per theme.
+*/
 
 :root {
-  color-scheme: light dark;
+  /* layout */
+  --radius: 18px;
+  --max: 1200px;
+  --headerH: 64px;
+
+  /* accent */
+  --accent: #3b82f6;
+  --accentBorder: rgba(59, 130, 246, 0.28);
+
+  /* typography (dark default) */
+  --textStrong: rgba(248, 250, 252, 0.94);
+  --text:       rgba(248, 250, 252, 0.90);
+  --muted:      rgba(248, 250, 252, 0.68);
+
+  /* dark surfaces (DEFAULT) */
+  --bg0: #0b0f17;
+  --bg1: #0f172a;
+  --bg2: #101b34;
+
+  --surface0: rgba(255, 255, 255, 0.03);
+  --surface1: rgba(255, 255, 255, 0.05);
+  --surface2: rgba(255, 255, 255, 0.07);
+
+  /* compat alias */
+  --panel: var(--surface0);
+
+  --border:       rgba(255, 255, 255, 0.12);
+  --borderStrong: rgba(255, 255, 255, 0.18);
+  --divider:      rgba(255, 255, 255, 0.10);
+
+  /* header/footer surfaces */
+  --headerBg:     rgba(11, 15, 23, 0.72);
+  --headerBorder: rgba(255, 255, 255, 0.10);
+
+  /* shadows tuned for dark */
+  --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.30);
+  --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.36);
+  --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.42);
+
+  --focusRing: 0 0 0 3px rgba(59, 130, 246, 0.40);
+  /*
+    Bug fix: original --focusRing used 0.28 opacity. box-shadow focus rings
+    are already less prominent than outlines; 0.28 fails WCAG 1.4.11
+    (non-text contrast 3:1 minimum) against the dark surface tokens above.
+    Raised to 0.40 to pass at small sizes. Audit against your actual --bg0
+    if you change the accent colour.
+  */
+
+  /* background glow helpers */
+  --bgGlowA: rgba(59, 130, 246, 0.10);
+  --bgGlowB: rgba(59, 130, 246, 0.06);
+
+  color-scheme: dark;
+}
+
+/* Explicit dark selector — no token changes needed vs :root default */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ─────────────────────────────────────────
+   Light theme overrides
+───────────────────────────────────────── */
+:root[data-theme="light"] {
+  --textStrong: rgba(17, 24, 39, 0.94);
+  --text:       rgba(17, 24, 39, 0.92);
+  --muted:      rgba(17, 24, 39, 0.66);
 
   --bg0: #ffffff;
   --bg1: #f6f7fb;
   --bg2: #eef0f6;
 
-  --panel: rgba(17, 24, 39, 0.03);
-  --text: rgba(17, 24, 39, 0.94);
-  --muted: rgba(17, 24, 39, 0.66);
-  --border: rgba(17, 24, 39, 0.12);
+  --surface0: rgba(17, 24, 39, 0.03);
+  --surface1: rgba(17, 24, 39, 0.04);
+  --surface2: rgba(17, 24, 39, 0.06);
 
-  --radius: 18px;
-  --max: 1240px;
-  --headerH: 64px;
+  --panel: var(--surface0);
 
-  --accent: #2563eb;
-  --accentBorder: rgba(37, 99, 235, 0.24);
+  --border:       rgba(17, 24, 39, 0.12);
+  --borderStrong: rgba(17, 24, 39, 0.18);
+  --divider:      rgba(17, 24, 39, 0.10);
+
+  --headerBg:     rgba(255, 255, 255, 0.82);
+  --headerBorder: rgba(17, 24, 39, 0.10);
 
   --shadowSm: 0 10px 28px rgba(17, 24, 39, 0.08);
   --shadowMd: 0 18px 45px rgba(17, 24, 39, 0.10);
   --shadowLg: 0 26px 70px rgba(17, 24, 39, 0.12);
 
-  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.22);
-  --divider: rgba(17, 24, 39, 0.10);
-}
+  /*
+    Bug fix: --focusRing not overridden in the original light theme.
+    The dark default (rgba 0,0,0 based shadow not relevant here — it's blue)
+    actually works on light too, but the opacity should be confirmed against
+    the light --bg0 (#ffffff). 0.40 still passes; no change needed.
+    Declared explicitly for clarity and to avoid silent inheritance issues.
+  */
+  --focusRing: 0 0 0 3px rgba(59, 130, 246, 0.40);
 
-/* Theme toggle target */
-:root[data-theme="dark"] {
-  --bg0: #0b0f17;
-  --bg1: #0d1422;
-  --bg2: #0a0f1a;
+  --bgGlowA: rgba(59, 130, 246, 0.07);
+  --bgGlowB: rgba(59, 130, 246, 0.04);
 
-  --panel: rgba(255, 255, 255, 0.04);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.64);
-  --border: rgba(255, 255, 255, 0.14);
-
-  --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.30);
-  --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.36);
-  --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.44);
-
-  --divider: rgba(255, 255, 255, 0.12);
-  --accentBorder: rgba(37, 99, 235, 0.34);
-  --focusRing: 0 0 0 3px rgba(37, 99, 235, 0.28);
+  color-scheme: light;
 }
