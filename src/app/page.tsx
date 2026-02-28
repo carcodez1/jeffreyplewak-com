@@ -1,96 +1,100 @@
-// src/app/projects/page.tsx
+// src/app/resume/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ExperienceStrip } from "@/components/ExperienceStrip";
-import { LINKS } from "@/config/site";
-import { SITE } from "@/config/site";
+import { LINKS, SITE } from "@/config/site";
+import { getResumeRoles } from "@/lib/resume";
 
 export const metadata: Metadata = {
-  title: "Projects — Jeffrey R. Plewak",
-  description: "Selected work and project write-ups.",
-  alternates: { canonical: "/projects" },
+  title: `Resume — ${SITE.name}`,
+  description: "Résumé (HTML) with traceable role details, skills, locations, and outcomes.",
+  alternates: { canonical: "/resume" },
   openGraph: {
     type: "website",
-    title: "Projects — Jeffrey R. Plewak",
-    description: "Selected work and project write-ups.",
-    url: "/projects",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects — Jeffrey R. Plewak",
-    description: "Selected work and project write-ups.",
+    title: `Resume — ${SITE.name}`,
+    description: "Résumé (HTML) with traceable role details, skills, locations, and outcomes.",
+    url: "/resume",
   },
 };
 
-export default function ProjectsPage() {
+function fmtRange(start: string, end?: string) {
+  const s = start;
+  const e = end ?? "Present";
+  return `${s} → ${e}`;
+}
+
+export default function ResumePage() {
+  const roles = getResumeRoles();
+
   return (
-    <main id="main" className="wrap">
-      <header className="section" aria-label="Projects intro">
-        <h1 className="h1">Projects</h1>
-        <p className="lede">
-          A short list. Each project has a page with details, links, and artifacts.
+    <div className="wrap">
+      <header className="section">
+        <h1 className="h2" style={{ marginBottom: 8 }}>
+          Resume
+        </h1>
+        <p className="lede" style={{ marginBottom: 14 }}>
+          Indexable HTML resume (keeps recruiters on-site). PDF is available for download.
         </p>
 
-        <div className="ctaRow" aria-label="Projects actions">
-          <Link className="btn btnPrimary" href="/projects/kprovengine">
-            KProvEngine
-          </Link>
-          <a className="btn" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
-            Résumé (PDF)
-          </a>
-          <a className="btn btnTertiary" href={LINKS.emailProject}>
+        <div className="ctaRow">
+          <a className="btn btnPrimary" href={LINKS.emailProject}>
             Email
           </a>
+          <a className="btn" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
+            Open PDF
+          </a>
+          <Link className="btn btnTertiary" href="/projects">
+            Projects
+          </Link>
         </div>
-
-        {/* Reusable experience strip (replaces duplicated credStrip markup) */}
-        <ExperienceStrip />
       </header>
 
-      <section className="section" aria-label="Project list">
-        <div className="grid2">
-          <article className="card cardLink" aria-label="KProvEngine project">
-            <h2 className="cardTitle">KProvEngine</h2>
-            <p className="cardDesc">
-              Deterministic provenance pipelines for human-reviewed workflows with local-first execution.
-            </p>
-            <div className="cardActions">
-              <Link className="btn btnPrimary" href="/projects/kprovengine">
-                Project page
-              </Link>
-              <a className="btn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
-                GitHub
-              </a>
-              <a
-                className="btn"
-                href="https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Architecture
-              </a>
-            </div>
-          </article>
+      <section className="section" aria-label="Experience">
+        <h2 className="h2">Experience</h2>
+        <p className="lede">Each entry includes employer, location, role, timeframe, and skills.</p>
 
-          <article className="card" aria-label="More projects">
-            <h2 className="cardTitle">More</h2>
-            <p className="cardDesc">
-              I’m iterating on this page. If you want a specific repo or case study added, email me.
-            </p>
-            <div className="cardActions">
-              <a className="btn btnPrimary" href={LINKS.emailProject}>
-                Email
-              </a>
-              <a className="btn btnTertiary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </a>
-              <a className="btn btnTertiary" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-                GitHub
-              </a>
-            </div>
-          </article>
+        <div className="stack">
+          {roles.map((r) => (
+            <article key={r.id} id={r.id} className="roleCard" aria-label={`${r.employerName} role`}>
+              <div className="roleTop">
+                <div>
+                  <h3 className="roleEmployer">{r.employerName}</h3>
+                  <div className="roleMeta">
+                    <span>{r.title}</span>
+                    <span className="roleSep" aria-hidden="true">
+                      •
+                    </span>
+                    <span>{r.location}</span>
+                    <span className="roleSep" aria-hidden="true">
+                      •
+                    </span>
+                    <span>{fmtRange(r.start, r.end)}</span>
+                  </div>
+                </div>
+
+                <div className="roleActions">
+                  <a className="btn btnTertiary" href={r.employerUrl} target="_blank" rel="noopener noreferrer">
+                    Company site
+                  </a>
+                </div>
+              </div>
+
+              <ul className="roleBullets">
+                {r.highlights.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+
+              <div className="roleSkills" aria-label="Skills">
+                {r.skills.map((s) => (
+                  <span key={s.id} className="skillPill">
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

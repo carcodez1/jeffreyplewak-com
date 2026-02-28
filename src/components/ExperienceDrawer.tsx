@@ -3,7 +3,21 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import type { ExperienceItem } from "@/lib/experience";
+
+export type ExperienceItem = {
+  key: string;
+  name: string;
+  href: string;
+  logoSrc: string;
+  logoWidth: number;
+  logoHeight: number;
+  resume: {
+    pageHref: string;
+    pdfHref: string;
+    roleLine?: string;
+  };
+  highlights: string[];
+};
 
 export function ExperienceDrawer(props: { open: boolean; item?: ExperienceItem; onClose?: () => void }) {
   const { open, item, onClose } = props;
@@ -14,15 +28,11 @@ export function ExperienceDrawer(props: { open: boolean; item?: ExperienceItem; 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose?.();
     };
-
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
 
   if (!open || !item) return null;
-
-  const resumeHref =
-    item.resume.pdfPageHint != null ? `${item.resume.pdfHref}#page=${item.resume.pdfPageHint}` : item.resume.pdfHref;
 
   return (
     <div className="expDrawerRoot" role="dialog" aria-modal="true" aria-label={`${item.name} details`}>
@@ -32,7 +42,13 @@ export function ExperienceDrawer(props: { open: boolean; item?: ExperienceItem; 
         <div className="expDrawerHead">
           <div className="expDrawerTitleRow">
             <div className="expDrawerLogo" aria-hidden="true">
-              <Image src={item.logoSrc} alt="" width={item.logoWidth} height={item.logoHeight} className="expDrawerLogoImg" />
+              <Image
+                src={item.logoSrc}
+                alt=""
+                width={item.logoWidth}
+                height={item.logoHeight}
+                className="expDrawerLogoImg"
+              />
             </div>
 
             <div>
@@ -46,11 +62,14 @@ export function ExperienceDrawer(props: { open: boolean; item?: ExperienceItem; 
           </div>
 
           <div className="expDrawerActions">
-            <a className="btn btnPrimary" href={resumeHref} target="_blank" rel="noopener noreferrer">
-              View in résumé
+            <a className="btn btnPrimary" href={item.resume.pageHref} onClick={onClose}>
+              View details
             </a>
-            <a className="btn" href={item.href} target="_blank" rel="noopener noreferrer">
-              Website
+            <a className="btn" href={item.resume.pdfHref} target="_blank" rel="noopener noreferrer">
+              Open PDF
+            </a>
+            <a className="btn btnTertiary" href={item.href} target="_blank" rel="noopener noreferrer">
+              Company site
             </a>
           </div>
         </div>

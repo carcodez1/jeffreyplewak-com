@@ -11,13 +11,13 @@ export function SiteFooter() {
       <div className="siteFooterInner">
         <div className="footerCol">
           <div className="footerTitle">{SITE.name}</div>
-          <div className="footerSub">{SITE.title} — {SITE.roleLine}</div>
+          <div className="footerSub">{SITE.footerBlurb}</div>
 
           <div className="footerCtas" aria-label="Footer actions">
-            <a className="btn btnPrimary" href={LINKS.resumePdf} {...extLinkProps(true)}>
-              View résumé
-            </a>
-            <a className="btn" href={LINKS.calendly} {...extLinkProps(true)}>
+            <Link className="btn btnPrimary" href="/resume">
+              Resume
+            </Link>
+            <a className="btn" href={LINKS.calendly} target="_blank" rel="noopener noreferrer">
               Book a call
             </a>
           </div>
@@ -30,7 +30,9 @@ export function SiteFooter() {
             ))}
           </div>
 
-          <div className="footerCopy">© {year} {SITE.name}. All rights reserved.</div>
+          <div className="footerCopy">
+            © {year} {SITE.name}. All rights reserved.
+          </div>
         </div>
 
         <div className="footerCol" aria-label="Contact">
@@ -40,27 +42,44 @@ export function SiteFooter() {
               plewak.jeff@gmail.com
             </a>
           </address>
-          <div className="footerHint">Fastest: email. If it’s easier, book a short call.</div>
+          <div className="footerHint">Fastest: email. For consulting: short call.</div>
         </div>
 
         <div className="footerCol" aria-label="Links">
           <div className="footerHead">Links</div>
           <div className="footerLinksStack">
-            <a className="footerLink" href={LINKS.linkedin} {...extLinkProps(true)}>LinkedIn</a>
-            <a className="footerLink" href={LINKS.github} {...extLinkProps(true)}>GitHub</a>
-            <Link className="footerLink" href="/projects">Projects</Link>
+            <a className="footerLink" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            <a className="footerLink" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <Link className="footerLink" href="/projects">
+              Projects
+            </Link>
+            <Link className="footerLink" href="/resume">
+              Resume
+            </Link>
           </div>
 
           <div className="footerHead footerHeadSpacer">Downloads</div>
           <div className="footerLinksStack">
-            <a className="footerLink" href={LINKS.resumePdf} {...extLinkProps(true)}>Résumé (PDF)</a>
-            <a className="footerLink" href={LINKS.vcf} download>Contact card (VCF)</a>
+            <a className="footerLink" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
+              Resume (PDF)
+            </a>
+            <a className="footerLink" href={LINKS.vcf} download>
+              Contact card (VCF)
+            </a>
           </div>
 
           <div className="footerHead footerHeadSpacer">Legal</div>
           <div className="footerLinksStack">
-            <Link className="footerLink" href="/terms">Terms</Link>
-            <Link className="footerLink" href="/privacy">Privacy</Link>
+            <Link className="footerLink" href="/terms">
+              Terms of Service
+            </Link>
+            <Link className="footerLink" href="/privacy">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>
