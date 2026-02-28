@@ -60,3 +60,7 @@ docs/debug/
 docs/DEBUG.md
 docs/debug/
 
+
+# Local-only debug (never commit)
+docs/debug/
+docs/DEBUG.md
