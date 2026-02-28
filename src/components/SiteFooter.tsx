@@ -1,4 +1,6 @@
 // src/components/SiteFooter.tsx
+import { SocialIcon } from "./SocialIcon";
+
 const LINKS = {
   github: "https://github.com/carcodez1",
   linkedin: "https://www.linkedin.com/in/jeffreyplewak",
@@ -8,12 +10,22 @@ const LINKS = {
   vcf: "/downloads/jeffrey-plewak.vcf",
 } as const;
 
+const SOCIALS = [
+  { href: LINKS.linkedin, label: "LinkedIn", icon: "/assets/icons/linkedin.svg", external: true },
+  { href: LINKS.email, label: "Email", icon: "/assets/icons/mail.svg", external: false },
+  { href: LINKS.github, label: "GitHub", icon: "/assets/icons/github.svg", external: true },
+] as const;
+
+function extProps(external: boolean) {
+  return external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="siteFooter" aria-label="Footer">
-      <div className="siteFooterInner siteFooterGrid">
+      <div className="siteFooterInner">
         <div className="footerCol">
           <div className="footerTitle">Jeffrey R. Plewak</div>
           <div className="footerSub">
@@ -27,6 +39,20 @@ export function SiteFooter() {
             <a className="btn" href={LINKS.calendly} target="_blank" rel="noopener noreferrer">
               Book a call
             </a>
+          </div>
+
+          <div className="footerIcons" aria-label="Footer social">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.href}
+                className="iconBtn"
+                href={s.href}
+                aria-label={s.label}
+                {...extProps(s.external)}
+              >
+                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
+              </a>
+            ))}
           </div>
 
           <div className="footerCopy">© {year}</div>
@@ -56,9 +82,7 @@ export function SiteFooter() {
             </a>
           </div>
 
-          <div className="footerHead" style={{ marginTop: 14 }}>
-            Downloads
-          </div>
+          <div className="footerHead footerHeadSpacer">Downloads</div>
           <div className="footerLinksStack">
             <a className="footerLink" href={LINKS.resume} target="_blank" rel="noopener noreferrer">
               Résumé (PDF)

@@ -1,6 +1,12 @@
-/* src/app/styles/components.css */
+/* src/app/styles/components.css
+   Components layer.
+   Rule: NO token definitions here. Use tokens from src/app/styles/tokens.css.
+   Rule: NO theme branching here. Components must be token-driven.
+*/
 
-/* Buttons */
+/* -------------------------
+   Buttons
+------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -9,29 +15,27 @@
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(17, 24, 39, 0.02);
+  background: var(--surface0);
   color: var(--text);
   transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
   white-space: nowrap;
 }
+
 .btn:hover {
-  background: rgba(17, 24, 39, 0.04);
-  border-color: rgba(17, 24, 39, 0.18);
+  background: var(--surface1);
+  border-color: var(--borderStrong);
   transform: translateY(-1px);
   text-decoration: none;
 }
 
-:root[data-theme="dark"] .btn {
-  background: rgba(255,255,255,0.04);
-}
-
 .btnPrimary {
   border-color: var(--accentBorder);
-  background: rgba(37, 99, 235, 0.10);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
 }
+
 .btnPrimary:hover {
-  background: rgba(37, 99, 235, 0.14);
-  border-color: rgba(37, 99, 235, 0.30);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
 }
 
 .btnTertiary {
@@ -39,25 +43,30 @@
   border-color: transparent;
   color: var(--muted);
 }
+
 .btnTertiary:hover {
   color: var(--text);
-  background: rgba(17, 24, 39, 0.04);
+  background: var(--surface1);
   transform: none;
 }
 
-/* Cards */
+/* -------------------------
+   Cards
+------------------------- */
 .card {
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--panel), rgba(17, 24, 39, 0.015));
+  background: linear-gradient(180deg, var(--surface1), transparent);
   box-shadow: var(--shadowMd);
   padding: 18px 18px 16px;
   min-height: 160px;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
+
 .card:hover {
   transform: translateY(-2px);
-  border-color: rgba(37, 99, 235, 0.22);
+  border-color: var(--accentBorder);
+  background: linear-gradient(180deg, var(--surface2), transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -82,32 +91,33 @@
 .cardMedia {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(17, 24, 39, 0.12);
-  background: rgba(17, 24, 39, 0.03);
+  border: 1px solid var(--border);
+  background: var(--surface0);
   position: relative;
   aspect-ratio: 1200 / 630;
 }
-:root[data-theme="dark"] .cardMedia {
-  border-color: rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
-.cardImg { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .cardImgContain { object-fit: contain; }
 .cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* Header */
+/* -------------------------
+   Header
+------------------------- */
 .siteHeader {
   position: sticky;
   top: 0;
   z-index: 60;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.82);
-  border-bottom: 1px solid rgba(17, 24, 39, 0.10);
-}
-:root[data-theme="dark"] .siteHeader {
-  background: rgba(11, 15, 23, 0.72);
-  border-bottom-color: rgba(255,255,255,0.10);
+  background: var(--headerBg);
+  border-bottom: 1px solid var(--headerBorder);
 }
 
 .siteHeaderInner {
@@ -122,32 +132,51 @@
 }
 
 .brand { display: inline-flex; align-items: center; gap: 10px; }
+
 .brandMark {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: radial-gradient(circle at 30% 30%, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.20));
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  background: radial-gradient(
+    circle at 30% 30%,
+    color-mix(in srgb, var(--accent) 95%, white),
+    color-mix(in srgb, var(--accent) 22%, transparent)
+  );
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
 }
-.brandText { font-weight: 650; letter-spacing: -0.01em; }
+
+.brandText {
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--textStrong);
+}
 
 .siteNav { display: flex; gap: 12px; align-items: center; }
+
 .navLink {
   color: var(--muted);
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
 }
+
 .navLink:hover {
   color: var(--text);
-  border-color: rgba(17, 24, 39, 0.10);
-  background: rgba(17, 24, 39, 0.03);
+  border-color: var(--border);
+  background: var(--surface0);
   text-decoration: none;
 }
 
 .siteActionsDesktop { display: inline-flex; gap: 8px; align-items: center; }
 .siteActionsMobile  { display: none; gap: 8px; align-items: center; }
 .headerCta { display: inline-flex; }
+
+.headerDivider {
+  width: 1px;
+  height: 22px;
+  background: var(--divider);
+  margin: 0 6px;
+}
 
 @media (max-width: 520px) {
   .siteNav { display: none; }
@@ -164,19 +193,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(17, 24, 39, 0.12);
-  background: rgba(17, 24, 39, 0.02);
-  color: rgba(17,24,39,0.90);
+  border: 1px solid var(--border);
+  background: var(--surface0);
+  color: var(--text);
 }
+
 .iconBtn:hover {
-  background: rgba(17, 24, 39, 0.04);
-  border-color: rgba(37, 99, 235, 0.22);
+  background: var(--surface1);
+  border-color: var(--accentBorder);
   text-decoration: none;
-}
-:root[data-theme="dark"] .iconBtn {
-  border-color: rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.92);
 }
 
 .themeGlyph {
@@ -185,7 +210,9 @@
   transform: translateY(-0.5px);
 }
 
-/* Employer credibility strip (MARQUEE) */
+/* -------------------------
+   Employer credibility marquee
+------------------------- */
 .credStrip {
   margin-top: 18px;
   display: grid;
@@ -206,20 +233,14 @@
   flex: 1;
 }
 
-/* viewport */
 .credMarquee {
   position: relative;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(17, 24, 39, 0.10);
-  background: rgba(255, 255, 255, 0.55);
-}
-:root[data-theme="dark"] .credMarquee {
-  border-color: rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  background: var(--surface0);
 }
 
-/* fade edges */
 .credMarquee::before,
 .credMarquee::after {
   content: "";
@@ -230,22 +251,17 @@
   pointer-events: none;
   z-index: 2;
 }
+
 .credMarquee::before {
   left: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0.90), rgba(255,255,255,0));
-}
-.credMarquee::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(255,255,255,0.90), rgba(255,255,255,0));
-}
-:root[data-theme="dark"] .credMarquee::before {
-  background: linear-gradient(90deg, rgba(11,15,23,0.92), rgba(11,15,23,0));
-}
-:root[data-theme="dark"] .credMarquee::after {
-  background: linear-gradient(270deg, rgba(11,15,23,0.92), rgba(11,15,23,0));
+  background: linear-gradient(90deg, var(--bg0), transparent);
 }
 
-/* moving track */
+.credMarquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg0), transparent);
+}
+
 .credTrack {
   display: flex;
   gap: 14px;
@@ -255,6 +271,7 @@
   animation: credScroll 22s linear infinite;
   flex-wrap: nowrap;
   white-space: nowrap;
+  will-change: transform;
 }
 
 .credMarquee:hover .credTrack,
@@ -281,16 +298,10 @@
 
 .credLogoLink:hover,
 .credLogoLink:focus-visible {
-  background: rgba(17,24,39,0.03);
-  border-color: rgba(17,24,39,0.10);
-  box-shadow: 0 8px 20px rgba(17,24,39,0.06);
+  background: var(--surface1);
+  border-color: var(--borderStrong);
+  box-shadow: var(--shadowSm);
   text-decoration: none;
-}
-:root[data-theme="dark"] .credLogoLink:hover,
-:root[data-theme="dark"] .credLogoLink:focus-visible {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.14);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.34);
 }
 
 .credLogo {
@@ -300,25 +311,25 @@
   filter: grayscale(1) contrast(1.08);
   transition: opacity 120ms ease, filter 120ms ease;
 }
+
 .credLogoLink:hover .credLogo,
 .credLogoLink:focus-visible .credLogo {
   opacity: 1;
   filter: none;
 }
 
-/* Reduced motion: stop marquee */
 @media (prefers-reduced-motion: reduce) {
   .credTrack { animation: none; }
 }
 
-/* Footer */
+/* -------------------------
+   Footer (synced to src/components/SiteFooter.tsx)
+------------------------- */
 .siteFooter {
   margin-top: 44px;
   padding: 28px 0 44px;
-  border-top: 1px solid rgba(17, 24, 39, 0.10);
-}
-:root[data-theme="dark"] .siteFooter {
-  border-top-color: rgba(255,255,255,0.10);
+  border-top: 1px solid var(--divider);
+  background: transparent;
 }
 
 .siteFooterInner {
@@ -331,25 +342,77 @@
   align-items: flex-start;
 }
 
-.footerTitle { font-weight: 650; }
+/* Footer grid wrapper used by the component */
+.siteFooterGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr;
+  gap: clamp(16px, 3vw, 28px);
+}
+
+/* Column wrapper */
+.footerCol {
+  min-width: 0;
+}
+
+.footerTitle { font-weight: 650; color: var(--textStrong); }
 .footerSub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 .footerCopy { color: var(--muted); margin-top: 10px; font-size: 0.9rem; }
 
+.footerHead {
+  font-weight: 650;
+  color: var(--textStrong);
+  margin-bottom: 6px;
+}
+
+.footerCtas {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.footerAddr {
+  font-style: normal;
+  margin: 0;
+}
+
+.footerHint {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 0.95rem;
+  max-width: 40ch;
+}
+
+.footerLinksStack {
+  display: grid;
+  gap: 8px;
+}
+
+.footerLink { color: var(--muted); }
+.footerLink:hover { color: var(--text); text-decoration: underline; }
+
+/* Keep legacy footerLinks class if referenced elsewhere */
 .footerLinks {
   display: inline-flex;
   gap: 12px;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
-.footerLink { color: var(--muted); }
-.footerLink:hover { color: var(--text); text-decoration: underline; }
+
+@media (max-width: 920px) {
+  .siteFooterGrid {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 520px) {
   .siteFooterInner { flex-direction: column; }
   .footerLinks { justify-content: flex-start; }
 }
 
-/* Scroll reveal: SEO-safe gating */
+/* -------------------------
+   Scroll reveal: SEO-safe gating
+------------------------- */
 .no-js .focusCard {
   opacity: 1;
   transform: none;
@@ -374,7 +437,7 @@
 
 .js .focusCard--visible:hover {
   transform: translate3d(0, -3px, 0);
-  border-color: rgba(37, 99, 235, 0.22);
+  border-color: var(--accentBorder);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -383,4 +446,105 @@
     transform: none;
     transition: none;
   }
+}
+/* -------------------------
+   Mask icons (used by SocialIcon.tsx)
+------------------------- */
+.iconMask {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+
+  /* The paint source for the mask */
+  background-color: currentColor;
+
+  /* Mask settings */
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.icon--social {
+  width: 18px;
+  height: 18px;
+}
+.siteActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerCtas {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btnHeader {
+  height: 38px;
+  padding: 0 13px;
+}
+
+.headerDivider {
+  width: 1px;
+  height: 22px;
+  background: var(--divider);
+  margin: 0 2px;
+}
+
+.headerIcons {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Small screens: reduce overload */
+@media (max-width: 720px) {
+  .siteNav { display: none; }
+}
+
+@media (max-width: 520px) {
+  .headerDivider { display: none; }
+  .headerIcons { display: none; } /* keep 2 primary CTAs only */
+}
+.siteFooterInner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.footerCol { min-width: 0; }
+
+.footerHead { font-weight: 650; color: var(--textStrong); margin-bottom: 8px; }
+.footerHeadSpacer { margin-top: 14px; }
+
+.footerCtas {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.footerIcons {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.footerLinksStack {
+  display: grid;
+  gap: 8px;
+}
+
+.footerAddr { font-style: normal; margin: 0; }
+
+.footerHint { color: var(--muted); margin-top: 8px; }
+
+@media (max-width: 920px) {
+  .siteFooterInner { grid-template-columns: 1fr; }
 }

@@ -1,41 +1,23 @@
 // src/components/SocialIcon.tsx
-import type React from "react";
-import { cx } from "./icons";
+import type { CSSProperties } from "react";
 
 type Props = {
-  src: string;          // URL/path to the SVG used as a mask
-  label: string;        // for title/tooltip semantics
-  size?: number;        // px
-  className?: string;
-  color?: string;       // optional override; default currentColor
+  src: string;              // e.g. "/assets/icons/github.svg"
+  className?: string;       // e.g. "icon--social"
+  title?: string;           // tooltip only; do not rely on for a11y
 };
 
 /**
- * Mask-based icon renderer.
- * - Uses CSS variable --icon-url for the mask image.
- * - Safe for SSR; purely presentational.
+ * Mask-based icon so it inherits currentColor.
+ * Requires CSS for .iconMask (size + background-color + mask rules).
  */
-export function SocialIcon({
-  src,
-  label,
-  size = 18,
-  className,
-  color,
-}: Props) {
-  // Strong typing for CSS custom property.
-  const style: React.CSSProperties & { ["--icon-url"]?: string } = {
-    width: size,
-    height: size,
-    color: color ?? "currentColor",
-    ["--icon-url"]: `url("${src}")`,
-  };
+export function SocialIcon({ src, className, title }: Props) {
+  const style = {
+    WebkitMaskImage: `url(${src})`,
+    maskImage: `url(${src})`,
+  } satisfies CSSProperties;
 
-  return (
-    <span
-      aria-hidden="true"
-      className={cx("iconMask", className)}
-      title={label}
-      style={style}
-    />
-  );
+  const cls = ["iconMask", className].filter(Boolean).join(" ");
+
+  return <span className={cls} aria-hidden="true" title={title} style={style} />;
 }

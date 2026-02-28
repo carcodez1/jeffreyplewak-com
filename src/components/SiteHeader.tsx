@@ -10,101 +10,74 @@ const LINKS = {
   resume: "/downloads/jeffrey-plewak-resume.pdf",
 } as const;
 
+const NAV = [
+  { href: "/#work", label: "Work" },
+  { href: "/#focus", label: "Focus" },
+  { href: "/projects", label: "Projects" },
+  { href: "/#contact", label: "Contact" },
+] as const;
+
+const ACTIONS = [
+  { kind: "primary", href: LINKS.resume, label: "Resume", external: true },
+  { kind: "secondary", href: LINKS.calendly, label: "Book a call", external: true },
+] as const;
+
+const SOCIALS = [
+  { href: LINKS.linkedin, label: "LinkedIn", icon: "/assets/icons/linkedin.svg", external: true },
+  { href: LINKS.email, label: "Email", icon: "/assets/icons/mail.svg", external: false },
+  { href: LINKS.github, label: "GitHub", icon: "/assets/icons/github.svg", external: true },
+] as const;
+
+function extProps(external: boolean) {
+  return external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
 export function SiteHeader() {
   return (
-    <header className="siteHeader">
+    <header className="siteHeader" aria-label="Header">
       <div className="siteHeaderInner">
         <Link className="brand" href="/" aria-label="Home">
           <span className="brandMark" aria-hidden="true" />
           <span className="brandText">Jeffrey R. Plewak</span>
         </Link>
 
-        <nav className="siteNav" aria-label="Primary">
-          <Link className="navLink" href="/#work">
-            Work
-          </Link>
-          <Link className="navLink" href="/#focus">
-            Focus
-          </Link>
-          <Link className="navLink" href="/projects">
-            Projects
-          </Link>
-          <Link className="navLink" href="/#contact">
-            Contact
-          </Link>
+        <nav className="siteNav" aria-label="Primary navigation">
+          {NAV.map((n) => (
+            <Link key={n.href} className="navLink" href={n.href}>
+              {n.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Desktop */}
-        <div className="siteActions siteActionsDesktop" aria-label="Actions (desktop)">
-          <a
-            className="btn btnPrimary btnHeader"
-            href={LINKS.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Résumé
-          </a>
-
-          <a
-            className="btn btnHeader btnSecondary"
-            href={LINKS.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book a call
-          </a>
+        <div className="siteActions" aria-label="Header actions">
+          <div className="headerCtas" aria-label="Primary actions">
+            {ACTIONS.map((a) => (
+              <a
+                key={a.href}
+                className={a.kind === "primary" ? "btn btnPrimary btnHeader" : "btn btnHeader"}
+                href={a.href}
+                {...extProps(a.external)}
+              >
+                {a.label}
+              </a>
+            ))}
+          </div>
 
           <span className="headerDivider" aria-hidden="true" />
 
-          <a
-            className="iconBtn brandLinkedIn"
-            href={LINKS.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <SocialIcon src="/assets/icons/linkedin.svg" label="LinkedIn" className="icon--social" />
-          </a>
-
-          <a className="iconBtn brandMail" href={LINKS.email} aria-label="Email">
-            <SocialIcon src="/assets/icons/mail.svg" label="Email" className="icon--social icon--mail" />
-          </a>
-
-          <a
-            className="iconBtn brandGithub"
-            href={LINKS.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <SocialIcon src="/assets/icons/github.svg" label="GitHub" className="icon--social" />
-          </a>
-        </div>
-
-        {/* Mobile */}
-        <div className="siteActions siteActionsMobile" aria-label="Actions (mobile)">
-          <a
-            className="btn btnPrimary btnHeader"
-            href={LINKS.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Résumé
-          </a>
-
-          <a
-            className="iconBtn brandLinkedIn"
-            href={LINKS.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <SocialIcon src="/assets/icons/linkedin.svg" label="LinkedIn" className="icon--social" />
-          </a>
-
-          <a className="iconBtn brandMail" href={LINKS.email} aria-label="Email">
-            <SocialIcon src="/assets/icons/mail.svg" label="Email" className="icon--social icon--mail" />
-          </a>
+          <div className="headerIcons" aria-label="Social links">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.href}
+                className="iconBtn"
+                href={s.href}
+                aria-label={s.label}
+                {...extProps(s.external)}
+              >
+                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </header>
