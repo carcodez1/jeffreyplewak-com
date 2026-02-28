@@ -37,8 +37,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     var root = document.documentElement;
 
     // Theme policy: DARK ALWAYS
-    // - Force data-theme="dark" on every load.
-    // - Remove persisted overrides to prevent drift back to light.
     try { localStorage.removeItem("theme"); } catch (e) { /* ignore */ }
     root.dataset.theme = "dark";
 

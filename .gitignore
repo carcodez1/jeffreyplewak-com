@@ -65,3 +65,6 @@ docs/debug/
 docs/debug/
 docs/DEBUG.md
 tmp/
+
+# Security audit artifacts
+/tmp.npm-audit.json

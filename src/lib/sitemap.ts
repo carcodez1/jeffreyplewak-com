@@ -2,13 +2,12 @@
 import type { MetadataRoute } from "next";
 
 const baseUrl = "https://www.jeffreyplewak.com";
+const BUILD_TIME = new Date().toISOString();
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date().toISOString();
-
   return [
-    { url: `${baseUrl}/`, lastModified: now },
-    { url: `${baseUrl}/projects`, lastModified: now },
-    { url: `${baseUrl}/projects/kprovengine`, lastModified: now },
+    { url: `${baseUrl}/`, lastModified: BUILD_TIME },
+    { url: `${baseUrl}/projects`, lastModified: BUILD_TIME },
+    { url: `${baseUrl}/projects/kprovengine`, lastModified: BUILD_TIME },
   ];
 }
