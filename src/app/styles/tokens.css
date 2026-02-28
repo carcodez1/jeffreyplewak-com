@@ -1,114 +1,150 @@
 /* src/app/styles/tokens.css
-   Single source of truth for theme tokens.
-   Default: DARK.
-   Light: available via :root[data-theme="light"].
-
-   Rules:
-   - Tokens are defined ONLY here.
-   - "--panel" is a compatibility alias, defined once per theme.
+   Single Source of Truth tokens.
+   Dark-first. Light tokens kept for future use.
 */
 
 :root {
-  /* layout */
-  --radius: 18px;
-  --max: 1200px;
+  /* Layout */
   --headerH: 64px;
+  --wrapMax: 1120px;
+  --gutter: 20px;
 
-  /* accent */
-  --accent: #3b82f6;
-  --accentBorder: rgba(59, 130, 246, 0.28);
+  /* Typography */
+  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
-  /* typography (dark default) */
-  --textStrong: rgba(248, 250, 252, 0.94);
-  --text:       rgba(248, 250, 252, 0.90);
-  --muted:      rgba(248, 250, 252, 0.68);
+  --text0: 0.95rem;
+  --text1: 1rem;
+  --text2: 1.125rem;
+  --text3: 1.35rem;
+  --text4: 1.8rem;
+  --text5: 2.35rem;
 
-  /* dark surfaces (DEFAULT) */
-  --bg0: #0b0f17;
-  --bg1: #0f172a;
-  --bg2: #101b34;
+  --lhTight: 1.15;
+  --lhNormal: 1.55;
 
-  --surface0: rgba(255, 255, 255, 0.03);
-  --surface1: rgba(255, 255, 255, 0.05);
-  --surface2: rgba(255, 255, 255, 0.07);
+  /* Radii */
+  --rSm: 10px;
+  --rMd: 14px;
+  --rLg: 18px;
 
-  /* compat alias */
-  --panel: var(--surface0);
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --tFast: 120ms;
+  --tMed: 180ms;
+  --tSlow: 260ms;
 
-  --border:       rgba(255, 255, 255, 0.12);
-  --borderStrong: rgba(255, 255, 255, 0.18);
-  --divider:      rgba(255, 255, 255, 0.10);
+  /* Shadows (subtle) */
+  --shadow1: 0 10px 30px rgba(0, 0, 0, 0.30);
+  --shadow2: 0 18px 60px rgba(0, 0, 0, 0.42);
 
-  /* header/footer surfaces */
-  --headerBg:     rgba(11, 15, 23, 0.72);
+  /* Brand accent (restrained) */
+  --accent: 220 90% 62%;
+  --accent2: 190 90% 55%;
+
+  /* Focus */
+  --focusRing: 0 0 0 3px rgba(255, 255, 255, 0.18);
+  --focusBorder: rgba(255, 255, 255, 0.26);
+
+  /* Surfaces: Dark */
+  --bg: #070a10;
+  --bg2: #0b0f17;
+
+  --surface0: rgba(255, 255, 255, 0.028);
+  --surface1: rgba(255, 255, 255, 0.045);
+  --surface2: rgba(255, 255, 255, 0.065);
+
+  --border0: rgba(255, 255, 255, 0.10);
+  --border1: rgba(255, 255, 255, 0.14);
+  --border2: rgba(255, 255, 255, 0.18);
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.70);
+  --muted2: rgba(255, 255, 255, 0.56);
+
+  /* Header/footer surfaces */
+  --headerBg: rgba(11, 15, 23, 0.72);
   --headerBorder: rgba(255, 255, 255, 0.10);
 
-  /* shadows tuned for dark */
-  --shadowSm: 0 10px 28px rgba(0, 0, 0, 0.30);
-  --shadowMd: 0 18px 45px rgba(0, 0, 0, 0.36);
-  --shadowLg: 0 26px 70px rgba(0, 0, 0, 0.42);
+  /* Buttons */
+  --btnBg: rgba(255, 255, 255, 0.06);
+  --btnBgHover: rgba(255, 255, 255, 0.09);
+  --btnBorder: rgba(255, 255, 255, 0.14);
+  --btnBorderHover: rgba(255, 255, 255, 0.20);
 
-  --focusRing: 0 0 0 3px rgba(59, 130, 246, 0.40);
-  /*
-    Bug fix: original --focusRing used 0.28 opacity. box-shadow focus rings
-    are already less prominent than outlines; 0.28 fails WCAG 1.4.11
-    (non-text contrast 3:1 minimum) against the dark surface tokens above.
-    Raised to 0.40 to pass at small sizes. Audit against your actual --bg0
-    if you change the accent colour.
-  */
+  --btnPrimaryBg: hsla(var(--accent) / 0.18);
+  --btnPrimaryBgHover: hsla(var(--accent) / 0.24);
+  --btnPrimaryBorder: hsla(var(--accent) / 0.45);
+  --btnPrimaryBorderHover: hsla(var(--accent) / 0.58);
+  --btnPrimaryText: rgba(255, 255, 255, 0.94);
 
-  /* background glow helpers */
-  --bgGlowA: rgba(59, 130, 246, 0.10);
-  --bgGlowB: rgba(59, 130, 246, 0.06);
+  /* Links */
+  --link: rgba(255, 255, 255, 0.92);
+  --linkHover: hsla(var(--accent2) / 0.95);
 
-  color-scheme: dark;
+  /* Code */
+  --codeBg: rgba(255, 255, 255, 0.04);
+  --codeBorder: rgba(255, 255, 255, 0.10);
+
+  /* Selection */
+  --selectionBg: hsla(var(--accent) / 0.22);
+  --selectionText: rgba(255, 255, 255, 0.98);
 }
 
-/* Explicit dark selector — no token changes needed vs :root default */
-:root[data-theme="dark"] {
-  color-scheme: dark;
-}
-
-/* ─────────────────────────────────────────
-   Light theme overrides
-───────────────────────────────────────── */
 :root[data-theme="light"] {
-  --textStrong: rgba(17, 24, 39, 0.94);
-  --text:       rgba(17, 24, 39, 0.92);
-  --muted:      rgba(17, 24, 39, 0.66);
-
-  --bg0: #ffffff;
-  --bg1: #f6f7fb;
-  --bg2: #eef0f6;
+  --bg: #fafafa;
+  --bg2: #ffffff;
 
   --surface0: rgba(17, 24, 39, 0.03);
-  --surface1: rgba(17, 24, 39, 0.04);
-  --surface2: rgba(17, 24, 39, 0.06);
+  --surface1: rgba(17, 24, 39, 0.05);
+  --surface2: rgba(17, 24, 39, 0.07);
 
-  --panel: var(--surface0);
+  --border0: rgba(17, 24, 39, 0.10);
+  --border1: rgba(17, 24, 39, 0.14);
+  --border2: rgba(17, 24, 39, 0.18);
 
-  --border:       rgba(17, 24, 39, 0.12);
-  --borderStrong: rgba(17, 24, 39, 0.18);
-  --divider:      rgba(17, 24, 39, 0.10);
+  --text: rgba(17, 24, 39, 0.92);
+  --muted: rgba(17, 24, 39, 0.70);
+  --muted2: rgba(17, 24, 39, 0.58);
 
-  --headerBg:     rgba(255, 255, 255, 0.82);
+  --headerBg: rgba(255, 255, 255, 0.82);
   --headerBorder: rgba(17, 24, 39, 0.10);
 
-  --shadowSm: 0 10px 28px rgba(17, 24, 39, 0.08);
-  --shadowMd: 0 18px 45px rgba(17, 24, 39, 0.10);
-  --shadowLg: 0 26px 70px rgba(17, 24, 39, 0.12);
+  --btnBg: rgba(17, 24, 39, 0.05);
+  --btnBgHover: rgba(17, 24, 39, 0.08);
+  --btnBorder: rgba(17, 24, 39, 0.14);
+  --btnBorderHover: rgba(17, 24, 39, 0.20);
 
-  /*
-    Bug fix: --focusRing not overridden in the original light theme.
-    The dark default (rgba 0,0,0 based shadow not relevant here — it's blue)
-    actually works on light too, but the opacity should be confirmed against
-    the light --bg0 (#ffffff). 0.40 still passes; no change needed.
-    Declared explicitly for clarity and to avoid silent inheritance issues.
-  */
-  --focusRing: 0 0 0 3px rgba(59, 130, 246, 0.40);
+  --btnPrimaryText: rgba(17, 24, 39, 0.92);
 
-  --bgGlowA: rgba(59, 130, 246, 0.07);
-  --bgGlowB: rgba(59, 130, 246, 0.04);
+  --link: rgba(17, 24, 39, 0.92);
+  --codeBg: rgba(17, 24, 39, 0.04);
+  --codeBorder: rgba(17, 24, 39, 0.10);
+}
+/* === CTA policy: neutral primary, accent only on intent (hover/focus) === */
+:root {
+  /* Neutral primary button */
+  --btnPrimaryBg: rgba(255, 255, 255, 0.06);
+  --btnPrimaryBgHover: rgba(255, 255, 255, 0.09);
+  --btnPrimaryBorder: rgba(255, 255, 255, 0.16);
+  --btnPrimaryBorderHover: rgba(255, 255, 255, 0.22);
+  --btnPrimaryText: rgba(255, 255, 255, 0.94);
 
-  color-scheme: light;
+  /* Accent used for focus ring / subtle hover glow only */
+  --focusRing: 0 0 0 3px hsla(var(--accent2) / 0.20);
+  --focusBorder: hsla(var(--accent2) / 0.32);
+}
+
+/* === CTA policy: neutral primary, accent only on intent (hover/focus) === */
+:root {
+  --btnPrimaryBg: rgba(255, 255, 255, 0.06);
+  --btnPrimaryBgHover: rgba(255, 255, 255, 0.09);
+  --btnPrimaryBorder: rgba(255, 255, 255, 0.16);
+  --btnPrimaryBorderHover: rgba(255, 255, 255, 0.22);
+  --btnPrimaryText: rgba(255, 255, 255, 0.94);
+
+  --focusRing: 0 0 0 3px hsla(var(--accent2) / 0.20);
+  --focusBorder: hsla(var(--accent2) / 0.32);
 }

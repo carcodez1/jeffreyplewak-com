@@ -9,6 +9,8 @@ import { getNonce } from "@/lib/nonce";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Haptics } from "@/components/Haptics";
+import { BackgroundMotion } from "@/components/BackgroundMotion";
+import { BackgroundFx } from "@/components/BackgroundFx";
 
 export { rootMetadata as metadata } from "@/lib/metadata/root";
 
@@ -25,7 +27,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" className="no-js" suppressHydrationWarning>
       <body>
-        {/* Pre-paint: force DARK theme + enable JS class */}
         <Script
           id="preflight"
           nonce={nonceAttr}
@@ -35,22 +36,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 (function () {
   try {
     var root = document.documentElement;
-
-    // Theme policy: DARK ALWAYS
-    try { localStorage.removeItem("theme"); } catch (e) { /* ignore */ }
+    try { localStorage.removeItem("theme"); } catch (e) {}
     root.dataset.theme = "dark";
-
-    // Progressive enhancement class toggle
     root.classList.remove("no-js");
     root.classList.add("js");
-  } catch (e) {
-    // no-op
-  }
+  } catch (e) {}
 })();`,
           }}
         />
 
-        {/* Site-wide structured data */}
         <Script
           id="site-jsonld"
           type="application/ld+json"
@@ -59,7 +53,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
         />
 
-        {/* Global mobile haptics (safe no-op where unsupported) */}
+        {/* Background layers (fixed, behind content). */}
+        <BackgroundMotion preload="metadata" />
+        <BackgroundFx />
+
         <Haptics selector=".btnPrimary, .iconBtn" patternMs={12} touchOnly />
 
         <a className="skipLink" href="#main">

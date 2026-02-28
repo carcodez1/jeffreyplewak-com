@@ -1,268 +1,160 @@
 /* src/app/styles/layout.css
-   Layout + page scaffolding.
-
-   RULES:
-   - NO token definitions here. Tokens live in tokens.css.
-   - NO theme branching here. Theme differences come ONLY from tokens.css.
-   - NO resets or accessibility primitives here (focus/selection/skipLink). Those live in base.css.
+   Page structure + grids + hero layout.
 */
 
-/* Ambient background glow (token-driven) */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-
-  background:
-    radial-gradient(60rem 40rem at 15% 18%, var(--bgGlowA), transparent 58%),
-    radial-gradient(55rem 40rem at 85% 22%, var(--bgGlowB), transparent 60%),
-    linear-gradient(180deg, var(--bg1), var(--bg0) 58%, var(--bg2));
-
-  transform: translateZ(0);
-}
-
-/* Subtle texture (token-driven via --text) */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-
-  opacity: 0.05;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      color-mix(in srgb, var(--text) 10%, transparent) 0,
-      color-mix(in srgb, var(--text) 10%, transparent) 1px,
-      transparent 1px,
-      transparent 3px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      color-mix(in srgb, var(--text) 12%, transparent) 0,
-      color-mix(in srgb, var(--text) 12%, transparent) 1px,
-      transparent 1px,
-      transparent 4px
-    );
+.wrap {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
 }
 
 .appMain {
-  min-height: calc(100dvh - var(--headerH));
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  padding-top: 18px;
+  padding-bottom: 60px;
 }
 
-.wrap {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 44px clamp(16px, 3vw, 28px) 40px;
-}
-
-@media (max-width: 520px) {
-  .wrap {
-    padding: 34px 16px 32px;
-  }
-}
-
-/* Hero */
-.hero {
-  padding: 0;
-}
-
-.heroGrid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(28px, 4vw, 64px);
-  align-items: center;
-  padding-top: clamp(44px, 6vw, 84px);
-  padding-bottom: 56px;
-}
-
-@media (max-width: 920px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 52px;
-    padding-bottom: 32px;
-  }
-}
-
-.heroLeft {
-  min-width: 0;
-}
-
-.heroRight {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-@media (max-width: 920px) {
-  .heroRight {
-    align-items: center;
-  }
-}
-
-.idRow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 10px;
-}
-
-.avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
-  overflow: hidden;
-
-  border: 1px solid var(--border);
-  background: var(--surface0);
-
-  flex: 0 0 auto;
-  box-shadow: var(--shadowSm);
-}
-
-.avatarImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.h1 {
-  font-size: clamp(34px, 3.2vw, 54px);
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-  margin: 0 0 12px;
-}
-
-.h1Accent {
-  color: var(--accent);
-}
-
-.sub {
-  margin: 0 0 12px;
-  color: var(--muted);
-  max-width: 72ch;
-}
-
+/* Sections */
 .section {
-  margin-top: 18px;
-}
-
-.h2 {
-  font-size: 18px;
-  margin: 0 0 6px;
+  margin-top: 48px;
 }
 
 .lede {
-  margin: 0 0 16px;
   color: var(--muted);
-  max-width: 80ch;
+  max-width: 72ch;
 }
 
 .muted {
   color: var(--muted);
 }
 
-/* Buttons row layout (structure only) */
+.muted2 {
+  color: var(--muted2);
+}
+
+/* Hero */
+.hero {
+  padding-top: 26px;
+  padding-bottom: 22px;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 920px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.idRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border0);
+  background: var(--surface0);
+}
+
+.avatarImg {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+}
+
+.h1 {
+  margin-top: 6px;
+}
+
+.h1Accent {
+  color: hsla(var(--accent2) / 0.95);
+}
+
+.sub {
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* CTA rows */
 .ctaRow {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
+  margin-top: 10px;
 }
 
 .btnGroupTight {
-  margin-top: 18px;
-  gap: 12px;
+  gap: 8px;
 }
 
-/* Grids */
-.grid2,
+/* Simple grids */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .grid3 {
   display: grid;
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+  padding-left: 0;
+  list-style: none;
 }
 
-.grid2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 920px) {
-  .grid2,
+@media (max-width: 980px) {
   .grid3 {
     grid-template-columns: 1fr;
   }
 }
 
-/* Reset list styling for grid lists */
-ul.grid3,
-ul[role="list"] {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Portrait side */
+.heroRight {
+  position: relative;
 }
 
-/* Portrait */
 .portraitHalo {
   position: absolute;
-  width: 420px;
-  height: 480px;
-  background: radial-gradient(circle at 40% 40%, var(--bgGlowA), transparent 74%);
-  filter: blur(44px);
-  z-index: 0;
-  transform: translate(-6%, -6%);
+  inset: -12px -16px auto -16px;
+  height: 260px;
+  background: radial-gradient(220px 220px at 30% 40%, rgba(70, 140, 255, 0.18), transparent 60%),
+    radial-gradient(220px 220px at 70% 40%, rgba(60, 220, 220, 0.12), transparent 62%);
+  filter: blur(12px);
   pointer-events: none;
-}
-
-.js .portraitHalo {
-  animation: haloFloat 14s ease-in-out infinite;
-}
-
-@keyframes haloFloat {
-  0% {
-    transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: translate(-6%, -6%) translate3d(0, -6px, 0) scale(1.02);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-6%, -6%) translate3d(0, 10px, 0) scale(1);
-    opacity: 0.9;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js .portraitHalo {
-    animation: none;
-  }
 }
 
 .portraitFrame {
   position: relative;
-  width: min(460px, 100%);
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
+  border-radius: var(--rLg);
   overflow: hidden;
-
-  border: 1px solid var(--border);
-  background: var(--bg0);
-
-  box-shadow: var(--shadowLg);
-  z-index: 1;
+  border: 1px solid var(--border0);
+  background: var(--surface0);
+  box-shadow: var(--shadow1);
+  height: 420px;
 }
 
-.portraitFrame img {
-  object-fit: cover;
-  object-position: 50% 30%;
+@media (max-width: 920px) {
+  .portraitFrame {
+    height: 360px;
+  }
 }

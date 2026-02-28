@@ -1,19 +1,7 @@
-/* src/app/globals.css
-   Global stylesheet entrypoint.
+/* src/app/globals.css */
 
-   HARD RULES:
-   - Do NOT define theme tokens here.
-   - globals.css is import-only.
-*/
-
-/* 1) Tokens (SSOT) */
 @import "./styles/tokens.css";
-
-/* 2) Base (reset + accessibility primitives) */
 @import "./styles/base.css";
-
-/* 3) Layout primitives (wrap/hero/grid + ambient background layers) */
 @import "./styles/layout.css";
-
-/* 4) Components (buttons/cards/header/footer/marquee/reveal) */
 @import "./styles/components.css";
+@import "./styles/animations.css";

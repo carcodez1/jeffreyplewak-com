@@ -1,8 +1,9 @@
 // src/lib/jsonld.ts
-export const SITE_URL = "https://www.jeffreyplewak.com" as const;
+import { LINKS, SITE } from "@/config/site";
 
-export const LINKEDIN_URL = "https://www.linkedin.com/in/jeffreyplewak" as const;
-export const GITHUB_URL = "https://github.com/carcodez1" as const;
+export const SITE_URL = SITE.url;
+export const LINKEDIN_URL = LINKS.linkedin;
+export const GITHUB_URL = LINKS.github;
 
 /**
  * Normalize base URL for stable @id values (no trailing slash).
@@ -24,25 +25,22 @@ export function siteGraphJsonLd() {
       {
         "@type": "Person",
         "@id": personId,
-        name: "Jeffrey R. Plewak",
+        name: SITE.name,
         url: base,
-        jobTitle: "Senior Software Engineer",
-        description:
-          "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
+        jobTitle: SITE.title,
         sameAs: [GITHUB_URL, LINKEDIN_URL],
       },
       {
         "@type": "Organization",
         "@id": orgId,
-        name: "Jeffrey R. Plewak",
+        name: SITE.name,
         url: base,
       },
       {
         "@type": "WebSite",
         "@id": websiteId,
         url: base,
-        name: "Jeffrey R. Plewak",
-        description: "Platform engineering and deterministic AI systems.",
+        name: SITE.name,
         inLanguage: "en-US",
         publisher: { "@id": orgId },
       },
@@ -50,7 +48,7 @@ export function siteGraphJsonLd() {
         "@type": "WebPage",
         "@id": `${base}/#home`,
         url: base,
-        name: "Jeffrey R. Plewak — Senior Software Engineer",
+        name: `${SITE.name} — ${SITE.title}`,
         isPartOf: { "@id": websiteId },
         inLanguage: "en-US",
         mainEntity: { "@id": personId },
@@ -72,6 +70,7 @@ export function kprovengineSourceCodeJsonLd() {
     codeRepository: "https://github.com/carcodez1/KProvEngine",
     programmingLanguage: "Python",
     author: { "@id": personId },
+    // NOTE: keep or remove; you should only assert dates you can defend.
     datePublished: "2025-01-15",
     license: "https://github.com/carcodez1/KProvEngine/blob/main/LICENSE",
   };

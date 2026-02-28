@@ -1,226 +1,66 @@
-// src/app/page.tsx
-import Image from "next/image";
+// src/app/projects/page.tsx
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { ExperienceStrip } from "@/components/ExperienceStrip";
+import { LINKS } from "@/config/site";
+import { SITE } from "@/config/site";
 
-export default function Page() {
-  const CALENDLY_URL = "https://calendly.com/plewak-jeff";
+export const metadata: Metadata = {
+  title: "Projects — Jeffrey R. Plewak",
+  description: "Selected work and project write-ups.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    type: "website",
+    title: "Projects — Jeffrey R. Plewak",
+    description: "Selected work and project write-ups.",
+    url: "/projects",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects — Jeffrey R. Plewak",
+    description: "Selected work and project write-ups.",
+  },
+};
 
+export default function ProjectsPage() {
   return (
-    <div className="wrap">
-      <header className="hero" aria-label="Intro">
-        <div className="heroGrid">
-          <div className="heroLeft">
-            <div className="idRow" style={{ marginBottom: 12 }}>
-              <div className="avatar">
-                <Image
-                  src="/assets/images/avatar.jpeg"
-                  alt="Jeffrey R. Plewak"
-                  width={56}
-                  height={56}
-                  className="avatarImg"
-                  // Avatar is not the LCP asset; avoid priority to reduce bandwidth contention.
-                />
-              </div>
-
-              <div className="idText">
-                <p className="muted" style={{ margin: 0, fontSize: "0.95rem" }}>
-                  Jeffrey R. Plewak
-                </p>
-
-                <h1 className="h1" style={{ marginTop: 4 }}>
-                  Compliance-critical engineering and{" "}
-                  <span className="h1Accent">provenance-first AI workflows</span>.
-                </h1>
-              </div>
-            </div>
-
-            <p className="sub" style={{ marginBottom: 14 }}>
-              Senior software engineer and consultant focused on platform, full-stack, and
-              reliability-first delivery—where traceability and determinism matter.
-            </p>
-
-            <div className="ctaRow btnGroupTight" aria-label="Primary actions">
-              <a
-                className="btn btnPrimary"
-                href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
-              >
-                Email
-              </a>
-
-              <Link className="btn" href="/projects">
-                View projects
-              </Link>
-
-              <a
-                className="btn btnTertiary"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Book a call
-              </a>
-
-              <a className="btn btnTertiary" href="#work">
-                Featured
-              </a>
-
-              <a className="btn btnTertiary" href="#contact">
-                Work with me
-              </a>
-            </div>
-{/* Experience across */}
-<div className="credStrip" aria-label="Experience across">
-  <div className="credLabel">
-    <span>Experience across</span>
-    <span className="credRule" aria-hidden="true" />
-  </div>
-
-  <div className="credMarquee" aria-label="Employer logos (auto-scrolling)">
-    <div className="credTrack">
-      {/* Track A */}
-      <a className="credLogoLink" href="https://www.lockheedmartin.com" target="_blank" rel="noopener noreferrer" aria-label="Lockheed Martin">
-        <Image src="/assets/logos/lockheed-martin.svg" alt="Lockheed Martin" width={110} height={22} className="credLogo" />
-      </a>
-
-      <a className="credLogoLink" href="https://www.jpmorganchase.com" target="_blank" rel="noopener noreferrer" aria-label="JPMorgan Chase">
-        <Image src="/assets/logos/jp-morgan-chase.svg" alt="JPMorgan Chase" width={130} height={22} className="credLogo" />
-      </a>
-
-      <a className="credLogoLink" href="https://www.ibm.com" target="_blank" rel="noopener noreferrer" aria-label="IBM">
-        <Image src="/assets/logos/ibm.svg" alt="IBM" width={60} height={22} className="credLogo" />
-      </a>
-
-      <a className="credLogoLink" href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" aria-label="AWS">
-        <Image src="/assets/logos/aws.svg" alt="AWS" width={54} height={22} className="credLogo" />
-      </a>
-
-      <a className="credLogoLink" href="https://www.expediagroup.com" target="_blank" rel="noopener noreferrer" aria-label="Expedia Group">
-        <Image src="/assets/logos/expedia.svg" alt="Expedia Group" width={92} height={22} className="credLogo" />
-      </a>
-
-      {/* Track B (duplicate) */}
-      <span aria-hidden="true" style={{ display: "contents" }}>
-        <a className="credLogoLink" href="https://www.lockheedmartin.com" target="_blank" rel="noopener noreferrer" aria-label="Lockheed Martin">
-          <Image src="/assets/logos/lockheed-martin.svg" alt="" width={110} height={22} className="credLogo" />
-        </a>
-        <a className="credLogoLink" href="https://www.jpmorganchase.com" target="_blank" rel="noopener noreferrer" aria-label="JPMorgan Chase">
-          <Image src="/assets/logos/jp-morgan-chase.svg" alt="" width={130} height={22} className="credLogo" />
-        </a>
-        <a className="credLogoLink" href="https://www.ibm.com" target="_blank" rel="noopener noreferrer" aria-label="IBM">
-          <Image src="/assets/logos/ibm.svg" alt="" width={60} height={22} className="credLogo" />
-        </a>
-        <a className="credLogoLink" href="https://aws.amazon.com" target="_blank" rel="noopener noreferrer" aria-label="AWS">
-          <Image src="/assets/logos/aws.svg" alt="" width={54} height={22} className="credLogo" />
-        </a>
-        <a className="credLogoLink" href="https://www.expediagroup.com" target="_blank" rel="noopener noreferrer" aria-label="Expedia Group">
-          <Image src="/assets/logos/expedia.svg" alt="" width={92} height={22} className="credLogo" />
-        </a>
-      </span>
-    </div>
-  </div>
-</div>
-
-
-            <div className="ctaRow" style={{ marginTop: 12 }}>
-              <a
-                className="btn btnTertiary"
-                href="/downloads/jeffrey-plewak-resume.pdf"
-                download
-              >
-                Résumé
-              </a>
-
-              <a
-                className="btn btnTertiary"
-                href="https://www.linkedin.com/in/jeffreyplewak"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </div>
-
-          <div className="heroRight" aria-label="Portrait">
-            <div className="portraitHalo" aria-hidden="true" />
-            <div className="portraitFrame">
-              <Image
-                src="/assets/images/jeffrey-plewak-portrait.webp"
-                alt="Portrait of Jeffrey R. Plewak"
-                fill
-                priority
-                sizes="(max-width: 920px) 100vw, 420px"
-                style={{ objectFit: "cover", objectPosition: "50% 30%" }}
-              />
-            </div>
-
-            <p className="muted" style={{ marginTop: 10, fontSize: "0.95rem" }}>
-              Remote-first • North Carolina • Available for consulting and senior roles
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <section className="section" id="work" aria-label="Featured work">
-        {/* Reveal driver (client-side only; page remains server-rendered) */}
-        <ScrollReveal selector=".focusCard" visibleClass="focusCard--visible" threshold={0.2} toggle />
-
-        <h2 className="h2">Featured</h2>
+    <main id="main" className="wrap">
+      <header className="section" aria-label="Projects intro">
+        <h1 className="h1">Projects</h1>
         <p className="lede">
-          A representative system that shows how I design for auditability and production use.
+          A short list. Each project has a page with details, links, and artifacts.
         </p>
 
+        <div className="ctaRow" aria-label="Projects actions">
+          <Link className="btn btnPrimary" href="/projects/kprovengine">
+            KProvEngine
+          </Link>
+          <a className="btn" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
+            Résumé (PDF)
+          </a>
+          <a className="btn btnTertiary" href={LINKS.emailProject}>
+            Email
+          </a>
+        </div>
+
+        {/* Reusable experience strip (replaces duplicated credStrip markup) */}
+        <ExperienceStrip />
+      </header>
+
+      <section className="section" aria-label="Project list">
         <div className="grid2">
-          <article
-            className="card cardLink focusCard"
-            aria-labelledby="kprovengine-title"
-          >
-            <div className="cardHead">
-              <h3 id="kprovengine-title" className="cardTitle">
-                KProvEngine
-              </h3>
-              <p className="cardTag">
-                Python · Deterministic Pipeline · Provenance · Human Review
-              </p>
-            </div>
-
+          <article className="card cardLink" aria-label="KProvEngine project">
+            <h2 className="cardTitle">KProvEngine</h2>
             <p className="cardDesc">
-              Deterministic provenance engine for AI-assisted workflows that require explicit
-              human review and reproducible evidence artifacts.
+              Deterministic provenance pipelines for human-reviewed workflows with local-first execution.
             </p>
-
-            <ul className="cardBullets">
-              <li>Reproducible run directories (inputs/outputs + hashes)</li>
-              <li>Human review captured as a first-class artifact</li>
-              <li>Adapters are non-authoritative (no over-claiming)</li>
-            </ul>
-
-            <div className="cardMedia" aria-label="KProvEngine architecture diagram">
-              <Image
-                src="/projects/kprovengine/architecture.png"
-                alt="KProvEngine pipeline architecture"
-                fill
-                className="cardImg cardImgContain"
-                sizes="(max-width: 920px) 100vw, (max-width: 1200px) 50vw, 480px"
-                // Below-the-fold; do not set priority.
-              />
-            </div>
-
             <div className="cardActions">
               <Link className="btn btnPrimary" href="/projects/kprovengine">
                 Project page
               </Link>
-
-              <a
-                className="btn"
-                href="https://github.com/carcodez1/KProvEngine"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="btn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
-
               <a
                 className="btn"
                 href="https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md"
@@ -232,104 +72,25 @@ export default function Page() {
             </div>
           </article>
 
-          <article className="card focusCard">
-            <h3>What I do</h3>
-            <p className="muted">
-              I help teams ship systems that are defensible under scrutiny: clear contracts,
-              deterministic builds, traceable artifacts, and reliable operations.
+          <article className="card" aria-label="More projects">
+            <h2 className="cardTitle">More</h2>
+            <p className="cardDesc">
+              I’m iterating on this page. If you want a specific repo or case study added, email me.
             </p>
-
             <div className="cardActions">
-              <a
-                className="btn btnPrimary"
-                href="mailto:plewak.jeff@gmail.com?subject=Consulting%20inquiry"
-              >
-                Start a conversation
+              <a className="btn btnPrimary" href={LINKS.emailProject}>
+                Email
               </a>
-
-              <a
-                className="btn btnTertiary"
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Book a call
+              <a className="btn btnTertiary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn
               </a>
-
-              <Link className="btn" href="/projects">
-                Browse projects
-              </Link>
+              <a className="btn btnTertiary" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
             </div>
           </article>
         </div>
       </section>
-
-      <section className="section" id="focus" aria-label="Focus">
-        <h2 className="h2">Focus</h2>
-        <p className="lede">
-          Production systems where correctness and operational clarity matter most.
-        </p>
-
-        <ul className="grid3" role="list">
-          <li className="card focusCard">
-            <h3>Platform &amp; Backend</h3>
-            <p className="muted">
-              Python-first services, APIs, and data pipelines with explicit contracts and
-              observability.
-            </p>
-          </li>
-
-          <li className="card focusCard">
-            <h3>Full-Stack Delivery</h3>
-            <p className="muted">
-              Pragmatic front-ends paired with resilient backends. No demo abstractions.
-            </p>
-          </li>
-
-          <li className="card focusCard">
-            <h3>Compliance &amp; Reliability</h3>
-            <p className="muted">
-              Deterministic builds, traceable artifacts, and audit-ready workflows.
-            </p>
-          </li>
-        </ul>
-      </section>
-
-      <section className="section" id="contact" aria-label="Work with me">
-        <h2 className="h2">Work with me</h2>
-        <p className="lede">Open to remote roles, consulting, and short-term contracts.</p>
-
-        <div className="ctaRow focusCard">
-          <a
-            className="btn btnPrimary"
-            href="mailto:plewak.jeff@gmail.com?subject=Project%20inquiry"
-          >
-            Project inquiry
-          </a>
-
-          <a
-            className="btn btnTertiary"
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book a call
-          </a>
-
-          <Link className="btn" href="/projects">
-            View projects
-          </Link>
-
-          <a
-            className="btn"
-            href="https://www.linkedin.com/in/jeffreyplewak"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Connect on LinkedIn
-          </a>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

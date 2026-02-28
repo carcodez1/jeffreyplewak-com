@@ -1,476 +1,136 @@
 /* src/app/styles/components.css
-   Components layer.
-   Rule: NO token definitions here. Use tokens from src/app/styles/tokens.css.
-   Rule: NO theme branching here. Components must be token-driven.
+   Components: header, buttons, cards, experience strip+drawer, footer.
+   “Less boxy” defaults: softer borders, subtle lift, consistent spacing.
 */
 
-/* -------------------------
-   Buttons
-------------------------- */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface0);
+  gap: 8px;
+
+  padding: 10px 12px;
+  border-radius: var(--rSm);
+  border: 1px solid var(--btnBorder);
+  background: var(--btnBg);
   color: var(--text);
-  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+
+  font-size: 0.95rem;
+  line-height: 1;
   white-space: nowrap;
+
+  transition: background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease),
+    box-shadow var(--tFast) var(--ease);
 }
 
 .btn:hover {
-  background: var(--surface1);
-  border-color: var(--borderStrong);
+  background: var(--btnBgHover);
+  border-color: var(--btnBorderHover);
   transform: translateY(-1px);
-  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btnPrimary {
-  border-color: var(--accentBorder);
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  background: var(--btnPrimaryBg);
+  border-color: var(--btnPrimaryBorder);
+  color: var(--btnPrimaryText);
 }
 
 .btnPrimary:hover {
-  background: color-mix(in srgb, var(--accent) 24%, transparent);
-  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
+  background: var(--btnPrimaryBgHover);
+  border-color: var(--btnPrimaryBorderHover);
 }
 
 .btnTertiary {
   background: transparent;
-  border-color: transparent;
-  color: var(--muted);
+  border-color: var(--border0);
 }
 
-.btnTertiary:hover {
-  color: var(--text);
-  background: var(--surface1);
-  transform: none;
+.btnHeader {
+  padding: 9px 11px;
 }
 
-/* -------------------------
-   Cards
-------------------------- */
-.card {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--surface1), transparent);
-  box-shadow: var(--shadowMd);
-  padding: 18px 18px 16px;
-  min-height: 160px;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accentBorder);
-  background: linear-gradient(180deg, var(--surface2), transparent);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn, .card { transition: none; }
-  .btn:hover, .card:hover { transform: none; }
-}
-
-.cardLink { display: grid; gap: 12px; }
-.cardHead { display: grid; gap: 4px; }
-.cardTitle { margin: 0; font-size: 18px; letter-spacing: -0.01em; }
-.cardTag { margin: 0; font-size: 0.95rem; color: var(--muted); }
-.cardDesc { margin: 0; color: var(--muted); line-height: 1.55; }
-
-.cardBullets {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--muted);
-  line-height: 1.55;
-}
-.cardBullets li { margin: 4px 0; }
-
-.cardMedia {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface0);
-  position: relative;
-  aspect-ratio: 1200 / 630;
-}
-
-.cardImg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-}
-
-.cardImgContain { object-fit: contain; }
-.cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-/* -------------------------
-   Header
-------------------------- */
+/* Header */
 .siteHeader {
   position: sticky;
   top: 0;
-  z-index: 60;
-  backdrop-filter: blur(10px);
+  z-index: 8000;
+  backdrop-filter: blur(12px);
   background: var(--headerBg);
   border-bottom: 1px solid var(--headerBorder);
 }
 
 .siteHeaderInner {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 14px clamp(16px, 3vw, 28px);
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  min-height: var(--headerH);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  min-height: var(--headerH);
+  gap: 12px;
 }
 
-.brand { display: inline-flex; align-items: center; gap: 10px; }
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--rSm);
+  border: 1px solid transparent;
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease);
+}
 
-.brandMark {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    color-mix(in srgb, var(--accent) 95%, white),
-    color-mix(in srgb, var(--accent) 22%, transparent)
-  );
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+.brand:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border0);
 }
 
 .brandText {
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  color: var(--textStrong);
 }
 
-.siteNav { display: flex; gap: 12px; align-items: center; }
+.brandHi {
+  color: var(--muted2);
+  font-weight: 500;
+}
+
+.brandSub {
+  color: var(--muted2);
+  font-size: 0.9rem;
+  margin-left: 10px;
+}
+
+.siteNav {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
 
 .navLink {
-  color: var(--muted);
-  padding: 6px 10px;
-  border-radius: 999px;
+  padding: 8px 10px;
+  border-radius: var(--rSm);
   border: 1px solid transparent;
+  color: var(--muted);
+  transition: color var(--tFast) var(--ease), border-color var(--tFast) var(--ease),
+    background var(--tFast) var(--ease);
 }
 
 .navLink:hover {
   color: var(--text);
-  border-color: var(--border);
-  background: var(--surface0);
-  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border0);
 }
 
-.siteActionsDesktop { display: inline-flex; gap: 8px; align-items: center; }
-.siteActionsMobile  { display: none; gap: 8px; align-items: center; }
-.headerCta { display: inline-flex; }
-
-.headerDivider {
-  width: 1px;
-  height: 22px;
-  background: var(--divider);
-  margin: 0 6px;
-}
-
-@media (max-width: 520px) {
-  .siteNav { display: none; }
-  .siteActionsDesktop { display: none; }
-  .siteActionsMobile  { display: inline-flex; }
-  .headerCta { display: none; }
-}
-
-/* Icon buttons */
-.iconBtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  background: var(--surface0);
-  color: var(--text);
-}
-
-.iconBtn:hover {
-  background: var(--surface1);
-  border-color: var(--accentBorder);
-  text-decoration: none;
-}
-
-.themeGlyph {
-  font-size: 15px;
-  line-height: 1;
-  transform: translateY(-0.5px);
-}
-
-/* -------------------------
-   Employer credibility marquee
-------------------------- */
-.credStrip {
-  margin-top: 18px;
-  display: grid;
-  gap: 10px;
-}
-
-.credLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.credRule {
-  height: 1px;
-  background: var(--divider);
-  flex: 1;
-}
-
-.credMarquee {
-  position: relative;
-  overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--surface0);
-}
-
-.credMarquee::before,
-.credMarquee::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 44px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.credMarquee::before {
-  left: 0;
-  background: linear-gradient(90deg, var(--bg0), transparent);
-}
-
-.credMarquee::after {
-  right: 0;
-  background: linear-gradient(270deg, var(--bg0), transparent);
-}
-
-.credTrack {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  width: max-content;
-  padding: 10px 12px;
-  animation: credScroll 22s linear infinite;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  will-change: transform;
-}
-
-.credMarquee:hover .credTrack,
-.credMarquee:focus-within .credTrack {
-  animation-play-state: paused;
-}
-
-@keyframes credScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.credLogoLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  padding: 0 8px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
-  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
-}
-
-.credLogoLink:hover,
-.credLogoLink:focus-visible {
-  background: var(--surface1);
-  border-color: var(--borderStrong);
-  box-shadow: var(--shadowSm);
-  text-decoration: none;
-}
-
-.credLogo {
-  height: 18px;
-  width: auto;
-  opacity: 0.88;
-  filter: grayscale(1) contrast(1.08);
-  transition: opacity 120ms ease, filter 120ms ease;
-}
-
-.credLogoLink:hover .credLogo,
-.credLogoLink:focus-visible .credLogo {
-  opacity: 1;
-  filter: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .credTrack { animation: none; }
-}
-
-/* -------------------------
-   Footer (synced to src/components/SiteFooter.tsx)
-------------------------- */
-.siteFooter {
-  margin-top: 44px;
-  padding: 28px 0 44px;
-  border-top: 1px solid var(--divider);
-  background: transparent;
-}
-
-.siteFooterInner {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 clamp(16px, 3vw, 28px);
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: flex-start;
-}
-
-/* Footer grid wrapper used by the component */
-.siteFooterGrid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.9fr 0.9fr;
-  gap: clamp(16px, 3vw, 28px);
-}
-
-/* Column wrapper */
-.footerCol {
-  min-width: 0;
-}
-
-.footerTitle { font-weight: 650; color: var(--textStrong); }
-.footerSub { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
-.footerCopy { color: var(--muted); margin-top: 10px; font-size: 0.9rem; }
-
-.footerHead {
-  font-weight: 650;
-  color: var(--textStrong);
-  margin-bottom: 6px;
-}
-
-.footerCtas {
-  display: inline-flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-
-.footerAddr {
-  font-style: normal;
-  margin: 0;
-}
-
-.footerHint {
-  color: var(--muted);
-  margin-top: 8px;
-  font-size: 0.95rem;
-  max-width: 40ch;
-}
-
-.footerLinksStack {
-  display: grid;
-  gap: 8px;
-}
-
-.footerLink { color: var(--muted); }
-.footerLink:hover { color: var(--text); text-decoration: underline; }
-
-/* Keep legacy footerLinks class if referenced elsewhere */
-.footerLinks {
-  display: inline-flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-@media (max-width: 920px) {
-  .siteFooterGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 520px) {
-  .siteFooterInner { flex-direction: column; }
-  .footerLinks { justify-content: flex-start; }
-}
-
-/* -------------------------
-   Scroll reveal: SEO-safe gating
-------------------------- */
-.no-js .focusCard {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
-.js .focusCard {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 420ms ease-out,
-    transform 420ms ease-out,
-    border-color 180ms ease-out,
-    box-shadow 180ms ease-out;
-  will-change: opacity, transform;
-}
-
-.js .focusCard--visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.js .focusCard--visible:hover {
-  transform: translate3d(0, -3px, 0);
-  border-color: var(--accentBorder);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js .focusCard {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-/* -------------------------
-   Mask icons (used by SocialIcon.tsx)
-------------------------- */
-.iconMask {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-
-  /* The paint source for the mask */
-  background-color: currentColor;
-
-  /* Mask settings */
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
-
-.icon--social {
-  width: 18px;
-  height: 18px;
-}
 .siteActions {
   display: inline-flex;
   align-items: center;
@@ -479,20 +139,15 @@
 
 .headerCtas {
   display: inline-flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-}
-
-.btnHeader {
-  height: 38px;
-  padding: 0 13px;
 }
 
 .headerDivider {
   width: 1px;
-  height: 22px;
-  background: var(--divider);
-  margin: 0 2px;
+  height: 24px;
+  background: var(--border0);
+  display: inline-block;
 }
 
 .headerIcons {
@@ -501,50 +156,564 @@
   align-items: center;
 }
 
-/* Small screens: reduce overload */
-@media (max-width: 720px) {
-  .siteNav { display: none; }
-}
-
-@media (max-width: 520px) {
-  .headerDivider { display: none; }
-  .headerIcons { display: none; } /* keep 2 primary CTAs only */
-}
-.siteFooterInner {
-  display: grid;
-  grid-template-columns: 1.2fr 0.9fr 0.9fr;
-  gap: 24px;
-  align-items: start;
-}
-
-.footerCol { min-width: 0; }
-
-.footerHead { font-weight: 650; color: var(--textStrong); margin-bottom: 8px; }
-.footerHeadSpacer { margin-top: 14px; }
-
-.footerCtas {
+/* Social icon buttons */
+.iconBtn {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 10px;
+  border: 1px solid var(--border0);
+  background: transparent;
+
+  transition: background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease);
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border1);
+  transform: translateY(-1px);
+}
+
+/* If SVGs are monochrome, this improves contrast without guessing SVG fills */
+.icon--social {
+  opacity: 0.92;
+  filter: brightness(1.12) saturate(1.05);
+}
+
+.iconBtn:hover .icon--social {
+  opacity: 1;
+  filter: brightness(1.25) saturate(1.25);
+}
+
+/* Responsive */
+@media (max-width: 820px) {
+  .siteNav {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .headerDivider,
+  .headerIcons,
+  .brandSub {
+    display: none;
+  }
+}
+
+/* Cards (less boxy) */
+.card {
+  border: 1px solid var(--border0);
+  background:
+    radial-gradient(700px 220px at 10% 0%, rgba(90, 150, 255, 0.08), transparent 55%),
+    radial-gradient(600px 220px at 90% 0%, rgba(70, 220, 220, 0.06), transparent 55%),
+    rgba(255, 255, 255, 0.018);
+  border-radius: var(--rLg);
+  padding: 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+}
+
+.cardLink {
+  transition: border-color var(--tMed) var(--ease),
+    transform var(--tMed) var(--ease),
+    box-shadow var(--tMed) var(--ease),
+    background var(--tMed) var(--ease);
+}
+
+.cardLink:hover {
+  border-color: var(--border1);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.22);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.cardTag {
+  color: var(--muted2);
+  font-size: 0.9rem;
+}
+
+.cardDesc {
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.cardBullets {
+  margin: 12px 0 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.cardBullets li {
+  margin-bottom: 6px;
+}
+
+.cardActions {
+  display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   margin-top: 14px;
 }
 
-.footerIcons {
-  display: inline-flex;
-  gap: 8px;
-  margin-top: 12px;
+.cardMedia {
+  position: relative;
+  border-radius: var(--rMd);
+  border: 1px solid var(--border0);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  margin-top: 14px;
+  height: 210px;
+}
+
+.cardImg {
+  object-fit: cover;
+}
+
+.cardImgContain {
+  object-fit: contain;
+}
+
+/* Experience strip (reusable marquee) */
+.expStrip {
+  display: block;
+  margin-top: 18px;
+  border: 1px solid var(--border0);
+  border-radius: var(--rLg);
+  padding: 12px 12px 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.expStripLabelRow {
+  display: flex;
   align-items: center;
+  gap: 12px;
+  padding: 2px 2px 10px 2px;
+}
+
+.expStripLabel {
+  font-size: 0.95rem;
+  color: var(--muted2);
+}
+
+.expStripRule {
+  height: 1px;
+  flex: 1;
+  background: var(--border0);
+}
+
+.expStripMarquee {
+  overflow: hidden;
+  border-radius: var(--rMd);
+}
+
+.expStripTrack {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: max-content;
+  padding: 8px 2px;
+  animation: marqueeScroll 28s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expStripTrack {
+    animation: none;
+  }
+}
+
+.expLogoBtn {
+  background: transparent;
+  border: 1px solid var(--border0);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease);
+}
+
+.expLogoBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border1);
+  transform: translateY(-1px);
+}
+
+/* Experience strip: increase legibility and add edge fade */
+.expStripMarquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.expLogoImg {
+  opacity: 0.96;
+  filter: saturate(1.05);
+}
+
+.expLogoBtn:hover .expLogoImg {
+  opacity: 1;
+  filter: saturate(1.12);
+}
+
+.expLogoBtn:hover .expLogoImg {
+  opacity: 1;
+}
+
+/* Experience drawer */
+.expDrawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+}
+
+.expDrawerBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.56);
+  border: 0;
+}
+
+.expDrawerPanel {
+  position: relative;
+  width: min(720px, calc(100vw - 24px));
+  max-height: min(82vh, 760px);
+  overflow: auto;
+  border-radius: 14px;
+
+  background:
+    radial-gradient(700px 260px at 15% 0%, rgba(90, 150, 255, 0.10), transparent 55%),
+    radial-gradient(650px 260px at 85% 0%, rgba(60, 220, 220, 0.07), transparent 58%),
+    rgba(11, 15, 23, 0.96);
+
+  border: 1px solid var(--border1);
+  box-shadow: var(--shadow2);
+  padding: 16px;
+}
+
+.expDrawerHead {
+  display: grid;
+  gap: 10px;
+}
+
+.expDrawerTitleRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.expDrawerLogoImg {
+  opacity: 0.92;
+}
+
+.expDrawerTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.expRoleLine {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.expDrawerCloseBtn {
+  background: transparent;
+  border: 1px solid var(--border0);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease);
+}
+
+.expDrawerCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border1);
+}
+
+.expDrawerActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.expDrawerBody {
+  margin-top: 12px;
+}
+
+.expDrawerSectionTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.expDrawerList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.expDrawerFoot {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted2);
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.siteFooter {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border0);
+  color: var(--muted);
+}
+
+.siteFooterInner {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 860px) {
+  .siteFooterInner {
+    flex-direction: column;
+  }
+}
+
+.footerCol {
+  min-width: 220px;
+}
+
+.footerTitle {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.footerSub {
+  color: var(--muted);
+  margin-bottom: 12px;
+  max-width: 44ch;
+}
+
+.footerCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.footerIcons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.footerCopy {
+  color: var(--muted2);
+  margin-top: 6px;
+}
+
+.footerHead {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.footerHeadSpacer {
+  margin-top: 14px;
+}
+
+.footerAddr {
+  font-style: normal;
+}
+
+.footerHint {
+  color: var(--muted2);
+  margin-top: 8px;
 }
 
 .footerLinksStack {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* fixes “LinkedInGitHubProjects” */
 }
 
-.footerAddr { font-style: normal; margin: 0; }
+.footerLink {
+  color: var(--muted);
+  text-decoration: none;
+}
 
-.footerHint { color: var(--muted); margin-top: 8px; }
+.footerLink:hover {
+  color: var(--text);
+}
 
-@media (max-width: 920px) {
-  .siteFooterInner { grid-template-columns: 1fr; }
+/*/* =========================================================
+   Background (Motion + FX)
+   - Fixed behind all content
+   - Never affects layout
+   - Reduced-motion safe
+   ========================================================= */
+
+/* Motion container */
+.bgMotion {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Video fills viewport */
+.bgMotionVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.20;
+  filter: saturate(1.06) contrast(1.06);
+}
+
+/* Fallback image always present, low opacity */
+.bgMotionFallback {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.12;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* Scrim keeps text readable */
+.bgMotionScrim {
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(0,0,0,0.0), rgba(0,0,0,0.55)),
+    radial-gradient(900px 520px at 80% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.62)),
+    linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.70));
+}
+
+/* Reduced motion: hide the video, keep fallback */
+@media (prefers-reduced-motion: reduce) {
+  .bgMotionVideo {
+    display: none;
+  }
+}
+
+/* FX layer (pure CSS). Subtle and cheap. */
+.bgFx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Two slow gradients. No animation by default (safest for perf). */
+.bgFxA {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(60% 50% at 10% 20%, hsla(var(--accent) / 0.10), transparent 55%);
+  filter: blur(18px);
+}
+
+.bgFxB {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(55% 45% at 90% 15%, hsla(var(--accent2) / 0.08), transparent 60%);
+  filter: blur(20px);
+}
+
+/* Optional: ultra-light noise (static). */
+.bgFxNoise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  mix-blend-mode: overlay;
+}
+
+/* If you later choose to animate gradients, gate it strictly */
+@media (prefers-reduced-motion: no-preference) {
+  .bgFxA {
+    animation: bgDriftA 18s var(--ease) infinite alternate;
+  }
+  .bgFxB {
+    animation: bgDriftB 22s var(--ease) infinite alternate;
+  }
+}
+
+@keyframes bgDriftA {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+  to   { transform: translate3d(1.5%,  1%, 0) scale(1.04); }
+}
+
+@keyframes bgDriftB {
+  from { transform: translate3d(1%, -1.2%, 0) scale(1.02); }
+  to   { transform: translate3d(-1%, 1.2%, 0) scale(1.04); }
+}
+
+/* === Buttons: calm primary, accent only on intent === */
+.btnPrimary {
+  background: var(--btnPrimaryBg);
+  border-color: var(--btnPrimaryBorder);
+  color: var(--btnPrimaryText);
+  box-shadow: none;
+}
+
+.btnPrimary:hover {
+  background: var(--btnPrimaryBgHover);
+  border-color: var(--btnPrimaryBorderHover);
+  box-shadow: 0 0 0 1px hsla(var(--accent2) / 0.18);
+}
+
+.btn:focus-visible,
+.iconBtn:focus-visible,
+.navLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focusRing);
+  border-color: var(--focusBorder);
+}
+
+/* === Resume embed === */
+.resumeEmbed {
+  border: 1px solid var(--border0);
+  border-radius: var(--rLg);
+  background: var(--surface0);
+  overflow: hidden;
+}
+
+.resumeEmbedObj {
+  width: 100%;
+  height: min(78vh, 920px);
+  display: block;
 }

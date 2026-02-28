@@ -1,23 +1,16 @@
 // src/components/SocialIcon.tsx
-import type { CSSProperties } from "react";
+import Image from "next/image";
 
-type Props = {
-  src: string;              // e.g. "/assets/icons/github.svg"
-  className?: string;       // e.g. "icon--social"
-  title?: string;           // tooltip only; do not rely on for a11y
-};
-
-/**
- * Mask-based icon so it inherits currentColor.
- * Requires CSS for .iconMask (size + background-color + mask rules).
- */
-export function SocialIcon({ src, className, title }: Props) {
-  const style = {
-    WebkitMaskImage: `url(${src})`,
-    maskImage: `url(${src})`,
-  } satisfies CSSProperties;
-
-  const cls = ["iconMask", className].filter(Boolean).join(" ");
-
-  return <span className={cls} aria-hidden="true" title={title} style={style} />;
+export function SocialIcon(props: { src: string; title: string; className?: string }) {
+  const { src, title, className } = props;
+  return (
+    <Image
+      src={src}
+      alt={title}
+      width={18}
+      height={18}
+      className={className}
+      // Don’t set priority; these are tiny and below LCP most of the time.
+    />
+  );
 }

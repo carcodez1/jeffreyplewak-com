@@ -1,10 +1,5 @@
 /* src/app/styles/base.css
-   Base layer: reset + element defaults + accessibility primitives.
-
-   RULES:
-   - No token definitions here (no --*).
-   - No page layout scaffolding here (NO wrap/hero/grid). That belongs to layout.css.
-   - Accessibility primitives (focus, selection, skipLink) live here.
+   Baseline element styles + typography.
 */
 
 *,
@@ -13,109 +8,91 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 html {
+  color-scheme: dark;
   -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--headerH);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  text-rendering: optimizeLegibility;
 }
 
 body {
   margin: 0;
+  font-family: var(--fontSans);
+  line-height: var(--lhNormal);
   color: var(--text);
-  font: 16px / 1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  background: var(--bg0);
-  overflow-x: hidden;
+  background: radial-gradient(1200px 800px at 60% -10%, rgba(35, 80, 180, 0.14), transparent 60%),
+    radial-gradient(1100px 700px at 85% 0%, rgba(40, 170, 180, 0.10), transparent 65%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  min-height: 100vh;
 }
 
-img,
-svg,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-}
-
-code,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--divider);
-}
-
-/* Selection (token-driven) */
 ::selection {
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-  color: var(--textStrong);
+  background: var(--selectionBg);
+  color: var(--selectionText);
 }
 
-/* Focus-visible (forced-colors safe) */
-:focus-visible {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  box-shadow: var(--focusRing);
-  border-radius: 10px;
-}
-
-@media (forced-colors: active) {
-  :focus-visible {
-    outline-color: Highlight;
-  }
-}
-
-/* Skip link (token-driven; works for dark) */
-.skipLink {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-
-  z-index: 1000;
-  padding: 0.75rem 1rem;
-  background: var(--bg0);
-  color: var(--textStrong);
-  border-radius: 0.5rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadowMd);
+a {
+  color: var(--link);
   text-decoration: none;
 }
 
-.skipLink:focus,
-.skipLink:focus-visible {
-  width: auto;
+a:hover {
+  color: var(--linkHover);
+}
+
+p {
+  margin: 0 0 12px 0;
+}
+
+h1, h2, h3 {
+  margin: 0 0 10px 0;
+  line-height: var(--lhTight);
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: clamp(1.9rem, 3.2vw, 2.55rem); }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.1rem; }
+
+code, pre {
+  font-family: var(--fontMono);
+}
+
+pre {
+  background: var(--codeBg);
+  border: 1px solid var(--codeBorder);
+  border-radius: var(--rMd);
+  padding: 12px;
+  overflow: auto;
+}
+
+img, video {
+  max-width: 100%;
   height: auto;
-  overflow: visible;
-  clip: auto;
-  clip-path: none;
-  white-space: normal;
-  inset-block-start: 1rem;
-  inset-inline-start: 1rem;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focusRing);
+  border-color: var(--focusBorder);
+}
+
+.skipLink {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transform: translateY(-200%);
+  background: rgba(0,0,0,0.85);
+  border: 1px solid var(--border1);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: var(--rSm);
+  z-index: 10000;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
 }
