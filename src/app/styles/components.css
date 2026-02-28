@@ -376,3 +376,21 @@
 
 /* Legal */
 .legal .h3 { margin-top: 14px; }
+
+/* Avatar (single source of truth) */
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border0);
+  background: rgba(255, 255, 255, 0.02);
+  flex: 0 0 auto;
+}
+
+.avatarImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
