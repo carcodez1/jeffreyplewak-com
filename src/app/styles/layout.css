@@ -1,12 +1,30 @@
-/* Home hero refinement */
-.heroHome {
-  margin-top: 30px;
+/* ==========================================================
+   layout.css — Global layout containers & utilities
+   ========================================================== */
+
+/* Site wrapper */
+.wrap {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
+/* Main page section */
+.section {
+  margin-bottom: 5rem;
+}
+
+/* Projects grid (2 columns) */
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* Hero grid (home page) */
 .homeHeroGrid {
   display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
   gap: 28px;
+  grid-template-columns: 1.35fr 0.65fr;
   align-items: start;
 }
 
@@ -16,53 +34,27 @@
   }
 }
 
-.homeIdRow {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
+/* Avatar in hero */
 .homeAvatar {
   width: 84px;
   height: 84px;
-  border-radius: 18px;
+  border-radius: var(--rLg);
   overflow: hidden;
-  border: 1px solid var(--border0);
-  background: var(--surface0);
-  flex: 0 0 auto;
+  border: 1px solid var(--border1);
+  background: var(--surface1);
 }
 
 .homeAvatarImg {
-  display: block;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
-.homeRole {
-  margin-top: 6px;
-}
-
-.homeLede {
-  margin-top: 10px;
-  max-width: 78ch;
-}
-
-.homeExpBlock {
-  margin-top: 18px; /* push strip lower */
-}
-
-.homeHeroRight {
-  position: relative;
-}
-
+/* Portrait frame in hero */
 .homePortraitFrame {
   position: relative;
   border-radius: var(--rLg);
   overflow: hidden;
-  border: 1px solid var(--border0);
-  background: var(--surface0);
+  border: 1px solid var(--border1);
+  background: var(--surface1);
   box-shadow: var(--shadow1);
   height: 360px;
 }
@@ -73,6 +65,9 @@
   }
 }
 
-.homePortraitImg {
-  object-fit: cover;
+/* CTA row */
+.ctaRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }

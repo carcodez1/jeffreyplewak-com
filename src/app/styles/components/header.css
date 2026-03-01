@@ -1,0 +1,23 @@
+/* ==========================
+   Header / Navigation
+   ========================== */
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 9000;
+  background: linear-gradient(180deg, rgba(16,22,34,0.82), rgba(11,15,23,0.62));
+  border-bottom: 1px solid var(--border1);
+  backdrop-filter: blur(10px);
+}
+
+/* Consistent inner spacing */
+.siteHeaderInner {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  min-height: var(--headerH);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}

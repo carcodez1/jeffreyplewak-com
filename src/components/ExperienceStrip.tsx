@@ -1,57 +1,76 @@
 // src/components/ExperienceStrip.tsx
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { useMemo, useState } from "react";
 import { ExperienceDrawer } from "./ExperienceDrawer";
 import { EXPERIENCE_ITEMS, type ExperienceItem } from "@/lib/experience";
 
+/**
+ * Horizontal timeline component showing both dates and role.
+ */
 type Props = { className?: string; label?: string };
 
-export function ExperienceStrip({ className, label = "Experience across" }: Props) {
-  const items = useMemo(() => EXPERIENCE_ITEMS, []);
-  const duplicated = useMemo(() => [...items, ...items], [items]);
-
+export function ExperienceStrip({
+  className,
+  label = "Experience across",
+}: Props) {
   const [openKey, setOpenKey] = useState<string | null>(null);
-
-  const active: ExperienceItem | undefined = useMemo(() => {
-    if (!openKey) return undefined;
-    return items.find((i) => i.key === openKey);
-  }, [openKey, items]);
+  const active: ExperienceItem | undefined =
+    EXPERIENCE_ITEMS.find((i) => i.key === openKey);
 
   return (
-    <section className={`expStrip ${className ?? ""}`} aria-label="Experience">
-      <div className="expStripLabelRow">
-        <span className="expStripLabel">{label}</span>
-        <span className="expStripRule" aria-hidden="true" />
-      </div>
+    <section
+      className={`expHorizontalTimeline ${className ?? ""}`}
+      aria-labelledby="experience-timeline-title"
+    >
+      <header className="expTimelineHeader">
+        <h2 id="experience-timeline-title" className="expTimelineTitle">
+          {label}
+        </h2>
+      </header>
 
-      {/* Desktop/tablet: marquee (CSS animation). Mobile: manual scroll-snap. */}
-      <div className="expStripViewport" aria-label="Employer logos">
-        <div className="expStripTrack" role="list">
-          {duplicated.map((item, idx) => (
+      <ol className="expTimelineTrack">
+        {EXPERIENCE_ITEMS.map((item) => (
+          <li key={item.key} className="expTimelineNode">
             <button
-              key={`${item.key}-${idx}`}
-              className="expLogoBtn"
               type="button"
+              className="expTimelineCard"
+              aria-label={`Show details for ${item.name}`}
               onClick={() => setOpenKey(item.key)}
-              aria-label={`Open details: ${item.name}`}
-              data-brand={item.key}
-              role="listitem"
             >
-              <Image
-                src={item.logoSrc}
-                alt={item.name}
-                width={item.logoWidth}
-                height={item.logoHeight}
-                className="expLogoImg"
-              />
-            </button>
-          ))}
-        </div>
-      </div>
+              <div className="expTimelineLogo">
+                <Image
+                  src={item.logoSrc}
+                  alt={item.name}
+                  width={item.logoWidth}
+                  height={item.logoHeight}
+                />
+              </div>
 
-      <ExperienceDrawer open={openKey != null} item={active} onClose={() => setOpenKey(null)} />
+              <div className="expTimelineText">
+                {/* Render timeline date range */}
+                <span className="expTimelineDate">
+                  {item.resume.startDate}
+                  {item.resume.endDate ? ` — ${item.resume.endDate}` : ""}
+                </span>
+
+                {/* Company name + role */}
+                <span className="expTimelineName">{item.name}</span>
+                {item.resume.roleLine && (
+                  <span className="expTimelineRole">{item.resume.roleLine}</span>
+                )}
+              </div>
+            </button>
+          </li>
+        ))}
+      </ol>
+
+      <ExperienceDrawer
+        open={openKey != null}
+        item={active}
+        onClose={() => setOpenKey(null)}
+      />
     </section>
   );
 }

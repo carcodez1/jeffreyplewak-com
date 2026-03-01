@@ -1,0 +1,24 @@
+/* ==========================
+   Avatar utilities (consistent sizing + shapes)
+   ========================== */
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid var(--border1);
+  background: var(--surface1);
+  border-radius: var(--rMd);
+  flex-shrink: 0;
+}
+
+.avatar--round {
+  border-radius: 999px;
+}
+
+.avatarImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

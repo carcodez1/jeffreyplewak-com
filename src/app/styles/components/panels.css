@@ -1,0 +1,11 @@
+/* ==========================
+   Panels & Utility Surfaces
+   ========================== */
+
+/* Base panel */
+.panel {
+  border: 1px solid var(--border0);
+  border-radius: var(--rLg);
+  background: linear-gradient(180deg, var(--surface0), transparent 78%);
+  padding: 16px;
+}

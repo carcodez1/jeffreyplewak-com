@@ -1,0 +1,35 @@
+/* ==========================
+   Navigation links + responsive behavior
+   ========================== */
+
+.siteNav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.navLink {
+  padding: 8px 12px;
+  border-radius: var(--rSm);
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-size: var(--text1);
+  transition:
+    color var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    background var(--tFast) var(--ease);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.12);
+}
+
+/* Hide nav on smaller screens */
+@media (max-width: 820px) {
+  .siteNav {
+    display: none;
+  }
+}

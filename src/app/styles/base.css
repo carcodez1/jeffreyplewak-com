@@ -1,63 +1,61 @@
-/* src/app/styles/base.css
-   Refined typography scale + hierarchy normalization.
-*/
+/* ==========================================================
+   base.css — Global element defaults & typography normalization
+   ========================================================== */
 
+/* Box sizing */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* Base document */
 html {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  font-family: var(--fontSans);
+  line-height: var(--lhNormal);
+  font-size: var(--text1);
 }
 
+/* Body reset & full height */
 body {
   margin: 0;
-  font-family: var(--fontSans);
-  line-height: 1.6;
-  color: var(--text);
-  background:
-    radial-gradient(1200px 800px at 60% -10%, rgba(35, 80, 180, 0.14), transparent 60%),
-    radial-gradient(1100px 700px at 85% 0%, rgba(40, 170, 180, 0.10), transparent 65%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
   min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* Selection */
+/* Selection for accessibility */
 ::selection {
-  background: var(--selectionBg);
-  color: var(--selectionText);
+  background: hsla(var(--accent) / 0.25);
+  color: var(--text);
 }
 
 /* Links */
 a {
-  color: var(--link);
+  color: var(--text);
   text-decoration: none;
 }
-
-a:hover {
-  color: var(--linkHover);
+a:hover,
+a:focus-visible {
+  color: hsla(var(--accent2) / 0.95);
 }
 
-/* Paragraph rhythm */
+/* Typography scale */
 p {
   margin: 0 0 18px 0;
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: var(--text1);
+  line-height: var(--lhNormal);
 }
 
-/* Headings */
 h1, h2, h3 {
   margin: 0;
-  letter-spacing: -0.02em;
   font-weight: 650;
-  line-height: 1.18;
+  line-height: var(--lhTight);
 }
 
-/* Refined scale */
 h1 {
   font-size: clamp(2.2rem, 3.4vw, 2.85rem);
   margin-bottom: 18px;
@@ -73,49 +71,29 @@ h3 {
   margin-bottom: 10px;
 }
 
-/* Utility heading classes */
-.h1 {
-  font-size: clamp(2.4rem, 3.8vw, 3rem);
-}
-
-.h2 {
-  font-size: clamp(1.45rem, 1.9vw, 1.65rem);
-}
-
-.h3 {
-  font-size: 1.15rem;
-}
-
-/* Lead paragraph */
-.lede {
-  font-size: 1.08rem;
-  line-height: 1.7;
-  margin-bottom: 22px;
-}
-
-/* Code */
+/* Pre/code */
 code,
 pre {
   font-family: var(--fontMono);
+  font-size: var(--text0);
 }
 
 pre {
-  background: var(--codeBg);
-  border: 1px solid var(--codeBorder);
+  background: var(--surface1);
+  border: 1px solid var(--border1);
   border-radius: var(--rMd);
   padding: 16px;
-  overflow: auto;
-  font-size: 0.92rem;
+  overflow-x: auto;
 }
 
-/* Media */
+/* Media responsiveness */
 img,
 video {
   max-width: 100%;
   height: auto;
 }
 
-/* Form */
+/* Form elements */
 button,
 input,
 textarea,
@@ -123,18 +101,17 @@ select {
   font: inherit;
 }
 
-/* Focus */
+/* Focus ring for accessibility */
 :focus-visible {
   outline: none;
-  box-shadow: var(--focusRing);
-  border-color: var(--focusBorder);
+  box-shadow: 0 0 0 3px hsla(var(--accent2) / 0.28);
 }
 
-/* Skip link */
+/* Skip link (accessibility) */
 .skipLink {
   position: absolute;
+  top: 0;
   left: 10px;
-  top: 10px;
   transform: translateY(-200%);
   background: rgba(0,0,0,0.85);
   border: 1px solid var(--border1);
@@ -143,7 +120,12 @@ select {
   border-radius: var(--rSm);
   z-index: 10000;
 }
-
 .skipLink:focus {
   transform: translateY(0);
+}
+
+/* === Global mobile overflow guard === */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }

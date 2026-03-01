@@ -1,0 +1,61 @@
+/* ==========================
+   Footer utilities
+   ========================== */
+
+.siteFooter {
+  margin-top: 100px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border0);
+  color: var(--muted);
+}
+
+.siteFooterInner {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter)*2)));
+  margin-inline: auto;
+  display: flex;
+  gap: 36px;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+/* Footer columns */
+.footerCol {
+  display: grid;
+  gap: 14px;
+}
+
+/* Footer labels */
+.footerTitle {
+  font-weight: 650;
+  color: var(--text);
+}
+.footerSub {
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+/* Footer link styles */
+.footerLinksStack {
+  display: grid;
+  gap: 10px;
+}
+.footerLink {
+  color: var(--muted);
+  font-size: var(--text1);
+}
+.footerLink:hover,
+.footerLink:focus-visible {
+  color: hsla(var(--accent2) / 0.95);
+}
+
+/* Copyright text */
+.footerCopy {
+  margin-top: 12px;
+  color: var(--muted2);
+}
+
+@media (max-width: 860px) {
+  .siteFooterInner {
+    flex-direction: column;
+  }
+}

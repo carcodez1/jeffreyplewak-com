@@ -1,0 +1,105 @@
+/* ==========================
+   Experience / Modal Drawer
+   ========================== */
+
+/* Root overlay */
+.expDrawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 8500;
+  display: grid;
+  place-items: center;
+}
+
+/* Backdrop */
+.expDrawerBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  border: 0;
+}
+
+/* Panel container */
+.expDrawerPanel {
+  position: relative;
+  width: min(720px, calc(100vw - 24px));
+  max-height: min(82vh, 760px);
+  overflow: auto;
+  background: var(--bg2);
+  border: 1px solid var(--border1);
+  border-radius: var(--rMd);
+  padding: 16px;
+  box-shadow: var(--shadow2);
+  transition: transform var(--tFast) var(--ease),
+              opacity var(--tFast) var(--ease);
+}
+
+/* Header row inside drawer */
+.expDrawerTitleRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.expDrawerTitle {
+  font-size: var(--text3);
+  font-weight: 650;
+}
+.expRoleLine {
+  margin-top: 6px;
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+/* Close button inside drawer */
+.expDrawerCloseBtn {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border1);
+  border-radius: var(--rMd);
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: var(--text1);
+}
+.expDrawerCloseBtn:hover,
+.expDrawerCloseBtn:focus-visible {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--border2);
+}
+
+/* Action links */
+.expDrawerActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* Body of drawer */
+.expDrawerBody {
+  margin-top: 14px;
+}
+
+/* Drawer section titles */
+.expDrawerSectionTitle {
+  font-weight: 650;
+  margin-bottom: 10px;
+}
+
+/* Drawer highlight list */
+.expDrawerList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+/* Footer hint text */
+.expDrawerFoot {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted2);
+}

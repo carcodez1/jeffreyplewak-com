@@ -1,0 +1,60 @@
+/* ==========================
+   Buttons — Reusable, polished
+   ========================== */
+
+/* Base button reset + shared behavior */
+/* DEBUG — REMOVE AFTER TEST */
+body {
+  outline: 5px dashed hotpink !important;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--rMd);
+  border: 1px solid var(--btnBorder);
+  background: var(--btnBg);
+  color: var(--text);
+  font-size: var(--text1);
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease),
+    color var(--tFast) var(--ease);
+}
+
+/* Hover & active states */
+.btn:hover,
+.btn:focus-visible {
+  background: var(--btnBgHover);
+  border-color: var(--btnBorderHover);
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Primary button variant */
+.btnPrimary {
+  background: var(--btnPrimaryBg);
+  border-color: var(--btnPrimaryBorder);
+  color: var(--btnPrimaryText);
+}
+.btnPrimary:hover,
+.btnPrimary:focus-visible {
+  background: var(--btnPrimaryBgHover);
+  border-color: var(--btnPrimaryBorderHover);
+}
+
+/* Tertiary and header variants */
+.btnTertiary {
+  background: transparent;
+  border-color: var(--border0);
+}
+.btnHeader {
+  padding: 9px 11px;
+}

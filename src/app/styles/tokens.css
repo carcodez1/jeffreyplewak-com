@@ -1,19 +1,23 @@
-/* src/app/styles/tokens.css
-   Single Source of Truth tokens.
-   Dark-first. Light tokens kept for future use.
-*/
+/* ==========================================================
+   tokens.css — Design Tokens (Single Source of Truth)
+   Used throughout base, layout, components, animations, etc.
+   ========================================================== */
 
 :root {
-  /* Layout */
+  /* ------------------------------------------------------
+     Layout
+     ------------------------------------------------------ */
   --headerH: 64px;
-  --wrapMax: 1120px;
+  --wrapMax: 1024px;
   --gutter: 20px;
 
-  /* Typography */
-  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-    "Apple Color Emoji", "Segoe UI Emoji";
-  --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  /* ------------------------------------------------------
+     Typography
+     ------------------------------------------------------ */
+  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   --text0: 0.95rem;
   --text1: 1rem;
@@ -22,39 +26,47 @@
   --text4: 1.8rem;
   --text5: 2.35rem;
 
+  /* ------------------------------------------------------
+     Line Height
+     ------------------------------------------------------ */
   --lhTight: 1.15;
   --lhNormal: 1.55;
 
-  /* Radii */
+  /* ------------------------------------------------------
+     Radii
+     ------------------------------------------------------ */
   --rSm: 10px;
   --rMd: 14px;
   --rLg: 18px;
 
-  /* Motion */
+  /* ------------------------------------------------------
+     Motion
+     ------------------------------------------------------ */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --tFast: 120ms;
   --tMed: 180ms;
   --tSlow: 260ms;
 
-  /* Shadows (subtle) */
-  --shadow1: 0 10px 30px rgba(0, 0, 0, 0.30);
-  --shadow2: 0 18px 60px rgba(0, 0, 0, 0.42);
+  /* ------------------------------------------------------
+     Shadows (subtle)
+     ------------------------------------------------------ */
+  --shadow1: 0px 10px 30px rgba(0, 0, 0, 0.30);
+  --shadow2: 0px 18px 60px rgba(0, 0, 0, 0.42);
 
-  /* Brand accent (restrained) */
+  /* ------------------------------------------------------
+     Brand Accents
+     ------------------------------------------------------ */
   --accent: 220 90% 62%;
   --accent2: 190 90% 55%;
 
-  /* Focus */
-  --focusRing: 0 0 0 3px rgba(255, 255, 255, 0.18);
-  --focusBorder: rgba(255, 255, 255, 0.26);
-
-  /* Surfaces: Dark */
+  /* ------------------------------------------------------
+     Surfaces (dark theme)
+     ------------------------------------------------------ */
   --bg: #070a10;
   --bg2: #0b0f17;
 
-  --surface0: rgba(255, 255, 255, 0.028);
-  --surface1: rgba(255, 255, 255, 0.045);
-  --surface2: rgba(255, 255, 255, 0.065);
+  --surface0: rgba(255, 255, 255, 0.03);
+  --surface1: rgba(255, 255, 255, 0.05);
 
   --border0: rgba(255, 255, 255, 0.10);
   --border1: rgba(255, 255, 255, 0.14);
@@ -64,33 +76,9 @@
   --muted: rgba(255, 255, 255, 0.70);
   --muted2: rgba(255, 255, 255, 0.56);
 
-  /* Header/footer surfaces */
-  --headerBg: rgba(11, 15, 23, 0.72);
-  --headerBorder: rgba(255, 255, 255, 0.10);
-
-  /* Buttons */
-  --btnBg: rgba(255, 255, 255, 0.06);
-  --btnBgHover: rgba(255, 255, 255, 0.09);
-  --btnBorder: rgba(255, 255, 255, 0.14);
-  --btnBorderHover: rgba(255, 255, 255, 0.20);
-
-  --btnPrimaryBg: hsla(var(--accent) / 0.18);
-  --btnPrimaryBgHover: hsla(var(--accent) / 0.24);
-  --btnPrimaryBorder: hsla(var(--accent) / 0.45);
-  --btnPrimaryBorderHover: hsla(var(--accent) / 0.58);
-  --btnPrimaryText: rgba(255, 255, 255, 0.94);
-
-  /* Links */
-  --link: rgba(255, 255, 255, 0.92);
-  --linkHover: hsla(var(--accent2) / 0.95);
-
-  /* Code */
-  --codeBg: rgba(255, 255, 255, 0.04);
-  --codeBorder: rgba(255, 255, 255, 0.10);
-
-  /* Selection */
-  --selectionBg: hsla(var(--accent) / 0.22);
-  --selectionText: rgba(255, 255, 255, 0.98);
+  /* ------------------------------------------------------
+     Light theme overrides (optional)
+     ------------------------------------------------------ */
 }
 
 :root[data-theme="light"] {
@@ -99,52 +87,13 @@
 
   --surface0: rgba(17, 24, 39, 0.03);
   --surface1: rgba(17, 24, 39, 0.05);
-  --surface2: rgba(17, 24, 39, 0.07);
 
   --border0: rgba(17, 24, 39, 0.10);
   --border1: rgba(17, 24, 39, 0.14);
-  --border2: rgba(17, 24, 39, 0.18);
 
   --text: rgba(17, 24, 39, 0.92);
   --muted: rgba(17, 24, 39, 0.70);
   --muted2: rgba(17, 24, 39, 0.58);
 
-  --headerBg: rgba(255, 255, 255, 0.82);
-  --headerBorder: rgba(17, 24, 39, 0.10);
-
-  --btnBg: rgba(17, 24, 39, 0.05);
-  --btnBgHover: rgba(17, 24, 39, 0.08);
-  --btnBorder: rgba(17, 24, 39, 0.14);
-  --btnBorderHover: rgba(17, 24, 39, 0.20);
-
   --btnPrimaryText: rgba(17, 24, 39, 0.92);
-
-  --link: rgba(17, 24, 39, 0.92);
-  --codeBg: rgba(17, 24, 39, 0.04);
-  --codeBorder: rgba(17, 24, 39, 0.10);
-}
-/* === CTA policy: neutral primary, accent only on intent (hover/focus) === */
-:root {
-  /* Neutral primary button */
-  --btnPrimaryBg: rgba(255, 255, 255, 0.06);
-  --btnPrimaryBgHover: rgba(255, 255, 255, 0.09);
-  --btnPrimaryBorder: rgba(255, 255, 255, 0.16);
-  --btnPrimaryBorderHover: rgba(255, 255, 255, 0.22);
-  --btnPrimaryText: rgba(255, 255, 255, 0.94);
-
-  /* Accent used for focus ring / subtle hover glow only */
-  --focusRing: 0 0 0 3px hsla(var(--accent2) / 0.20);
-  --focusBorder: hsla(var(--accent2) / 0.32);
-}
-
-/* === CTA policy: neutral primary, accent only on intent (hover/focus) === */
-:root {
-  --btnPrimaryBg: rgba(255, 255, 255, 0.06);
-  --btnPrimaryBgHover: rgba(255, 255, 255, 0.09);
-  --btnPrimaryBorder: rgba(255, 255, 255, 0.16);
-  --btnPrimaryBorderHover: rgba(255, 255, 255, 0.22);
-  --btnPrimaryText: rgba(255, 255, 255, 0.94);
-
-  --focusRing: 0 0 0 3px hsla(var(--accent2) / 0.20);
-  --focusBorder: hsla(var(--accent2) / 0.32);
 }
