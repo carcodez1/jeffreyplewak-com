@@ -298,6 +298,7 @@
 }
 
 /* Viewport with edge fade (desktop) */
+
 .expStripViewport {
   position: relative;
   overflow: hidden;
