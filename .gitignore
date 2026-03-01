@@ -71,3 +71,7 @@ tmp/
 
 # local artifacts
 portfolio-src.tar.gz
+
+# local accidental artifacts
+/cd
+/npm
