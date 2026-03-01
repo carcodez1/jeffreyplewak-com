@@ -2,11 +2,11 @@
 export const SITE = {
   url: "https://www.jeffreyplewak.com",
   name: "Jeffrey R. Plewak",
-  shortName: "Jeff",
+  shortName: "Jeffrey",
   title: "Senior Software Engineer",
-  locationLine: "Remote-first • North Carolina",
+  locationLine: "Remote first • North Carolina",
   locale: "en_US",
-  footerBlurb: "Senior Software Engineer — platform, full-stack, compliance-critical systems.",
+  footerBlurb: "Senior Software Engineer. Platform, full stack, and compliance focused systems.",
 } as const;
 
 export const LINKS = {
@@ -14,14 +14,10 @@ export const LINKS = {
   resumePdf: "/downloads/jeffrey-plewak-resume.pdf",
   vcf: "/downloads/jeffrey-plewak.vcf",
 
-  // Keep mailto stable + predictable. Avoid forced subjects unless you explicitly want them.
   emailProject: "mailto:plewak.jeff@gmail.com",
   emailConsulting: "mailto:plewak.jeff@gmail.com",
 
   github: "https://github.com/carcodez1",
-
-  // Use the canonical LinkedIn handle you want public.
-  // You previously used: https://www.linkedin.com/in/jeffrey-plewak
   linkedin: "https://www.linkedin.com/in/jeffrey-plewak",
 } as const;
 

@@ -5,3 +5,36 @@
 @import "./styles/layout.css";
 @import "./styles/components.css";
 @import "./styles/animations.css";
+/* Executive static background for non-home pages */
+
+body {
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(40, 60, 90, 0.35),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(20, 30, 50, 0.4),
+      transparent 45%
+    ),
+    #0b0f17;
+  background-attachment: fixed;
+}/* Improve hero spacing */
+
+.wrap {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.section {
+  margin-bottom: 5rem;
+}
+
+/* Footer separation */
+
+.siteFooter {
+  margin-top: 6rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}

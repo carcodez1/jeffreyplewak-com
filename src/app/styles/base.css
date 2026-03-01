@@ -1,5 +1,5 @@
 /* src/app/styles/base.css
-   Baseline element styles + typography.
+   Refined typography scale + hierarchy normalization.
 */
 
 *,
@@ -17,19 +17,22 @@ html {
 body {
   margin: 0;
   font-family: var(--fontSans);
-  line-height: var(--lhNormal);
+  line-height: 1.6;
   color: var(--text);
-  background: radial-gradient(1200px 800px at 60% -10%, rgba(35, 80, 180, 0.14), transparent 60%),
+  background:
+    radial-gradient(1200px 800px at 60% -10%, rgba(35, 80, 180, 0.14), transparent 60%),
     radial-gradient(1100px 700px at 85% 0%, rgba(40, 170, 180, 0.10), transparent 65%),
     linear-gradient(180deg, var(--bg), var(--bg2));
   min-height: 100vh;
 }
 
+/* Selection */
 ::selection {
   background: var(--selectionBg);
   color: var(--selectionText);
 }
 
+/* Links */
 a {
   color: var(--link);
   text-decoration: none;
@@ -39,21 +42,60 @@ a:hover {
   color: var(--linkHover);
 }
 
+/* Paragraph rhythm */
 p {
-  margin: 0 0 12px 0;
+  margin: 0 0 18px 0;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
+/* Headings */
 h1, h2, h3 {
-  margin: 0 0 10px 0;
-  line-height: var(--lhTight);
-  letter-spacing: -0.015em;
+  margin: 0;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+  line-height: 1.18;
 }
 
-h1 { font-size: clamp(1.9rem, 3.2vw, 2.55rem); }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.1rem; }
+/* Refined scale */
+h1 {
+  font-size: clamp(2.2rem, 3.4vw, 2.85rem);
+  margin-bottom: 18px;
+}
 
-code, pre {
+h2 {
+  font-size: clamp(1.45rem, 1.9vw, 1.65rem);
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+
+/* Utility heading classes */
+.h1 {
+  font-size: clamp(2.4rem, 3.8vw, 3rem);
+}
+
+.h2 {
+  font-size: clamp(1.45rem, 1.9vw, 1.65rem);
+}
+
+.h3 {
+  font-size: 1.15rem;
+}
+
+/* Lead paragraph */
+.lede {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+/* Code */
+code,
+pre {
   font-family: var(--fontMono);
 }
 
@@ -61,25 +103,34 @@ pre {
   background: var(--codeBg);
   border: 1px solid var(--codeBorder);
   border-radius: var(--rMd);
-  padding: 12px;
+  padding: 16px;
   overflow: auto;
+  font-size: 0.92rem;
 }
 
-img, video {
+/* Media */
+img,
+video {
   max-width: 100%;
   height: auto;
 }
 
-button, input, textarea, select {
+/* Form */
+button,
+input,
+textarea,
+select {
   font: inherit;
 }
 
+/* Focus */
 :focus-visible {
   outline: none;
   box-shadow: var(--focusRing);
   border-color: var(--focusBorder);
 }
 
+/* Skip link */
 .skipLink {
   position: absolute;
   left: 10px;

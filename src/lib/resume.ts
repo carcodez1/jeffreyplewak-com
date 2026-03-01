@@ -9,8 +9,8 @@ export type ExperienceStripItem = {
   logoWidth: number;
   logoHeight: number;
   resume: {
-    pageHref: string; // on-site, keeps users engaged
-    pdfHref: string; // secondary
+    pageHref: string;
+    pdfHref: string;
     roleLine?: string;
   };
   highlights: string[];
@@ -24,8 +24,27 @@ export function getResumeRoleById(id: string): ResumeRole | undefined {
   return RESUME.roles.find((r) => r.id === id);
 }
 
+/**
+ * Normalize employer list:
+ * - Keep first occurrence per employerKey (stable order).
+ * - Prevents repeated employers in the strip if RESUME.roles has multiple roles per employer.
+ */
+function uniqueByEmployerKey(roles: readonly ResumeRole[]): ResumeRole[] {
+  const seen = new Set<string>();
+  const out: ResumeRole[] = [];
+  for (const r of roles) {
+    const k = String(r.employerKey);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push(r);
+  }
+  return out;
+}
+
 export function getExperienceStripItems(): readonly ExperienceStripItem[] {
-  return RESUME.roles.map((r) => ({
+  const roles = uniqueByEmployerKey(RESUME.roles);
+
+  return roles.map((r) => ({
     key: r.employerKey,
     name: r.employerName,
     href: r.employerUrl,

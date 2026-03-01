@@ -1,4 +1,3 @@
-// src/components/SiteHeader.tsx
 import Link from "next/link";
 import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
@@ -35,20 +34,40 @@ export function SiteHeader() {
         </nav>
 
         <div className="siteActions" aria-label="Header actions">
-          <div className="headerCtas" aria-label="Primary actions">
-            <Link className="btn btnPrimary btnHeader" href="/resume" aria-label="Open resume page">
+          <div className="headerCtas">
+            <Link
+              className="btn btnPrimary btnHeader"
+              href="/resume"
+              aria-label="Open resume page"
+            >
               Resume
             </Link>
-            <a className="btn btnHeader" href={LINKS.emailProject} aria-label="Email Jeff">
+
+            <a
+              className="btn btnHeader"
+              href={LINKS.emailProject}
+              aria-label="Email Jeff"
+            >
               Email
             </a>
           </div>
 
           <span className="headerDivider" aria-hidden="true" />
-          <div className="headerIcons" aria-label="Social links">
+
+          <div className="headerIcons">
             {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
-              <a key={s.key} className="iconBtn" href={s.href} aria-label={s.label} {...extLinkProps(s.external)}>
-                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
+              <a
+                key={s.key}
+                className="iconBtn"
+                href={s.href}
+                aria-label={s.label}
+                {...extLinkProps(s.external)}
+              >
+                <SocialIcon
+                  src={s.icon}
+                  title={s.label}
+                  className="icon--social"
+                />
               </a>
             ))}
           </div>

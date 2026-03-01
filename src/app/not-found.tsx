@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="wrap" aria-label="Not found">
+    <div className="wrap" aria-label="Not found">
       <section className="section">
         <h1 className="h1">Page not found</h1>
         <p className="lede">
@@ -17,6 +17,6 @@ export default function NotFound() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

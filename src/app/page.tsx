@@ -1,96 +1,130 @@
-// src/app/projects/page.tsx
+// src/app/page.tsx
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ExperienceStrip } from "@/components/ExperienceStrip";
-import { LINKS } from "@/config/site";
-import { SITE } from "@/config/site";
+import { LINKS, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Projects — Jeffrey R. Plewak",
-  description: "Selected work and project write-ups.",
-  alternates: { canonical: "/projects" },
+  title: `${SITE.name} — ${SITE.title}`,
+  description:
+    "Jeffrey R. Plewak. Senior software engineer focused on backend systems, platform architecture, and production reliability.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    title: "Projects — Jeffrey R. Plewak",
-    description: "Selected work and project write-ups.",
-    url: "/projects",
+    title: `${SITE.name} — ${SITE.title}`,
+    description: "Senior software engineer working on backend systems and platform architecture.",
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects — Jeffrey R. Plewak",
-    description: "Selected work and project write-ups.",
+    title: `${SITE.name} — ${SITE.title}`,
+    description: "Senior software engineer working on backend systems and platform architecture.",
   },
 };
 
-export default function ProjectsPage() {
+const PORTRAIT_SRC = "/assets/images/jeffrey-plewak-portrait.webp";
+
+export default function HomePage() {
   return (
-    <main id="main" className="wrap">
-      <header className="section" aria-label="Projects intro">
-        <h1 className="h1">Projects</h1>
-        <p className="lede">
-          A short list. Each project has a page with details, links, and artifacts.
-        </p>
+    <div className="wrap">
+      <header className="section heroHome" aria-label="Home intro">
+        <div className="homeHeroGrid">
+          <div className="homeHeroLeft">
+            <div className="homeIdRow">
+              <div className="homeAvatar" aria-hidden="true">
+                <Image
+                  src={PORTRAIT_SRC}
+                  alt=""
+                  width={84}
+                  height={84}
+                  className="homeAvatarImg"
+                  priority
+                />
+              </div>
 
-        <div className="ctaRow" aria-label="Projects actions">
-          <Link className="btn btnPrimary" href="/projects/kprovengine">
-            KProvEngine
-          </Link>
-          <a className="btn" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
-            Résumé (PDF)
-          </a>
-          <a className="btn btnTertiary" href={LINKS.emailProject}>
-            Email
-          </a>
-        </div>
-
-        {/* Reusable experience strip (replaces duplicated credStrip markup) */}
-        <ExperienceStrip />
-      </header>
-
-      <section className="section" aria-label="Project list">
-        <div className="grid2">
-          <article className="card cardLink" aria-label="KProvEngine project">
-            <h2 className="cardTitle">KProvEngine</h2>
-            <p className="cardDesc">
-              Deterministic provenance pipelines for human-reviewed workflows with local-first execution.
-            </p>
-            <div className="cardActions">
-              <Link className="btn btnPrimary" href="/projects/kprovengine">
-                Project page
-              </Link>
-              <a className="btn" href="https://github.com/carcodez1/KProvEngine" target="_blank" rel="noopener noreferrer">
-                GitHub
-              </a>
-              <a
-                className="btn"
-                href="https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Architecture
-              </a>
+              <div>
+                <h1 className="h1">{SITE.name}</h1>
+                <p className="lede homeRole">{SITE.title}</p>
+              </div>
             </div>
-          </article>
 
-          <article className="card" aria-label="More projects">
-            <h2 className="cardTitle">More</h2>
-            <p className="cardDesc">
-              I’m iterating on this page. If you want a specific repo or case study added, email me.
+            <p className="lede homeLede">
+              I build backend services and internal platforms. I care about predictable behavior in production and code that is
+              easy for other engineers to pick up.
             </p>
-            <div className="cardActions">
-              <a className="btn btnPrimary" href={LINKS.emailProject}>
+
+            <div className="ctaRow" aria-label="Primary actions">
+              <Link className="btn btnPrimary" href="/resume">
+                Resume
+              </Link>
+              <Link className="btn" href="/projects">
+                Projects
+              </Link>
+              <a className="btn btnTertiary" href={LINKS.emailProject}>
                 Email
               </a>
-              <a className="btn btnTertiary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </a>
-              <a className="btn btnTertiary" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-                GitHub
-              </a>
             </div>
+
+            {/* Lower + spaced + clearer label */}
+            <div className="homeExpBlock">
+              <ExperienceStrip label="Experience across" />
+            </div>
+          </div>
+
+          <aside className="homeHeroRight" aria-label="Portrait">
+            <div className="homePortraitFrame">
+              <Image
+                src={PORTRAIT_SRC}
+                alt="Jeffrey R. Plewak"
+                fill
+                sizes="(max-width: 980px) 100vw, 420px"
+                className="homePortraitImg"
+                priority
+              />
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <section id="work" className="section" aria-label="Work">
+        <h2 className="h2">Work</h2>
+
+        <div className="grid2">
+          <article className="card">
+            <h3 className="cardTitle">Backend systems</h3>
+            <p className="cardDesc">
+              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production. Clean interfaces for
+              other teams.
+            </p>
+          </article>
+
+          <article className="card">
+            <h3 className="cardTitle">Platform and infrastructure</h3>
+            <p className="cardDesc">
+              Build pipelines, runtime configuration, and deployment workflows. I focus on reducing operational friction and
+              keeping systems straightforward to reason about.
+            </p>
           </article>
         </div>
       </section>
-    </main>
+
+      <section id="contact" className="section" aria-label="Contact">
+        <h2 className="h2">Contact</h2>
+        <p className="lede">Email is best. If you prefer to talk first, you can book a short call.</p>
+
+        <div className="ctaRow" aria-label="Contact actions">
+          <a className="btn btnPrimary" href={LINKS.emailProject}>
+            Email
+          </a>
+          <a className="btn" href={LINKS.calendly} target="_blank" rel="noopener noreferrer">
+            Book a call
+          </a>
+          <a className="btn btnTertiary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+        </div>
+      </section>
+    </div>
   );
 }

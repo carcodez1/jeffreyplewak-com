@@ -9,7 +9,7 @@ const LINKS = {
   home: "/",
   repo: "https://github.com/carcodez1/KProvEngine",
   readme: "https://github.com/carcodez1/KProvEngine#readme",
-  archDoc: "https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md"
+  archDoc: "https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md",
 } as const;
 
 const OG_IMAGE = "/projects/kprovengine/og.png";
@@ -27,8 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "article",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description:
-      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
     url: `${SITE_URL}/projects/kprovengine`,
     images: [
       {
@@ -42,17 +41,21 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description:
-      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
     images: [`${SITE_URL}${OG_IMAGE}`],
   },
 };
+
 export default async function Page() {
   const nonce = await getNonce();
   const jsonLd = kprovengineSourceCodeJsonLd();
 
+  // IMPORTANT:
+  // - Do NOT render a <main> landmark here.
+  // - The app-level <main id="main" className="appMain"> already exists in src/app/layout.tsx.
+  // - This wrapper is intentionally a <div> to avoid nested landmarks and duplicate IDs.
   return (
-    <main className="pWrap" id="main">
+    <div className="pWrap">
       <script
         type="application/ld+json"
         nonce={nonce || undefined}
@@ -78,7 +81,8 @@ export default async function Page() {
             <p className="pSub">Deterministic provenance for AI-assisted workflows that require explicit human review.</p>
 
             <p className="pLede">
-              Local-first by design: reproducible runs, captured review decisions, and evidence artifacts you can audit, diff, and defend.
+              Local-first by design: reproducible runs, captured review decisions, and evidence artifacts you can audit,
+              diff, and defend.
             </p>
 
             <nav className="pCtas" aria-label="Project links">
@@ -107,7 +111,8 @@ export default async function Page() {
               <div className="pCalloutTitle">What you get (V1)</div>
               <ul className="pList">
                 <li>
-                  <strong>Reproducible run directory</strong> with deterministic stages: normalize → parse → extract → render
+                  <strong>Reproducible run directory</strong> with deterministic stages: normalize → parse → extract →
+                  render
                 </li>
                 <li>
                   <strong>Evidence artifacts</strong> (manifest + hashes + provenance + toolchain disclosure)
@@ -153,8 +158,8 @@ export default async function Page() {
         <div className="pGrid2">
           <div className="pCard">
             <p className="pP0">
-              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can't reliably reproduce results,
-              explain what happened, or separate human judgment from automation.
+              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can't
+              reliably reproduce results, explain what happened, or separate human judgment from automation.
             </p>
           </div>
           <div className="pCard">
@@ -283,6 +288,6 @@ python -m kprovengine.cli input.txt --out runs`}</pre>
         </div>
         <div className="pFootnote">V1 is intentionally stable. Rich walkthrough media (GIF/video) belongs in V2 after the interface settles.</div>
       </footer>
-    </main>
+    </div>
   );
 }

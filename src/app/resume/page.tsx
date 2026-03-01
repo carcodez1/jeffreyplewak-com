@@ -17,11 +17,9 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main className="wrap section" aria-label="Résumé">
+    <div className="wrap section" aria-label="Résumé">
       <h1 className="h2">Résumé</h1>
-      <p className="lede">
-        Embedded for convenience. If your browser blocks it, use Open or Download.
-      </p>
+      <p className="lede">Embedded for convenience. If your browser blocks it, use Open or Download.</p>
 
       <div className="ctaRow" aria-label="Résumé actions" style={{ marginBottom: 16 }}>
         <a className="btn btnPrimary" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
@@ -49,6 +47,6 @@ export default function ResumePage() {
           </p>
         </object>
       </div>
-    </main>
+    </div>
   );
 }

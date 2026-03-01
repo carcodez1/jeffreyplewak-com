@@ -3,38 +3,20 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { ExperienceDrawer, type ExperienceItem } from "./ExperienceDrawer";
-import { getExperienceStripItems } from "@/lib/resume";
+import { ExperienceDrawer } from "./ExperienceDrawer";
+import { EXPERIENCE_ITEMS, type ExperienceItem } from "@/lib/experience";
 
-type Props = {
-  className?: string;
-  label?: string;
-};
+type Props = { className?: string; label?: string };
 
 export function ExperienceStrip({ className, label = "Experience across" }: Props) {
-  const items = useMemo(() => getExperienceStripItems(), []);
+  const items = useMemo(() => EXPERIENCE_ITEMS, []);
   const duplicated = useMemo(() => [...items, ...items], [items]);
 
   const [openKey, setOpenKey] = useState<string | null>(null);
 
   const active: ExperienceItem | undefined = useMemo(() => {
     if (!openKey) return undefined;
-    const hit = items.find((i) => i.key === openKey);
-    if (!hit) return undefined;
-    return {
-      key: hit.key,
-      name: hit.name,
-      href: hit.href,
-      logoSrc: hit.logoSrc,
-      logoWidth: hit.logoWidth,
-      logoHeight: hit.logoHeight,
-      resume: {
-        pageHref: hit.resume.pageHref,
-        pdfHref: hit.resume.pdfHref,
-        roleLine: hit.resume.roleLine,
-      },
-      highlights: hit.highlights,
-    };
+    return items.find((i) => i.key === openKey);
   }, [openKey, items]);
 
   return (
@@ -44,8 +26,9 @@ export function ExperienceStrip({ className, label = "Experience across" }: Prop
         <span className="expStripRule" aria-hidden="true" />
       </div>
 
-      <div className="expStripMarquee" aria-label="Employer logos">
-        <div className="expStripTrack" aria-hidden="false">
+      {/* Desktop/tablet: marquee (CSS animation). Mobile: manual scroll-snap. */}
+      <div className="expStripViewport" aria-label="Employer logos">
+        <div className="expStripTrack" role="list">
           {duplicated.map((item, idx) => (
             <button
               key={`${item.key}-${idx}`}
@@ -53,6 +36,8 @@ export function ExperienceStrip({ className, label = "Experience across" }: Prop
               type="button"
               onClick={() => setOpenKey(item.key)}
               aria-label={`Open details: ${item.name}`}
+              data-brand={item.key}
+              role="listitem"
             >
               <Image
                 src={item.logoSrc}

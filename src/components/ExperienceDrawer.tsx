@@ -4,20 +4,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 
-export type ExperienceItem = {
-  key: string;
-  name: string;
-  href: string;
-  logoSrc: string;
-  logoWidth: number;
-  logoHeight: number;
-  resume: {
-    pageHref: string;
-    pdfHref: string;
-    roleLine?: string;
-  };
-  highlights: string[];
-};
+import type { ExperienceItem } from "@/lib/experience";
 
 export function ExperienceDrawer(props: { open: boolean; item?: ExperienceItem; onClose?: () => void }) {
   const { open, item, onClose } = props;

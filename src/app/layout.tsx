@@ -53,8 +53,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
         />
 
-        {/* Background layers (fixed, behind content). */}
-        <BackgroundMotion preload="metadata" />
+        {/* BackgroundMotion should manage its own preload attribute internally.
+            Do NOT pass arbitrary props unless the component defines them. */}
+        <BackgroundMotion />
         <BackgroundFx />
 
         <Haptics selector=".btnPrimary, .iconBtn" patternMs={12} touchOnly />
