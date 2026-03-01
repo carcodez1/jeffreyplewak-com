@@ -1,3 +1,4 @@
+// middleware.ts
 import { NextResponse } from "next/server";
 
 function base64Nonce(bytes = 16): string {
@@ -9,6 +10,8 @@ function base64Nonce(bytes = 16): string {
 }
 
 function buildCsp(nonce: string): string {
+  // Keep this conservative; Next dev/HMR can break under strict CSP.
+  // You already gate CSP to production below.
   const directives = [
     `default-src 'self'`,
     `base-uri 'self'`,
@@ -32,9 +35,12 @@ export function middleware() {
   res.headers.set("X-Content-Type-Options", "nosniff");
   res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   res.headers.set("X-Frame-Options", "DENY");
-  res.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), browsing-topics=()");
+  res.headers.set(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+  );
 
-  // CSP only in Vercel Production (keeps dev/HMR and Preview clean)
+  // CSP only in Vercel Production (avoid breaking local dev / preview)
   const enableCsp =
     process.env.VERCEL_ENV === "production" ||
     (process.env.NEXT_PUBLIC_ENABLE_CSP === "1" && process.env.NODE_ENV === "production");
@@ -47,6 +53,7 @@ export function middleware() {
   return res;
 }
 
+// IMPORTANT: matcher must be statically analyzable (no variables).
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };

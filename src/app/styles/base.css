@@ -1,0 +1,98 @@
+/* src/app/styles/base.css
+   Baseline element styles + typography.
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fontSans);
+  line-height: var(--lhNormal);
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 60% -10%, rgba(35, 80, 180, 0.14), transparent 60%),
+    radial-gradient(1100px 700px at 85% 0%, rgba(40, 170, 180, 0.10), transparent 65%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--selectionBg);
+  color: var(--selectionText);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--linkHover);
+}
+
+p {
+  margin: 0 0 12px 0;
+}
+
+h1, h2, h3 {
+  margin: 0 0 10px 0;
+  line-height: var(--lhTight);
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: clamp(1.9rem, 3.2vw, 2.55rem); }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.1rem; }
+
+code, pre {
+  font-family: var(--fontMono);
+}
+
+pre {
+  background: var(--codeBg);
+  border: 1px solid var(--codeBorder);
+  border-radius: var(--rMd);
+  padding: 12px;
+  overflow: auto;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focusRing);
+  border-color: var(--focusBorder);
+}
+
+.skipLink {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  transform: translateY(-200%);
+  background: rgba(0,0,0,0.85);
+  border: 1px solid var(--border1);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: var(--rSm);
+  z-index: 10000;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}

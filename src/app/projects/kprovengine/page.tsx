@@ -15,26 +15,38 @@ const LINKS = {
 const OG_IMAGE = "/projects/kprovengine/og.png";
 const DIAGRAM = "/projects/kprovengine/architecture.png";
 
+import { SITE_URL } from "@/lib/jsonld";
+
 export const metadata: Metadata = {
   title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
   description:
     "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows. Local-first execution, explicit review, and audit-grade run artifacts.",
-  alternates: { canonical: "/projects/kprovengine" },
+  alternates: {
+    canonical: `${SITE_URL}/projects/kprovengine`,
+  },
   openGraph: {
     type: "article",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
-    url: "/projects/kprovengine",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "KProvEngine" }]
+    description:
+      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    url: `${SITE_URL}/projects/kprovengine`,
+    images: [
+      {
+        url: `${SITE_URL}${OG_IMAGE}`,
+        width: 1200,
+        height: 630,
+        alt: "KProvEngine",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
-    images: [OG_IMAGE]
-  }
+    description:
+      "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    images: [`${SITE_URL}${OG_IMAGE}`],
+  },
 };
-
 export default async function Page() {
   const nonce = await getNonce();
   const jsonLd = kprovengineSourceCodeJsonLd();

@@ -1,0 +1,78 @@
+/* src/app/styles/animations.css
+   Keep animations subtle and optional.
+*/
+
+/* Scroll reveal helper (if you use it) */
+.focusCard {
+  opacity: 0.01;
+  transform: translateY(8px);
+  transition: opacity var(--tSlow) var(--ease), transform var(--tSlow) var(--ease);
+}
+
+.focusCard--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focusCard,
+  .focusCard--visible {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Generic marquee keyframes */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* Background motion: fixed behind all content */
+.bgMotion {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.bgMotionVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.bgMotionImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  opacity: 0.14; /* fallback layer stays subtle */
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.bgMotionVignette {
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(900px 520px at 20% 10%, rgba(0,0,0,0.0), rgba(0,0,0,0.55)),
+    radial-gradient(900px 520px at 80% 20%, rgba(0,0,0,0.0), rgba(0,0,0,0.62)),
+    linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.70));
+}
+
+/* Respect reduced motion: no video */
+@media (prefers-reduced-motion: reduce) {
+  .bgMotionVideo {
+    display: none;
+  }
+}

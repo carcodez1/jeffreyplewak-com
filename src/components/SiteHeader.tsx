@@ -1,96 +1,57 @@
+// src/components/SiteHeader.tsx
 import Link from "next/link";
+import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
 
-const LINKS = {
-  github: "https://github.com/carcodez1",
-  linkedin: "https://www.linkedin.com/in/jeffreyplewak",
-  email: "mailto:plewak.jeff@gmail.com",
-  calendly: "https://calendly.com/plewak-jeff",
-} as const;
+const NAV = [
+  { href: "/projects", label: "Projects" },
+  { href: "/resume", label: "Resume" },
+  { href: "/#work", label: "Work" },
+  { href: "/#contact", label: "Contact" },
+] as const;
 
 export function SiteHeader() {
   return (
-    <header className="siteHeader">
+    <header className="siteHeader" aria-label="Site header">
       <div className="siteHeaderInner">
         <Link className="brand" href="/" aria-label="Home">
-          <span className="brandMark" aria-hidden="true" />
-          <span className="brandText">Jeffrey R. Plewak</span>
+          <span className="brandText">
+            <span className="brandHi" aria-hidden="true">
+              Hi, I’m
+            </span>{" "}
+            {SITE.shortName}
+          </span>
+          <span className="brandSub" aria-hidden="true">
+            {SITE.title}
+          </span>
         </Link>
 
-        <nav className="siteNav" aria-label="Primary">
-          <Link className="navLink" href="/#focus">
-            Focus
-          </Link>
-          <Link className="navLink" href="/#work">
-            Work
-          </Link>
-          <Link className="navLink" href="/projects">
-            Projects
-          </Link>
+        <nav className="siteNav" aria-label="Primary navigation">
+          {NAV.map((n) => (
+            <Link key={n.href} className="navLink" href={n.href}>
+              {n.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Desktop: full cluster */}
-        <div className="siteActions siteActionsDesktop" aria-label="Social links (desktop)">
-          <a
-            className="iconBtn brandGithub"
-            href={LINKS.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <SocialIcon src="/assets/icons/github.svg" label="GitHub" className="icon--social" />
-          </a>
+        <div className="siteActions" aria-label="Header actions">
+          <div className="headerCtas" aria-label="Primary actions">
+            <Link className="btn btnPrimary btnHeader" href="/resume" aria-label="Open resume page">
+              Resume
+            </Link>
+            <a className="btn btnHeader" href={LINKS.emailProject} aria-label="Email Jeff">
+              Email
+            </a>
+          </div>
 
-          <a
-            className="iconBtn brandLinkedIn"
-            href={LINKS.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <SocialIcon src="/assets/icons/linkedin.svg" label="LinkedIn" className="icon--social" />
-          </a>
-
-          <a className="iconBtn brandMail" href={LINKS.email} aria-label="Email">
-            <SocialIcon src="/assets/icons/mail.svg" label="Email" className="icon--social icon--mail" />
-          </a>
-
-          <a
-            className="iconBtn brandCalendly"
-            href={LINKS.calendly}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Calendly"
-          >
-            <SocialIcon src="/assets/icons/calendly.svg" label="Calendly" className="icon--social" />
-          </a>
-        </div>
-
-        {/* Mobile: minimal cluster (3 icons) */}
-        <div className="siteActions siteActionsMobile" aria-label="Social links (mobile)">
-          <a
-            className="iconBtn brandLinkedIn"
-            href={LINKS.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <SocialIcon src="/assets/icons/linkedin.svg" label="LinkedIn" className="icon--social" />
-          </a>
-
-          <a className="iconBtn brandMail" href={LINKS.email} aria-label="Email">
-            <SocialIcon src="/assets/icons/mail.svg" label="Email" className="icon--social icon--mail" />
-          </a>
-
-          <a
-            className="iconBtn brandGithub"
-            href={LINKS.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <SocialIcon src="/assets/icons/github.svg" label="GitHub" className="icon--social" />
-          </a>
+          <span className="headerDivider" aria-hidden="true" />
+          <div className="headerIcons" aria-label="Social links">
+            {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
+              <a key={s.key} className="iconBtn" href={s.href} aria-label={s.label} {...extLinkProps(s.external)}>
+                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </header>

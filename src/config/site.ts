@@ -1,18 +1,44 @@
 // src/config/site.ts
 export const SITE = {
+  url: "https://www.jeffreyplewak.com",
   name: "Jeffrey R. Plewak",
   shortName: "Jeff",
   title: "Senior Software Engineer",
-  url: "https://www.jeffreyplewak.com",
+  locationLine: "Remote-first • North Carolina",
+  locale: "en_US",
+  footerBlurb: "Senior Software Engineer — platform, full-stack, compliance-critical systems.",
 } as const;
 
 export const LINKS = {
-  resumePdf: "/downloads/jeffrey-plewak-resume.pdf",
-  emailProject: "mailto:plewak.jeff@gmail.com",
-  github: "https://github.com/carcodez1",
-  linkedin: "https://www.linkedin.com/in/jeffrey-plewak",
   calendly: "https://calendly.com/plewak-jeff",
+  resumePdf: "/downloads/jeffrey-plewak-resume.pdf",
+  vcf: "/downloads/jeffrey-plewak.vcf",
+
+  // Keep mailto stable + predictable. Avoid forced subjects unless you explicitly want them.
+  emailProject: "mailto:plewak.jeff@gmail.com",
+  emailConsulting: "mailto:plewak.jeff@gmail.com",
+
+  github: "https://github.com/carcodez1",
+
+  // Use the canonical LinkedIn handle you want public.
+  // You previously used: https://www.linkedin.com/in/jeffrey-plewak
+  linkedin: "https://www.linkedin.com/in/jeffrey-plewak",
 } as const;
+
+export type SocialKey = "linkedin" | "github" | "email" | "calendly";
+
+export const SOCIALS: ReadonlyArray<{
+  key: SocialKey;
+  href: string;
+  label: string;
+  icon: string;
+  external: boolean;
+}> = [
+  { key: "linkedin", href: LINKS.linkedin, label: "LinkedIn", icon: "/assets/icons/linkedin.svg", external: true },
+  { key: "github", href: LINKS.github, label: "GitHub", icon: "/assets/icons/github.svg", external: true },
+  { key: "email", href: LINKS.emailProject, label: "Email", icon: "/assets/icons/mail.svg", external: false },
+  { key: "calendly", href: LINKS.calendly, label: "Calendly", icon: "/assets/icons/calendly.svg", external: true },
+] as const;
 
 export function extLinkProps(external: boolean) {
   return external ? { target: "_blank", rel: "noopener noreferrer" } : {};

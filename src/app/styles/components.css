@@ -1,0 +1,396 @@
+/* src/app/styles/components.css
+   Component styling: header, buttons, panels/cards, experience strip + drawer, footer, resume.
+   Goal: less boxy; introduce lighter primitives; keep performance safe (no heavy effects).
+*/
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+  border-radius: var(--rSm);
+  border: 1px solid var(--btnBorder);
+  background: var(--btnBg);
+  color: var(--text);
+
+  font-size: 0.95rem;
+  line-height: 1;
+  white-space: nowrap;
+
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease), color var(--tFast) var(--ease);
+}
+
+.btn:hover {
+  background: var(--btnBgHover);
+  border-color: var(--btnBorderHover);
+  transform: translateY(-1px);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btnPrimary {
+  background: var(--btnPrimaryBg);
+  border-color: var(--btnPrimaryBorder);
+  color: var(--btnPrimaryText);
+}
+
+.btnPrimary:hover {
+  background: var(--btnPrimaryBgHover);
+  border-color: var(--btnPrimaryBorderHover);
+}
+
+.btnTertiary {
+  background: transparent;
+  border-color: var(--border0);
+}
+
+.btnHeader { padding: 9px 11px; }
+
+/* Header */
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 8000;
+  background: var(--headerBg);
+  border-bottom: 1px solid var(--headerBorder);
+  backdrop-filter: blur(10px);
+}
+
+.siteHeaderInner {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  min-height: var(--headerH);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--rSm);
+  border: 1px solid transparent;
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease);
+}
+
+.brand:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border0);
+}
+
+.brandText { font-weight: 650; letter-spacing: -0.01em; }
+.brandHi { color: var(--muted2); font-weight: 500; }
+.brandSub { display: block; font-size: 0.86rem; color: var(--muted2); margin-top: 1px; }
+
+.siteNav { display: flex; gap: 6px; align-items: center; }
+
+.navLink {
+  padding: 8px 10px;
+  border-radius: var(--rSm);
+  border: 1px solid transparent;
+  color: var(--muted);
+  transition: color var(--tFast) var(--ease), border-color var(--tFast) var(--ease),
+    background var(--tFast) var(--ease);
+}
+
+.navLink:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border0);
+}
+
+.siteActions { display: inline-flex; align-items: center; gap: 10px; }
+.headerCtas { display: inline-flex; gap: 8px; align-items: center; }
+
+.headerDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--border0);
+  display: inline-block;
+}
+
+.headerIcons { display: inline-flex; gap: 8px; align-items: center; }
+
+/* Social icon buttons */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 10px;
+  border: 1px solid var(--border0);
+  background: transparent;
+
+  /* important: currentColor drives svg fill */
+  color: var(--muted);
+
+  transition: background var(--tFast) var(--ease), border-color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease), color var(--tFast) var(--ease);
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border1);
+  transform: translateY(-1px);
+  color: hsla(var(--accent2) / 0.95);
+}
+
+.icon--social {
+  opacity: 0.96;
+  filter: brightness(1.12) saturate(1.10);
+}
+
+.iconBtn:hover .icon--social {
+  opacity: 1;
+  filter: brightness(1.25) saturate(1.35);
+}
+
+/* Responsive: keep header clean */
+@media (max-width: 820px) { .siteNav { display: none; } }
+@media (max-width: 640px) {
+  .headerDivider, .headerIcons { display: none; }
+}
+
+/* NEW: a lighter surface primitive than "card" */
+.panel {
+  border: 1px solid var(--border0);
+  border-radius: var(--rLg);
+  background: linear-gradient(180deg, var(--surface0), transparent 78%);
+  padding: 16px;
+}
+
+/* Cards (less boxy: softer border + slight depth, fewer hard edges) */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,0.06), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.035), transparent 72%);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+.cardLink {
+  transition: border-color var(--tMed) var(--ease), transform var(--tMed) var(--ease),
+    background var(--tMed) var(--ease);
+}
+
+.cardLink:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cardTitle { font-size: 1.1rem; letter-spacing: -0.01em; }
+.cardTag { color: var(--muted2); font-size: 0.9rem; }
+.cardDesc { color: var(--muted); margin-top: 8px; }
+
+.cardBullets {
+  margin: 12px 0 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.cardBullets li { margin-bottom: 6px; }
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.cardMedia {
+  position: relative;
+  border-radius: var(--rMd);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  margin-top: 14px;
+  height: 210px;
+}
+
+.cardImg { object-fit: cover; }
+.cardImgContain { object-fit: contain; }
+
+/* Avatar visibility defaults (fix "avatar not showing" caused by missing styles) */
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.02);
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+.avatarImg { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Experience Strip + Drawer */
+.expStrip { display: block; }
+.expStripLabelRow { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.expStripLabel { font-size: 0.95rem; color: var(--muted2); }
+.expStripRule { height: 1px; flex: 1; background: var(--headerBorder); opacity: 0.9; }
+
+.expStripMarquee { overflow: hidden; }
+.expStripTrack {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+  animation: expScroll 26s linear infinite;
+  padding: 8px 2px;
+}
+@media (prefers-reduced-motion: reduce) { .expStripTrack { animation: none; } }
+
+@keyframes expScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.expLogoBtn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color var(--tFast) var(--ease), background var(--tFast) var(--ease), transform var(--tFast) var(--ease);
+}
+
+.expLogoBtn:hover {
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.03);
+  transform: translateY(-1px);
+}
+
+.expLogoImg {
+  display: block;
+  opacity: 0.92;
+  filter: saturate(1.02);
+}
+.expLogoBtn:hover .expLogoImg { opacity: 1; filter: saturate(1.18); }
+
+.expDrawerRoot { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; }
+.expDrawerBackdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.55); border: 0; }
+.expDrawerPanel {
+  position: relative;
+  width: min(720px, calc(100vw - 24px));
+  max-height: min(82vh, 760px);
+  overflow: auto;
+  background: rgba(11, 15, 23, 0.96);
+  border: 1px solid var(--headerBorder);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow1);
+}
+.expDrawerHead { display: grid; gap: 10px; }
+.expDrawerTitleRow { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; }
+.expDrawerTitle { font-size: 1.1rem; font-weight: 650; }
+.expRoleLine { margin: 6px 0 0; opacity: 0.86; color: var(--muted); }
+.expDrawerCloseBtn { background: transparent; border: 1px solid var(--headerBorder); border-radius: 10px; padding: 6px 10px; cursor: pointer; color: var(--text); }
+.expDrawerActions { display: flex; gap: 10px; flex-wrap: wrap; }
+.expDrawerBody { margin-top: 12px; }
+.expDrawerSectionTitle { font-weight: 650; margin-bottom: 8px; }
+.expDrawerList { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--muted); }
+.expDrawerFoot { margin-top: 12px; display: flex; justify-content: space-between; color: var(--muted2); }
+
+/* Footer */
+.siteFooter {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border0);
+  color: var(--muted);
+}
+
+.siteFooterInner {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 30px;
+}
+
+.footerCol { display: grid; gap: 10px; }
+.footerTitle { font-weight: 650; color: var(--text); }
+.footerSub { color: var(--muted); max-width: 52ch; }
+.footerHead { font-weight: 650; color: var(--text); margin-top: 2px; }
+.footerHeadSpacer { margin-top: 10px; }
+.footerLinksStack { display: grid; gap: 8px; }
+.footerLink { color: var(--muted); }
+.footerLink:hover { color: hsla(var(--accent2) / 0.95); }
+.footerAddr { font-style: normal; }
+.footerHint { color: var(--muted2); }
+.footerCtas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.footerIcons { display: inline-flex; gap: 10px; align-items: center; margin-top: 4px; }
+.footerCopy { margin-top: 6px; color: var(--muted2); }
+
+@media (max-width: 860px) { .siteFooterInner { flex-direction: column; } }
+
+/* Resume page */
+.stack { display: grid; gap: 14px; }
+
+.roleCard {
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 78%);
+}
+
+.roleTop { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+.roleEmployer { margin: 0; font-size: 1.1rem; letter-spacing: -0.01em; }
+.roleMeta { margin-top: 6px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px; }
+.roleSep { color: var(--muted2); }
+.roleActions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.roleBullets { margin: 12px 0 0 0; padding-left: 18px; color: var(--muted); display: grid; gap: 8px; }
+
+.roleSkills { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.skillPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Legal */
+.legal .h3 { margin-top: 14px; }
+
+/* Avatar (single source of truth) */
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border0);
+  background: rgba(255, 255, 255, 0.02);
+  flex: 0 0 auto;
+}
+
+.avatarImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

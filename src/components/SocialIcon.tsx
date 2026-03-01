@@ -1,27 +1,16 @@
-import { cx } from "./icons";
+// src/components/SocialIcon.tsx
+import Image from "next/image";
 
-type Props = {
-  src: string;
-  label: string;
-  size?: number;
-  className?: string;
-  color?: string;
-};
-
-export function SocialIcon({ src, label, size = 18, className, color }: Props) {
+export function SocialIcon(props: { src: string; title: string; className?: string }) {
+  const { src, title, className } = props;
   return (
-    <span
-      aria-hidden="true"
-      className={cx("iconMask", className)}
-      title={label}
-      style={
-        {
-          width: size,
-          height: size,
-          color: color ?? "currentColor",
-          ["--icon-url"]: `url("${src}")`,
-        } as React.CSSProperties
-      }
+    <Image
+      src={src}
+      alt={title}
+      width={18}
+      height={18}
+      className={className}
+      // Don’t set priority; these are tiny and below LCP most of the time.
     />
   );
 }
