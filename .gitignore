@@ -68,3 +68,6 @@ tmp/
 
 # Security audit artifacts
 /tmp.npm-audit.json
+
+# local artifacts
+portfolio-src.tar.gz
