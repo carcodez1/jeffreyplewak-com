@@ -12,53 +12,34 @@ export type ExperienceStripItem = {
     pageHref: string;
     pdfHref: string;
     roleLine?: string;
-    start: string; // ISO-ish "YYYY-MM"
-    end?: string;  // ISO-ish "YYYY-MM" or omitted for present
+    start?: string;
+    end?: string;
   };
-  highlights: string[];
+  highlights: readonly string[];
 };
 
-export function getResumeRoles(): readonly ResumeRole[] {
-  return RESUME.roles;
+function sortByStartDesc(a: ResumeRole, b: ResumeRole): number {
+  // "YYYY-MM" compares lexicographically.
+  return b.start.localeCompare(a.start);
 }
 
-export function getResumeRoleById(id: string): ResumeRole | undefined {
-  return RESUME.roles.find((r) => r.id === id);
-}
-
-/**
- * Normalize employer list:
- * - Keep first occurrence per employerKey (stable order).
- * - Prevent repeated employers in the strip if RESUME.roles has multiple roles per employer.
- */
-function uniqueByEmployerKey(roles: readonly ResumeRole[]): ResumeRole[] {
-  const seen = new Set<string>();
+function uniqueByEmployerKeySorted(roles: readonly ResumeRole[]): ResumeRole[] {
+  const sorted = [...roles].sort(sortByStartDesc);
+  const seen = new Set<ResumeRole["employerKey"]>();
   const out: ResumeRole[] = [];
-  for (const r of roles) {
-    const k = String(r.employerKey);
-    if (seen.has(k)) continue;
-    seen.add(k);
+
+  for (const r of sorted) {
+    if (seen.has(r.employerKey)) continue;
+    seen.add(r.employerKey);
     out.push(r);
   }
   return out;
 }
 
-/**
- * Compare ISO-ish YYYY-MM descending (stable).
- * Assumes strings are valid "YYYY-MM".
- */
-function compareYmDesc(a: string, b: string): number {
-  if (a === b) return 0;
-  return a > b ? -1 : 1;
-}
-
 export function getExperienceStripItems(): readonly ExperienceStripItem[] {
-  const roles = uniqueByEmployerKey(RESUME.roles);
+  const roles = uniqueByEmployerKeySorted(RESUME.roles);
 
-  // Deterministic ordering: newest start first.
-  const sorted = [...roles].sort((a, b) => compareYmDesc(a.start, b.start));
-
-  return sorted.map((r) => ({
+  return roles.map((r) => ({
     key: r.employerKey,
     name: r.employerName,
     href: r.employerUrl,

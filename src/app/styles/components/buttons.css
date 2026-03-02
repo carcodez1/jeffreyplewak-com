@@ -1,8 +1,18 @@
-/* ==========================
-   Buttons — Reusable, polished
-   ========================== */
+/* src/app/styles/components/buttons.css */
 
+/* Buttons — Reusable */
 .btn {
+  --btnBg: rgba(255, 255, 255, 0.02);
+  --btnBgHover: rgba(255, 255, 255, 0.06);
+  --btnBorder: var(--border0);
+  --btnBorderHover: var(--border1);
+
+  --btnPrimaryBg: hsla(var(--accent) / 0.95);
+  --btnPrimaryBgHover: hsla(var(--accent) / 1);
+  --btnPrimaryBorder: hsla(var(--accent) / 0.65);
+  --btnPrimaryBorderHover: hsla(var(--accent) / 0.85);
+  --btnPrimaryText: rgba(8, 10, 14, 0.96);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +25,8 @@
   font-size: var(--text1);
   line-height: 1.2;
   text-align: center;
+  text-decoration: none;
+
   transition:
     background var(--tFast) var(--ease),
     border-color var(--tFast) var(--ease),
@@ -22,59 +34,34 @@
     color var(--tFast) var(--ease);
 }
 
-/* Hover & active states */
 .btn:hover,
 .btn:focus-visible {
   background: var(--btnBgHover);
   border-color: var(--btnBorderHover);
   transform: translateY(-1px);
 }
+
 .btn:active {
   transform: translateY(0);
 }
 
-/* Primary button variant */
 .btnPrimary {
   background: var(--btnPrimaryBg);
   border-color: var(--btnPrimaryBorder);
   color: var(--btnPrimaryText);
 }
+
 .btnPrimary:hover,
 .btnPrimary:focus-visible {
   background: var(--btnPrimaryBgHover);
   border-color: var(--btnPrimaryBorderHover);
 }
 
-/* Tertiary and header variants */
 .btnTertiary {
   background: transparent;
   border-color: var(--border0);
 }
+
 .btnHeader {
   padding: 9px 11px;
-}
-
-/* Icon buttons */
-.iconBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--rMd);
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--muted);
-  transition:
-    background var(--tFast) var(--ease),
-    border-color var(--tFast) var(--ease),
-    color var(--tFast) var(--ease),
-    transform var(--tFast) var(--ease);
-}
-.iconBtn:hover,
-.iconBtn:focus-visible {
-  color: var(--text);
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.12);
-  transform: translateY(-1px);
 }

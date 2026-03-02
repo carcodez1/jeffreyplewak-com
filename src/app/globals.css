@@ -18,6 +18,7 @@
 @import "./styles/components/avatar.css";
 @import "./styles/components/drawer.css";
 @import "./styles/components/footer.css";
+@import "./styles/components/resume.css";
 
 /* Timeline */
 @import "./styles/experience.css";

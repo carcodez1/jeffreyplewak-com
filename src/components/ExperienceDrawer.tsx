@@ -7,33 +7,37 @@ import type { ExperienceStripItem } from "@/lib/resume";
 
 /**
  * ExperienceDrawer
- *
- * - Traps focus while open (lightweight)
+ * - Traps focus while open
  * - Returns focus to opener when closed
- * - Escape key closes
- * - Backdrop closes
+ * - Handles Escape key
+ * - Accessible labeling via aria-labelledby
  */
 export function ExperienceDrawer({
   open,
   item,
   onClose,
+  dialogId,
 }: {
   open: boolean;
   item?: ExperienceStripItem;
   onClose?: () => void;
+  dialogId: string;
 }) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const firstFocusableRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
+
+  const titleId = `${dialogId}-title`;
 
   useEffect(() => {
     if (!open) return;
 
     lastFocusedElement.current = document.activeElement as HTMLElement;
 
-    setTimeout(() => {
+    // focus the close button ASAP after mount
+    queueMicrotask(() => {
       firstFocusableRef.current?.focus();
-    }, 0);
+    });
 
     const handleFocus = (e: FocusEvent) => {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
@@ -48,9 +52,11 @@ export function ExperienceDrawer({
 
   useEffect(() => {
     if (!open) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose?.();
     };
+
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
@@ -64,7 +70,12 @@ export function ExperienceDrawer({
   if (!open || !item) return null;
 
   return (
-    <div className="expDrawerRoot" role="dialog" aria-modal="true" aria-labelledby="exp-drawer-title">
+    <div
+      className="expDrawerRoot"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+    >
       <button
         className="expDrawerBackdrop"
         type="button"
@@ -86,18 +97,18 @@ export function ExperienceDrawer({
             </div>
 
             <div>
-              <h2 id="exp-drawer-title" className="expDrawerTitle">
+              <h2 id={titleId} className="expDrawerTitle">
                 {item.name}
               </h2>
-
               {item.resume.roleLine && (
                 <p className="expRoleLine">{item.resume.roleLine}</p>
               )}
-
-              <p className="expRoleLine">
-                {item.resume.start}
-                {item.resume.end ? ` — ${item.resume.end}` : " — Present"}
-              </p>
+              {(item.resume.start || item.resume.end) && (
+                <p className="expRoleLine">
+                  {item.resume.start ?? "UNKNOWN"}
+                  {item.resume.end ? ` — ${item.resume.end}` : ""}
+                </p>
+              )}
             </div>
 
             <button
@@ -115,12 +126,20 @@ export function ExperienceDrawer({
             <a className="btn btnPrimary" href={item.resume.pageHref} onClick={onClose}>
               View details
             </a>
-
-            <a className="btn" href={item.resume.pdfHref} target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn"
+              href={item.resume.pdfHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Open PDF
             </a>
-
-            <a className="btn btnTertiary" href={item.href} target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn btnTertiary"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Company site
             </a>
           </div>

@@ -1,19 +1,22 @@
 // src/components/ExperienceStrip.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import Image from "next/image";
 import { ExperienceDrawer } from "./ExperienceDrawer";
 import { getExperienceStripItems, type ExperienceStripItem } from "@/lib/resume";
 
 type Props = { className?: string; label?: string };
 
-export function ExperienceStrip({ className, label = "Experience across" }: Props) {
+export function ExperienceStrip({
+  className,
+  label = "Experience across",
+}: Props) {
   const items = useMemo(() => getExperienceStripItems(), []);
-  const [openKey, setOpenKey] = useState<string | null>(null);
+  const [openKey, setOpenKey] = useState<ExperienceStripItem["key"] | null>(null);
+  const dialogId = useId();
 
-  const active: ExperienceStripItem | undefined =
-    items.find((i) => String(i.key) === String(openKey));
+  const active = items.find((i) => i.key === openKey);
 
   return (
     <section
@@ -26,14 +29,17 @@ export function ExperienceStrip({ className, label = "Experience across" }: Prop
         </h2>
       </header>
 
-      <ol className="expTimelineTrack">
+      <ol className="expTimelineTrack" role="list">
         {items.map((item) => (
-          <li key={String(item.key)} className="expTimelineNode">
+          <li key={item.key} className="expTimelineNode">
             <button
               type="button"
               className="expTimelineCard"
               aria-label={`Show details for ${item.name}`}
-              onClick={() => setOpenKey(String(item.key))}
+              aria-haspopup="dialog"
+              aria-controls={dialogId}
+              aria-expanded={openKey === item.key}
+              onClick={() => setOpenKey(item.key)}
             >
               <div className="expTimelineLogo" aria-hidden="true">
                 <Image
@@ -41,14 +47,18 @@ export function ExperienceStrip({ className, label = "Experience across" }: Prop
                   alt=""
                   width={item.logoWidth}
                   height={item.logoHeight}
+                  className="expTimelineLogoImg"
+                  loading="lazy"
                 />
               </div>
 
               <div className="expTimelineText">
-                <span className="expTimelineDate">
-                  {item.resume.start}
-                  {item.resume.end ? ` — ${item.resume.end}` : " — Present"}
-                </span>
+                {(item.resume.start || item.resume.end) && (
+                  <span className="expTimelineDate">
+                    {item.resume.start ?? "UNKNOWN"}
+                    {item.resume.end ? ` — ${item.resume.end}` : ""}
+                  </span>
+                )}
 
                 <span className="expTimelineName">{item.name}</span>
 
@@ -65,6 +75,7 @@ export function ExperienceStrip({ className, label = "Experience across" }: Prop
         open={openKey != null}
         item={active}
         onClose={() => setOpenKey(null)}
+        dialogId={dialogId}
       />
     </section>
   );

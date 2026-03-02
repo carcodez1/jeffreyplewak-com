@@ -1,13 +1,6 @@
 // src/components/SiteFooter.tsx
-// Production: Next.js 16.x + TypeScript strict + SEO/A11y.
-// Jeffrey R. Plewak | Senior Software Engineer Portfolio
-//
-// Notes:
-// - Avoid `JSX.Element` return types (can fail depending on TS JSX namespace config).
-// - Prefer explicit React types imported from "react" or omit return type.
-// - Keep semantic structure: contentinfo, headings, lists, address.
+// Server Component: Zero JS, static rendering, SEO/A11y oriented.
 
-import type { ReactElement } from "react";
 import Link from "next/link";
 import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
@@ -18,31 +11,25 @@ function copyrightLine(year: number): string {
   return year <= START_YEAR ? `${year}` : `${START_YEAR}–${year}`;
 }
 
-export function SiteFooter(): ReactElement {
+export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="siteFooter" role="contentinfo" aria-label="Footer">
       <div className="siteFooterInner">
-        {/* Brand + Primary CTAs */}
-        <section className="footerCol" aria-labelledby="footer-site-title">
-          <h3 id="footer-site-title" className="footerTitle">
+        {/* Brand / About */}
+        <section className="footerCol" aria-labelledby="footer-about-title">
+          <h3 id="footer-about-title" className="footerTitle">
             {SITE.name}
           </h3>
           <p className="footerSub">{SITE.footerBlurb}</p>
 
           <div className="footerCtas" aria-label="Primary actions">
             <Link className="btn btnPrimary" href="/resume">
-              View Resume
+              View resume
             </Link>
-
-            <a
-              className="btn"
-              href={LINKS.calendly}
-              {...extLinkProps(true)}
-              aria-label="Schedule a consultation"
-            >
-              Book a Call
+            <a className="btn" href={LINKS.calendly} {...extLinkProps(true)}>
+              Book a call
             </a>
           </div>
 
@@ -55,10 +42,7 @@ export function SiteFooter(): ReactElement {
                 aria-label={s.label}
                 {...extLinkProps(s.external)}
               >
-                {/* Icon is decorative because the <a> has an aria-label */}
-                <span aria-hidden="true">
-                  <SocialIcon src={s.icon} title={s.label} className="icon--social" />
-                </span>
+                <SocialIcon src={s.icon} title={s.label} />
               </a>
             ))}
           </nav>
@@ -69,27 +53,21 @@ export function SiteFooter(): ReactElement {
         </section>
 
         {/* Contact */}
-        <section className="footerCol" aria-labelledby="footer-contact-heading">
-          <h3 id="footer-contact-heading" className="footerHead">
+        <section className="footerCol" aria-labelledby="footer-contact-title">
+          <h3 id="footer-contact-title" className="footerHead">
             Contact
           </h3>
-
           <address className="footerAddr">
-            <a
-              className="footerLink"
-              href={LINKS.emailProject}
-              aria-label="Email Jeffrey R. Plewak"
-            >
+            <a className="footerLink" href={LINKS.emailProject}>
               plewak.jeff@gmail.com
             </a>
           </address>
-
-          <p className="footerHint">Fastest response: email. Consulting: 15min call.</p>
+          <p className="footerHint">Fastest: email. Consulting: short call.</p>
         </section>
 
-        {/* Navigation + Resources */}
-        <nav className="footerCol" aria-labelledby="footer-nav-heading">
-          <h3 id="footer-nav-heading" className="footerHead">
+        {/* Links */}
+        <nav className="footerCol" aria-labelledby="footer-links-title">
+          <h3 id="footer-links-title" className="footerHead">
             Links
           </h3>
 
@@ -116,7 +94,7 @@ export function SiteFooter(): ReactElement {
             </li>
           </ul>
 
-          <h3 className="footerHead footerHeadSpacer">Downloads</h3>
+          <h4 className="footerHead footerHeadSpacer">Downloads</h4>
           <ul className="footerLinksStack" role="list">
             <li>
               <a className="footerLink" href={LINKS.resumePdf} {...extLinkProps(true)}>
@@ -125,12 +103,12 @@ export function SiteFooter(): ReactElement {
             </li>
             <li>
               <a className="footerLink" href={LINKS.vcf} download>
-                Contact (.vcf)
+                Contact card (VCF)
               </a>
             </li>
           </ul>
 
-          <h3 className="footerHead footerHeadSpacer">Legal</h3>
+          <h4 className="footerHead footerHeadSpacer">Legal</h4>
           <ul className="footerLinksStack" role="list">
             <li>
               <Link className="footerLink" href="/terms">

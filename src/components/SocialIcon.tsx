@@ -1,36 +1,29 @@
 // src/components/SocialIcon.tsx
-//
-// Goal: CSS-tintable icons with zero runtime JS.
-// Rationale: <img>/<Image> SVGs do NOT inherit currentColor reliably.
-// Solution: render a span that uses the SVG as a mask; background-color = currentColor.
+import type { CSSProperties } from "react";
 
 type Props = {
-  src: string;            // e.g. "/assets/icons/github.svg"
-  title: string;          // accessible label on the wrapper link
+  src: string; // e.g. "/assets/icons/github.svg"
+  title: string;
   className?: string;
-  size?: number;          // px
+  size?: number; // px
 };
 
-export function SocialIcon({ src, title: _title, className, size = 18 }: Props) {
-  // title is handled by the parent <a aria-label="...">; no duplicate accessible name here.
+type IconStyle = CSSProperties & { ["--icon-url"]?: string };
+
+export function SocialIcon({ src, title, className, size = 18 }: Props) {
+  const style: IconStyle = {
+    ["--icon-url"]: `url(${src})`,
+    width: size,
+    height: size,
+  };
+
+  // Mask-image makes the icon inherit currentColor reliably.
   return (
     <span
-      className={className ?? "icon"}
-      aria-hidden="true"
-      style={{
-        width: size,
-        height: size,
-        display: "inline-block",
-        backgroundColor: "currentColor",
-        WebkitMaskImage: `url(${src})`,
-        maskImage: `url(${src})`,
-        WebkitMaskRepeat: "no-repeat",
-        maskRepeat: "no-repeat",
-        WebkitMaskPosition: "center",
-        maskPosition: "center",
-        WebkitMaskSize: "contain",
-        maskSize: "contain",
-      }}
+      className={className ? `icon ${className}` : "icon"}
+      aria-label={title}
+      role="img"
+      style={style}
     />
   );
 }

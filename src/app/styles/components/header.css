@@ -1,95 +1,86 @@
-/* ==========================
-   Header / Actions / Brand
-   ========================== */
+/* src/app/styles/components/header.css */
 
+/* Header container */
 .siteHeader {
   position: sticky;
   top: 0;
-  z-index: 9000;
-  background: rgba(11, 15, 23, 0.96);
-  border-bottom: 1px solid var(--border1);
+  z-index: 7000;
+  background: color-mix(in srgb, var(--bg2) 88%, transparent);
+  border-bottom: 1px solid var(--border0);
+  backdrop-filter: blur(10px);
 }
 
 .siteHeaderInner {
   width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
   margin-inline: auto;
-  min-height: var(--headerH);
+  height: var(--headerH);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
 }
 
-/* Brand */
-.brand {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 10px;
-  border-radius: var(--rSm);
-  border: 1px solid transparent;
-  color: var(--text);
-  font-weight: 600;
-}
-
-.brand:hover,
-.brand:focus-visible {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.brandText {
-  font-size: 1rem;
-}
-
-.brandHi {
-  opacity: 0.85;
-  font-size: 0.85rem;
-}
-
-.brandSub {
-  font-size: 0.75rem;
-  opacity: 0.72;
-}
-
-/* Actions (right side) */
-.siteActions {
+.siteHeaderLeft,
+.siteHeaderRight {
   display: inline-flex;
   align-items: center;
   gap: 10px;
 }
 
-.headerDivider {
-  width: 1px;
-  height: 24px;
-  background: rgba(255,255,255,0.12);
-  display: inline-block;
-}
-
-.headerIcons {
+.siteBrand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
 }
 
-/* Mobile toggle */
-.navToggle {
-  display: none;
+.siteBrandName {
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
 
-/* Show mobile toggle only below threshold */
-@media (max-width: 820px) {
-  .navToggle {
-    display: inline-flex;
-  }
+/* Icon buttons */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--rMd);
+  border: 1px solid var(--border0);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  transition:
+    background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease);
 }
 
-/* Hide desktop nav at mobile break */
-@media (max-width: 820px) {
-  .siteNav {
-    display: none;
-  }
-  .headerDivider {
-    display: none;
-  }
+.iconBtn:hover,
+.iconBtn:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border1);
+  color: hsla(var(--accent2) / 0.95);
+  transform: translateY(-1px);
+}
+
+.iconBtn:active {
+  transform: translateY(0);
+}
+
+/* ICON SYSTEM (Turbopack-safe; no attr()) */
+.icon {
+  display: inline-block;
+  background-color: currentColor;
+
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
