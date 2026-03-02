@@ -14,6 +14,10 @@
   /* Default section spacing; tuned for portfolio pages */
   --sectionY: clamp(2.25rem, 4vw, 3.5rem);
   --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
+
+  /* Hero-only rhythm (home) */
+  --heroY: clamp(1.25rem, 2.25vw, 1.75rem);
+  --heroGap: clamp(12px, 2vw, 18px);
 }
 
 /* Main content container: single source of truth for page padding */
@@ -51,12 +55,14 @@
   gap: 28px;
 }
 
-/* Hero grid (home page) */
+/* Hero grid (home page)
+   CRITICAL: align to top; center causes left column to drop under the portrait
+   and hides the timeline within the first viewport. */
 .homeHeroGrid {
   display: grid;
-  gap: clamp(18px, 3vw, 28px);
+  gap: var(--heroGap);
   grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
+  align-items: start; /* was center */
 }
 
 /* Mobile / narrow */
@@ -67,6 +73,50 @@
   }
 }
 
+/* Tighten hero-only vertical rhythm (do not change global typography) */
+.heroHome.section {
+  margin-bottom: var(--sectionYSm);
+}
+
+.homeHeroLeft {
+  max-width: 640px;
+  display: grid;
+  gap: 0;
+}
+
+.homeIdRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.homeRole {
+  margin-top: 6px;
+}
+
+.homeLede {
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.heroHome .ctaRow {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.homeExpBlock {
+  margin-top: 8px;
+}
+/* Home experience block: increase whitespace + reduce clutter */
+.homeExpBlock {
+  margin-top: 18px;
+}
+@media (max-width: 980px) {
+  .homeExpBlock {
+    margin-top: 16px;
+  }
+}
 /* Avatar in hero */
 .homeAvatar {
   width: 84px;
@@ -90,14 +140,22 @@
   background: var(--surface1);
   box-shadow: var(--shadow1);
 
-  /* Reduce the "giant photo dominates everything" feeling */
-  height: clamp(280px, 38vw, 420px);
+  /* Reduce portrait dominance so timeline is visible sooner */
+  height: clamp(260px, 32vw, 360px); /* was clamp(280px, 38vw, 420px) */
+  width: 100%;
+  max-width: 520px;
+}
+
+.homeHeroRight {
+  align-self: start;
+  min-width: 0;
 }
 
 /* Mobile portrait: keep it present but not overpowering */
 @media (max-width: 980px) {
   .homePortraitFrame {
-    height: clamp(260px, 56vw, 360px);
+    height: clamp(240px, 56vw, 340px);
+    max-width: 100%;
   }
 }
 
@@ -126,28 +184,14 @@
   min-width: 0;
 }
 
-.homePortraitFrame {
-  width: 100%;
-  max-width: 520px;
-}
-
-.homePortraitFrame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.homeHeroLeft {
-  max-width: 640px;
-}
-
-.homeHeroLeft p {
-  max-width: 60ch;
-}
 /* Ensure hero text never forces horizontal overflow */
 .homeHeroLeft,
 .homeHeroRight {
   min-width: 0;
+}
+
+.homeHeroLeft p {
+  max-width: 60ch;
 }
 
 .homeHeroLeft .homeLede,
@@ -158,10 +202,440 @@
 /* Timeline scroller must not escape container */
 .expTimelineScroller {
   max-width: 100%;
+  position: relative; /* needed for affordance overlay */
+}
+
+/* Scroll affordance: subtle right-edge fade (CSS-only, Turbopack-safe) */
+.expTimelineScroller::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 6px; /* match scroller padding-bottom */
+  width: 48px;
+  pointer-events: none;
+  background: linear-gradient(to left, rgba(10, 12, 16, 0.9), rgba(10, 12, 16, 0));
 }
 
 /* Prevent long company names from blowing layout */
 .expTimelineName,
 .expDrawerTitle {
   word-break: break-word;
+}
+
+/* =============================
+   Global Navy Theme
+============================= */
+
+:root {
+  --navy-bg: #0b1220;
+  --navy-surface: rgba(10, 18, 35, 0.78);
+  --navy-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --accent: #3b82f6;
+}
+
+body {
+  background: var(--navy-bg);
+  color: var(--text-primary);
+}
+
+/* Header + Footer translucency */
+.siteHeader,
+.siteFooter {
+  background: var(--navy-surface);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--navy-border);
+}
+
+.siteFooter {
+  border-top: 1px solid var(--navy-border);
+}
+
+/* Icon color enforcement */
+.icon,
+.icon svg {
+  color: var(--accent);
+  fill: currentColor;
+}
+
+
+/* ===============================
+   NAVY THEME FOUNDATION
+================================ */
+
+:root {
+  --navy-bg: #0b1220;
+  --navy-surface: rgba(10, 18, 35, 0.78);
+  --navy-border: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+}
+
+body {
+  background: var(--navy-bg);
+  color: var(--text-primary);
+}
+
+/* Header / Footer translucency */
+.siteHeader,
+.siteFooter {
+  background: var(--navy-surface);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--navy-border);
+}
+
+.siteFooter {
+  border-top: 1px solid var(--navy-border);
+}
+
+/* Remove washed effect */
+.siteHeader *,
+.siteFooter * {
+  color: var(--text-primary);
+}
+
+
+/* ===============================
+   INTERACTION TARGET HARDENING
+================================ */
+
+.navLink,
+.btnHeader,
+.iconBtn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 14px;
+}
+
+.iconBtn {
+  width: 44px;
+  justify-content: center;
+}
+
+.navLink:hover,
+.iconBtn:hover {
+  color: var(--accent);
+}
+
+
+/* ===============================
+   BRAND REFINEMENT
+================================ */
+
+.brandText {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.brandHi {
+  opacity: 0.55;
+  font-weight: 400;
+}
+
+.brandSub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+
+.siteNav {
+  gap: 12px;
+}
+
+.navLink {
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity 120ms ease, color 120ms ease;
+}
+
+.navLink:hover {
+  opacity: 1;
+}
+
+.headerDivider {
+  width: 1px;
+  height: 28px;
+  background: var(--navy-border);
+  margin-inline: 12px;
+}
+
+
+/* === NAV SCAN IMPROVEMENT === */
+
+.siteNav {
+  gap: 20px;
+}
+
+.navLink {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.navLink:hover {
+  color: var(--accent);
+}
+
+
+/* === HERO VISUAL BALANCE === */
+
+.homePortraitFrame {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+
+.homeHeroLeft h1 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.homeLede {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+
+/* === BUTTON POLISH === */
+
+.btnPrimary {
+  background: var(--accent);
+  border: none;
+  font-weight: 600;
+}
+
+.btnPrimary:hover {
+  background: var(--accent-hover);
+}
+
+.btn {
+  transition: all 140ms ease;
+}
+
+
+/* ===============================
+   FOOTER STRUCTURAL GRID
+================================ */
+
+.siteFooterInner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 64px;
+  padding-block: 64px;
+}
+
+@media (max-width: 980px) {
+  .siteFooterInner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* ===============================
+   FOOTER TYPOGRAPHY
+================================ */
+
+.footerTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.footerHead {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.footerHeadSpacer {
+  margin-top: 18px;
+}
+
+.footerSub {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 38ch;
+}
+
+.footerHint {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footerAddr {
+  font-style: normal;
+}
+
+
+/* ===============================
+   FOOTER TYPOGRAPHY
+================================ */
+
+.footerTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.footerHead {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.footerHeadSpacer {
+  margin-top: 18px;
+}
+
+.footerSub {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 38ch;
+}
+
+.footerHint {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footerAddr {
+  font-style: normal;
+}
+
+
+/* ===============================
+   FOOTER ICONS
+================================ */
+
+.footerIcons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footerIcons .iconBtn {
+  min-height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--navy-border);
+}
+
+.footerIcons .iconBtn:hover {
+  border-color: var(--accent);
+}
+
+
+/* ===============================
+   FOOTER ICONS
+================================ */
+
+.footerIcons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footerIcons .iconBtn {
+  min-height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--navy-border);
+}
+
+.footerIcons .iconBtn:hover {
+  border-color: var(--accent);
+}
+
+
+.footerCopy {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 16px;
+}
+
+
+/* ===============================
+   SOCIAL ICON MASK + COLOR INHERITANCE
+================================ */
+
+/* Base icon container */
+
+
+/* Apply the CSS variable from SocialIcon style */
+
+
+/* Hover / focus color change */
+.iconBtn:hover .icon,
+.iconBtn:focus-visible 
+
+
+/* Icon animation + focus outline */
+
+
+.iconBtn:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+
+/* ======================================
+   SOCIAL ICONS — show original color
+====================================== */
+
+/* Remove any mask-based logic */
+
+
+/* Optional hover effect: scale up slightly */
+.iconBtn:hover .icon,
+.iconBtn:focus-visible 
+
+
+
+/* ======================================
+   SOCIAL ICONS — show original colors
+====================================== */
+
+
+
+/* optional hover scale */
+.iconBtn:hover .icon,
+.iconBtn:focus-visible 
+
+
+
+/* =====================
+   SOCIAL ICONS — show original colors
+   ===================== */
+.icon {
+  background-image: var(--icon-url) !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+.iconBtn:hover .icon,
+.iconBtn:focus-visible .icon {
+  transform: scale(1.1);
+}
+.icon {
+  transition: transform 120ms ease;
 }

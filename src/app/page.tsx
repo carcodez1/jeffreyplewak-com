@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ExperienceStrip } from "@/components/ExperienceStrip";
+import { ExperienceTicker } from "@/components/ExperienceTicker";
 import { LINKS, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -33,25 +33,18 @@ export default function HomePage() {
           <div className="homeHeroLeft">
             <div className="homeIdRow">
               <div className="homeAvatar" aria-hidden="true">
-                <Image
-                  src={PORTRAIT_SRC}
-                  alt=""
-                  width={84}
-                  height={84}
-                  className="homeAvatarImg"
-                  priority
-                />
+                <Image src={PORTRAIT_SRC} alt="" width={84} height={84} className="homeAvatarImg" priority />
               </div>
 
-              <div className="homeIdText">
+              <div>
                 <h1 className="h1">{SITE.name}</h1>
                 <p className="lede homeRole">{SITE.title}</p>
               </div>
             </div>
 
-            <p className="homeLede">
-              Backend services and internal platforms. Predictable behavior in production.
-              Clear boundaries. Code other engineers can extend safely.
+            <p className="lede homeLede">
+              I build backend services and internal platforms. I care about predictable behavior in production and code
+              that is easy for other engineers to pick up.
             </p>
 
             <div className="ctaRow" aria-label="Primary actions">
@@ -66,9 +59,15 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="homeExpBlock">
-              <ExperienceStrip label="Experience across" />
-            </div>
+            <section className="homeExpBlock" aria-label="Experience strip">
+              <header className="homeExpHead">
+                <h2 className="h3 homeExpTitle">Experience across</h2>
+                <p className="homeExpHint">
+                  Logos only. Hover to pause. Click to jump into the resume.
+                </p>
+              </header>
+              <ExperienceTicker />
+            </section>
           </div>
 
           <aside className="homeHeroRight" aria-label="Portrait">
@@ -93,16 +92,16 @@ export default function HomePage() {
           <article className="card">
             <h3 className="cardTitle">Backend systems</h3>
             <p className="cardDesc">
-              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production.
-              Clean interfaces for other teams.
+              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production. Clean interfaces
+              for other teams.
             </p>
           </article>
 
           <article className="card">
             <h3 className="cardTitle">Platform and infrastructure</h3>
             <p className="cardDesc">
-              Build pipelines, runtime configuration, and deployment workflows. Reduce operational friction.
-              Keep systems straightforward to reason about.
+              Build pipelines, runtime configuration, and deployment workflows. I focus on reducing operational friction
+              and keeping systems straightforward to reason about.
             </p>
           </article>
         </div>

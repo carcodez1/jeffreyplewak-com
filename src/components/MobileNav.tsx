@@ -17,32 +17,37 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const prev = document.body.style.overflow;
+    const prevOverflow = document.body.style.overflow;
+
     if (open) {
+      // Prevent body scroll when the drawer is open
       document.body.style.overflow = "hidden";
+
+      // Focus the first interactive element in the nav panel
       requestAnimationFrame(() => {
-        const panel = panelRef.current;
-        if (!panel) return;
-        const first = panel.querySelector<HTMLElement>("a, button");
+        const first = panelRef.current?.querySelector<HTMLElement>("a, button");
         first?.focus();
       });
     }
+
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
       toggleRef.current?.focus();
     };
   }, [open]);
 
   useEffect(() => {
     if (!open) return;
-    const handler = (e: KeyboardEvent) => {
+
+    const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
         onClose?.();
       }
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => window.removeEventListener("keydown", handleKeydown);
   }, [open, onClose]);
 
   return (
@@ -50,13 +55,15 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
       <button
         ref={toggleRef}
         type="button"
-        className="btn btnHeader navToggle"
+        className="btn navToggle iconBtn"
         aria-expanded={open}
         aria-controls={dialogId}
         aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setOpen((v) => !v)}
       >
-        <span aria-hidden="true">{open ? "✕" : "☰"}</span>
+        <span aria-hidden="true" className="navToggleIcon">
+          {open ? "✕" : "☰"}
+        </span>
       </button>
 
       <div
@@ -66,15 +73,7 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
         role="dialog"
         aria-modal="true"
       >
-        <button
-          type="button"
-          className="mobileNavBackdrop"
-          aria-label="Close menu"
-          onClick={() => {
-            setOpen(false);
-            onClose?.();
-          }}
-        />
+        <div className="mobileNavBackdrop" onClick={() => setOpen(false)} />
 
         <div ref={panelRef} className="mobileNavPanel">
           <nav className="mobileNavLinks" aria-label="Mobile navigation">

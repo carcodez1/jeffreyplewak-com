@@ -1,296 +1,280 @@
-/* src/app/styles/experience.css */
+/* ==========================================
+   EXPERIENCE TICKER — Logo-only hero strip
+   Mobile-first, pauses on hover/focus.
+   ========================================== */
 
-/* ---- Timeline wrapper ---- */
-.expHorizontalTimeline {
-  margin-top: 20px;
-}
+.expTicker {
+  --tickerPadY: 14px;
+  --tickerGap: 44px;
+  --tickerSpeed: 34s;
+  --edgeW: 56px;
 
-.expTimelineHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.expTimelineTitle {
-  font-size: 18px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-.expTimelineCount {
-  font-size: 13px;
-  opacity: 0.7;
-}
-
-/* Scroller: contains horizontal overflow (prevents page-level overflow) */
-.expTimelineScroller {
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  padding-bottom: 6px;
-}
-
-/* Track */
-.expTimelineTrack {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 320px);
-  gap: 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.expTimelineNode {
-  min-width: 0;
-}
-
-/* Card */
-.expTimelineCard {
-  width: 100%;
-  text-align: left;
-  border: 1px solid var(--border1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 14px;
+  padding: var(--tickerPadY) 0;
+  border: 1px solid var(--border0);
   border-radius: var(--rLg);
-  background: rgba(255, 255, 255, 0.02);
-  padding: 14px 14px 12px;
-  display: grid;
-  gap: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012));
 }
 
-.expTimelineCard:hover,
-.expTimelineCard:focus-visible {
-  border-color: var(--border2);
-  background: rgba(255, 255, 255, 0.04);
-  outline: none;
-}
-
-.expTimelineTop {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-  align-items: start;
-}
-
-.expTimelineCompany {
-  min-width: 0;
-}
-
-.expTimelineName {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-}
-
-.expTimelineRole {
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  opacity: 0.86;
-  line-height: 1.25;
-}
-
-.expTimelineLogo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  opacity: 0.9;
-}
-
-.expTimelineLogoImg {
-  max-width: 110px;
-  height: auto;
-}
-
-.expTimelineMeta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 12px;
-  opacity: 0.78;
-}
-
-.expTimelineDate {
-  white-space: nowrap;
-}
-
-.expTimelineType {
-  white-space: nowrap;
-  border: 1px solid var(--border1);
-  border-radius: 999px;
-  padding: 2px 8px;
-  opacity: 0.9;
-}
-
-/* Mobile: slightly narrower cards; stronger scroll affordance */
-@media (max-width: 640px) {
-  .expTimelineTrack {
-    grid-auto-columns: minmax(250px, 280px);
-  }
-}
-
-/* ---- Drawer ---- */
-.expDrawerRoot {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-}
-
-.expDrawerBackdrop {
+/* Edge fades to signal scroll without visual clutter */
+.expTickerEdge {
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  border: 0;
-}
-
-.expDrawerPanel {
-  position: absolute;
-  right: 0;
   top: 0;
-  height: 100%;
-  width: min(560px, 92vw);
-  background: rgba(10, 12, 16, 0.98);
-  border-left: 1px solid var(--border1);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  bottom: 0;
+  width: var(--edgeW);
+  pointer-events: none;
+  z-index: 2;
+}
+.expTickerEdgeL {
+  left: 0;
+  background: linear-gradient(to right, rgba(7,10,16,0.95), rgba(7,10,16,0));
+}
+.expTickerEdgeR {
+  right: 0;
+  background: linear-gradient(to left, rgba(7,10,16,0.95), rgba(7,10,16,0));
 }
 
-.expDrawerHead {
-  padding: 18px 18px 12px;
-  border-bottom: 1px solid var(--border1);
-}
-
-.expDrawerTitleRow {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 12px;
-  align-items: start;
-}
-
-.expDrawerTitleBlock {
-  min-width: 0;
-}
-
-.expDrawerTitle {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.015em;
-  margin: 0;
-}
-
-.expDrawerRole {
-  margin: 6px 0 0;
-  font-size: 15px;
-  font-weight: 650;
-  opacity: 0.9;
-}
-
-.expDrawerMeta {
-  margin: 8px 0 0;
-  font-size: 13px;
-  opacity: 0.72;
-  line-height: 1.25;
-}
-
-.expDrawerMetaDot {
-  margin: 0 6px;
-  opacity: 0.7;
-}
-
-.expDrawerLogo {
-  opacity: 0.9;
+.expTrack {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  gap: var(--tickerGap);
+  width: max-content;
+  padding: 0 18px;
+  animation: expScroll var(--tickerSpeed) linear infinite;
+  will-change: transform;
 }
 
-.expDrawerLogoImg {
-  max-width: 120px;
-  height: auto;
+/* Pause on hover/focus-within for accessibility + intent */
+.expTicker:hover .expTrack,
+.expTicker:focus-within .expTrack {
+  animation-play-state: paused;
 }
 
-.expDrawerCloseBtn {
-  border: 1px solid var(--border1);
-  background: rgba(255,255,255,0.02);
+.expStripe {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--rMd);
   padding: 8px 10px;
-  height: fit-content;
+  border: 1px solid transparent;
+  opacity: 0.78;
+  transition:
+    opacity var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    background var(--tFast) var(--ease);
 }
 
-.expDrawerCloseBtn:hover,
-.expDrawerCloseBtn:focus-visible {
-  border-color: var(--border2);
-  background: rgba(255,255,255,0.05);
-  outline: none;
+
+/* “Marketing clean”: subtle lift + restore logo color */
+.expStripe:hover,
+.expStripe:hover .expLogo,
+
+.expFallback {
+  font-size: 0.95rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
-.expDrawerActions {
-  margin-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+/* Infinite horizontal movement */
+@keyframes expScroll {
 }
 
-.expDrawerBody {
-  padding: 16px 18px 18px;
-  overflow: auto;
+/* Reduced motion: no animation, keep readable */
+@media (prefers-reduced-motion: reduce) {
+  .expTrack { animation: none; }
 }
 
-.expDrawerSectionTitle {
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  opacity: 0.75;
-  margin: 0 0 10px;
+/* Tablet/desktop tuning */
+@media (min-width: 980px) {
+  .expTicker {
+    --tickerPadY: 16px;
+    --tickerGap: 56px;
+    --tickerSpeed: 40s;
+  }
 }
 
-.expDrawerList {
-  margin: 0 0 18px;
-  padding-left: 18px;
+/* Home hero spacing helpers (only used if present) */
+.homeExpHead {
+  display: grid;
+  gap: 6px;
+  margin-top: 2px;
+  margin-bottom: 10px;
 }
-
-.expDrawerTags {
-  list-style: none;
+.homeExpTitle {
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+}
+.homeExpHint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
-.expDrawerTag {
-  border: 1px solid var(--border1);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 12px;
-  opacity: 0.9;
+/* === STRIPE EDGE FADE === */
+
+.expTicker::before,
+.expTicker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  pointer-events: none;
 }
 
-.expDrawerFoot {
-  padding: 10px 18px;
-  border-top: 1px solid var(--border1);
-  font-size: 12px;
-  opacity: 0.65;
+.expTicker::before {
+  left: 0;
+  background: linear-gradient(to right, var(--navy-bg), transparent);
 }
 
-@media (max-width: 640px) {
-  .expDrawerTitleRow {
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-  }
-  .expDrawerCloseBtn {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .expDrawerLogo {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-    margin-top: 10px;
-  }
+.expTicker::after {
+  right: 0;
+  background: linear-gradient(to left, var(--navy-bg), transparent);
+}
+
+
+/* ========================
+   Experience Ticker — show original logos
+   ======================== */
+
+
+.expStripe:hover .expLogo,
+
+
+/* ======================
+   TICKER LOGO COLOR + BEHAVIOR
+   ====================== */
+
+
+/* optional hover/focus boost */
+.expStripe:hover .expLogo,
+
+/* consistent smooth transitions */
+
+/* ======================================
+   EXPERIENCE TICKER — Original Colors + Interaction
+====================================== */
+
+
+/* Scale & clarity on hover/focus */
+.expStripe:hover .expLogo,
+
+/* Smooth yet subtle transition */
+.expStripe,
+
+
+/* ===============================
+   EXPERIENCE TICKER — COLOR LOGOS
+   =============================== */
+
+
+/* Optional hover/ focus behavior */
+.expStripe:hover .expLogo,
+
+/* Smooth transitions */
+.expStripe,
+
+
+/* ==============================================
+   EXPERIENCE TICKER — ORIGINAL COLOR + HOVER
+   ============================================== */
+
+
+
+/* Hover/focus subtle scale */
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+/* Smooth transitions */
+.expStripe,
+
+
+/* ==========
+   TICKER LOGOS — ORIGINAL COLORS + BEHAVIOR
+   ========== */
+
+
+
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+.expStripe,
+
+
+
+/* ==========
+   TICKER LOGOS — ORIGINAL COLORS + BEHAVIOR
+   ========== */
+
+
+
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+.expStripe,
+
+
+
+/* ======================================
+   EXPERIENCE TICKER — show original SVG colors
+   ====================================== */
+
+
+
+/* subtle scale on hover/focus */
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+/* smooth transitions */
+.expStripe,
+
+
+
+/* ======================================
+   EXPERIENCE TICKER — show original SVG colors
+   ====================================== */
+
+
+
+/* subtle scale on hover/focus */
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+/* smooth transitions */
+.expStripe,
+
+
+
+/* ======================================
+   EXPERIENCE TICKER — show original SVG colors
+   ====================================== */
+
+
+
+/* subtle scale on hover/focus */
+.expStripe:hover .expLogo,
+.expStripe:focus-visible 
+
+/* smooth transitions */
+.expStripe,
+
+
+
+/* =============
+   EXPERIENCE TICKER — true colors
+   ============= */
+.expLogo {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+.expStripe:hover .expLogo,
+.expStripe:focus-visible .expLogo {
+  transform: scale(1.05);
+}
+.expStripe,
+.expLogo {
+  transition: transform 120ms ease, opacity 120ms ease;
 }

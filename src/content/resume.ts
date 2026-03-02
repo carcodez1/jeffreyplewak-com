@@ -60,7 +60,7 @@ export type ResumeData = {
 // ─── SSOT ─────────────────────────────────────────────────────────────────────
 
 export const RESUME: ResumeData = {
-  pdfHref: "/assets/jeffrey-plewak-resume.pdf", // TODO: confirm path in /public
+  pdfHref: "/downloads/jeffrey-plewak-resume.pdf", // TODO: confirm path in /public
 
   summary:
     "Senior software engineer with 10+ years designing and operating platform systems in compliance-critical, high-reliability environments. Specialized in Python-based distributed systems, cloud automation, and audit-ready delivery across financial, defense, and cloud platforms (J.P. Morgan Chase, Lockheed Martin, IBM). Focus on production correctness, observability, and trusted compliant AI workflows where traceability, security, and reliability are first-class requirements.",
@@ -80,7 +80,7 @@ export const RESUME: ResumeData = {
       start: "2024-09", // [CONFIRMED]
       end: "2025-11",   // [CONFIRMED]
       location: "Remote",
-      logo: { src: "TODO_/assets/logos/mstro.svg", width: 120, height: 32 },
+      logo: { src: "/assets/logos/mstro.png", width: 120, height: 32 },
       highlights: [
         "Led research and innovation for next-generation AI and platform capabilities, developing operational MVPs to evaluate production readiness, scalability, and compliance constraints prior to broader adoption.",
         "Evaluated and introduced LLM orchestration, vector databases, NLP pipelines, and containerized runtimes with emphasis on reproducibility, observability, and operational viability over experimental novelty.",
@@ -108,7 +108,7 @@ export const RESUME: ResumeData = {
       start: "2024-02", // [CONFIRMED]
       end: "2024-09",   // [CONFIRMED]
       location: "West Palm Beach, FL",
-      logo: { src: "TODO_/assets/logos/mygeo.svg", width: 96, height: 32 },
+      logo: { src: "/assets/logos/bae-systems.svg", width: 96, height: 32 },
       highlights: [
         "Delivered a cloud-based SEO and communications platform from concept through MVP and customer deployment, owning system architecture, implementation, and operations.",
         "Built full-stack systems using Python and Node.js with API-driven frontends, MongoDB-backed persistence, and automated ETL pipelines.",
@@ -132,7 +132,7 @@ export const RESUME: ResumeData = {
       start: "2022-07", // [CONFIRMED]
       end: "2023-12",   // [CONFIRMED]
       location: "Plano, TX",
-      logo: { src: "TODO_/assets/logos/jpmorgan.svg", width: 120, height: 32 },
+      logo: { src: "/assets/logos/jp-morgan-chase.svg", width: 120, height: 32 },
       highlights: [
         "Designed, led, and delivered cloud-native automation tools for regulated global banking environments.",
         "Reduced deployment risk by automating environment validation across staging and production under regulated change controls, improving release confidence.",
@@ -159,7 +159,7 @@ export const RESUME: ResumeData = {
       start: "2019-09", // [CONFIRMED]
       end: "2022-03",   // [CONFIRMED]
       location: "Remote",
-      logo: { src: "TODO_/assets/logos/consulting-generic.svg", width: 96, height: 32 },
+      logo: { src: "/assets/logos/placeholder.svg", width: 96, height: 32 },
       highlights: [
         "Delivered backend services and ETL pipelines across engagements with Nintendo, Raytheon, AWS, and Northrop Grumman in Python, Java, and C++.",
         "Automated build pipelines, infrastructure provisioning, and AWS deployments across client environments, reducing delivery overhead.",
@@ -186,7 +186,7 @@ export const RESUME: ResumeData = {
       start: "2019-01", // [CONFIRMED]
       end: "2019-09",   // [CONFIRMED]
       location: "Austin, TX",
-      logo: { src: "TODO_/assets/logos/ibm.svg", width: 64, height: 32 },
+      logo: { src: "/assets/logos/ibm.svg", width: 64, height: 32 },
       highlights: [
         "Contributed to design and operation of Kubernetes-based microservices in Python and Go for IBM Cloud File and Block Storage production services with defined SLO/SLA targets.",
         "Owned CI/CD pipelines for containerized services, supporting build, deployment, and rollback workflows.",
@@ -214,7 +214,7 @@ export const RESUME: ResumeData = {
       start: "2018-05", // [BEST-GUESS]
       end: "2018-12",   // [CONFIRMED]
       location: "Fort Worth, TX",
-      logo: { src: "TODO_/assets/logos/lockheed-martin.svg", width: 140, height: 32 },
+      logo: { src: "/assets/logos/lockheed-martin.svg", width: 140, height: 32 },
       highlights: [
         "Developed real-time C++ avionics software for F-35 mission systems, supporting pilot-facing tactical displays in safety-critical, certification-aware environments.",
         "Led automation of build, test, and instrumentation pipelines improving DO-178 A/B compliance efficiency, reducing manual certification effort by approximately 20 hours per week.",
@@ -242,7 +242,7 @@ export const RESUME: ResumeData = {
       start: "2017-10", // [BEST-GUESS]
       end: "2018-04",   // [BEST-GUESS]
       location: "Westlake, TX",
-      logo: { src: "TODO_/assets/logos/fidelity.svg", width: 120, height: 32 },
+      logo: { src: "/assets/logos/fidelity.svg", width: 120, height: 32 },
       highlights: [
         "Returned to Fidelity to continue enterprise automation program work, maintaining service ownership of production backend systems with emphasis on reliability and rollback capability.",
         "Extended service-oriented architecture refactoring and API-based integration work initiated in first stint.",
@@ -270,7 +270,7 @@ export const RESUME: ResumeData = {
       start: "2016-11", // [BEST-GUESS]
       end: "2017-09",   // [BEST-GUESS]
       location: "McKinney, TX",
-      logo: { src: "TODO_/assets/logos/raytheon.svg", width: 120, height: 32 },
+      logo: { src: "/assets/logos/raytheon.svg", width: 120, height: 32 },
       highlights: [
         "Full-time software engineering role at Raytheon in McKinney, TX; contributed to defense software programs between two periods at Fidelity Investments.",
         // TODO: Replace with 2-3 specific bullets describing your actual work here.
@@ -293,7 +293,7 @@ export const RESUME: ResumeData = {
       start: "2015-04", // [CONFIRMED]
       end: "2016-10",   // [BEST-GUESS]
       location: "Westlake, TX",
-      logo: { src: "TODO_/assets/logos/fidelity.svg", width: 120, height: 32 },
+      logo: { src: "/assets/logos/fidelity.svg", width: 120, height: 32 },
       highlights: [
         "Built and operated backend systems supporting a large multi-year enterprise automation program, emphasizing reliability, rollback capability, and performance profiling in production environments.",
         "Led refactoring of monolithic applications into service-oriented architectures, introducing clearer service boundaries and API-based integrations to improve scalability and maintainability.",
@@ -319,7 +319,7 @@ export const RESUME: ResumeData = {
       start: "2012-06", // [CONFIRMED]
       end: "2015-04",   // [CONFIRMED]
       location: "Liverpool, NY",
-      logo: { src: "TODO_/assets/logos/lockheed-martin.svg", width: 140, height: 32 },
+      logo: { src: "/assets/logos/lockheed-martin.svg", width: 140, height: 32 },
       highlights: [
         "Developed and automated avionics simulation software under DO-178 compliance requirements, supporting verification and validation activities for safety-critical systems.",
         "Contributed to radar simulation and signal-processing systems including TPQ-53 and F-35-related programs supporting ballistics detection and operational field scenarios.",
@@ -344,7 +344,7 @@ export const RESUME: ResumeData = {
       start: "2011-05", // [CONFIRMED]
       end: "2012-06",   // [CONFIRMED]
       location: "St. Inigoes, MD",
-      logo: { src: "TODO_/assets/logos/bae-systems.svg", width: 96, height: 32 },
+      logo: { src: "/assets/logos/bae-systems.svg", width: 96, height: 32 },
       highlights: [
         "Developed multithreaded radar simulation software in Java and C++ for U.S. Navy systems, supporting real-time signal processing and operational scenario modeling.",
         "Contributed across design, implementation, and baseline development activities within structured, defense-oriented engineering environments.",

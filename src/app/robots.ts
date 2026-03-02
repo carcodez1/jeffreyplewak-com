@@ -6,28 +6,35 @@ import { SITE } from "@/config/site";
  * robots.ts -> /robots.txt (App Router)
  *
  * Policy:
- * - Use ONE canonical host everywhere (SITE.url).
- * - Allow crawling of public portfolio content.
- * - Block any future private area prefix.
+ * - Universal defaults: block all indexing when not production.
+ * - Production: allow crawling of public portfolio content.
+ * - Use a single canonical host (SITE.url).
  *
- * NOTE:
- * - robots directives control crawling. They do NOT grant/deny training rights as a legal license.
- *   If you want an explicit license statement, publish it on a page (e.g., /terms) and link it.
+ * Notes:
+ * - robots directives control crawling; not licensing/training rights.
+ * - Keep this deterministic and test-friendly.
  */
 export default function robots(): MetadataRoute.Robots {
   const base = SITE.url.replace(/\/+$/, "");
 
-  return {
-    rules: [
-      // AI crawlers (explicit allow; block /private/)
-      { userAgent: "GPTBot", allow: "/", disallow: "/private/" },
-      { userAgent: "Google-Extended", allow: "/", disallow: "/private/" },
-      { userAgent: "Applebot-Extended", allow: "/", disallow: "/private/" },
-      { userAgent: "ClaudeBot", allow: "/", disallow: "/private/" },
+  const isProd =
+    process.env.NODE_ENV === "production" &&
+    process.env.VERCEL_ENV !== "preview" &&
+    process.env.VERCEL_ENV !== "development";
 
-      // Default
-      { userAgent: "*", allow: "/", disallow: "/private/" },
-    ],
+  if (!isProd) {
+    return {
+      rules: { userAgent: "*", disallow: "/" },
+      sitemap: `${base}/sitemap.xml`,
+    };
+  }
+
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/private/", "/admin/", "/api/"],
+    },
     sitemap: `${base}/sitemap.xml`,
   };
 }

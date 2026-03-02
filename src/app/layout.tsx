@@ -53,8 +53,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd()) }}
         />
 
-        {/* BackgroundMotion should manage its own preload attribute internally.
-            Do NOT pass arbitrary props unless the component defines them. */}
         <BackgroundMotion />
         <BackgroundFx />
 

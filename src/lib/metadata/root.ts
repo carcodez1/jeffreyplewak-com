@@ -4,26 +4,36 @@ import { SITE_URL } from "@/lib/jsonld";
 
 /**
  * Root metadata must use absolute URLs for canonical + OpenGraph URL.
- * Tests enforce that canonical and OG url equal SITE_URL.
- *
- * Hardening:
- * - Use absolute OG/Twitter image URLs to avoid host ambiguity in preview bots.
+ * Keep robots minimal here (index/follow) for universal compatibility and stable tests.
+ * Bot-specific directives belong in app/robots.ts.
  */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+
+  applicationName: "Jeffrey R. Plewak",
+  authors: [{ name: "Jeffrey R. Plewak", url: SITE_URL }],
+  creator: "Jeffrey R. Plewak",
+  publisher: "Jeffrey R. Plewak",
+
   title: {
     default: "Jeffrey R. Plewak — Senior Software Engineer",
     template: "%s — Jeffrey R. Plewak",
   },
+
   description:
-    "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
+    "Senior software engineer specializing in backend systems, platform architecture, deterministic AI systems, and compliance-focused engineering.",
+
   alternates: { canonical: SITE_URL },
+
+  // Keep minimal for test stability + universal crawler compatibility.
+  robots: { index: true, follow: true },
+
   openGraph: {
     type: "website",
     url: SITE_URL,
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
-      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
+      "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
     siteName: "Jeffrey R. Plewak",
     locale: "en_US",
     images: [
@@ -35,12 +45,20 @@ export const rootMetadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
-      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
+      "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
     images: [`${SITE_URL}/og-image.png`],
   },
-  robots: { index: true, follow: true },
+
+  referrer: "strict-origin-when-cross-origin",
+
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
 };

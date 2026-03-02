@@ -75,3 +75,13 @@ portfolio-src.tar.gz
 # local accidental artifacts
 /cd
 /npm
+
+# Debug artifacts
+debug/
+debug-smart/
+ticker_ctx_*.md
+
+# Debug artifacts
+debug/
+debug-smart/
+ticker_ctx_*.md
