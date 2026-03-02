@@ -639,3 +639,23 @@ body {
 .icon {
   transition: transform 120ms ease;
 }
+
+/* ======================================
+   Social icons (brand colors, universal)
+   ====================================== */
+.iconImg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.iconBtn .iconImg {
+  transition: transform 120ms ease, opacity 120ms ease;
+  opacity: 0.92;
+}
+
+.iconBtn:hover .iconImg,
+.iconBtn:focus-visible .iconImg {
+  transform: scale(1.10);
+  opacity: 1;
+}

@@ -1,5 +1,5 @@
 // src/components/SocialIcon.tsx
-import type { CSSProperties } from "react";
+import type { ImgHTMLAttributes } from "react";
 
 type Props = {
   src: string; // e.g. "/assets/icons/github.svg"
@@ -8,22 +8,21 @@ type Props = {
   size?: number; // px
 };
 
-type IconStyle = CSSProperties & { ["--icon-url"]?: string };
-
+/**
+ * Brand-color icons (universal).
+ * - Uses <img> so original SVG colors render (mask-based icons cannot).
+ * - Keep link aria-label on the <a>; this <img> can be decorative.
+ */
 export function SocialIcon({ src, title, className, size = 18 }: Props) {
-  const style: IconStyle = {
-    ["--icon-url"]: `url(${src})`,
+  const imgProps: ImgHTMLAttributes<HTMLImageElement> = {
+    src,
+    alt: "",
     width: size,
     height: size,
+    loading: "lazy",
+    decoding: "async",
+    draggable: false,
   };
 
-  // Mask-image makes the icon inherit currentColor reliably.
-  return (
-    <span
-      className={className ? `icon ${className}` : "icon"}
-      aria-label={title}
-      role="img"
-      style={style}
-    />
-  );
+  return <img {...imgProps} className={className ? `iconImg ${className}` : "iconImg"} title={title} />;
 }

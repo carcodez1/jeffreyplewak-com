@@ -4,7 +4,7 @@
    - Then modular component CSS
    - Then experience/timeline + animations last
 */
-
+@import "./styles/theme.css";
 @import "./styles/tokens.css";
 @import "./styles/base.css";
 @import "./styles/layout.css";

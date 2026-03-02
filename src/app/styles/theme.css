@@ -1,0 +1,37 @@
+/* src/app/styles/theme.css
+   SINGLE SOURCE OF TRUTH: theme tokens
+*/
+:root {
+  /* Core */
+  --bg: #0b1320;
+  --surface0: rgba(255,255,255,0.03);
+  --surface1: rgba(255,255,255,0.05);
+  --border0: rgba(255,255,255,0.08);
+  --border1: rgba(255,255,255,0.12);
+
+  --text0: #f5f7fb;
+  --text1: #9aa6c3;
+
+  --accent: #4c8dff;
+  --accentGlow: rgba(76, 141, 255, 0.35);
+
+  /* Header/Footer translucency */
+  --chromeBg: rgba(11, 19, 32, 0.72);
+  --chromeBlur: 14px;
+
+  /* Radii */
+  --rSm: 10px;
+  --rMd: 14px;
+  --rLg: 18px;
+
+  /* Shadows */
+  --shadow0: 0 10px 30px rgba(0,0,0,0.35);
+  --shadow1: 0 16px 50px rgba(0,0,0,0.45);
+
+  /* Spacing rhythm */
+  --sectionY: clamp(2.25rem, 4vw, 3.5rem);
+  --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
+
+  /* Typography */
+  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+}

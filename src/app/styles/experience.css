@@ -1,6 +1,8 @@
 /* ==========================================
    EXPERIENCE TICKER — Logo-only hero strip
-   Mobile-first, pauses on hover/focus.
+   - CSS-only animation
+   - Pauses on hover/focus-within
+   - Respects prefers-reduced-motion
    ========================================== */
 
 .expTicker {
@@ -11,15 +13,19 @@
 
   position: relative;
   overflow: hidden;
+
   margin-top: 14px;
   padding: var(--tickerPadY) 0;
+
   border: 1px solid var(--border0);
   border-radius: var(--rLg);
   background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012));
 }
 
-/* Edge fades to signal scroll without visual clutter */
-.expTickerEdge {
+/* Edge fades (signal motion) */
+.expTicker::before,
+.expTicker::after {
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -27,11 +33,11 @@
   pointer-events: none;
   z-index: 2;
 }
-.expTickerEdgeL {
+.expTicker::before {
   left: 0;
   background: linear-gradient(to right, rgba(7,10,16,0.95), rgba(7,10,16,0));
 }
-.expTickerEdgeR {
+.expTicker::after {
   right: 0;
   background: linear-gradient(to left, rgba(7,10,16,0.95), rgba(7,10,16,0));
 }
@@ -40,13 +46,15 @@
   display: flex;
   align-items: center;
   gap: var(--tickerGap);
+
   width: max-content;
   padding: 0 18px;
+
   animation: expScroll var(--tickerSpeed) linear infinite;
   will-change: transform;
 }
 
-/* Pause on hover/focus-within for accessibility + intent */
+/* Pause for intent */
 .expTicker:hover .expTrack,
 .expTicker:focus-within .expTrack {
   animation-play-state: paused;
@@ -56,10 +64,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   border-radius: var(--rMd);
   padding: 8px 10px;
   border: 1px solid transparent;
-  opacity: 0.78;
+
+  opacity: 0.82;
   transition:
     opacity var(--tFast) var(--ease),
     transform var(--tFast) var(--ease),
@@ -67,214 +77,50 @@
     background var(--tFast) var(--ease);
 }
 
-
-/* “Marketing clean”: subtle lift + restore logo color */
 .expStripe:hover,
-.expStripe:hover .expLogo,
+.expStripe:focus-visible {
+  opacity: 1;
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.02);
+}
 
+/* IMPORTANT: with Next/Image, class applies to <img> element */
+.expLogo {
+  height: 28px;
+  width: auto;
+  display: block;
+  filter: none;
+  opacity: 1;
+  transition: transform var(--tFast) var(--ease);
+}
+
+.expStripe:hover .expLogo,
+.expStripe:focus-visible .expLogo {
+  transform: scale(1.05);
+}
+
+/* Fallback (no logo) */
 .expFallback {
   font-size: 0.95rem;
   color: var(--muted);
   white-space: nowrap;
 }
 
-/* Infinite horizontal movement */
+/* Infinite loop: you duplicate items once, so -50% is correct */
 @keyframes expScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* Reduced motion: no animation, keep readable */
 @media (prefers-reduced-motion: reduce) {
   .expTrack { animation: none; }
 }
 
-/* Tablet/desktop tuning */
 @media (min-width: 980px) {
   .expTicker {
     --tickerPadY: 16px;
     --tickerGap: 56px;
     --tickerSpeed: 40s;
   }
-}
-
-/* Home hero spacing helpers (only used if present) */
-.homeExpHead {
-  display: grid;
-  gap: 6px;
-  margin-top: 2px;
-  margin-bottom: 10px;
-}
-.homeExpTitle {
-  margin: 0;
-}
-.homeExpHint {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* === STRIPE EDGE FADE === */
-
-.expTicker::before,
-.expTicker::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  pointer-events: none;
-}
-
-.expTicker::before {
-  left: 0;
-  background: linear-gradient(to right, var(--navy-bg), transparent);
-}
-
-.expTicker::after {
-  right: 0;
-  background: linear-gradient(to left, var(--navy-bg), transparent);
-}
-
-
-/* ========================
-   Experience Ticker — show original logos
-   ======================== */
-
-
-.expStripe:hover .expLogo,
-
-
-/* ======================
-   TICKER LOGO COLOR + BEHAVIOR
-   ====================== */
-
-
-/* optional hover/focus boost */
-.expStripe:hover .expLogo,
-
-/* consistent smooth transitions */
-
-/* ======================================
-   EXPERIENCE TICKER — Original Colors + Interaction
-====================================== */
-
-
-/* Scale & clarity on hover/focus */
-.expStripe:hover .expLogo,
-
-/* Smooth yet subtle transition */
-.expStripe,
-
-
-/* ===============================
-   EXPERIENCE TICKER — COLOR LOGOS
-   =============================== */
-
-
-/* Optional hover/ focus behavior */
-.expStripe:hover .expLogo,
-
-/* Smooth transitions */
-.expStripe,
-
-
-/* ==============================================
-   EXPERIENCE TICKER — ORIGINAL COLOR + HOVER
-   ============================================== */
-
-
-
-/* Hover/focus subtle scale */
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-/* Smooth transitions */
-.expStripe,
-
-
-/* ==========
-   TICKER LOGOS — ORIGINAL COLORS + BEHAVIOR
-   ========== */
-
-
-
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-.expStripe,
-
-
-
-/* ==========
-   TICKER LOGOS — ORIGINAL COLORS + BEHAVIOR
-   ========== */
-
-
-
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-.expStripe,
-
-
-
-/* ======================================
-   EXPERIENCE TICKER — show original SVG colors
-   ====================================== */
-
-
-
-/* subtle scale on hover/focus */
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-/* smooth transitions */
-.expStripe,
-
-
-
-/* ======================================
-   EXPERIENCE TICKER — show original SVG colors
-   ====================================== */
-
-
-
-/* subtle scale on hover/focus */
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-/* smooth transitions */
-.expStripe,
-
-
-
-/* ======================================
-   EXPERIENCE TICKER — show original SVG colors
-   ====================================== */
-
-
-
-/* subtle scale on hover/focus */
-.expStripe:hover .expLogo,
-.expStripe:focus-visible 
-
-/* smooth transitions */
-.expStripe,
-
-
-
-/* =============
-   EXPERIENCE TICKER — true colors
-   ============= */
-.expLogo {
-  filter: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-.expStripe:hover .expLogo,
-.expStripe:focus-visible .expLogo {
-  transform: scale(1.05);
-}
-.expStripe,
-.expLogo {
-  transition: transform 120ms ease, opacity 120ms ease;
 }
