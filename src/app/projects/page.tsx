@@ -15,14 +15,15 @@ export default function ProjectsPage() {
       <header className="section" aria-label="Projects intro">
         <h1 className="h1">Projects</h1>
 
-        <p className="lede">
-          A focused set of projects with architecture notes and source.
-        </p>
+        <p className="lede">A focused set of projects with architecture notes and source.</p>
 
         <div className="ctaRow">
           <Link className="btn btnPrimary" href="/projects/kprovengine">
             KProvEngine
           </Link>
+          <a className="btn" href={LINKS.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
           <Link className="btn" href="/resume">
             Resume
           </Link>

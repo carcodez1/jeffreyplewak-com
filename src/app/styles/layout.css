@@ -29,8 +29,12 @@
   scroll-margin-top: calc(var(--headerH) + 16px);
 }
 
-/* Legacy wrapper (if pages still use .wrap) */
+/* Legacy wrapper (if pages still use .wrap)
+   IMPORTANT: constrain width to match .appMain so pages don't go full-bleed.
+*/
 .wrap {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
   padding-top: var(--sectionYSm);
   padding-bottom: var(--sectionY);
 }
@@ -108,4 +112,56 @@
 .stackTight {
   display: grid;
   gap: 10px;
+}
+
+/* HARD CONSTRAINT: no layout escape */
+.appMain,
+.wrap,
+.homeHeroGrid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.homeHeroGrid > * {
+  min-width: 0;
+}
+
+.homePortraitFrame {
+  width: 100%;
+  max-width: 520px;
+}
+
+.homePortraitFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.homeHeroLeft {
+  max-width: 640px;
+}
+
+.homeHeroLeft p {
+  max-width: 60ch;
+}
+/* Ensure hero text never forces horizontal overflow */
+.homeHeroLeft,
+.homeHeroRight {
+  min-width: 0;
+}
+
+.homeHeroLeft .homeLede,
+.homeHeroLeft .lede {
+  max-width: 60ch;
+}
+
+/* Timeline scroller must not escape container */
+.expTimelineScroller {
+  max-width: 100%;
+}
+
+/* Prevent long company names from blowing layout */
+.expTimelineName,
+.expDrawerTitle {
+  word-break: break-word;
 }

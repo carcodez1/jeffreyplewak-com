@@ -5,13 +5,6 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { ExperienceStripItem } from "@/lib/resume";
 
-/**
- * ExperienceDrawer
- * - Traps focus while open
- * - Returns focus to opener when closed
- * - Handles Escape key
- * - Accessible labeling via aria-labelledby
- */
 export function ExperienceDrawer({
   open,
   item,
@@ -28,13 +21,13 @@ export function ExperienceDrawer({
   const lastFocusedElement = useRef<HTMLElement | null>(null);
 
   const titleId = `${dialogId}-title`;
+  const descId = `${dialogId}-desc`;
 
   useEffect(() => {
     if (!open) return;
 
     lastFocusedElement.current = document.activeElement as HTMLElement;
 
-    // focus the close button ASAP after mount
     queueMicrotask(() => {
       firstFocusableRef.current?.focus();
     });
@@ -69,47 +62,50 @@ export function ExperienceDrawer({
 
   if (!open || !item) return null;
 
+  const range = item.resume.end ? `${item.resume.start} — ${item.resume.end}` : `${item.resume.start} — Present`;
+
   return (
     <div
+      id={dialogId}
       className="expDrawerRoot"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
+      aria-describedby={descId}
     >
-      <button
-        className="expDrawerBackdrop"
-        type="button"
-        aria-label="Close details"
-        onClick={onClose}
-      />
+      <button className="expDrawerBackdrop" type="button" aria-label="Close details" onClick={onClose} />
 
       <div className="expDrawerPanel" ref={panelRef}>
         <div className="expDrawerHead">
           <div className="expDrawerTitleRow">
-            <div className="expDrawerLogo" aria-hidden="true">
-              <Image
-                src={item.logoSrc}
-                alt=""
-                width={item.logoWidth}
-                height={item.logoHeight}
-                className="expDrawerLogoImg"
-              />
-            </div>
-
-            <div>
+            {/* Primary: Company + title */}
+            <div className="expDrawerTitleBlock">
               <h2 id={titleId} className="expDrawerTitle">
                 {item.name}
               </h2>
-              {item.resume.roleLine && (
-                <p className="expRoleLine">{item.resume.roleLine}</p>
-              )}
-              {(item.resume.start || item.resume.end) && (
-                <p className="expRoleLine">
-                  {item.resume.start ?? "UNKNOWN"}
-                  {item.resume.end ? ` — ${item.resume.end}` : ""}
-                </p>
-              )}
+              <p className="expDrawerRole">{item.resume.title}</p>
+
+              <p id={descId} className="expDrawerMeta">
+                <span className="expDrawerMetaItem">{range}</span>
+                <span className="expDrawerMetaDot">•</span>
+                <span className="expDrawerMetaItem">{item.resume.workType}</span>
+                <span className="expDrawerMetaDot">•</span>
+                <span className="expDrawerMetaItem">{item.resume.location}</span>
+              </p>
             </div>
+
+            {/* Secondary: Logo (only if present) */}
+            {item.logoSrc ? (
+              <div className="expDrawerLogo" aria-hidden="true">
+                <Image
+                  src={item.logoSrc}
+                  alt=""
+                  width={item.logoWidth ?? 96}
+                  height={item.logoHeight ?? 28}
+                  className="expDrawerLogoImg"
+                />
+              </div>
+            ) : null}
 
             <button
               ref={firstFocusableRef}
@@ -124,24 +120,18 @@ export function ExperienceDrawer({
 
           <div className="expDrawerActions">
             <a className="btn btnPrimary" href={item.resume.pageHref} onClick={onClose}>
-              View details
+              View on resume
             </a>
-            <a
-              className="btn"
-              href={item.resume.pdfHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+
+            <a className="btn" href={item.resume.pdfHref} target="_blank" rel="noopener noreferrer">
               Open PDF
             </a>
-            <a
-              className="btn btnTertiary"
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Company site
-            </a>
+
+            {item.href ? (
+              <a className="btn btnTertiary" href={item.href} target="_blank" rel="noopener noreferrer">
+                Company site
+              </a>
+            ) : null}
           </div>
         </div>
 
@@ -152,6 +142,19 @@ export function ExperienceDrawer({
               <li key={h}>{h}</li>
             ))}
           </ul>
+
+          {item.technologies && item.technologies.length > 0 ? (
+            <>
+              <h3 className="expDrawerSectionTitle">Technologies</h3>
+              <ul className="expDrawerTags" role="list">
+                {item.technologies.map((t) => (
+                  <li key={t} className="expDrawerTag">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
         </div>
 
         <div className="expDrawerFoot">

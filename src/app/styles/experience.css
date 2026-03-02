@@ -1,124 +1,296 @@
-/* src/app/styles/experience.css
-   Experience Timeline — mobile-first, enterprise-leaning strip.
-   Goals:
-   - Stable logo column (prevents jitter)
-   - Predictable card sizing (prevents overflow surprises)
-   - Clean truncation (prevents ugly wraps)
-*/
+/* src/app/styles/experience.css */
 
+/* ---- Timeline wrapper ---- */
 .expHorizontalTimeline {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .expTimelineHeader {
-  margin-top: 18px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 12px;
 }
 
 .expTimelineTitle {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--muted2);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
-/* Scroll container */
-.expTimelineTrack {
-  display: flex;
-  gap: 14px;
+.expTimelineCount {
+  font-size: 13px;
+  opacity: 0.7;
+}
 
+/* Scroller: contains horizontal overflow (prevents page-level overflow) */
+.expTimelineScroller {
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 6px;
+}
 
-  padding: 10px 2px 14px;
-  scroll-snap-type: x mandatory;
-
-  max-width: 100%;
+/* Track */
+.expTimelineTrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 320px);
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .expTimelineNode {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  list-style: none;
+  min-width: 0;
 }
 
 /* Card */
 .expTimelineCard {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-
-  /* Card size strategy:
-     - mobile: constrained to viewport
-     - desktop: consistent readable width
-  */
-  min-width: 240px;
-  max-width: calc(100vw - 48px);
-
-  padding: 14px 16px;
-
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.03);
-
+  width: 100%;
   text-align: left;
-  cursor: pointer;
-
-  transition:
-    transform var(--tMed) var(--ease),
-    border-color var(--tMed) var(--ease),
-    background var(--tMed) var(--ease);
+  border: 1px solid var(--border1);
+  border-radius: var(--rLg);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px 14px 12px;
+  display: grid;
+  gap: 10px;
 }
 
 .expTimelineCard:hover,
 .expTimelineCard:focus-visible {
-  transform: translateY(-1px);
-  border-color: rgba(255,255,255,0.20);
-  background: rgba(255,255,255,0.05);
+  border-color: var(--border2);
+  background: rgba(255, 255, 255, 0.04);
+  outline: none;
 }
 
-/* Stable logo column */
-.expTimelineLogo {
-  flex: 0 0 auto;
-  width: 56px;      /* stable */
+.expTimelineTop {
   display: grid;
-  place-items: center;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
 }
 
-.expTimelineText {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.expTimelineCompany {
   min-width: 0;
 }
 
-.expTimelineDate {
-  font-size: 0.82rem;
-  color: var(--muted2);
-}
-
 .expTimelineName {
-  font-size: 1rem;
-  font-weight: 650;
-  color: var(--text);
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
-/* Role: allow wrap, but keep it clean */
 .expTimelineRole {
-  font-size: 0.92rem;
-  color: var(--muted);
-  line-height: 1.35;
-  overflow-wrap: anywhere;
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.86;
+  line-height: 1.25;
 }
 
-/* Desktop: tighten padding, normalize width */
-@media (min-width: 768px) {
-  .expTimelineCard {
-    min-width: 320px;
-    padding: 12px 14px;
-  }
+.expTimelineLogo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0.9;
+}
 
-  .expTimelineLogo {
-    width: 64px;
+.expTimelineLogoImg {
+  max-width: 110px;
+  height: auto;
+}
+
+.expTimelineMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  opacity: 0.78;
+}
+
+.expTimelineDate {
+  white-space: nowrap;
+}
+
+.expTimelineType {
+  white-space: nowrap;
+  border: 1px solid var(--border1);
+  border-radius: 999px;
+  padding: 2px 8px;
+  opacity: 0.9;
+}
+
+/* Mobile: slightly narrower cards; stronger scroll affordance */
+@media (max-width: 640px) {
+  .expTimelineTrack {
+    grid-auto-columns: minmax(250px, 280px);
+  }
+}
+
+/* ---- Drawer ---- */
+.expDrawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.expDrawerBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  border: 0;
+}
+
+.expDrawerPanel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: min(560px, 92vw);
+  background: rgba(10, 12, 16, 0.98);
+  border-left: 1px solid var(--border1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.expDrawerHead {
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid var(--border1);
+}
+
+.expDrawerTitleRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.expDrawerTitleBlock {
+  min-width: 0;
+}
+
+.expDrawerTitle {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.expDrawerRole {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 650;
+  opacity: 0.9;
+}
+
+.expDrawerMeta {
+  margin: 8px 0 0;
+  font-size: 13px;
+  opacity: 0.72;
+  line-height: 1.25;
+}
+
+.expDrawerMetaDot {
+  margin: 0 6px;
+  opacity: 0.7;
+}
+
+.expDrawerLogo {
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.expDrawerLogoImg {
+  max-width: 120px;
+  height: auto;
+}
+
+.expDrawerCloseBtn {
+  border: 1px solid var(--border1);
+  background: rgba(255,255,255,0.02);
+  border-radius: var(--rMd);
+  padding: 8px 10px;
+  height: fit-content;
+}
+
+.expDrawerCloseBtn:hover,
+.expDrawerCloseBtn:focus-visible {
+  border-color: var(--border2);
+  background: rgba(255,255,255,0.05);
+  outline: none;
+}
+
+.expDrawerActions {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.expDrawerBody {
+  padding: 16px 18px 18px;
+  overflow: auto;
+}
+
+.expDrawerSectionTitle {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin: 0 0 10px;
+}
+
+.expDrawerList {
+  margin: 0 0 18px;
+  padding-left: 18px;
+}
+
+.expDrawerTags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.expDrawerTag {
+  border: 1px solid var(--border1);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.expDrawerFoot {
+  padding: 10px 18px;
+  border-top: 1px solid var(--border1);
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+@media (max-width: 640px) {
+  .expDrawerTitleRow {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+  .expDrawerCloseBtn {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .expDrawerLogo {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    margin-top: 10px;
   }
 }

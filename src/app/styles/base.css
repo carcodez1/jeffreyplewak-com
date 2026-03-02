@@ -135,3 +135,12 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+html, body {
+  background-color: var(--bg) !important;
+}
+
+/* Guard against long tokens causing horizontal scroll */
+:where(p, li, a, span, div) {
+  overflow-wrap: anywhere;
+}

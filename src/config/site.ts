@@ -18,7 +18,7 @@ export const LINKS = {
   emailConsulting: "mailto:plewak.jeff@gmail.com",
 
   github: "https://github.com/carcodez1",
-  linkedin: "https://www.linkedin.com/in/jeffrey-plewak",
+  linkedin: "https://www.linkedin.com/in/jeffreyplewak/",
 } as const;
 
 export type SocialKey = "linkedin" | "github" | "email" | "calendly";

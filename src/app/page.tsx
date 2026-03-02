@@ -43,15 +43,15 @@ export default function HomePage() {
                 />
               </div>
 
-              <div>
+              <div className="homeIdText">
                 <h1 className="h1">{SITE.name}</h1>
                 <p className="lede homeRole">{SITE.title}</p>
               </div>
             </div>
 
-            <p className="lede homeLede">
-              I build backend services and internal platforms. I care about predictable behavior in production and code that is
-              easy for other engineers to pick up.
+            <p className="homeLede">
+              Backend services and internal platforms. Predictable behavior in production.
+              Clear boundaries. Code other engineers can extend safely.
             </p>
 
             <div className="ctaRow" aria-label="Primary actions">
@@ -66,7 +66,6 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Lower + spaced + clearer label */}
             <div className="homeExpBlock">
               <ExperienceStrip label="Experience across" />
             </div>
@@ -94,16 +93,16 @@ export default function HomePage() {
           <article className="card">
             <h3 className="cardTitle">Backend systems</h3>
             <p className="cardDesc">
-              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production. Clean interfaces for
-              other teams.
+              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production.
+              Clean interfaces for other teams.
             </p>
           </article>
 
           <article className="card">
             <h3 className="cardTitle">Platform and infrastructure</h3>
             <p className="cardDesc">
-              Build pipelines, runtime configuration, and deployment workflows. I focus on reducing operational friction and
-              keeping systems straightforward to reason about.
+              Build pipelines, runtime configuration, and deployment workflows. Reduce operational friction.
+              Keep systems straightforward to reason about.
             </p>
           </article>
         </div>
