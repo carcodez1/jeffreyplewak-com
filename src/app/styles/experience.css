@@ -1,10 +1,15 @@
-/* Experience Timeline — Mobile First, No Overflow */
+/* src/app/styles/experience.css
+   Experience Timeline — mobile-first, enterprise-leaning strip.
+   Goals:
+   - Stable logo column (prevents jitter)
+   - Predictable card sizing (prevents overflow surprises)
+   - Clean truncation (prevents ugly wraps)
+*/
 
 .expHorizontalTimeline {
   margin-top: 22px;
 }
 
-/* Header */
 .expTimelineHeader {
   margin-top: 18px;
   margin-bottom: 12px;
@@ -26,13 +31,11 @@
   -webkit-overflow-scrolling: touch;
 
   padding: 10px 2px 14px;
-
   scroll-snap-type: x mandatory;
 
   max-width: 100%;
 }
 
-/* Each item */
 .expTimelineNode {
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -45,6 +48,10 @@
   gap: 12px;
   align-items: center;
 
+  /* Card size strategy:
+     - mobile: constrained to viewport
+     - desktop: consistent readable width
+  */
   min-width: 240px;
   max-width: calc(100vw - 48px);
 
@@ -63,24 +70,26 @@
     background var(--tMed) var(--ease);
 }
 
-.expTimelineCard:hover {
+.expTimelineCard:hover,
+.expTimelineCard:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(255,255,255,0.20);
   background: rgba(255,255,255,0.05);
 }
 
-/* Logo */
+/* Stable logo column */
 .expTimelineLogo {
   flex: 0 0 auto;
-  min-width: 52px;
+  width: 56px;      /* stable */
+  display: grid;
+  place-items: center;
 }
 
-/* Text */
 .expTimelineText {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-width: 0; /* important for wrapping */
+  min-width: 0;
 }
 
 .expTimelineDate {
@@ -94,16 +103,22 @@
   color: var(--text);
 }
 
+/* Role: allow wrap, but keep it clean */
 .expTimelineRole {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--muted);
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
 
-/* Tablet/Desktop */
+/* Desktop: tighten padding, normalize width */
 @media (min-width: 768px) {
   .expTimelineCard {
-    min-width: 300px;
+    min-width: 320px;
+    padding: 12px 14px;
+  }
+
+  .expTimelineLogo {
+    width: 64px;
   }
 }

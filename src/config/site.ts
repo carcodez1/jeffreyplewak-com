@@ -39,3 +39,12 @@ export const SOCIALS: ReadonlyArray<{
 export function extLinkProps(external: boolean) {
   return external ? { target: "_blank", rel: "noopener noreferrer" } : {};
 }
+export const PROJECT_LINKS = {
+  kprovengine: {
+    // Fill these with the exact values currently in src/app/projects/kprovengine/page.tsx
+    home: "/projects",
+    repo: "REPLACE_ME",
+    readme: "REPLACE_ME",
+    archDoc: "REPLACE_ME",
+  },
+} as const;

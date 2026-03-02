@@ -27,6 +27,12 @@ body {
   color: var(--text);
 }
 
+/* Improve long-line readability on ultra-wide layouts */
+:where(p, li) {
+  max-width: 75ch;
+}
+
+
 /* Selection for accessibility */
 ::selection {
   background: hsla(var(--accent) / 0.25);

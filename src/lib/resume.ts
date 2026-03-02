@@ -12,6 +12,8 @@ export type ExperienceStripItem = {
     pageHref: string;
     pdfHref: string;
     roleLine?: string;
+    start: string; // ISO-ish "YYYY-MM"
+    end?: string;  // ISO-ish "YYYY-MM" or omitted for present
   };
   highlights: string[];
 };
@@ -27,7 +29,7 @@ export function getResumeRoleById(id: string): ResumeRole | undefined {
 /**
  * Normalize employer list:
  * - Keep first occurrence per employerKey (stable order).
- * - Prevents repeated employers in the strip if RESUME.roles has multiple roles per employer.
+ * - Prevent repeated employers in the strip if RESUME.roles has multiple roles per employer.
  */
 function uniqueByEmployerKey(roles: readonly ResumeRole[]): ResumeRole[] {
   const seen = new Set<string>();
@@ -41,10 +43,22 @@ function uniqueByEmployerKey(roles: readonly ResumeRole[]): ResumeRole[] {
   return out;
 }
 
+/**
+ * Compare ISO-ish YYYY-MM descending (stable).
+ * Assumes strings are valid "YYYY-MM".
+ */
+function compareYmDesc(a: string, b: string): number {
+  if (a === b) return 0;
+  return a > b ? -1 : 1;
+}
+
 export function getExperienceStripItems(): readonly ExperienceStripItem[] {
   const roles = uniqueByEmployerKey(RESUME.roles);
 
-  return roles.map((r) => ({
+  // Deterministic ordering: newest start first.
+  const sorted = [...roles].sort((a, b) => compareYmDesc(a.start, b.start));
+
+  return sorted.map((r) => ({
     key: r.employerKey,
     name: r.employerName,
     href: r.employerUrl,
@@ -55,6 +69,8 @@ export function getExperienceStripItems(): readonly ExperienceStripItem[] {
       pageHref: `/resume#${r.id}`,
       pdfHref: RESUME.pdfHref,
       roleLine: r.title,
+      start: r.start,
+      end: r.end,
     },
     highlights: r.highlights,
   }));

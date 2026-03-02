@@ -2,18 +2,45 @@
    layout.css — Global layout containers & utilities
    ========================================================== */
 
-/* Site wrapper */
+/*
+  Goals:
+  - Constrain content width consistently (main content shouldn't "float").
+  - Fix sticky-header anchor offsets (no hidden section headings).
+  - Normalize vertical rhythm (reduce the "giant empty ocean" effect).
+  - Keep hero balanced on wide viewports and stable on mobile.
+*/
+
+:root {
+  /* Default section spacing; tuned for portfolio pages */
+  --sectionY: clamp(2.25rem, 4vw, 3.5rem);
+  --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* Main content container: single source of truth for page padding */
+.appMain {
+  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  margin-inline: auto;
+  padding-top: var(--sectionYSm);
+  padding-bottom: var(--sectionY);
+}
+
+/* Anchor targets should land below sticky header */
+:where(section[id], main[id], div[id]) {
+  scroll-margin-top: calc(var(--headerH) + 16px);
+}
+
+/* Legacy wrapper (if pages still use .wrap) */
 .wrap {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: var(--sectionYSm);
+  padding-bottom: var(--sectionY);
 }
 
-/* Main page section */
+/* Standard section spacing */
 .section {
-  margin-bottom: 5rem;
+  margin-bottom: var(--sectionY);
 }
 
-/* Projects grid (2 columns) */
+/* Projects grid */
 .grid2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -23,14 +50,16 @@
 /* Hero grid (home page) */
 .homeHeroGrid {
   display: grid;
-  gap: 28px;
-  grid-template-columns: 1.35fr 0.65fr;
-  align-items: start;
+  gap: clamp(18px, 3vw, 28px);
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
 }
 
+/* Mobile / narrow */
 @media (max-width: 980px) {
   .homeHeroGrid {
     grid-template-columns: 1fr;
+    align-items: start;
   }
 }
 
@@ -56,12 +85,15 @@
   border: 1px solid var(--border1);
   background: var(--surface1);
   box-shadow: var(--shadow1);
-  height: 360px;
+
+  /* Reduce the "giant photo dominates everything" feeling */
+  height: clamp(280px, 38vw, 420px);
 }
 
+/* Mobile portrait: keep it present but not overpowering */
 @media (max-width: 980px) {
   .homePortraitFrame {
-    height: 320px;
+    height: clamp(260px, 56vw, 360px);
   }
 }
 
@@ -70,4 +102,10 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* Optional utility: tighten vertical spacing for dense sections */
+.stackTight {
+  display: grid;
+  gap: 10px;
 }

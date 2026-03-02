@@ -2,11 +2,6 @@
    Buttons — Reusable, polished
    ========================== */
 
-/* Base button reset + shared behavior */
-/* DEBUG — REMOVE AFTER TEST */
-body {
-  outline: 5px dashed hotpink !important;
-}
 .btn {
   display: inline-flex;
   align-items: center;
@@ -57,4 +52,29 @@ body {
 }
 .btnHeader {
   padding: 9px 11px;
+}
+
+/* Icon buttons */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--rMd);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  transition:
+    background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    color var(--tFast) var(--ease),
+    transform var(--tFast) var(--ease);
+}
+.iconBtn:hover,
+.iconBtn:focus-visible {
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
 }

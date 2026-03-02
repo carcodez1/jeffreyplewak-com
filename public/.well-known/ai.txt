@@ -1,0 +1,4 @@
+# Jeffrey Plewak Portfolio - www.jeffreyplewak.com
+User-agent: *
+Allow: /
+Sitemap: https://www.jeffreyplewak.com/sitemap.xml

@@ -3,18 +3,15 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-
-import type { ExperienceItem } from "@/lib/experience";
+import type { ExperienceStripItem } from "@/lib/resume";
 
 /**
  * ExperienceDrawer
  *
- * Polished drawer/modal:
- * - Traps focus while open
+ * - Traps focus while open (lightweight)
  * - Returns focus to opener when closed
- * - Handles Escape key
- * - Accessible labeling via aria-labelledby
- * - Safely guards optional hrefs
+ * - Escape key closes
+ * - Backdrop closes
  */
 export function ExperienceDrawer({
   open,
@@ -22,40 +19,33 @@ export function ExperienceDrawer({
   onClose,
 }: {
   open: boolean;
-  item?: ExperienceItem;
+  item?: ExperienceStripItem;
   onClose?: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const firstFocusableRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusedElement = useRef<HTMLElement | null>(null);
 
-  // Focus management: move focus into drawer on open
   useEffect(() => {
     if (!open) return;
 
-    // remember last focus for return
     lastFocusedElement.current = document.activeElement as HTMLElement;
 
-    // after DOM updated
     setTimeout(() => {
       firstFocusableRef.current?.focus();
     }, 0);
 
-    // trap focus logic
     const handleFocus = (e: FocusEvent) => {
-      if (
-        panelRef.current &&
-        !panelRef.current.contains(e.target as Node)
-      ) {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
         e.stopPropagation();
         firstFocusableRef.current?.focus();
       }
     };
+
     document.addEventListener("focusin", handleFocus);
     return () => document.removeEventListener("focusin", handleFocus);
   }, [open]);
 
-  // Escape key to close
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -65,7 +55,6 @@ export function ExperienceDrawer({
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // Return focus when closed
   useEffect(() => {
     if (!open && lastFocusedElement.current) {
       lastFocusedElement.current.focus();
@@ -76,7 +65,6 @@ export function ExperienceDrawer({
 
   return (
     <div className="expDrawerRoot" role="dialog" aria-modal="true" aria-labelledby="exp-drawer-title">
-      {/* backdrop closes drawer */}
       <button
         className="expDrawerBackdrop"
         type="button"
@@ -85,7 +73,6 @@ export function ExperienceDrawer({
       />
 
       <div className="expDrawerPanel" ref={panelRef}>
-        {/* HEADER */}
         <div className="expDrawerHead">
           <div className="expDrawerTitleRow">
             <div className="expDrawerLogo" aria-hidden="true">
@@ -99,7 +86,6 @@ export function ExperienceDrawer({
             </div>
 
             <div>
-              {/* Connect this title with aria-labelledby */}
               <h2 id="exp-drawer-title" className="expDrawerTitle">
                 {item.name}
               </h2>
@@ -107,9 +93,13 @@ export function ExperienceDrawer({
               {item.resume.roleLine && (
                 <p className="expRoleLine">{item.resume.roleLine}</p>
               )}
+
+              <p className="expRoleLine">
+                {item.resume.start}
+                {item.resume.end ? ` — ${item.resume.end}` : " — Present"}
+              </p>
             </div>
 
-            {/* Close button gets initial focus */}
             <button
               ref={firstFocusableRef}
               className="expDrawerCloseBtn"
@@ -121,39 +111,23 @@ export function ExperienceDrawer({
             </button>
           </div>
 
-          {/* ACTION LINKS */}
           <div className="expDrawerActions">
-            {item.resume.pageHref && (
-              <a
-                className="btn btnPrimary"
-                href={item.resume.pageHref}
-                onClick={onClose}
-              >
-                View details
-              </a>
-            )}
-            <a
-              className="btn"
-              href={item.resume.pdfHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a className="btn btnPrimary" href={item.resume.pageHref} onClick={onClose}>
+              View details
+            </a>
+
+            <a className="btn" href={item.resume.pdfHref} target="_blank" rel="noopener noreferrer">
               Open PDF
             </a>
-            <a
-              className="btn btnTertiary"
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+
+            <a className="btn btnTertiary" href={item.href} target="_blank" rel="noopener noreferrer">
               Company site
             </a>
           </div>
         </div>
 
-        {/* BODY CONTENT */}
         <div className="expDrawerBody">
-          <h3 className="expDrawerSectionTitle">What I did</h3>
+          <h3 className="expDrawerSectionTitle">Highlights</h3>
           <ul className="expDrawerList">
             {item.highlights.map((h) => (
               <li key={h}>{h}</li>
@@ -161,11 +135,8 @@ export function ExperienceDrawer({
           </ul>
         </div>
 
-        {/* FOOTER */}
         <div className="expDrawerFoot">
-          <span className="expDrawerHint">
-            Esc closes • Click outside closes
-          </span>
+          <span className="expDrawerHint">Esc closes • Click outside closes</span>
         </div>
       </div>
     </div>

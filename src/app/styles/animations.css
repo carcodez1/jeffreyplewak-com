@@ -22,3 +22,10 @@
     opacity: 1;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileNav,
+  .mobileNavPanel {
+    transition: none !important;
+  }
+}

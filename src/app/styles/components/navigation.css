@@ -33,3 +33,18 @@
     display: none;
   }
 }
+
+/* Header nav hide/display toggles for mobile */
+.navToggle {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+@media (max-width: 820px) {
+  .navToggle {
+    display: inline-flex;
+  }
+  .siteNav {
+    display: none;
+  }
+}

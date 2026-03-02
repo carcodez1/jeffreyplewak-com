@@ -5,7 +5,7 @@ import "../projects.css";
 import { kprovengineSourceCodeJsonLd } from "@/lib/jsonld";
 import { getNonce } from "@/lib/nonce";
 
-const LINKS = {
+const KPROV_LINKS = {
   home: "/",
   repo: "https://github.com/carcodez1/KProvEngine",
   readme: "https://github.com/carcodez1/KProvEngine#readme",
@@ -64,7 +64,7 @@ export default async function Page() {
 
       <header className="pHero">
         <div className="pCrumb">
-          <Link href={LINKS.home} className="pBack">
+          <Link href={KPROV_LINKS.home} className="pBack">
             ← Home
           </Link>
         </div>
@@ -86,13 +86,13 @@ export default async function Page() {
             </p>
 
             <nav className="pCtas" aria-label="Project links">
-              <a className="pBtn pBtnPrimary" href={LINKS.repo} target="_blank" rel="noopener noreferrer">
+              <a className="pBtn pBtnPrimary" href={KPROV_LINKS.repo} target="_blank" rel="noopener noreferrer">
                 GitHub repo
               </a>
-              <a className="pBtn" href={LINKS.readme} target="_blank" rel="noopener noreferrer">
+              <a className="pBtn" href={KPROV_LINKS.readme} target="_blank" rel="noopener noreferrer">
                 README
               </a>
-              <a className="pBtn" href={LINKS.archDoc} target="_blank" rel="noopener noreferrer">
+              <a className="pBtn" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
                 Architecture doc
               </a>
             </nav>
@@ -144,7 +144,7 @@ export default async function Page() {
               </div>
 
               <div className="pMiniLinks">
-                <a className="pLink" href={LINKS.archDoc} target="_blank" rel="noopener noreferrer">
+                <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
                   View diagram + notes →
                 </a>
               </div>
@@ -218,7 +218,7 @@ export default async function Page() {
 
         <div className="pCard pCardTight pInlineNote">
           Full architecture diagrams and governance rules live in the repository.{" "}
-          <a className="pLink" href={LINKS.archDoc} target="_blank" rel="noopener noreferrer">
+          <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
             View architecture and notes →
           </a>
         </div>
@@ -278,11 +278,11 @@ python -m kprovengine.cli input.txt --out runs`}</pre>
 
       <footer className="pFooter" aria-label="Project footer">
         <div className="pFooterRow">
-          <a className="pLink" href={LINKS.repo} target="_blank" rel="noopener noreferrer">
+          <a className="pLink" href={KPROV_LINKS.repo} target="_blank" rel="noopener noreferrer">
             GitHub repository →
           </a>
           <span className="pDot">•</span>
-          <a className="pLink" href={LINKS.archDoc} target="_blank" rel="noopener noreferrer">
+          <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
             Architecture doc →
           </a>
         </div>

@@ -1,23 +1,19 @@
 // src/components/ExperienceStrip.tsx
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ExperienceDrawer } from "./ExperienceDrawer";
-import { EXPERIENCE_ITEMS, type ExperienceItem } from "@/lib/experience";
+import { getExperienceStripItems, type ExperienceStripItem } from "@/lib/resume";
 
-/**
- * Horizontal timeline component showing both dates and role.
- */
 type Props = { className?: string; label?: string };
 
-export function ExperienceStrip({
-  className,
-  label = "Experience across",
-}: Props) {
+export function ExperienceStrip({ className, label = "Experience across" }: Props) {
+  const items = useMemo(() => getExperienceStripItems(), []);
   const [openKey, setOpenKey] = useState<string | null>(null);
-  const active: ExperienceItem | undefined =
-    EXPERIENCE_ITEMS.find((i) => i.key === openKey);
+
+  const active: ExperienceStripItem | undefined =
+    items.find((i) => String(i.key) === String(openKey));
 
   return (
     <section
@@ -31,32 +27,31 @@ export function ExperienceStrip({
       </header>
 
       <ol className="expTimelineTrack">
-        {EXPERIENCE_ITEMS.map((item) => (
-          <li key={item.key} className="expTimelineNode">
+        {items.map((item) => (
+          <li key={String(item.key)} className="expTimelineNode">
             <button
               type="button"
               className="expTimelineCard"
               aria-label={`Show details for ${item.name}`}
-              onClick={() => setOpenKey(item.key)}
+              onClick={() => setOpenKey(String(item.key))}
             >
-              <div className="expTimelineLogo">
+              <div className="expTimelineLogo" aria-hidden="true">
                 <Image
                   src={item.logoSrc}
-                  alt={item.name}
+                  alt=""
                   width={item.logoWidth}
                   height={item.logoHeight}
                 />
               </div>
 
               <div className="expTimelineText">
-                {/* Render timeline date range */}
                 <span className="expTimelineDate">
-                  {item.resume.startDate}
-                  {item.resume.endDate ? ` — ${item.resume.endDate}` : ""}
+                  {item.resume.start}
+                  {item.resume.end ? ` — ${item.resume.end}` : " — Present"}
                 </span>
 
-                {/* Company name + role */}
                 <span className="expTimelineName">{item.name}</span>
+
                 {item.resume.roleLine && (
                   <span className="expTimelineRole">{item.resume.roleLine}</span>
                 )}
