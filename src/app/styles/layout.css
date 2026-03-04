@@ -1,41 +1,26 @@
-/* ==========================================================
-   layout.css — Global layout containers & utilities
-   ========================================================== */
-
-/*
-  Goals:
-  - Constrain content width consistently (main content shouldn't "float").
-  - Fix sticky-header anchor offsets (no hidden section headings).
-  - Normalize vertical rhythm (reduce the "giant empty ocean" effect).
-  - Keep hero balanced on wide viewports and stable on mobile.
-*/
+/* Layout/geometry only. No theme colors here. */
 
 :root {
-  /* Default section spacing; tuned for portfolio pages */
-  --sectionY: clamp(2.25rem, 4vw, 3.5rem);
-  --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
-
-  /* Hero-only rhythm (home) */
   --heroY: clamp(1.25rem, 2.25vw, 1.75rem);
   --heroGap: clamp(12px, 2vw, 18px);
 }
 
-/* Main content container: single source of truth for page padding */
+/* Sticky footer closure */
+.appRoot {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 .appMain {
+  flex: 1;
   width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
   margin-inline: auto;
   padding-top: var(--sectionYSm);
   padding-bottom: var(--sectionY);
 }
 
-/* Anchor targets should land below sticky header */
-:where(section[id], main[id], div[id]) {
-  scroll-margin-top: calc(var(--headerH) + 16px);
-}
-
-/* Legacy wrapper (if pages still use .wrap)
-   IMPORTANT: constrain width to match .appMain so pages don't go full-bleed.
-*/
 .wrap {
   width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
   margin-inline: auto;
@@ -43,37 +28,61 @@
   padding-bottom: var(--sectionY);
 }
 
-/* Standard section spacing */
+:where(section[id], main[id], div[id]) {
+  scroll-margin-top: calc(var(--headerH) + 16px);
+}
+
 .section {
   margin-bottom: var(--sectionY);
 }
 
-/* Projects grid */
 .grid2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
 }
 
-/* Hero grid (home page)
-   CRITICAL: align to top; center causes left column to drop under the portrait
-   and hides the timeline within the first viewport. */
-.homeHeroGrid {
-  display: grid;
-  gap: var(--heroGap);
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: start; /* was center */
+/* Ticker band near header */
+.homeTickerBand {
+  padding-top: 18px;
+  padding-bottom: 10px;
 }
 
-/* Mobile / narrow */
+.homeTickerHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.homeTickerTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  letter-spacing: var(--trackNormal);
+}
+
+.homeTickerHint {
+  margin: 0;
+  font-size: var(--text0);
+  color: var(--muted);
+}
+
+/* Hero */
+.homeHeroGrid {
+  display: grid;
+  gap: clamp(18px, 3vw, 40px);
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+}
+
 @media (max-width: 980px) {
   .homeHeroGrid {
     grid-template-columns: 1fr;
-    align-items: start;
   }
 }
 
-/* Tighten hero-only vertical rhythm (do not change global typography) */
 .heroHome.section {
   margin-bottom: var(--sectionYSm);
 }
@@ -82,13 +91,29 @@
   max-width: 640px;
   display: grid;
   gap: 0;
+  min-width: 0;
+}
+
+.homeHeroRight {
+  align-self: start;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.homeHeroLeft :where(p, .homeLede, .lede) {
+  max-width: 60ch;
 }
 
 .homeIdRow {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.homeIdText {
+  min-width: 0;
 }
 
 .homeRole {
@@ -96,83 +121,56 @@
 }
 
 .homeLede {
-  margin-top: 10px;
-  margin-bottom: 12px;
+  margin-top: 12px;
+  margin-bottom: 14px;
 }
 
-.heroHome .ctaRow {
-  margin-top: 6px;
-  margin-bottom: 10px;
-}
-
-.homeExpBlock {
-  margin-top: 8px;
-}
-/* Home experience block: increase whitespace + reduce clutter */
-.homeExpBlock {
-  margin-top: 18px;
-}
-@media (max-width: 980px) {
-  .homeExpBlock {
-    margin-top: 16px;
-  }
-}
-/* Avatar in hero */
+/* Avatar (layout only) */
 .homeAvatar {
   width: 84px;
   height: 84px;
   border-radius: var(--rLg);
   overflow: hidden;
-  border: 1px solid var(--border1);
-  background: var(--surface1);
 }
 
 .homeAvatarImg {
   object-fit: cover;
 }
 
-/* Portrait frame in hero */
+/* Portrait frame (layout only) */
 .homePortraitFrame {
   position: relative;
   border-radius: var(--rLg);
   overflow: hidden;
-  border: 1px solid var(--border1);
-  background: var(--surface1);
-  box-shadow: var(--shadow1);
 
-  /* Reduce portrait dominance so timeline is visible sooner */
-  height: clamp(260px, 32vw, 360px); /* was clamp(280px, 38vw, 420px) */
+  /* IMPORTANT: prevent portrait from dominating the fold */
   width: 100%;
-  max-width: 520px;
+  max-width: 420px;
+
+  /* Stable media sizing across devices */
+  aspect-ratio: 4 / 3;
+  height: auto;
+
+  /* Keep it visually aligned and not “floaty” */
+  margin-left: auto;
 }
 
-.homeHeroRight {
-  align-self: start;
-  min-width: 0;
-}
-
-/* Mobile portrait: keep it present but not overpowering */
 @media (max-width: 980px) {
   .homePortraitFrame {
-    height: clamp(240px, 56vw, 340px);
-    max-width: 100%;
+    max-width: 520px;
+    margin-left: 0;
+    aspect-ratio: 16 / 10;
   }
 }
 
-/* CTA row */
+
+
 .ctaRow {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-/* Optional utility: tighten vertical spacing for dense sections */
-.stackTight {
-  display: grid;
-  gap: 10px;
-}
-
-/* HARD CONSTRAINT: no layout escape */
 .appMain,
 .wrap,
 .homeHeroGrid {
@@ -182,480 +180,4 @@
 
 .homeHeroGrid > * {
   min-width: 0;
-}
-
-/* Ensure hero text never forces horizontal overflow */
-.homeHeroLeft,
-.homeHeroRight {
-  min-width: 0;
-}
-
-.homeHeroLeft p {
-  max-width: 60ch;
-}
-
-.homeHeroLeft .homeLede,
-.homeHeroLeft .lede {
-  max-width: 60ch;
-}
-
-/* Timeline scroller must not escape container */
-.expTimelineScroller {
-  max-width: 100%;
-  position: relative; /* needed for affordance overlay */
-}
-
-/* Scroll affordance: subtle right-edge fade (CSS-only, Turbopack-safe) */
-.expTimelineScroller::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 6px; /* match scroller padding-bottom */
-  width: 48px;
-  pointer-events: none;
-  background: linear-gradient(to left, rgba(10, 12, 16, 0.9), rgba(10, 12, 16, 0));
-}
-
-/* Prevent long company names from blowing layout */
-.expTimelineName,
-.expDrawerTitle {
-  word-break: break-word;
-}
-
-/* =============================
-   Global Navy Theme
-============================= */
-
-:root {
-  --navy-bg: #0b1220;
-  --navy-surface: rgba(10, 18, 35, 0.78);
-  --navy-border: rgba(255, 255, 255, 0.08);
-  --text-primary: #ffffff;
-  --text-secondary: #cbd5e1;
-  --accent: #3b82f6;
-}
-
-body {
-  background: var(--navy-bg);
-  color: var(--text-primary);
-}
-
-/* Header + Footer translucency */
-.siteHeader,
-.siteFooter {
-  background: var(--navy-surface);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--navy-border);
-}
-
-.siteFooter {
-  border-top: 1px solid var(--navy-border);
-}
-
-/* Icon color enforcement */
-.icon,
-.icon svg {
-  color: var(--accent);
-  fill: currentColor;
-}
-
-
-/* ===============================
-   NAVY THEME FOUNDATION
-================================ */
-
-:root {
-  --navy-bg: #0b1220;
-  --navy-surface: rgba(10, 18, 35, 0.78);
-  --navy-border: rgba(255, 255, 255, 0.08);
-
-  --text-primary: #ffffff;
-  --text-secondary: #cbd5e1;
-
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-}
-
-body {
-  background: var(--navy-bg);
-  color: var(--text-primary);
-}
-
-/* Header / Footer translucency */
-.siteHeader,
-.siteFooter {
-  background: var(--navy-surface);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--navy-border);
-}
-
-.siteFooter {
-  border-top: 1px solid var(--navy-border);
-}
-
-/* Remove washed effect */
-.siteHeader *,
-.siteFooter * {
-  color: var(--text-primary);
-}
-
-
-/* ===============================
-   INTERACTION TARGET HARDENING
-================================ */
-
-.navLink,
-.btnHeader,
-.iconBtn {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  padding-inline: 14px;
-}
-
-.iconBtn {
-  width: 44px;
-  justify-content: center;
-}
-
-.navLink:hover,
-.iconBtn:hover {
-  color: var(--accent);
-}
-
-
-/* ===============================
-   BRAND REFINEMENT
-================================ */
-
-.brandText {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.brandHi {
-  opacity: 0.55;
-  font-weight: 400;
-}
-
-.brandSub {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-
-.siteNav {
-  gap: 12px;
-}
-
-.navLink {
-  font-weight: 500;
-  opacity: 0.85;
-  transition: opacity 120ms ease, color 120ms ease;
-}
-
-.navLink:hover {
-  opacity: 1;
-}
-
-.headerDivider {
-  width: 1px;
-  height: 28px;
-  background: var(--navy-border);
-  margin-inline: 12px;
-}
-
-
-/* === NAV SCAN IMPROVEMENT === */
-
-.siteNav {
-  gap: 20px;
-}
-
-.navLink {
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-}
-
-.navLink:hover {
-  color: var(--accent);
-}
-
-
-/* === HERO VISUAL BALANCE === */
-
-.homePortraitFrame {
-  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
-}
-
-.homeHeroLeft h1 {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.homeLede {
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-
-/* === BUTTON POLISH === */
-
-.btnPrimary {
-  background: var(--accent);
-  border: none;
-  font-weight: 600;
-}
-
-.btnPrimary:hover {
-  background: var(--accent-hover);
-}
-
-.btn {
-  transition: all 140ms ease;
-}
-
-
-/* ===============================
-   FOOTER STRUCTURAL GRID
-================================ */
-
-.siteFooterInner {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 64px;
-  padding-block: 64px;
-}
-
-@media (max-width: 980px) {
-  .siteFooterInner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
-
-.footerCol {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-
-/* ===============================
-   FOOTER TYPOGRAPHY
-================================ */
-
-.footerTitle {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.footerHead {
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.8;
-}
-
-.footerHeadSpacer {
-  margin-top: 18px;
-}
-
-.footerSub {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 38ch;
-}
-
-.footerHint {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.footerAddr {
-  font-style: normal;
-}
-
-
-/* ===============================
-   FOOTER TYPOGRAPHY
-================================ */
-
-.footerTitle {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.footerHead {
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  opacity: 0.8;
-}
-
-.footerHeadSpacer {
-  margin-top: 18px;
-}
-
-.footerSub {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 38ch;
-}
-
-.footerHint {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.footerAddr {
-  font-style: normal;
-}
-
-
-/* ===============================
-   FOOTER ICONS
-================================ */
-
-.footerIcons {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.footerIcons .iconBtn {
-  min-height: 44px;
-  width: 44px;
-  border-radius: 10px;
-  border: 1px solid var(--navy-border);
-}
-
-.footerIcons .iconBtn:hover {
-  border-color: var(--accent);
-}
-
-
-/* ===============================
-   FOOTER ICONS
-================================ */
-
-.footerIcons {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.footerIcons .iconBtn {
-  min-height: 44px;
-  width: 44px;
-  border-radius: 10px;
-  border: 1px solid var(--navy-border);
-}
-
-.footerIcons .iconBtn:hover {
-  border-color: var(--accent);
-}
-
-
-.footerCopy {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.45);
-  margin-top: 16px;
-}
-
-
-/* ===============================
-   SOCIAL ICON MASK + COLOR INHERITANCE
-================================ */
-
-/* Base icon container */
-
-
-/* Apply the CSS variable from SocialIcon style */
-
-
-/* Hover / focus color change */
-.iconBtn:hover .icon,
-.iconBtn:focus-visible 
-
-
-/* Icon animation + focus outline */
-
-
-.iconBtn:focus-visible {
-  outline: 2px solid var(--accent-hover);
-  outline-offset: 2px;
-}
-
-
-/* ======================================
-   SOCIAL ICONS — show original color
-====================================== */
-
-/* Remove any mask-based logic */
-
-
-/* Optional hover effect: scale up slightly */
-.iconBtn:hover .icon,
-.iconBtn:focus-visible 
-
-
-
-/* ======================================
-   SOCIAL ICONS — show original colors
-====================================== */
-
-
-
-/* optional hover scale */
-.iconBtn:hover .icon,
-.iconBtn:focus-visible 
-
-
-
-/* =====================
-   SOCIAL ICONS — show original colors
-   ===================== */
-.icon {
-  background-image: var(--icon-url) !important;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  background-color: transparent !important;
-  -webkit-mask: none !important;
-  mask: none !important;
-}
-.iconBtn:hover .icon,
-.iconBtn:focus-visible .icon {
-  transform: scale(1.1);
-}
-.icon {
-  transition: transform 120ms ease;
-}
-
-/* ======================================
-   Social icons (brand colors, universal)
-   ====================================== */
-.iconImg {
-  display: block;
-  width: 18px;
-  height: 18px;
-}
-
-.iconBtn .iconImg {
-  transition: transform 120ms ease, opacity 120ms ease;
-  opacity: 0.92;
-}
-
-.iconBtn:hover .iconImg,
-.iconBtn:focus-visible .iconImg {
-  transform: scale(1.10);
-  opacity: 1;
 }

@@ -1,6 +1,7 @@
-/* ==========================================================
-   base.css — Global element defaults & typography normalization
-   ========================================================== */
+/* src/app/styles/base.css
+   Global element defaults & typography normalization.
+   IMPORTANT: This file should consume tokens from theme.css + tokens.css.
+*/
 
 /* Box sizing */
 *,
@@ -11,29 +12,29 @@
 
 /* Base document */
 html {
-  color-scheme: dark;
+  color-scheme: light;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+
   font-family: var(--fontSans);
+  font-size: 16px; /* stable baseline; type scale is rem-driven */
   line-height: var(--lhNormal);
-  font-size: var(--text1);
 }
 
 /* Body reset & full height */
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
+
+  /* Crispness on dark */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Improve long-line readability on ultra-wide layouts */
-:where(p, li) {
-  max-width: 75ch;
-}
-
-
-/* Selection for accessibility */
+/* Selection */
 ::selection {
   background: hsla(var(--accent) / 0.25);
   color: var(--text);
@@ -41,7 +42,7 @@ body {
 
 /* Links */
 a {
-  color: var(--text);
+  color: inherit;
   text-decoration: none;
 }
 a:hover,
@@ -49,47 +50,89 @@ a:focus-visible {
   color: hsla(var(--accent2) / 0.95);
 }
 
-/* Typography scale */
+/* Typography defaults */
 p {
-  margin: 0 0 18px 0;
+  margin: 0 0 var(--pSpace) 0;
   font-size: var(--text1);
   line-height: var(--lhNormal);
+  color: var(--muted);
 }
 
-h1, h2, h3 {
+:where(p, li) {
+  max-width: var(--measure);
+}
+
+/* Lists */
+ul,
+ol {
+  margin: 0 0 var(--pSpace) 0;
+  padding-left: 1.2rem;
+}
+li {
+  margin: 0.35rem 0;
+  color: var(--muted);
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
   margin: 0;
   font-weight: 650;
   line-height: var(--lhTight);
+  letter-spacing: var(--trackNormal);
+  color: var(--text);
 }
 
 h1 {
-  font-size: clamp(2.2rem, 3.4vw, 2.85rem);
-  margin-bottom: 18px;
-}
-
-h2 {
-  font-size: clamp(1.45rem, 1.9vw, 1.65rem);
+  font-size: clamp(2.1rem, 3.2vw, 2.85rem);
+  letter-spacing: var(--trackTight);
   margin-bottom: 14px;
 }
 
+h2 {
+  font-size: clamp(1.45rem, 1.9vw, 1.7rem);
+  margin-bottom: 12px;
+}
+
 h3 {
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   margin-bottom: 10px;
 }
 
-/* Pre/code */
+/* Utility text classes used across pages */
+.lede {
+  font-size: var(--text2);
+  line-height: var(--lhNormal);
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Inline code + code blocks */
 code,
 pre {
   font-family: var(--fontMono);
   font-size: var(--text0);
 }
 
+code {
+  padding: 0.15em 0.35em;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
 pre {
+  margin: 0 0 var(--pSpace) 0;
   background: var(--surface1);
   border: 1px solid var(--border1);
   border-radius: var(--rMd);
   padding: 16px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Media responsiveness */
@@ -107,19 +150,19 @@ select {
   font: inherit;
 }
 
-/* Focus ring for accessibility */
+/* Focus ring */
 :focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px hsla(var(--accent2) / 0.28);
 }
 
-/* Skip link (accessibility) */
+/* Skip link */
 .skipLink {
   position: absolute;
   top: 0;
   left: 10px;
   transform: translateY(-200%);
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   border: 1px solid var(--border1);
   color: var(--text);
   padding: 10px 12px;
@@ -130,14 +173,11 @@ select {
   transform: translateY(0);
 }
 
-/* === Global mobile overflow guard === */
-html, body {
+/* Global overflow guard */
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
-}
-
-html, body {
-  background-color: var(--bg) !important;
 }
 
 /* Guard against long tokens causing horizontal scroll */

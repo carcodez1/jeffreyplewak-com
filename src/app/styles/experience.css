@@ -1,9 +1,10 @@
-/* ==========================================
+/* src/app/styles/experience.css
    EXPERIENCE TICKER — Logo-only hero strip
    - CSS-only animation
    - Pauses on hover/focus-within
    - Respects prefers-reduced-motion
-   ========================================== */
+   - Tokenized surfaces (no hard-coded background colors)
+*/
 
 .expTicker {
   --tickerPadY: 14px;
@@ -13,16 +14,21 @@
 
   position: relative;
   overflow: hidden;
-
   margin-top: 14px;
   padding: var(--tickerPadY) 0;
 
   border: 1px solid var(--border0);
   border-radius: var(--rLg);
-  background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.012));
+
+  /* Match the site’s surface language (panel/card family) */
+  background:
+    radial-gradient(900px 420px at 15% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.030), rgba(255, 255, 255, 0.012));
+
+  box-shadow: var(--shadow1);
 }
 
-/* Edge fades (signal motion) */
+/* Edge fades (tokenized to theme background) */
 .expTicker::before,
 .expTicker::after {
   content: "";
@@ -33,28 +39,32 @@
   pointer-events: none;
   z-index: 2;
 }
+
 .expTicker::before {
   left: 0;
-  background: linear-gradient(to right, rgba(7,10,16,0.95), rgba(7,10,16,0));
+  background: linear-gradient(to right, var(--bg) 0%, rgba(0, 0, 0, 0) 100%);
 }
+
 .expTicker::after {
   right: 0;
-  background: linear-gradient(to left, rgba(7,10,16,0.95), rgba(7,10,16,0));
+  background: linear-gradient(to left, var(--bg) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .expTrack {
   display: flex;
   align-items: center;
   gap: var(--tickerGap);
-
   width: max-content;
   padding: 0 18px;
 
   animation: expScroll var(--tickerSpeed) linear infinite;
   will-change: transform;
+
+  /* Reduce layout/paint coupling during animation */
+  contain: layout paint;
+  transform: translate3d(0, 0, 0);
 }
 
-/* Pause for intent */
 .expTicker:hover .expTrack,
 .expTicker:focus-within .expTrack {
   animation-play-state: paused;
@@ -66,10 +76,13 @@
   justify-content: center;
 
   border-radius: var(--rMd);
-  padding: 8px 10px;
-  border: 1px solid transparent;
+  padding: 9px 10px;
 
-  opacity: 0.82;
+  border: 1px solid transparent;
+  background: transparent;
+
+  opacity: 0.86;
+
   transition:
     opacity var(--tFast) var(--ease),
     transform var(--tFast) var(--ease),
@@ -77,40 +90,50 @@
     background var(--tFast) var(--ease);
 }
 
-.expStripe:hover,
-.expStripe:focus-visible {
+.expStripe:hover {
   opacity: 1;
   transform: translateY(-1px);
-  border-color: rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.02);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.035);
 }
 
-/* IMPORTANT: with Next/Image, class applies to <img> element */
+/* Keyboard focus: explicit, consistent, and visible */
+.expStripe:focus-visible {
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 0 0 3px hsla(var(--accent2) / 0.28);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .expLogo {
   height: 28px;
   width: auto;
   display: block;
-  filter: none;
-  opacity: 1;
-  transition: transform var(--tFast) var(--ease);
+
+  /* Optical normalization: helps mixed logo assets on dark */
+  opacity: 0.96;
+  filter: saturate(1.05) contrast(1.02);
+
+  transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease);
 }
 
 .expStripe:hover .expLogo,
 .expStripe:focus-visible .expLogo {
   transform: scale(1.05);
+  opacity: 1;
 }
 
-/* Fallback (no logo) */
 .expFallback {
   font-size: 0.95rem;
   color: var(--muted);
   white-space: nowrap;
 }
 
-/* Infinite loop: you duplicate items once, so -50% is correct */
+/* -50% is correct for 2-copy loop */
 @keyframes expScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

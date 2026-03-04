@@ -3,29 +3,29 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/config/site";
 
 /**
- * robots.ts -> /robots.txt (App Router)
+ * robots.ts -> /robots.txt
  *
- * Policy:
- * - Universal defaults: block all indexing when not production.
- * - Production: allow crawling of public portfolio content.
- * - Use a single canonical host (SITE.url).
+ * Test alignment:
+ * - In non-production, return ONLY { rules: { userAgent:'*', disallow:'/' } }
+ * - In production, return object rules with allow/disallow and sitemap.
  *
- * Notes:
- * - robots directives control crawling; not licensing/training rights.
- * - Keep this deterministic and test-friendly.
+ * Universal deployment:
+ * - Works on Vercel (optional VERCEL_ENV) and other hosts.
  */
 export default function robots(): MetadataRoute.Robots {
   const base = SITE.url.replace(/\/+$/, "");
 
-  const isProd =
-    process.env.NODE_ENV === "production" &&
-    process.env.VERCEL_ENV !== "preview" &&
-    process.env.VERCEL_ENV !== "development";
+  const nodeEnv = process.env.NODE_ENV;
+  const vercelEnv = process.env.VERCEL_ENV; // optional
+  const isProd = nodeEnv === "production" && vercelEnv !== "preview" && vercelEnv !== "development";
 
   if (!isProd) {
+    // Block indexing on dev/preview/staging by default
     return {
-      rules: { userAgent: "*", disallow: "/" },
-      sitemap: `${base}/sitemap.xml`,
+      rules: {
+        userAgent: "*",
+        disallow: "/",
+      },
     };
   }
 

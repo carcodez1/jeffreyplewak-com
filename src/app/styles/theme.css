@@ -1,37 +1,57 @@
 /* src/app/styles/theme.css
-   SINGLE SOURCE OF TRUTH: theme tokens
+   COLOR SSOT ONLY.
+   Mechanism: :root (default) + :root[data-theme="dark"] (runtime-controlled)
 */
+
 :root {
-  /* Core */
-  --bg: #0b1320;
-  --surface0: rgba(255,255,255,0.03);
-  --surface1: rgba(255,255,255,0.05);
-  --border0: rgba(255,255,255,0.08);
-  --border1: rgba(255,255,255,0.12);
+  /* Base */
+  --bg: hsl(30 20% 98%);
+  --bg2: hsl(30 18% 96%);
 
-  --text0: #f5f7fb;
-  --text1: #9aa6c3;
+  --text: hsl(222 28% 14%);
+  --muted: hsl(222 10% 38%);
+  --muted2: hsl(222 10% 46%);
 
-  --accent: #4c8dff;
-  --accentGlow: rgba(76, 141, 255, 0.35);
+  /* Surfaces */
+  --surface0: hsl(0 0% 100%);
+  --surface1: hsl(30 18% 96%);
 
-  /* Header/Footer translucency */
-  --chromeBg: rgba(11, 19, 32, 0.72);
-  --chromeBlur: 14px;
-
-  /* Radii */
-  --rSm: 10px;
-  --rMd: 14px;
-  --rLg: 18px;
+  /* Borders */
+  --border0: hsl(222 18% 86%);
+  --border1: hsl(222 18% 82%);
+  --border2: hsl(222 18% 74%);
 
   /* Shadows */
-  --shadow0: 0 10px 30px rgba(0,0,0,0.35);
-  --shadow1: 0 16px 50px rgba(0,0,0,0.45);
+  --shadow1: 0 10px 30px rgba(17, 24, 39, 0.08);
+  --shadow2: 0 18px 60px rgba(17, 24, 39, 0.10);
 
-  /* Spacing rhythm */
-  --sectionY: clamp(2.25rem, 4vw, 3.5rem);
-  --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
+  /* Accent (space-separated for hsla(var(--accent)/x) usage) */
+  --accent: 221 84% 54%;
+  --accent2: 221 84% 44%;
 
-  /* Typography */
-  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  /* Chrome */
+  --chromeBg: color-mix(in srgb, var(--bg) 78%, transparent);
+  --chromeBlur: 10px;
+}
+
+:root[data-theme="dark"] {
+  --bg: hsl(236 49% 12%);
+  --bg2: hsl(236 40% 16%);
+
+  --text: hsl(222 35% 92%);
+  --muted: hsl(222 15% 72%);
+  --muted2: hsl(222 12% 60%);
+
+  --surface0: hsl(236 35% 14%);
+  --surface1: hsl(236 30% 18%);
+
+  --border0: hsl(236 18% 28%);
+  --border1: hsl(236 18% 34%);
+  --border2: hsl(236 18% 40%);
+
+  --shadow1: 0 10px 30px rgba(0, 0, 0, 0.30);
+  --shadow2: 0 18px 60px rgba(0, 0, 0, 0.42);
+
+  --chromeBg: color-mix(in srgb, var(--bg2) 84%, transparent);
+  --chromeBlur: 16px;
 }

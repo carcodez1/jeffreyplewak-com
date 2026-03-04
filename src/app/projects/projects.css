@@ -6,7 +6,7 @@
 */
 
 .pWrap {
-  max-width: var(--max);
+  max-width: var(--wrapMax);
   margin: 0 auto;
   padding: 48px 20px 84px;
 }
@@ -58,7 +58,7 @@
   align-items: center;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border1);
   background: rgba(255, 255, 255, 0.04);
   color: var(--muted);
   font-size: 12px;
@@ -105,8 +105,8 @@
 }
 
 .pBtnPrimary {
-  background: rgba(37, 99, 235, 0.18);
-  border-color: rgba(37, 99, 235, 0.40);
+  background: hsla(var(--accent) / 0.14);
+  border-color: hsla(var(--accent) / 0.40);
 }
 
 .pMetaRow {
@@ -129,7 +129,7 @@
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border1);
   color: var(--muted);
   background: rgba(255, 255, 255, 0.03);
 }
@@ -154,9 +154,9 @@
 
 .pCard {
   border-radius: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border1);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow1);
   padding: 14px 16px;
 }
 
@@ -202,7 +202,7 @@
   background: rgba(0, 0, 0, 0.25);
   overflow-x: auto;
   white-space: pre;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--fontMono);
   font-size: 0.92rem;
   line-height: 1.45;
 }

@@ -85,3 +85,7 @@ ticker_ctx_*.md
 debug/
 debug-smart/
 ticker_ctx_*.md
+
+# local scratch
+.tmp/
+_audit_bundle.txt

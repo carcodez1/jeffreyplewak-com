@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/jsonld";
 
 /**
- * Root metadata must use absolute URLs for canonical + OpenGraph URL.
- * Keep robots minimal here (index/follow) for universal compatibility and stable tests.
- * Bot-specific directives belong in app/robots.ts.
+ * Root metadata:
+ * - Keep robots minimal here to satisfy unit tests and avoid over-coupling.
+ * - Bot-specific directives belong in /robots.txt (src/app/robots.ts).
+ * - Use absolute URLs for canonical + OG/Twitter.
  */
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -25,7 +26,7 @@ export const rootMetadata: Metadata = {
 
   alternates: { canonical: SITE_URL },
 
-  // Keep minimal for test stability + universal crawler compatibility.
+  // IMPORTANT: keep minimal to satisfy tests (md.robots deep equals {index,follow})
   robots: { index: true, follow: true },
 
   openGraph: {
@@ -33,7 +34,7 @@ export const rootMetadata: Metadata = {
     url: SITE_URL,
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
-      "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
+      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     siteName: "Jeffrey R. Plewak",
     locale: "en_US",
     images: [
@@ -50,12 +51,11 @@ export const rootMetadata: Metadata = {
     card: "summary_large_image",
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
-      "Platform engineering, AI provenance systems, and reliability-focused backend architecture.",
+      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     images: [`${SITE_URL}/og-image.png`],
   },
 
   referrer: "strict-origin-when-cross-origin",
-
   formatDetection: {
     telephone: false,
     address: false,

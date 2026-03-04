@@ -1,6 +1,6 @@
-/* ==========================
+/* src/app/styles/components/cards.css
    Cards / Panels
-   ========================== */
+*/
 
 /* Card container */
 .card {
@@ -10,10 +10,13 @@
     linear-gradient(180deg, rgba(255,255,255,0.035), transparent 72%);
   border-radius: var(--rLg);
   padding: 16px;
-  transition: transform var(--tFast) var(--ease), border-color var(--tFast) var(--ease);
+
+  transition:
+    transform var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease);
 }
 
-/* Hover & focus interaction */
+/* Hover interaction */
 .card:hover,
 .card:focus-within {
   border-color: var(--border2);
@@ -33,10 +36,12 @@
   font-size: var(--text3);
   letter-spacing: -0.01em;
 }
+
 .cardTag {
   color: var(--muted2);
   font-size: var(--text1);
 }
+
 .cardDesc {
   color: var(--muted);
   margin-top: 8px;
@@ -48,11 +53,12 @@
   padding-left: 18px;
   color: var(--muted);
 }
+
 .cardBullets li {
   margin-bottom: 6px;
 }
 
-/* Card actions at bottom */
+/* Card actions */
 .cardActions {
   display: flex;
   gap: 10px;

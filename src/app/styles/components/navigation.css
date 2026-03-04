@@ -1,50 +1,6 @@
-/* ==========================
-   Navigation links + responsive behavior
-   ========================== */
+/* src/app/styles/components/navigation.css
+   Keep this file minimal to avoid fighting header.css.
+   MobileNav owns mobile panel styling elsewhere.
+*/
 
-.siteNav {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.navLink {
-  padding: 8px 12px;
-  border-radius: var(--rSm);
-  border: 1px solid transparent;
-  color: var(--muted);
-  font-size: var(--text1);
-  transition:
-    color var(--tFast) var(--ease),
-    border-color var(--tFast) var(--ease),
-    background var(--tFast) var(--ease);
-}
-
-.navLink:hover,
-.navLink:focus-visible {
-  color: var(--text);
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.12);
-}
-
-/* Hide nav on smaller screens */
-@media (max-width: 820px) {
-  .siteNav {
-    display: none;
-  }
-}
-
-/* Header nav hide/display toggles for mobile */
-.navToggle {
-  display: none;
-  align-items: center;
-  gap: 4px;
-}
-@media (max-width: 820px) {
-  .navToggle {
-    display: inline-flex;
-  }
-  .siteNav {
-    display: none;
-  }
-}
+/* no-op by design (reserved for future nav-specific styles) */

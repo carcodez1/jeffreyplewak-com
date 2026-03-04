@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import type { ReactNode } from "react";
 import type { Viewport } from "next";
 import Script from "next/script";
@@ -6,18 +5,21 @@ import "./globals.css";
 
 import { siteGraphJsonLd } from "@/lib/jsonld";
 import { getNonce } from "@/lib/nonce";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { Haptics } from "@/components/Haptics";
-import { BackgroundMotion } from "@/components/BackgroundMotion";
-import { BackgroundFx } from "@/components/BackgroundFx";
+import { SiteHeader } from "@/app/components/SiteHeader";
+import { SiteFooter } from "@/app/components/SiteFooter";
+import { Haptics } from "@/app/components/Haptics";
+import { BackgroundMotion } from "@/app/components/BackgroundMotion";
+import { BackgroundFx } from "@/app/components/BackgroundFx";
 
 export { rootMetadata as metadata } from "@/lib/metadata/root";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b0f17",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1116" },
+  ],
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -26,7 +28,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="en" className="no-js" suppressHydrationWarning>
-      <body>
+      <body className="appRoot">
+        {/* Preflight:
+           - DOES NOT delete localStorage.theme
+           - Defaults to LIGHT when no stored preference
+           - If you want default DARK: change defaultTheme to "dark"
+        */}
         <Script
           id="preflight"
           nonce={nonceAttr}
@@ -36,8 +43,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 (function () {
   try {
     var root = document.documentElement;
-    try { localStorage.removeItem("theme"); } catch (e) {}
-    root.dataset.theme = "dark";
+    var defaultTheme = "light";
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    var next = (stored === "dark" || stored === "light") ? stored : defaultTheme;
+    root.dataset.theme = next;
     root.classList.remove("no-js");
     root.classList.add("js");
   } catch (e) {}

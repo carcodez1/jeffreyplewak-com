@@ -1,99 +1,74 @@
-/* ==========================================================
-   tokens.css — Design Tokens (Single Source of Truth)
-   Used throughout base, layout, components, animations, etc.
-   ========================================================== */
+/* src/app/styles/tokens.css
+   Design system primitives (structure/typography/motion).
+   IMPORTANT: Do NOT define colors here. Colors live in theme.css only.
+*/
 
 :root {
-  /* ------------------------------------------------------
-     Layout
-     ------------------------------------------------------ */
-  --headerH: 64px;
-  --wrapMax: 1024px;
+  /* Typography: system sans (no remote dependency) */
+  --fontSans:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "SF Pro Display",
+    "Inter",
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    sans-serif;
+
+  /* Layout */
+  --headerH: 68px;
+  --wrapMax: 1040px;
   --gutter: 20px;
 
-  /* ------------------------------------------------------
-     Typography
-     ------------------------------------------------------ */
-  --fontSans: ui-sans-serif, system-ui, -apple-system, Segoe UI,
-    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --fontMono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  /* Typography: font stacks (no remote dependency) */
+  --fontMono:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
 
-  --text0: 0.95rem;
-  --text1: 1rem;
-  --text2: 1.125rem;
-  --text3: 1.35rem;
-  --text4: 1.8rem;
-  --text5: 2.35rem;
+  /* Reading measure + spacing rhythm */
+  --measure: 68ch;
+  --pSpace: 18px;
 
-  /* ------------------------------------------------------
-     Line Height
-     ------------------------------------------------------ */
-  --lhTight: 1.15;
-  --lhNormal: 1.55;
+  /* Type scale (slightly larger + cleaner for dark UI) */
+  --text0: 0.9375rem; /* 15px */
+  --text1: 1.0625rem; /* 17px */
+  --text2: 1.1875rem; /* 19px */
+  --text3: 1.375rem;  /* 22px */
+  --text4: 1.875rem;  /* 30px */
+  --text5: 2.5rem;    /* 40px */
 
-  /* ------------------------------------------------------
-     Radii
-     ------------------------------------------------------ */
+  /* Line height */
+  --lhTight: 1.12;
+  --lhNormal: 1.62;
+
+  /* Heading tracking */
+  --trackTight: -0.015em;
+  --trackNormal: -0.01em;
+
+  /* Radii */
   --rSm: 10px;
   --rMd: 14px;
   --rLg: 18px;
 
-  /* ------------------------------------------------------
-     Motion
-     ------------------------------------------------------ */
+  /* Motion */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --tFast: 120ms;
   --tMed: 180ms;
   --tSlow: 260ms;
 
-  /* ------------------------------------------------------
-     Shadows (subtle)
-     ------------------------------------------------------ */
-  --shadow1: 0px 10px 30px rgba(0, 0, 0, 0.30);
-  --shadow2: 0px 18px 60px rgba(0, 0, 0, 0.42);
-
-  /* ------------------------------------------------------
-     Brand Accents
-     ------------------------------------------------------ */
-  --accent: 220 90% 62%;
-  --accent2: 190 90% 55%;
-
-  /* ------------------------------------------------------
-     Surfaces (dark theme)
-     ------------------------------------------------------ */
-  --bg: #070a10;
-  --bg2: #0b0f17;
-
-  --surface0: rgba(255, 255, 255, 0.03);
-  --surface1: rgba(255, 255, 255, 0.05);
-
-  --border0: rgba(255, 255, 255, 0.10);
-  --border1: rgba(255, 255, 255, 0.14);
-  --border2: rgba(255, 255, 255, 0.18);
-
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.70);
-  --muted2: rgba(255, 255, 255, 0.56);
-
-  /* ------------------------------------------------------
-     Light theme overrides (optional)
-     ------------------------------------------------------ */
-}
-
-:root[data-theme="light"] {
-  --bg: #fafafa;
-  --bg2: #ffffff;
-
-  --surface0: rgba(17, 24, 39, 0.03);
-  --surface1: rgba(17, 24, 39, 0.05);
-
-  --border0: rgba(17, 24, 39, 0.10);
-  --border1: rgba(17, 24, 39, 0.14);
-
-  --text: rgba(17, 24, 39, 0.92);
-  --muted: rgba(17, 24, 39, 0.70);
-  --muted2: rgba(17, 24, 39, 0.58);
-
-  --btnPrimaryText: rgba(17, 24, 39, 0.92);
+  /* Section rhythm */
+  --sectionY: clamp(2.75rem, 5vw, 4.25rem);
+  --sectionYSm: clamp(1.5rem, 3vw, 2.25rem);
 }

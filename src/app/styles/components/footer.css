@@ -103,3 +103,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- 2026 polish: footer hierarchy + link affordance --- */
+.footerTitle,
+.footerHead {
+  letter-spacing: -0.01em;
+}
+
+.footerLink:hover,
+.footerLink:focus-visible {
+  color: hsla(var(--accent) / 1);
+}

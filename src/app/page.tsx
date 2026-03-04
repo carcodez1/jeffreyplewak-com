@@ -1,8 +1,7 @@
-// src/app/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ExperienceTicker } from "@/components/ExperienceTicker";
+import { ExperienceTicker } from "@/app/components/ExperienceTicker";
 import { LINKS, SITE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -28,6 +27,14 @@ const PORTRAIT_SRC = "/assets/images/jeffrey-plewak-portrait.webp";
 export default function HomePage() {
   return (
     <div className="wrap">
+      <section className="homeTickerBand" aria-label="Experience strip">
+        <header className="homeTickerHead">
+          <h2 className="homeTickerTitle">Experience across</h2>
+          <p className="homeTickerHint">Logos only. Hover to pause. Click to jump into the resume.</p>
+        </header>
+        <ExperienceTicker />
+      </section>
+
       <header className="section heroHome" aria-label="Home intro">
         <div className="homeHeroGrid">
           <div className="homeHeroLeft">
@@ -36,7 +43,7 @@ export default function HomePage() {
                 <Image src={PORTRAIT_SRC} alt="" width={84} height={84} className="homeAvatarImg" priority />
               </div>
 
-              <div>
+              <div className="homeIdText">
                 <h1 className="h1">{SITE.name}</h1>
                 <p className="lede homeRole">{SITE.title}</p>
               </div>
@@ -58,16 +65,6 @@ export default function HomePage() {
                 Email
               </a>
             </div>
-
-            <section className="homeExpBlock" aria-label="Experience strip">
-              <header className="homeExpHead">
-                <h2 className="h3 homeExpTitle">Experience across</h2>
-                <p className="homeExpHint">
-                  Logos only. Hover to pause. Click to jump into the resume.
-                </p>
-              </header>
-              <ExperienceTicker />
-            </section>
           </div>
 
           <aside className="homeHeroRight" aria-label="Portrait">

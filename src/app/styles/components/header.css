@@ -1,16 +1,10 @@
-/* src/app/styles/components/header.css */
-
-/* ==========================================================
-   Header container
-   ========================================================== */
-
 .siteHeader {
   position: sticky;
   top: 0;
   z-index: 7000;
-  background: color-mix(in srgb, var(--bg2) 88%, transparent);
+  background: var(--chromeBg);
   border-bottom: 1px solid var(--border0);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(var(--chromeBlur));
 }
 
 .siteHeaderInner {
@@ -20,13 +14,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 16px;
 }
 
-/* ==========================================================
-   Brand block (FIXES "JeffreySenior..." collapse)
-   ========================================================== */
-
+/* Brand */
 .brand {
   display: flex;
   flex-direction: column;
@@ -37,53 +28,51 @@
 }
 
 .brandText {
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
   line-height: 1.1;
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
 }
 
 .brandHi {
   font-weight: 500;
-  opacity: 0.75;
+  opacity: 0.72;
+  margin-right: 6px;
 }
 
 .brandSub {
   font-size: 12px;
-  opacity: 0.65;
+  opacity: 0.60;
   margin-top: 2px;
   white-space: nowrap;
 }
 
-/* ==========================================================
-   Navigation
-   ========================================================== */
-
+/* Nav */
 .siteNav {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 8px;
 }
 
 .navLink {
-  font-size: 14px;
-  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: var(--rSm);
+  border: 1px solid transparent;
   color: var(--muted);
-  transition: color var(--tFast) var(--ease);
+  transition:
+    color var(--tFast) var(--ease),
+    background var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease);
 }
 
 .navLink:hover,
 .navLink:focus-visible {
   color: var(--text);
+  background: color-mix(in srgb, var(--bg2) 86%, transparent);
+  border-color: var(--border0);
   outline: none;
 }
 
-/* ==========================================================
-   Header actions
-   ========================================================== */
-
+/* Actions */
 .siteActions {
   display: flex;
   align-items: center;
@@ -94,12 +83,6 @@
   display: flex;
   gap: 8px;
   align-items: center;
-}
-
-.btnHeader {
-  height: 34px;
-  padding-inline: 12px;
-  font-size: 13px;
 }
 
 .headerDivider {
@@ -114,33 +97,32 @@
   align-items: center;
 }
 
-/* ==========================================================
-   Icon buttons
-   ========================================================== */
-
+/* Icon buttons */
 .iconBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+
+  width: 36px;
+  height: 36px;
+
   border-radius: var(--rMd);
   border: 1px solid var(--border0);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--muted);
+  background: color-mix(in srgb, var(--bg2) 70%, transparent);
+
   transition:
     background var(--tFast) var(--ease),
     border-color var(--tFast) var(--ease),
-    color var(--tFast) var(--ease),
-    transform var(--tFast) var(--ease);
+    transform var(--tFast) var(--ease),
+    box-shadow var(--tFast) var(--ease);
 }
 
 .iconBtn:hover,
 .iconBtn:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: color-mix(in srgb, var(--bg2) 82%, transparent);
   border-color: var(--border1);
-  color: hsla(var(--accent2) / 0.95);
   transform: translateY(-1px);
+  box-shadow: var(--shadow1);
   outline: none;
 }
 
@@ -148,16 +130,22 @@
   transform: translateY(0);
 }
 
-/* ==========================================================
-   Responsive
-   ========================================================== */
+.iconImg {
+  display: block;
+}
 
+/* Responsive */
 @media (max-width: 980px) {
   .siteNav {
     display: none;
   }
-
   .brandSub {
     display: none;
   }
 }
+
+/* --- icon polish: make SVG icons reliably visible in light theme --- */
+.iconBtn { color: var(--fg); }
+.iconImg { opacity: 0.92; }
+.iconBtn:hover .iconImg,
+.iconBtn:focus-visible .iconImg { opacity: 1; }
