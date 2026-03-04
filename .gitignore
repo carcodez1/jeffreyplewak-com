@@ -89,3 +89,8 @@ ticker_ctx_*.md
 # local scratch
 .tmp/
 _audit_bundle.txt
+
+# Local audit/context artifacts
+CONTEXT.txt
+context-output.txt
+collect-context.sh
