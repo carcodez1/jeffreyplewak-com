@@ -37,6 +37,7 @@
   /* ── Chrome ── */
   --chromeBg:   color-mix(in srgb, var(--bg2) 82%, transparent);
   --chromeBlur: 18px;
+  --iconFilter: brightness(0) invert(1);
 
   /* ── Typography (system stack, characterful order) ── */
   --fontSans:
@@ -73,4 +74,5 @@
   --accent2:  221 84% 44%;
   --chromeBg: color-mix(in srgb, var(--bg) 80%, transparent);
   --chromeBlur: 12px;
+  --iconFilter: none;
 }

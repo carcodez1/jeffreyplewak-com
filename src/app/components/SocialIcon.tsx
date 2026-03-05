@@ -23,7 +23,8 @@ export function SocialIcon({
       height={size}
       className={className ? `iconImg ${className}` : "iconImg"}
       sizes={`${size}px`}
-      loading="lazy"
+      loading="eager"
+      decoding="async"
     />
   );
 }

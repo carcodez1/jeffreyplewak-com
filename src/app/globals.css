@@ -1,7 +1,7 @@
 /* src/app/globals.css
    Style entrypoint — import order matters.
-   1. Color tokens first (theme.css)
-   2. Structure tokens (tokens.css)
+   1. Structure tokens first (tokens.css)
+   2. Theme colors (theme.css)
    3. Element resets (base.css)
    4. Layout geometry (layout.css)
    5. Components
@@ -9,8 +9,8 @@
    7. Animations last
 */
 
-@import "./styles/theme.css";
 @import "./styles/tokens.css";
+@import "./styles/theme.css";
 @import "./styles/base.css";
 @import "./styles/layout.css";
 
