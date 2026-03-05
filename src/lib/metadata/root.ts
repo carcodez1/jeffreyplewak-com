@@ -28,7 +28,7 @@ export const rootMetadata: Metadata = {
   manifest: "/assets/favicon/site.webmanifest",
   icons: {
     icon: [
-      { url: "/assets/favicon/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon.ico", type: "image/x-icon" },
       { url: "/assets/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/assets/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -41,7 +41,7 @@ export const rootMetadata: Metadata = {
         type: "image/png",
       },
     ],
-    shortcut: ["/assets/favicon/favicon.ico"],
+    shortcut: ["/favicon.ico"],
   },
 
   // IMPORTANT: keep minimal to satisfy tests (md.robots deep equals {index,follow})
