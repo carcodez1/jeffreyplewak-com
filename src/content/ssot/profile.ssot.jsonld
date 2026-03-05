@@ -1,0 +1,228 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ssot": "https://plewak.jeffrey/ssot#",
+    "evidence": "ssot:evidence",
+    "claimStatus": "ssot:claimStatus",
+    "SUPPORTED": "ssot:SUPPORTED",
+    "UNSUPPORTED": "ssot:UNSUPPORTED",
+    "UNKNOWN": "ssot:UNKNOWN",
+    "source": "ssot:source",
+    "sourceType": "ssot:sourceType",
+    "hash": "ssot:hash",
+    "retrievedAt": "ssot:retrievedAt",
+    "jobTarget": "ssot:jobTarget",
+    "skillsMap": "ssot:skillsMap",
+    "projectMap": "ssot:projectMap",
+    "workflow": "ssot:workflow",
+    "artifact": "ssot:artifact",
+    "derivesFrom": "ssot:derivesFrom",
+    "verification": "ssot:verification",
+    "constraints": "ssot:constraints"
+  },
+  "@type": "Person",
+  "@id": "https://jeffreyplewak.com/#jeffrey-r-plewak",
+  "name": "Jeffrey R. Plewak",
+  "jobTitle": "Senior Software Engineer — Platform, Compliance & Production Systems",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "New Bern",
+    "addressRegion": "NC",
+    "addressCountry": "US"
+  },
+  "email": "mailto:plewak.jeff@gmail.com",
+  "telephone": "+1-919-402-6624",
+  "url": "https://jeffreyplewak.com/",
+  "sameAs": [
+    "LINKEDIN_URL_UNKNOWN",
+    "GITHUB_URL_UNKNOWN"
+  ],
+  "nationality": "US",
+  "knowsAbout": [
+    "Python",
+    "TypeScript",
+    "JavaScript",
+    "SQL",
+    "AWS",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "SBOM",
+    "SLSA provenance",
+    "RAG",
+    "Deterministic orchestration",
+    "Auditability"
+  ],
+  "hasPart": [
+    {
+      "@type": "CreativeWork",
+      "@id": "https://jeffreyplewak.com/#project-portfolio-site",
+      "name": "jeffreyplewak-com (Portfolio Site V1)",
+      "description": "Static-first personal portfolio and project showcase. Minimal structure; recruiter-friendly; strong SEO defaults; performance and accessibility; low operational complexity.",
+      "keywords": [
+        "Next.js App Router",
+        "TypeScript",
+        "Hand-authored CSS",
+        "Vercel",
+        "Static generation",
+        "SEO metadata",
+        "robots.txt",
+        "sitemap.xml"
+      ],
+      "evidence": [
+        {
+          "claimStatus": "SUPPORTED",
+          "sourceType": "text",
+          "source": "Pasted repo README excerpt (jeffreyplewak-com)"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://jeffreyplewak.com/#project-support-agent",
+      "name": "Customer Support Agent",
+      "description": "Deterministic multi-tool support workflow with RBAC, verification gates, HITL approval before mutation, and structured audit envelopes (timestamp, decision, action, actor, why).",
+      "keywords": [
+        "Deterministic agent",
+        "RBAC",
+        "HITL",
+        "Audit envelope",
+        "Tool registry",
+        "RAG (KB answering)"
+      ],
+      "evidence": [
+        {
+          "claimStatus": "SUPPORTED",
+          "sourceType": "text",
+          "source": "Pasted project description excerpt (Customer Support Agent)"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://jeffreyplewak.com/#project-kprovengine",
+      "name": "KProvEngine",
+      "description": "Governance-locked OSS core for deterministic execution and evidence-ready pipelines with identity guard, artifact guard, Python runtime policy, and CI parity (make preflight).",
+      "keywords": [
+        "SBOM",
+        "Provenance",
+        "Deterministic CLI",
+        "Governance",
+        "CI parity"
+      ],
+      "evidence": [
+        {
+          "claimStatus": "SUPPORTED",
+          "sourceType": "text",
+          "source": "Pasted project README excerpt (kprovengine)"
+        }
+      ]
+    }
+  ],
+  "jobTarget": {
+    "@type": "JobPosting",
+    "name": "Senior Software Engineer – AI-Native Development",
+    "skills": [
+      "Agent frameworks (LangGraph, LangChain, CrewAI, Pydantic AI)",
+      "LLM integration (OpenAI, Claude)",
+      "RAG pipelines and evaluation",
+      "Node.js, Python",
+      "React, Next.js, TypeScript",
+      "AWS, Kubernetes",
+      "Vector databases / document stores / graph databases",
+      "AI-assisted developer workflows (Cursor-like tools)"
+    ],
+    "evidence": [
+      {
+        "claimStatus": "SUPPORTED",
+        "sourceType": "text",
+        "source": "Pasted job description excerpt"
+      }
+    ]
+  },
+  "skillsMap": [
+    {
+      "ssot:skill": "RAG pipelines",
+      "claimStatus": "SUPPORTED",
+      "evidence": [
+        {
+          "sourceType": "text",
+          "source": "Resume draft: RAG + retrieval-augmented pipelines; Support Agent project: KB answering"
+        }
+      ]
+    },
+    {
+      "ssot:skill": "Agent orchestration with HITL/RBAC",
+      "claimStatus": "SUPPORTED",
+      "evidence": [
+        {
+          "sourceType": "text",
+          "source": "Support Agent project description: RBAC, HITL, gating order, audit envelope"
+        }
+      ]
+    },
+    {
+      "ssot:skill": "LangChain / LangGraph (direct library usage)",
+      "claimStatus": "UNKNOWN",
+      "evidence": [
+        {
+          "sourceType": "text",
+          "source": "Not proven in pasted resume/projects as direct dependency usage"
+        }
+      ]
+    },
+    {
+      "ssot:skill": "React/Next.js (professional employer production usage)",
+      "claimStatus": "UNKNOWN",
+      "evidence": [
+        {
+          "sourceType": "text",
+          "source": "Portfolio proves Next.js/TS; employer usage not proven in this SSOT input"
+        }
+      ]
+    }
+  ],
+  "workflow": {
+    "@type": "CreativeWork",
+    "name": "Deterministic Artifact Generation Pipeline",
+    "constraints": [
+      "Do not emit UNSUPPORTED/UNKNOWN claims into recruiter artifacts",
+      "All derived artifacts must be reproducible from SSOT + checked-in sources",
+      "Every artifact includes a manifest with hashes + generation timestamp"
+    ],
+    "artifact": [
+      {
+        "@type": "DigitalDocument",
+        "name": "resume.json",
+        "derivesFrom": [
+          "src/content/ssot/profile.ssot.jsonld"
+        ],
+        "verification": [
+          "json schema validation",
+          "claim ledger enforcement"
+        ]
+      },
+      {
+        "@type": "DigitalDocument",
+        "name": "contact.vcf",
+        "derivesFrom": [
+          "src/content/ssot/profile.ssot.jsonld"
+        ],
+        "verification": [
+          "VCF syntax validation"
+        ]
+      },
+      {
+        "@type": "DigitalDocument",
+        "name": "recruiter-pack.pdf",
+        "derivesFrom": [
+          "src/content/ssot/profile.ssot.jsonld"
+        ],
+        "verification": [
+          "hash manifest",
+          "build reproducibility"
+        ]
+      }
+    ]
+  }
+}
