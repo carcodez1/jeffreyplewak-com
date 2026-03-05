@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,18 +8,20 @@ import { LINKS, SITE } from "@/config/site";
 export const metadata: Metadata = {
   title: `${SITE.name} — ${SITE.title}`,
   description:
-    "Jeffrey R. Plewak. Senior software engineer focused on backend systems, platform architecture, and production reliability.",
+    "Jeffrey R. Plewak. Senior software engineer specializing in backend systems, platform architecture, and compliance-critical production environments. 10+ years across defense, finance, and cloud.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     title: `${SITE.name} — ${SITE.title}`,
-    description: "Senior software engineer working on backend systems and platform architecture.",
+    description:
+      "Senior software engineer — backend systems, platform architecture, production reliability.",
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} — ${SITE.title}`,
-    description: "Senior software engineer working on backend systems and platform architecture.",
+    description:
+      "Senior software engineer — backend systems, platform architecture, production reliability.",
   },
 };
 
@@ -27,20 +30,31 @@ const PORTRAIT_SRC = "/assets/images/jeffrey-plewak-portrait.webp";
 export default function HomePage() {
   return (
     <div className="wrap">
+
+      {/* ── Experience ticker — above the fold, sets authority immediately ── */}
       <section className="homeTickerBand" aria-label="Experience strip">
         <header className="homeTickerHead">
           <h2 className="homeTickerTitle">Experience across</h2>
-          <p className="homeTickerHint">Logos only. Hover to pause. Click to jump into the resume.</p>
+          <p className="homeTickerHint">Hover to pause · click to jump to resume</p>
         </header>
         <ExperienceTicker />
       </section>
 
-      <header className="section heroHome" aria-label="Home intro">
+      {/* ── Hero ── */}
+      <header className="section heroHome" aria-label="Introduction">
         <div className="homeHeroGrid">
+
+          {/* Left column — identity + copy + CTAs */}
           <div className="homeHeroLeft">
             <div className="homeIdRow">
               <div className="homeAvatar" aria-hidden="true">
-                <Image src={PORTRAIT_SRC} alt="" width={84} height={84} className="homeAvatarImg" priority />
+                <Image
+                  src={PORTRAIT_SRC}
+                  alt=""
+                  width={80}
+                  height={80}
+                  className="homeAvatarImg"
+                />
               </div>
 
               <div className="homeIdText">
@@ -50,11 +64,12 @@ export default function HomePage() {
             </div>
 
             <p className="lede homeLede">
-              I build backend services and internal platforms. I care about predictable behavior in production and code
-              that is easy for other engineers to pick up.
+              I build backend services and internal platforms. I care about
+              predictable behavior in production and code that is easy for other
+              engineers to pick up.
             </p>
 
-            <div className="ctaRow" aria-label="Primary actions">
+            <nav className="ctaRow" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">
                 Resume
               </Link>
@@ -64,16 +79,17 @@ export default function HomePage() {
               <a className="btn btnTertiary" href={LINKS.emailProject}>
                 Email
               </a>
-            </div>
+            </nav>
           </div>
 
+          {/* Right column — portrait */}
           <aside className="homeHeroRight" aria-label="Portrait">
             <div className="homePortraitFrame">
               <Image
                 src={PORTRAIT_SRC}
                 alt="Jeffrey R. Plewak"
                 fill
-                sizes="(max-width: 980px) 100vw, 420px"
+                sizes="(max-width: 980px) 100vw, 400px"
                 className="homePortraitImg"
                 priority
               />
@@ -82,43 +98,77 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* ── Work ── */}
       <section id="work" className="section" aria-label="Work">
         <h2 className="h2">Work</h2>
 
         <div className="grid2">
-          <article className="card">
+          <article className="card focusCard">
             <h3 className="cardTitle">Backend systems</h3>
             <p className="cardDesc">
-              APIs, services, and data pipelines. Clear boundaries. Predictable behavior in production. Clean interfaces
-              for other teams.
+              APIs, services, and data pipelines with clear boundaries.
+              Predictable behavior in production. Clean interfaces for other
+              teams to build on.
             </p>
           </article>
 
-          <article className="card">
+          <article className="card focusCard">
             <h3 className="cardTitle">Platform and infrastructure</h3>
             <p className="cardDesc">
-              Build pipelines, runtime configuration, and deployment workflows. I focus on reducing operational friction
-              and keeping systems straightforward to reason about.
+              Build pipelines, runtime configuration, and deployment workflows.
+              Reducing operational friction and keeping systems straightforward
+              to reason about.
+            </p>
+          </article>
+
+          <article className="card focusCard">
+            <h3 className="cardTitle">Compliance-critical environments</h3>
+            <p className="cardDesc">
+              10+ years in defense, finance, and cloud platforms where
+              traceability, audit-readiness, and correctness are non-negotiable
+              requirements.
+            </p>
+          </article>
+
+          <article className="card focusCard">
+            <h3 className="cardTitle">AI workflow engineering</h3>
+            <p className="cardDesc">
+              Deterministic, human-reviewed AI pipelines with explicit
+              provenance. Production-first — not experimental tooling dressed
+              up as infrastructure.
             </p>
           </article>
         </div>
       </section>
 
+      {/* ── Contact ── */}
       <section id="contact" className="section" aria-label="Contact">
         <h2 className="h2">Contact</h2>
-        <p className="lede">Email is best. If you prefer to talk first, you can book a short call.</p>
+        <p className="lede">
+          Email is best. If you prefer to talk first, you can book a short call.
+        </p>
 
-        <div className="ctaRow" aria-label="Contact actions">
+        <nav className="ctaRow" aria-label="Contact actions">
           <a className="btn btnPrimary" href={LINKS.emailProject}>
             Email
           </a>
-          <a className="btn" href={LINKS.calendly} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn"
+            href={LINKS.calendly}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Book a call
           </a>
-          <a className="btn btnTertiary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">
+          <a
+            className="btn btnTertiary"
+            href={LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             LinkedIn
           </a>
-        </div>
+        </nav>
       </section>
     </div>
   );

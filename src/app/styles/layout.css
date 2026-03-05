@@ -1,11 +1,7 @@
-/* Layout/geometry only. No theme colors here. */
+/* src/app/styles/layout.css
+   Geometry · spacing · grid. NO COLORS. */
 
-:root {
-  --heroY: clamp(1.25rem, 2.25vw, 1.75rem);
-  --heroGap: clamp(12px, 2vw, 18px);
-}
-
-/* Sticky footer closure */
+/* ── App shell (sticky footer) ── */
 .appRoot {
   min-height: 100vh;
   min-height: 100dvh;
@@ -21,6 +17,7 @@
   padding-bottom: var(--sectionY);
 }
 
+/* ── Legacy .wrap ── */
 .wrap {
   width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
   margin-inline: auto;
@@ -28,156 +25,138 @@
   padding-bottom: var(--sectionY);
 }
 
+/* ── Scroll target offset ── */
 :where(section[id], main[id], div[id]) {
-  scroll-margin-top: calc(var(--headerH) + 16px);
+  scroll-margin-top: calc(var(--headerH) + 20px);
 }
 
-.section {
-  margin-bottom: var(--sectionY);
-}
+/* ── Section spacing ── */
+.section { margin-bottom: var(--sectionY); }
 
+/* ── 2-col grid ── */
 .grid2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
 }
 
-/* Ticker band near header */
+/* ── Experience ticker band ── */
 .homeTickerBand {
-  padding-top: 18px;
-  padding-bottom: 10px;
+  padding-top: 22px;
+  padding-bottom: 12px;
 }
 
 .homeTickerHead {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
-  margin-bottom: 10px;
+  gap: 16px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 
 .homeTickerTitle {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: var(--text3);
+  font-weight: 680;
   letter-spacing: var(--trackNormal);
 }
 
 .homeTickerHint {
   margin: 0;
   font-size: var(--text0);
-  color: var(--muted);
+  color: var(--muted2);
 }
 
-/* Hero */
+/* ── Hero grid ── */
 .homeHeroGrid {
   display: grid;
-  gap: clamp(18px, 3vw, 40px);
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: start;
+  gap: var(--heroGap);
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
 }
 
 @media (max-width: 980px) {
-  .homeHeroGrid {
-    grid-template-columns: 1fr;
-  }
+  .homeHeroGrid { grid-template-columns: 1fr; }
 }
 
-.heroHome.section {
-  margin-bottom: var(--sectionYSm);
-}
+.heroHome.section { margin-bottom: var(--sectionYSm); }
 
 .homeHeroLeft {
-  max-width: 640px;
+  max-width: 660px;
   display: grid;
   gap: 0;
   min-width: 0;
 }
 
 .homeHeroRight {
-  align-self: start;
+  align-self: center;
   min-width: 0;
   display: flex;
   justify-content: flex-end;
 }
 
-.homeHeroLeft :where(p, .homeLede, .lede) {
-  max-width: 60ch;
-}
+.homeHeroLeft :where(p, .homeLede, .lede) { max-width: 58ch; }
 
+/* ── Identity row ── */
 .homeIdRow {
   display: flex;
-  align-items: start;
-  gap: 14px;
-  margin-bottom: 12px;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.homeIdText {
-  min-width: 0;
-}
-
-.homeRole {
-  margin-top: 6px;
-}
+.homeIdText { min-width: 0; }
+.homeRole { margin-top: 6px; }
 
 .homeLede {
-  margin-top: 12px;
-  margin-bottom: 14px;
+  margin-top: 14px;
+  margin-bottom: 20px;
 }
 
-/* Avatar (layout only) */
+.heroHome .ctaRow {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* ── Avatar ── */
 .homeAvatar {
-  width: 84px;
-  height: 84px;
-  border-radius: var(--rLg);
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-.homeAvatarImg {
-  object-fit: cover;
-}
+.homeAvatarImg { object-fit: cover; }
 
-/* Portrait frame (layout only) */
+/* ── Portrait frame ── */
 .homePortraitFrame {
   position: relative;
-  border-radius: var(--rLg);
+  border-radius: var(--rXl);
   overflow: hidden;
-
-  /* IMPORTANT: prevent portrait from dominating the fold */
   width: 100%;
-  max-width: 420px;
-
-  /* Stable media sizing across devices */
-  aspect-ratio: 4 / 3;
+  max-width: 400px;
+  aspect-ratio: 3 / 4;
   height: auto;
-
-  /* Keep it visually aligned and not “floaty” */
   margin-left: auto;
 }
 
 @media (max-width: 980px) {
   .homePortraitFrame {
-    max-width: 520px;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
     margin-left: 0;
-    aspect-ratio: 16 / 10;
   }
 }
 
-
-
+/* ── CTA row ── */
 .ctaRow {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.appMain,
-.wrap,
-.homeHeroGrid {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.homeHeroGrid > * {
-  min-width: 0;
-}
+/* ── Overflow guard ── */
+.appMain, .wrap { max-width: 100%; }
+.homeHeroGrid > * { min-width: 0; }

@@ -19,6 +19,9 @@
     "check:test": "npm run -s test:ci",
     "check:lint": "npm run -s lint",
     "check:build": "npm run -s build",
+    "ssot:export": "node scripts/ssot/export.mjs",
+    "ssot:verify": "node scripts/ssot/verify-claims.mjs",
+    "check:ssot": "npm run -s ssot:export && npm run -s ssot:verify",
     "diagrams:render": "node scripts/render-diagrams.mjs",
     "diagrams:check": "npm run -s diagrams:render && git diff --exit-code -- public/diagrams",
     "diagrams:clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('public/diagrams',{recursive:true,force:true}))\"",
@@ -32,6 +35,7 @@
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^11.12.0",
+    "@modelcontextprotocol/sdk": "^1.27.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -52,7 +56,8 @@
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.18",
     "vitest-axe": "^0.1.0",
-    "yaml": "2.8.2"
+    "yaml": "2.8.2",
+    "zod": "^4.3.6"
   },
   "overrides": {
     "rollup": "^4.58.1",

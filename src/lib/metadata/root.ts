@@ -25,6 +25,24 @@ export const rootMetadata: Metadata = {
     "Senior software engineer specializing in backend systems, platform architecture, deterministic AI systems, and compliance-focused engineering.",
 
   alternates: { canonical: SITE_URL },
+  manifest: "/assets/favicon/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/assets/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/assets/favicon/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
 
   // IMPORTANT: keep minimal to satisfy tests (md.robots deep equals {index,follow})
   robots: { index: true, follow: true },

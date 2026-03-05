@@ -28,4 +28,12 @@
   .mobileNavPanel {
     transition: none !important;
   }
+
+  .btn,
+  .card,
+  .navLink,
+  .iconBtn,
+  .mobileNavLink {
+    transition: none !important;
+  }
 }

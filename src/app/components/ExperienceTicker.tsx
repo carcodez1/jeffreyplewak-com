@@ -1,3 +1,4 @@
+// src/app/components/ExperienceTicker.tsx
 "use client";
 
 import Link from "next/link";
@@ -5,15 +6,15 @@ import Image from "next/image";
 import { useMemo } from "react";
 import { EXPERIENCE_LOGOS, type ExperienceLogo } from "@/config/experience";
 
-function seamSafeLoop<T>(items: readonly T[]): readonly T[] {
+// Two identical copies → -50% transform is always correct
+function twoPass<T>(items: readonly T[]): readonly T[] {
   if (items.length <= 1) return items;
-  const rotated = [...items.slice(1), items[0]];
-  return [...items, ...rotated];
+  return [...items, ...items];
 }
 
 export function ExperienceTicker() {
   const items = useMemo(() => EXPERIENCE_LOGOS, []);
-  const loopItems = useMemo(() => seamSafeLoop(items), [items]);
+  const loopItems = useMemo(() => twoPass(items), [items]);
 
   if (!items.length) return null;
 
@@ -25,7 +26,7 @@ export function ExperienceTicker() {
             key={`${item.key}-${index}`}
             href={item.href}
             className="expStripe"
-            aria-label={`${item.label} — open details`}
+            aria-label={`${item.label} — view on resume`}
             prefetch={false}
           >
             <Image

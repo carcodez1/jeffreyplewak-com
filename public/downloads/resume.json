@@ -1,0 +1,116 @@
+{
+  "generatedBy": "scripts/ssot/export.mjs",
+  "source": "src/content/ssot/profile.ssot.jsonld",
+  "profile": {
+    "id": "https://jeffreyplewak.com/#jeffrey-r-plewak",
+    "name": "Jeffrey R. Plewak",
+    "jobTitle": "Senior Software Engineer — Platform, Compliance & Production Systems",
+    "email": "mailto:plewak.jeff@gmail.com",
+    "telephone": "+1-919-402-6624",
+    "url": "https://jeffreyplewak.com/",
+    "locality": "New Bern",
+    "region": "NC",
+    "country": "US"
+  },
+  "claims": {
+    "skills": [
+      {
+        "skill": "RAG pipelines",
+        "claimStatus": "SUPPORTED",
+        "evidence": [
+          {
+            "sourceType": "text",
+            "source": "Resume draft: RAG + retrieval-augmented pipelines; Support Agent project: KB answering"
+          }
+        ]
+      },
+      {
+        "skill": "Agent orchestration with HITL/RBAC",
+        "claimStatus": "SUPPORTED",
+        "evidence": [
+          {
+            "sourceType": "text",
+            "source": "Support Agent project description: RBAC, HITL, gating order, audit envelope"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "id": "https://jeffreyplewak.com/#project-portfolio-site",
+        "type": "CreativeWork",
+        "name": "jeffreyplewak-com (Portfolio Site V1)",
+        "description": "Static-first personal portfolio and project showcase. Minimal structure; recruiter-friendly; strong SEO defaults; performance and accessibility; low operational complexity.",
+        "keywords": [
+          "Next.js App Router",
+          "TypeScript",
+          "Hand-authored CSS",
+          "Vercel",
+          "Static generation",
+          "SEO metadata",
+          "robots.txt",
+          "sitemap.xml"
+        ]
+      },
+      {
+        "id": "https://jeffreyplewak.com/#project-support-agent",
+        "type": "SoftwareSourceCode",
+        "name": "Customer Support Agent",
+        "description": "Deterministic multi-tool support workflow with RBAC, verification gates, HITL approval before mutation, and structured audit envelopes (timestamp, decision, action, actor, why).",
+        "keywords": [
+          "Deterministic agent",
+          "RBAC",
+          "HITL",
+          "Audit envelope",
+          "Tool registry",
+          "RAG (KB answering)"
+        ]
+      },
+      {
+        "id": "https://jeffreyplewak.com/#project-kprovengine",
+        "type": "SoftwareSourceCode",
+        "name": "KProvEngine",
+        "description": "Governance-locked OSS core for deterministic execution and evidence-ready pipelines with identity guard, artifact guard, Python runtime policy, and CI parity (make preflight).",
+        "keywords": [
+          "SBOM",
+          "Provenance",
+          "Deterministic CLI",
+          "Governance",
+          "CI parity"
+        ]
+      }
+    ]
+  },
+  "references": [
+    {
+      "id": "nist-ssdf-sp-800-218",
+      "title": "NIST SP 800-218: Secure Software Development Framework (SSDF) Version 1.1",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "source": "NIST CSRC"
+    },
+    {
+      "id": "cisa-sbom-overview",
+      "title": "CISA: Software Bill of Materials (SBOM)",
+      "url": "https://www.cisa.gov/sbom",
+      "source": "CISA"
+    },
+    {
+      "id": "fedramp-documents-templates",
+      "title": "FedRAMP Documents & Templates",
+      "url": "https://www.fedramp.gov/documents-templates/",
+      "source": "FedRAMP"
+    },
+    {
+      "id": "eu-ai-act-eli",
+      "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act), ELI",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "source": "EU ELI"
+    },
+    {
+      "id": "eu-ai-act-service-desk",
+      "title": "AI Act Service Desk",
+      "url": "https://ai-office-helpdesk.ec.europa.eu/",
+      "source": "EU AI Act Service Desk"
+    }
+  ]
+}

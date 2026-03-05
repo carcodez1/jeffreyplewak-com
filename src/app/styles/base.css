@@ -1,186 +1,170 @@
 /* src/app/styles/base.css
-   Global element defaults & typography normalization.
-   IMPORTANT: This file should consume tokens from theme.css + tokens.css.
+   Element resets + typography normalization.
+   Consumes tokens from theme.css + tokens.css.
 */
 
-/* Box sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ── Box sizing ── */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* Base document */
+/* ── Document ── */
 html {
-  color-scheme: light;
+  color-scheme: dark light;
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-
   font-family: var(--fontSans);
-  font-size: 16px; /* stable baseline; type scale is rem-driven */
+  font-size: 16px;
   line-height: var(--lhNormal);
+  /* hardware-accelerate scroll */
+  scroll-behavior: smooth;
 }
 
-/* Body reset & full height */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Body ── */
 body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
-
-  /* Crispness on dark */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection */
+/* ── Selection ── */
 ::selection {
-  background: hsla(var(--accent) / 0.25);
+  background: hsla(var(--accent) / 0.28);
   color: var(--text);
 }
 
-/* Links */
+/* ── Links ── */
 a {
   color: inherit;
   text-decoration: none;
 }
 a:hover,
 a:focus-visible {
-  color: hsla(var(--accent2) / 0.95);
+  color: hsl(var(--accent));
 }
 
-/* Typography defaults */
-p {
-  margin: 0 0 var(--pSpace) 0;
-  font-size: var(--text1);
-  line-height: var(--lhNormal);
-  color: var(--muted);
-}
-
-:where(p, li) {
-  max-width: var(--measure);
-}
-
-/* Lists */
-ul,
-ol {
-  margin: 0 0 var(--pSpace) 0;
-  padding-left: 1.2rem;
-}
-li {
-  margin: 0.35rem 0;
-  color: var(--muted);
-}
-
-/* Headings */
-h1,
-h2,
-h3 {
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 650;
+  font-weight: 680;
   line-height: var(--lhTight);
   letter-spacing: var(--trackNormal);
   color: var(--text);
 }
 
 h1 {
-  font-size: clamp(2.1rem, 3.2vw, 2.85rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   letter-spacing: var(--trackTight);
-  margin-bottom: 14px;
+  font-weight: 740;
+  line-height: 1.05;
+  margin-bottom: 16px;
 }
 
 h2 {
-  font-size: clamp(1.45rem, 1.9vw, 1.7rem);
-  margin-bottom: 12px;
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  margin-bottom: 14px;
 }
 
 h3 {
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   margin-bottom: 10px;
 }
 
-/* Utility text classes used across pages */
-.lede {
+/* ── Body copy ── */
+p {
+  margin: 0 0 var(--pSpace);
   font-size: var(--text2);
   line-height: var(--lhNormal);
   color: var(--muted);
 }
 
-.muted {
+:where(p, li) { max-width: var(--measure); }
+
+/* ── Utility classes ── */
+.lede {
+  font-size: var(--text3);
+  line-height: var(--lhNormal);
   color: var(--muted);
 }
 
-/* Inline code + code blocks */
-code,
-pre {
-  font-family: var(--fontMono);
-  font-size: var(--text0);
+.muted  { color: var(--muted); }
+.muted2 { color: var(--muted2); }
+
+/* ── Lists ── */
+ul, ol {
+  margin: 0 0 var(--pSpace);
+  padding-left: 1.25rem;
 }
+li {
+  margin: 0.4rem 0;
+  color: var(--muted);
+}
+
+/* ── Code ── */
+code, pre { font-family: var(--fontMono); }
 
 code {
-  padding: 0.15em 0.35em;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-size: 0.875em;
+  padding: 0.18em 0.4em;
+  border-radius: var(--rXs);
+  background: color-mix(in srgb, var(--surface2) 80%, transparent);
+  border: 1px solid var(--border1);
 }
 
 pre {
-  margin: 0 0 var(--pSpace) 0;
-  background: var(--surface1);
+  margin: 0 0 var(--pSpace);
+  background: var(--surface0);
   border: 1px solid var(--border1);
   border-radius: var(--rMd);
-  padding: 16px;
+  padding: 18px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
-/* Media responsiveness */
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
+/* ── Media ── */
+img, video { max-width: 100%; height: auto; }
 
-/* Form elements */
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
+/* ── Forms ── */
+button, input, textarea, select { font: inherit; }
 
-/* Focus ring */
+/* ── Focus ring ── */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px hsla(var(--accent2) / 0.28);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px hsla(var(--accent) / 0.55);
 }
 
-/* Skip link */
+/* ── Skip link ── */
 .skipLink {
   position: absolute;
-  top: 0;
-  left: 10px;
+  top: 8px;
+  left: 12px;
   transform: translateY(-200%);
-  background: rgba(0, 0, 0, 0.85);
+  background: var(--bg2);
   border: 1px solid var(--border1);
   color: var(--text);
-  padding: 10px 12px;
+  padding: 10px 14px;
   border-radius: var(--rSm);
+  font-size: var(--text1);
   z-index: 10000;
+  transition: transform var(--tFast) var(--ease);
 }
-.skipLink:focus {
-  transform: translateY(0);
-}
+.skipLink:focus { transform: translateY(0); }
 
-/* Global overflow guard */
-html,
-body {
+/* ── Overflow guard ── */
+html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Guard against long tokens causing horizontal scroll */
-:where(p, li, a, span, div) {
-  overflow-wrap: anywhere;
-}
+/* ── Prevent long tokens from causing scroll ── */
+:where(p, li, a, span, div) { overflow-wrap: anywhere; }

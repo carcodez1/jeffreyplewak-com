@@ -1,0 +1,51 @@
+{
+  "generatedBy": "scripts/ssot/export.mjs",
+  "source": "src/content/ssot/profile.ssot.jsonld",
+  "outputs": {
+    "public/downloads/resume.json": {
+      "sha256": "f8f7a41ed8ac9807f5280b9df507bbd4b809c42d4b850febe1b902ccd49edfb2"
+    },
+    "public/downloads/contact.vcf": {
+      "sha256": "509566b117dd43b7358a4f554a0c5e8e341d26d3c534eeb68858010d73d80575"
+    }
+  },
+  "claimLedger": {
+    "unknownSkills": [
+      "LangChain / LangGraph (direct library usage)",
+      "React/Next.js (professional employer production usage)"
+    ],
+    "enforcement": "Only claimStatus=SUPPORTED are emitted to outputs."
+  },
+  "references": [
+    {
+      "id": "nist-ssdf-sp-800-218",
+      "title": "NIST SP 800-218: Secure Software Development Framework (SSDF) Version 1.1",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "source": "NIST CSRC"
+    },
+    {
+      "id": "cisa-sbom-overview",
+      "title": "CISA: Software Bill of Materials (SBOM)",
+      "url": "https://www.cisa.gov/sbom",
+      "source": "CISA"
+    },
+    {
+      "id": "fedramp-documents-templates",
+      "title": "FedRAMP Documents & Templates",
+      "url": "https://www.fedramp.gov/documents-templates/",
+      "source": "FedRAMP"
+    },
+    {
+      "id": "eu-ai-act-eli",
+      "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act), ELI",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "source": "EU ELI"
+    },
+    {
+      "id": "eu-ai-act-service-desk",
+      "title": "AI Act Service Desk",
+      "url": "https://ai-office-helpdesk.ec.europa.eu/",
+      "source": "EU AI Act Service Desk"
+    }
+  ]
+}

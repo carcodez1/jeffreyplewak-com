@@ -1,18 +1,176 @@
-/* src/app/styles/components/resume.css */
+/* src/app/styles/components/resume.css
+   Covers: stat bar · filter tabs · role cards · PDF embed
+*/
 
-.resumeRoles {
-  display: grid;
-  gap: 18px;
+/* ── Page header ── */
+.resumePageHead { padding-bottom: 0; }
+
+.resumeH1 {
+  margin-bottom: 20px;
 }
 
-.resumeRoleHead {
-  display: grid;
-  gap: 10px;
+/* ── Stats bar ── */
+.resumeStats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--border1);
+  border-radius: var(--rLg);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--surface1) 90%, transparent),
+    var(--surface0));
+  box-shadow: var(--shadow1);
 }
+
+.resumeStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 20px;
+  min-width: 0;
+}
+
+.resumeStatNum {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 760;
+  letter-spacing: var(--trackTight);
+  color: var(--text);
+  line-height: 1;
+}
+
+.resumeStatLabel {
+  font-size: var(--text0);
+  color: var(--muted2);
+  white-space: nowrap;
+  letter-spacing: var(--trackLoose);
+  text-transform: uppercase;
+}
+
+.resumeStatDivider {
+  width: 1px;
+  height: 36px;
+  background: var(--border1);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .resumeStats     { gap: 8px; padding: 14px; }
+  .resumeStat      { padding: 4px 12px; }
+  .resumeStatDivider { display: none; }
+}
+
+/* ── CTA row spacing ── */
+.resumeCtaRow { margin-top: 4px; }
+
+/* ── Section headings ── */
+.resumeSectionHead {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 720;
+  letter-spacing: var(--trackNormal);
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+/* ── Summary ── */
+.resumeSummary {
+  max-width: 72ch;
+  line-height: 1.7;
+}
+
+/* ── Filter tabs ── */
+.resumeFilters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.resumeFilterTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--rMd);
+  border: 1px solid var(--border1);
+  background: color-mix(in srgb, var(--surface1) 80%, transparent);
+  color: var(--muted);
+  font-size: var(--text1);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background   var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    color        var(--tFast) var(--ease),
+    box-shadow   var(--tFast) var(--ease);
+}
+
+.resumeFilterTab:hover {
+  background: var(--surface2);
+  border-color: var(--border2);
+  color: var(--text);
+}
+
+.resumeFilterTab--active {
+  background: hsl(var(--accent));
+  border-color: hsla(var(--accent) / 0.40);
+  color: hsl(0 0% 100%);
+  box-shadow: 0 2px 12px hsla(var(--accent) / 0.28);
+}
+
+.resumeFilterTab--active:hover {
+  background: hsl(var(--accent2));
+}
+
+.resumeFilterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 15%, transparent);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* ── Role cards list ── */
+.resumeRoles { display: grid; gap: 16px; }
+
+/* ── Single role card ── */
+.resumeRole {
+  position: relative;
+  border: 1px solid var(--border0);
+  border-radius: var(--rLg);
+  background: linear-gradient(160deg, var(--surface1), var(--surface0) 100%);
+  padding: 20px 22px;
+  transition:
+    border-color var(--tFast) var(--ease),
+    box-shadow   var(--tFast) var(--ease);
+}
+
+.resumeRole:hover {
+  border-color: var(--border1);
+  box-shadow: var(--shadow1);
+}
+
+/* Featured (most recent) role gets accent left border */
+.resumeRole--featured {
+  border-left: 3px solid hsl(var(--accent));
+  padding-left: 20px;
+}
+
+/* ── Role header ── */
+.resumeRoleHead { display: grid; gap: 10px; }
 
 .resumeRoleTop {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
@@ -25,64 +183,122 @@
   min-width: 0;
 }
 
-.resumeEmployerLogo {
-  height: 28px;
-  width: auto;
-  opacity: 0.92;
-  flex: 0 0 auto;
+/* VISUAL TIER 1 — employer name: largest, heaviest */
+.resumeRoleEmployer {
+  font-size: var(--text4);
+  font-weight: 720;
+  letter-spacing: var(--trackNormal);
+  color: var(--text);
+  min-width: 0;
+  margin: 0;
 }
 
-.resumeRoleEmployer {
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  min-width: 0;
+.resumeEmployerLogo {
+  height: 24px;
+  width: auto;
+  opacity: 0.82;
+  flex: 0 0 auto;
+  filter: brightness(0) invert(1);
 }
 
 .resumeRoleMeta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.resumeRoleDates {
+  font-size: var(--text1);
   color: var(--muted);
-  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Work type badge — color-coded by type */
+.resumeRoleType {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border1);
+  background: var(--surface0);
+  color: var(--muted2);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.resumeRoleType--fte {
+  border-color: hsla(142 60% 50% / 0.35);
+  background: hsla(142 60% 50% / 0.08);
+  color: hsl(142 50% 62%);
+}
+
+.resumeRoleType--consulting {
+  border-color: hsla(var(--accent) / 0.35);
+  background: hsla(var(--accent) / 0.08);
+  color: hsl(var(--accent));
+}
+
+.resumeRoleType--owner {
+  border-color: hsla(35 80% 55% / 0.35);
+  background: hsla(35 80% 55% / 0.08);
+  color: hsl(35 70% 65%);
+}
+
+/* VISUAL TIER 2 — title: medium weight, slightly muted */
+.resumeRoleTitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 .resumeRoleTitle {
-  font-weight: 600;
+  font-size: var(--text3);
+  font-weight: 580;
+  color: var(--muted);
 }
 
 .resumeRoleLocation {
-  color: var(--muted);
+  font-size: var(--text1);
+  color: var(--muted2);
 }
 
+/* ── Links — tertiary, out of the way ── */
 .resumeRoleLinks {
   display: flex;
-  gap: 10px;
+  gap: 7px;
   flex-wrap: wrap;
 }
 
-.resumeRoleBody {
-  margin-top: 10px;
-  display: grid;
-  gap: 10px;
-}
+/* ── Role body ── */
+.resumeRoleBody  { margin-top: 16px; display: grid; gap: 12px; }
 
 .resumeRoleSection {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: var(--text0);
+  font-weight: 680;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: var(--trackLoose);
+  margin-bottom: 8px;
 }
 
 .resumeRoleList {
   margin: 0;
   padding-left: 18px;
   display: grid;
-  gap: 6px;
+  gap: 7px;
+  color: var(--muted);
+  font-size: var(--text2);
+  line-height: 1.6;
 }
 
+/* ── Tech skills ── */
 .resumeRoleSkills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -91,16 +307,22 @@
 .resumeSkill {
   border: 1px solid var(--border0);
   border-radius: 999px;
-  padding: 6px 10px;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
-  font-size: 0.92rem;
-  line-height: 1;
+  padding: 4px 10px;
+  background: var(--surface0);
+  color: var(--muted2);
+  font-size: var(--text0);
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: border-color var(--tFast) var(--ease), color var(--tFast) var(--ease);
 }
 
-.resumePdfPanel {
-  overflow: hidden;
+.resumeSkill:hover {
+  border-color: var(--border2);
+  color: var(--muted);
 }
+
+/* ── PDF embed ── */
+.resumePdfPanel { overflow: hidden; }
 
 .resumeEmbedObj {
   width: 100%;

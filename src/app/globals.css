@@ -1,15 +1,20 @@
 /* src/app/globals.css
-   Global style entrypoint.
-   - Loads tokens + base + layout first
-   - Then modular component CSS
-   - Then experience/timeline + animations last
+   Style entrypoint — import order matters.
+   1. Structure tokens first (tokens.css)
+   2. Theme colors (theme.css)
+   3. Element resets (base.css)
+   4. Layout geometry (layout.css)
+   5. Components
+   6. Feature-scoped CSS
+   7. Animations last
 */
-@import "./styles/theme.css";
+
 @import "./styles/tokens.css";
+@import "./styles/theme.css";
 @import "./styles/base.css";
 @import "./styles/layout.css";
 
-/* Modular components */
+/* Components */
 @import "./styles/components/buttons.css";
 @import "./styles/components/header.css";
 @import "./styles/components/navigation.css";
@@ -21,8 +26,30 @@
 @import "./styles/components/footer.css";
 @import "./styles/components/resume.css";
 
-/* Timeline */
+/* Features */
 @import "./styles/experience.css";
 
 /* Animations */
 @import "./styles/animations.css";
+
+/* ── Background FX (tokenized ambient glow) ── */
+.bgFx {
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 20%, hsla(var(--accent) / 0.08), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 85% 75%, hsla(var(--accent2) / 0.06), transparent 50%),
+    var(--bg);
+}
+
+/* ── Portrait image fit ── */
+.homePortraitImg {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* ── Work card icon spacer ── */
+.cardIconRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}

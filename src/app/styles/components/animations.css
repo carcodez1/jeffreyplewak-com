@@ -1,0 +1,32 @@
+/* Scroll reveal */
+.focusCard {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity  var(--tSlow) var(--ease),
+    transform var(--tSlow) var(--ease);
+}
+
+.focusCard--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.focusCard:nth-child(2) { transition-delay: 60ms; }
+.focusCard:nth-child(3) { transition-delay: 120ms; }
+.focusCard:nth-child(4) { transition-delay: 180ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .focusCard,
+  .focusCard--visible {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .mobileNav,
+  .mobileNavPanel {
+    transition: none !important;
+  }
+}
