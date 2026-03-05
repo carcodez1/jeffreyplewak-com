@@ -15,7 +15,7 @@
   position: absolute;
   inset: 0;
   background: hsl(228 32% 4% / 0.70);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(var(--glassBlur));
   border: 0;
   cursor: pointer;
 }
@@ -25,11 +25,13 @@
   width: min(700px, calc(100vw - 24px));
   max-height: min(84vh, 780px);
   overflow: auto;
-  background: var(--bg2);
-  border: 1px solid var(--border1);
+  background: var(--glassBg);
+  border: 1px solid var(--glassBorder);
   border-radius: var(--rLg);
   padding: 20px 22px;
-  box-shadow: var(--shadow2);
+  box-shadow: var(--glassShadow);
+  backdrop-filter: blur(var(--glassBlur));
+  -webkit-backdrop-filter: blur(var(--glassBlur));
 }
 
 .expDrawerTitleRow {
@@ -45,7 +47,7 @@
 .expDrawerMetaItem { display: inline; }
 .expDrawerMetaDot  { opacity: 0.45; margin-inline: 6px; }
 .expDrawerLogo    { display: flex; align-items: center; }
-.expDrawerLogoImg { opacity: 0.85; filter: brightness(0) invert(1); }
+.expDrawerLogoImg { opacity: 0.85; filter: var(--iconFilter); }
 
 .expDrawerCloseBtn {
   background: var(--surface1);
@@ -129,7 +131,7 @@
   position: absolute;
   inset: 0;
   background: hsl(228 32% 4% / 0.65);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(var(--glassBlur));
   border: 0;
   cursor: pointer;
 }
@@ -141,12 +143,14 @@
   width: min(300px, calc(100vw - 32px));
   height: 100vh;
   height: 100dvh;
-  background: color-mix(in srgb, var(--bg2) 96%, transparent);
+  background: var(--glassBg);
   padding: 18px 16px;
-  border-right: 1px solid var(--border1);
+  border-right: 1px solid var(--glassBorder);
   transform: translateX(-100%);
   transition: transform var(--tMed) var(--ease);
-  box-shadow: var(--shadow2);
+  box-shadow: var(--glassShadow);
+  backdrop-filter: blur(var(--glassBlur));
+  -webkit-backdrop-filter: blur(var(--glassBlur));
 }
 .mobileNav--open .mobileNavPanel { transform: translateX(0); }
 
