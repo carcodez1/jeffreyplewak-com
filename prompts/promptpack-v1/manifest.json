@@ -1,0 +1,18 @@
+{
+  "promptpack": "promptpack-v1",
+  "version": 1,
+  "files": [
+    {
+      "path": "0001-ssot-pack.md",
+      "sha256": "6bfae20899b47ae1fb07b8638e1d68133a3b0f6914d9acb60bacb8c70c34b9f6"
+    },
+    {
+      "path": "0002-ui-polish.md",
+      "sha256": "72b6d8308c3ef30666708ba049b151142fb0ed1af0798f1f36586408b85d1523"
+    },
+    {
+      "path": "README.md",
+      "sha256": "324e4705c3ad6a9512830744dba785dce0aefc259eaf1274f3ce16647f1e93d7"
+    }
+  ]
+}

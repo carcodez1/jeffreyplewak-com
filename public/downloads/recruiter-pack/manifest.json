@@ -1,0 +1,27 @@
+{
+  "generatedBy": "scripts/ssot/manifest.mjs",
+  "source": "src/content/ssot/profile.ssot.jsonld",
+  "generatedAt": "2026-03-05T16:52:24.021Z",
+  "toolVersions": {
+    "node": "v20.19.6"
+  },
+  "outputs": {
+    "public/downloads/recruiter-pack/resume.pdf": {
+      "sha256": "51ff19953f1783c9804382f083de450526bd252c0403e3dd8a4c9ad6f8cebea1"
+    },
+    "public/downloads/recruiter-pack/resume.json": {
+      "sha256": "4d8e80473f2e2b7816ba8a350a71195c5217b21522118f286305d855aa590111"
+    },
+    "public/downloads/recruiter-pack/contact.vcf": {
+      "sha256": "509566b117dd43b7358a4f554a0c5e8e341d26d3c534eeb68858010d73d80575"
+    }
+  },
+  "claimLedger": {
+    "unknownSkills": [
+      "LangChain / LangGraph (direct library usage)",
+      "React/Next.js (professional employer production usage)"
+    ],
+    "enforcement": "Only claimStatus=SUPPORTED are emitted to exported resume.json."
+  },
+  "references": []
+}

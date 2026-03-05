@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: clamp(10px, 2vw, 16px);
 }
 
 .brand {
@@ -84,7 +84,7 @@
 .siteActions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: clamp(6px, 1.5vw, 10px);
 }
 
 .headerCtas {

@@ -1,3 +1,11 @@
-# DEFAULT posture for this repo
+# .codex/config.toml (repo)
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
+
+[profiles.regulated]
+sandbox_mode = "workspace-write"
+approval_policy = "untrusted"
+
+[profiles.readonly]
+sandbox_mode = "read-only"
+approval_policy = "untrusted"

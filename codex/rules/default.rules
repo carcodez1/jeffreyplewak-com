@@ -1,0 +1,18 @@
+# Allow safe inspection + your deterministic gate
+prefix_rule(pattern=["git", "status"], decision="allow")
+prefix_rule(pattern=["git", "diff"], decision="allow")
+prefix_rule(pattern=["rg"], decision="allow")
+prefix_rule(pattern=["node", "-v"], decision="allow")
+prefix_rule(pattern=["npm", "-v"], decision="allow")
+prefix_rule(pattern=["npm", "run", "-s", "check"], decision="allow")
+
+# Prompt for installs
+prefix_rule(pattern=["npm", "ci"], decision="prompt")
+prefix_rule(pattern=["npm", "install"], decision="prompt")
+
+# Forbid dev server + network tools + force push
+prefix_rule(pattern=["npm", "run", "dev"], decision="forbidden")
+prefix_rule(pattern=["next", "dev"], decision="forbidden")
+prefix_rule(pattern=["curl"], decision="forbidden")
+prefix_rule(pattern=["wget"], decision="forbidden")
+prefix_rule(pattern=["git", "push", "--force"], decision="forbidden")
