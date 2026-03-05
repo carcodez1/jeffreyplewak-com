@@ -1,0 +1,3 @@
+# DEFAULT posture for this repo
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"

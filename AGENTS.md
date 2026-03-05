@@ -1,30 +1,55 @@
-# AGENTS.md (repo rules)
+# AGENTS.md (personal portfolio repo rules)
 
-## Operating mode
-- Diff-first: propose plan, then show a unified diff. Do not apply changes without approval.
-- Surgical changes only. No rewrites, no new deps unless explicitly requested.
+## Operating mode (default)
+- Diff-first: propose a plan, then output a unified diff. Do not apply changes unless I explicitly say “apply”.
+- Surgical changes only. No rewrites, no new dependencies unless explicitly approved.
+- Prefer edits only in already-changed files unless explicitly approved.
 
-## Allowed commands
-### Read-only / inspection
+## Commands (allowed by default)
 - git status -sb
 - git diff
 - rg
 - node -v
-- pnpm -v (or npm -v)
+- npm -v
+- npm run -s lint
+- npm run -s test
+- npm run -s build
+- npm run -s check
+- npm run -s prepush
 
-### Quality gates (run only; do not modify config)
-- pnpm lint / pnpm test / pnpm build (or npm equivalents)
-
-### Safe git workflow (no network)
-- git switch -c <branch>
-- git add <paths>
-- git restore --staged <paths>
-- git commit -m "<message>"
+## Commands (require explicit approval each time)
+- npm run dev / next dev (dev server / port binding)
+- any command that writes outside the repo root
+- any command that changes git history (reset, rebase, push --force)
+- any networked commands (curl, wget) unless explicitly requested
 
 ## Must-preserve constraints
-- A11y: no nested landmarks, no duplicate id="main", preserve focus states, respect prefers-reduced-motion.
-- SEO: keep HTML-first pages indexable, keep metadata stable, avoid client-only rendering for core content.
-- Perf: avoid heavy animations on main thread; ensure reduced-motion path; no large layout shifts.
+### Accessibility
+- No nested landmarks.
+- No duplicate id="main".
+- Preserve focus-visible states.
+- Respect prefers-reduced-motion (provide a reduced-motion path for animations).
 
-## Scope
-- Prefer edits only in already-changed files unless explicitly approved.
+### SEO
+- Keep core pages HTML-first and indexable.
+- Keep metadata stable unless change is requested.
+- Avoid client-only rendering for core content (especially /, /resume, /projects/*).
+- Preserve canonical URLs and ensure sitemap/robots remain valid.
+
+### Performance
+- Avoid heavy animations on the main thread.
+- Avoid layout shift (stable image dimensions; no late-loading layout changes).
+- Prefer static generation where reasonable.
+
+## Evidence & traceability
+- Any claim about frameworks/standards must be backed by a file path in this repo (or marked UNKNOWN).
+- For any change affecting SEO/a11y/perf, include:
+  - risk notes
+  - verify commands
+  - rollback plan (how to revert)
+
+## Output format
+- PLAN (bullets)
+- DIFF (unified)
+- VERIFY (exact commands)
+- RISKS (a11y/SEO/perf)
