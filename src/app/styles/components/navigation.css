@@ -1,6 +1,3 @@
 /* src/app/styles/components/navigation.css
-   Keep this file minimal to avoid fighting header.css.
-   MobileNav owns mobile panel styling elsewhere.
+   Reserved — nav styles live in header.css.
 */
-
-/* no-op by design (reserved for future nav-specific styles) */

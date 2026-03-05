@@ -1,57 +1,76 @@
 /* src/app/styles/theme.css
    COLOR SSOT ONLY.
-   Mechanism: :root (default) + :root[data-theme="dark"] (runtime-controlled)
+   Palette: deep navy base · slate-indigo surfaces · electric blue accent · warm off-white text
+   Mechanism: :root (default dark) + :root[data-theme="light"] override
 */
 
 :root {
-  /* Base */
-  --bg: hsl(30 20% 98%);
-  --bg2: hsl(30 18% 96%);
+  /* ── Backgrounds ── */
+  --bg:       hsl(228 32% 7%);    /* near-void navy */
+  --bg2:      hsl(228 28% 10%);   /* raised surface */
 
-  --text: hsl(222 28% 14%);
-  --muted: hsl(222 10% 38%);
-  --muted2: hsl(222 10% 46%);
+  /* ── Text ── */
+  --text:     hsl(220 22% 93%);   /* warm off-white */
+  --muted:    hsl(220 14% 62%);   /* secondary */
+  --muted2:   hsl(220 10% 48%);   /* tertiary / hints */
 
-  /* Surfaces */
-  --surface0: hsl(0 0% 100%);
-  --surface1: hsl(30 18% 96%);
+  /* ── Surfaces ── */
+  --surface0: hsl(228 26% 9%);    /* subtle inset */
+  --surface1: hsl(228 24% 13%);   /* cards default */
+  --surface2: hsl(228 22% 16%);   /* cards hover / raised */
 
-  /* Borders */
-  --border0: hsl(222 18% 86%);
-  --border1: hsl(222 18% 82%);
-  --border2: hsl(222 18% 74%);
+  /* ── Borders ── */
+  --border0:  hsl(228 18% 18%);   /* hairline */
+  --border1:  hsl(228 18% 24%);   /* visible */
+  --border2:  hsl(228 18% 32%);   /* active / hover */
 
-  /* Shadows */
-  --shadow1: 0 10px 30px rgba(17, 24, 39, 0.08);
-  --shadow2: 0 18px 60px rgba(17, 24, 39, 0.10);
+  /* ── Shadows ── */
+  --shadow1:  0 4px 20px hsl(228 40% 3% / 0.55);
+  --shadow2:  0 12px 50px hsl(228 40% 3% / 0.70);
+  --glowAccent: 0 0 40px hsla(var(--accent) / 0.12);
 
-  /* Accent (space-separated for hsla(var(--accent)/x) usage) */
-  --accent: 221 84% 54%;
-  --accent2: 221 84% 44%;
+  /* ── Accent (HSL components — used with hsla(var(--accent)/x)) ── */
+  --accent:   215 92% 60%;        /* electric blue */
+  --accent2:  215 92% 52%;        /* pressed */
+  --accentFg: hsl(0 0% 100%);
 
-  /* Chrome */
-  --chromeBg: color-mix(in srgb, var(--bg) 78%, transparent);
-  --chromeBlur: 10px;
+  /* ── Chrome ── */
+  --chromeBg:   color-mix(in srgb, var(--bg2) 82%, transparent);
+  --chromeBlur: 18px;
+
+  /* ── Typography (system stack, characterful order) ── */
+  --fontSans:
+    "SF Pro Display",
+    "SF Pro Text",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI Variable Display",
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 
-:root[data-theme="dark"] {
-  --bg: hsl(236 49% 12%);
-  --bg2: hsl(236 40% 16%);
-
-  --text: hsl(222 35% 92%);
-  --muted: hsl(222 15% 72%);
-  --muted2: hsl(222 12% 60%);
-
-  --surface0: hsl(236 35% 14%);
-  --surface1: hsl(236 30% 18%);
-
-  --border0: hsl(236 18% 28%);
-  --border1: hsl(236 18% 34%);
-  --border2: hsl(236 18% 40%);
-
-  --shadow1: 0 10px 30px rgba(0, 0, 0, 0.30);
-  --shadow2: 0 18px 60px rgba(0, 0, 0, 0.42);
-
-  --chromeBg: color-mix(in srgb, var(--bg2) 84%, transparent);
-  --chromeBlur: 16px;
+/* Light theme override — activated by preflight script */
+:root[data-theme="light"] {
+  --bg:       hsl(30 18% 97%);
+  --bg2:      hsl(30 14% 94%);
+  --text:     hsl(222 28% 12%);
+  --muted:    hsl(222 12% 40%);
+  --muted2:   hsl(222 10% 52%);
+  --surface0: hsl(0 0% 100%);
+  --surface1: hsl(30 14% 94%);
+  --surface2: hsl(30 12% 90%);
+  --border0:  hsl(222 16% 84%);
+  --border1:  hsl(222 16% 78%);
+  --border2:  hsl(222 16% 68%);
+  --shadow1:  0 4px 20px hsl(222 30% 10% / 0.08);
+  --shadow2:  0 12px 50px hsl(222 30% 10% / 0.13);
+  --glowAccent: none;
+  --accent:   221 84% 52%;
+  --accent2:  221 84% 44%;
+  --chromeBg: color-mix(in srgb, var(--bg) 80%, transparent);
+  --chromeBlur: 12px;
 }

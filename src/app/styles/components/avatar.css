@@ -1,10 +1,6 @@
-/* ==========================
-   Avatar utilities (consistent sizing + shapes)
-   ========================== */
-
 .avatar {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   overflow: hidden;
   border: 1px solid var(--border1);
   background: var(--surface1);
@@ -12,9 +8,7 @@
   flex-shrink: 0;
 }
 
-.avatar--round {
-  border-radius: 999px;
-}
+.avatar--round { border-radius: 999px; }
 
 .avatarImg {
   display: block;
@@ -22,3 +16,9 @@
   height: 100%;
   object-fit: cover;
 }
+
+
+/* ══════════════════════════════════════════════
+   navigation.css  — reserved
+   ══════════════════════════════════════════════ */
+/* no-op — nav styles live in header.css */

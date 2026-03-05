@@ -1,29 +1,22 @@
-/* src/app/styles/components/cards.css
-   Cards / Panels
-*/
-
-/* Card container */
 .card {
   border: 1px solid var(--border1);
   background:
-    radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,0.06), transparent 55%),
-    linear-gradient(180deg, rgba(255,255,255,0.035), transparent 72%);
+    linear-gradient(135deg, color-mix(in srgb, var(--surface1) 90%, transparent), var(--surface0));
   border-radius: var(--rLg);
-  padding: 16px;
-
+  padding: 20px 22px;
   transition:
-    transform var(--tFast) var(--ease),
-    border-color var(--tFast) var(--ease);
+    transform    var(--tFast) var(--ease),
+    border-color var(--tFast) var(--ease),
+    box-shadow   var(--tFast) var(--ease);
 }
 
-/* Hover interaction */
 .card:hover,
 .card:focus-within {
   border-color: var(--border2);
   transform: translateY(-2px);
+  box-shadow: var(--shadow1);
 }
 
-/* Headings inside cards */
 .cardHead {
   display: flex;
   align-items: baseline;
@@ -33,34 +26,36 @@
 }
 
 .cardTitle {
-  font-size: var(--text3);
-  letter-spacing: -0.01em;
+  font-size: var(--text4);
+  font-weight: 680;
+  letter-spacing: var(--trackNormal);
 }
 
-.cardTag {
-  color: var(--muted2);
-  font-size: var(--text1);
+.cardTag   { color: var(--muted2); font-size: var(--text1); }
+.cardDesc  { color: var(--muted); margin-top: 8px; }
+
+.cardBullets { margin-top: 12px; padding-left: 18px; color: var(--muted); }
+.cardBullets li { margin-bottom: 6px; }
+
+.cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+
+/* ══════════════════════════════════════════════
+   surfaces.css  — visuals only, no geometry
+   ══════════════════════════════════════════════ */
+
+.homeAvatar {
+  border: 1.5px solid var(--border2);
+  background: var(--surface1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--surface2) 60%, transparent);
 }
 
-.cardDesc {
-  color: var(--muted);
-  margin-top: 8px;
+.homePortraitFrame {
+  border: 1px solid var(--border1);
+  background: var(--surface1);
+  box-shadow: var(--shadow2), var(--glowAccent);
 }
 
-/* Bulleted lists in cards */
-.cardBullets {
-  margin-top: 12px;
-  padding-left: 18px;
-  color: var(--muted);
-}
-
-.cardBullets li {
-  margin-bottom: 6px;
-}
-
-/* Card actions */
-.cardActions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.homePortraitFrame:hover {
+  border-color: var(--border2);
 }

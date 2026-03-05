@@ -1,80 +1,76 @@
-/* Buttons — modern 2026 hierarchy */
+/* src/app/styles/components/buttons.css */
 
 .btn {
-  --btnBg: color-mix(in srgb, var(--bg2) 70%, transparent);
-  --btnBgHover: color-mix(in srgb, var(--bg2) 82%, transparent);
-  --btnBorder: var(--border0);
-  --btnBorderHover: var(--border1);
-
-  --btnPrimaryBg: hsla(var(--accent) / 0.96);
-  --btnPrimaryBgHover: hsla(var(--accent2) / 0.98);
-  --btnPrimaryBorder: hsla(var(--accent) / 0.40);
-  --btnPrimaryBorderHover: hsla(var(--accent2) / 0.55);
-  --btnPrimaryText: rgba(255, 255, 255, 0.98);
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-
-  padding: 10px 14px;
+  gap: 7px;
+  padding: 10px 16px;
   border-radius: var(--rMd);
-  border: 1px solid var(--btnBorder);
-  background: var(--btnBg);
+  border: 1px solid var(--border1);
+  background: color-mix(in srgb, var(--surface1) 85%, transparent);
   color: var(--text);
-
   font-size: var(--text1);
+  font-weight: 500;
   line-height: 1.2;
-  text-align: center;
   text-decoration: none;
-
+  white-space: nowrap;
+  cursor: pointer;
   transition:
-    background var(--tFast) var(--ease),
+    background   var(--tFast) var(--ease),
     border-color var(--tFast) var(--ease),
-    transform var(--tFast) var(--ease),
-    box-shadow var(--tFast) var(--ease),
-    color var(--tFast) var(--ease);
+    transform    var(--tFast) var(--ease),
+    box-shadow   var(--tFast) var(--ease),
+    color        var(--tFast) var(--ease);
 }
 
 .btn:hover,
 .btn:focus-visible {
-  background: var(--btnBgHover);
-  border-color: var(--btnBorderHover);
+  background: var(--surface2);
+  border-color: var(--border2);
   transform: translateY(-1px);
   box-shadow: var(--shadow1);
+  outline: none;
 }
 
-.btn:active {
-  transform: translateY(0);
-}
+.btn:active { transform: translateY(0); box-shadow: none; }
 
 .btnPrimary {
-  background: var(--btnPrimaryBg);
-  border-color: var(--btnPrimaryBorder);
-  color: var(--btnPrimaryText);
-  box-shadow: var(--shadow1);
+  background: hsl(var(--accent));
+  border-color: hsla(var(--accent) / 0.40);
+  color: hsl(0 0% 100%);
+  box-shadow: 0 4px 18px hsla(var(--accent) / 0.28);
 }
 
 .btnPrimary:hover,
 .btnPrimary:focus-visible {
-  background: var(--btnPrimaryBgHover);
-  border-color: var(--btnPrimaryBorderHover);
-  box-shadow: var(--shadow2);
+  background: hsl(var(--accent2));
+  border-color: hsla(var(--accent2) / 0.55);
+  box-shadow: 0 6px 28px hsla(var(--accent) / 0.38);
 }
 
 .btnTertiary {
   background: transparent;
   border-color: var(--border0);
+  color: var(--muted);
+}
+
+.btnTertiary:hover,
+.btnTertiary:focus-visible {
+  background: color-mix(in srgb, var(--surface1) 60%, transparent);
+  border-color: var(--border1);
+  color: var(--text);
 }
 
 .btnHeader {
   height: 36px;
-  padding-inline: 12px;
-  font-size: 13px;
+  padding-inline: 13px;
+  font-size: var(--text0);
 }
 
 .btnSm {
   height: 32px;
-  padding: 7px 10px;
-  font-size: 13px;
+  padding: 6px 10px;
+  font-size: var(--text0);
+  border-radius: var(--rSm);
 }

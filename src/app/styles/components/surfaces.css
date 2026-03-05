@@ -1,21 +1,17 @@
 /* src/app/styles/components/surfaces.css
-   Surface visuals shared across pages.
-   PURPOSE: visuals (borders, shadows, subtle elevation).
-   DO NOT: define layout/geometry (that stays in layout.css).
+   Surface visuals only — no geometry.
 */
 
-/* Home hero avatar surface */
 .homeAvatar {
-  border: 1px solid var(--border1);
+  border: 1.5px solid var(--border2);
   background: var(--surface1);
-  box-shadow: var(--shadow1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--surface2) 60%, transparent);
 }
 
-/* Home hero portrait surface */
 .homePortraitFrame {
   border: 1px solid var(--border1);
   background: var(--surface1);
-  box-shadow: var(--shadow2);
+  box-shadow: var(--shadow2), var(--glowAccent);
 }
 
 .homePortraitFrame:hover {
