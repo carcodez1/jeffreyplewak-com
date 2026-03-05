@@ -1,6 +1,9 @@
 .panel {
-  border: 1px solid var(--border0);
+  border: 1px solid var(--glassBorder);
   border-radius: var(--rLg);
-  background: linear-gradient(180deg, var(--surface1), var(--surface0) 100%);
+  background: var(--glassBg);
+  backdrop-filter: blur(var(--glassBlur));
+  -webkit-backdrop-filter: blur(var(--glassBlur));
+  box-shadow: var(--glassShadow);
   padding: 18px;
 }

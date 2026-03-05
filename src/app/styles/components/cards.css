@@ -39,6 +39,25 @@
 
 .cardActions { display: flex; gap: 10px; flex-wrap: wrap; }
 
+.depthFx {
+  transition: transform var(--tFast) var(--ease), box-shadow var(--tFast) var(--ease);
+}
+
+.depthFx:hover,
+.depthFx:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depthFx,
+  .depthFx:hover,
+  .depthFx:focus-within {
+    transition: none;
+    transform: none;
+  }
+}
+
 
 /* ══════════════════════════════════════════════
    surfaces.css  — visuals only, no geometry

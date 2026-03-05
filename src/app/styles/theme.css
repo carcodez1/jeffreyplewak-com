@@ -34,9 +34,23 @@
   --accent2:  215 92% 52%;        /* pressed */
   --accentFg: hsl(0 0% 100%);
 
-  /* ── Chrome ── */
-  --chromeBg:   color-mix(in srgb, var(--bg2) 82%, transparent);
-  --chromeBlur: 18px;
+  /* ── Glass (semantic) ── */
+  --glassBg: color-mix(in srgb, var(--bg2) 84%, transparent);
+  --glassBorder: color-mix(in srgb, var(--border1) 78%, transparent);
+  --glassBlur: 14px;
+  --glassShadow: 0 10px 28px hsl(228 40% 3% / 0.42);
+
+  /* ── CTA contract (semantic SSOT) ── */
+  --ctaBg: hsl(var(--accent));
+  --ctaFg: hsl(0 0% 100%);
+  --ctaBorder: hsla(var(--accent) / 0.40);
+  --ctaHover: hsl(var(--accent2));
+  --ctaRing: hsla(var(--accent) / 0.62);
+
+  --ctaSecondaryBg: color-mix(in srgb, var(--surface1) 82%, transparent);
+  --ctaSecondaryFg: var(--text);
+  --ctaSecondaryBorder: var(--border1);
+  --ctaSecondaryHover: var(--surface2);
   --iconFilter: brightness(0) invert(1);
 
   /* ── Typography (system stack, characterful order) ── */
@@ -72,7 +86,27 @@
   --glowAccent: none;
   --accent:   221 84% 52%;
   --accent2:  221 84% 44%;
-  --chromeBg: color-mix(in srgb, var(--bg) 80%, transparent);
-  --chromeBlur: 12px;
+  --glassBg: color-mix(in srgb, var(--bg) 88%, transparent);
+  --glassBorder: color-mix(in srgb, var(--border1) 88%, transparent);
+  --glassBlur: 10px;
+  --glassShadow: 0 8px 20px hsl(222 30% 10% / 0.11);
+  --ctaBg: hsl(var(--accent));
+  --ctaFg: hsl(0 0% 100%);
+  --ctaBorder: hsla(var(--accent) / 0.35);
+  --ctaHover: hsl(var(--accent2));
+  --ctaRing: hsla(var(--accent) / 0.55);
+  --ctaSecondaryBg: color-mix(in srgb, var(--surface1) 70%, transparent);
+  --ctaSecondaryFg: var(--text);
+  --ctaSecondaryBorder: var(--border1);
+  --ctaSecondaryHover: var(--surface2);
   --iconFilter: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glassBg: var(--surface1);
+    --glassBorder: var(--border1);
+    --glassBlur: 0px;
+    --glassShadow: var(--shadow1);
+  }
 }

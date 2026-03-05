@@ -26,6 +26,22 @@ export const metadata: Metadata = {
 };
 
 const PORTRAIT_SRC = "/assets/images/jeffrey-plewak-portrait.webp";
+const HOME_PREVIEWS = [
+  {
+    href: "/projects/kprovengine",
+    src: "/projects/kprovengine/architecture.png",
+    title: "KProvEngine architecture",
+    blurb: "Deterministic pipeline and evidence flow.",
+    alt: "KProvEngine pipeline and evidence architecture diagram",
+  },
+  {
+    href: "/resume",
+    src: "/og-image.png",
+    title: "Resume + proof surface",
+    blurb: "Resume, downloadable artifacts, and recruiter evidence links.",
+    alt: "Jeffrey R. Plewak site preview image",
+  },
+] as const;
 
 export default function HomePage() {
   return (
@@ -98,12 +114,33 @@ export default function HomePage() {
         </div>
       </header>
 
+      <section className="section homePreviewBand" aria-label="Quick previews">
+        <h2 className="homePreviewTitle">Quick previews</h2>
+        <div className="homePreviewGrid">
+          {HOME_PREVIEWS.map((item) => (
+            <Link key={item.title} href={item.href} className="card depthFx focusCard homePreviewCard">
+              <div className="homePreviewMedia">
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 980px) 100vw, (max-width: 1200px) 50vw, 420px"
+                  className="homePreviewImg"
+                />
+              </div>
+              <h3 className="cardTitle">{item.title}</h3>
+              <p className="cardDesc">{item.blurb}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ── Work ── */}
       <section id="work" className="section" aria-label="Work">
         <h2 className="h2">Work</h2>
 
         <div className="grid2">
-          <article className="card focusCard">
+          <article className="card focusCard depthFx">
             <h3 className="cardTitle">Backend systems</h3>
             <p className="cardDesc">
               APIs, services, and data pipelines with clear boundaries.
@@ -112,7 +149,7 @@ export default function HomePage() {
             </p>
           </article>
 
-          <article className="card focusCard">
+          <article className="card focusCard depthFx">
             <h3 className="cardTitle">Platform and infrastructure</h3>
             <p className="cardDesc">
               Build pipelines, runtime configuration, and deployment workflows.
@@ -121,7 +158,7 @@ export default function HomePage() {
             </p>
           </article>
 
-          <article className="card focusCard">
+          <article className="card focusCard depthFx">
             <h3 className="cardTitle">Compliance-critical environments</h3>
             <p className="cardDesc">
               10+ years in defense, finance, and cloud platforms where
@@ -130,7 +167,7 @@ export default function HomePage() {
             </p>
           </article>
 
-          <article className="card focusCard">
+          <article className="card focusCard depthFx">
             <h3 className="cardTitle">AI workflow engineering</h3>
             <p className="cardDesc">
               Deterministic, human-reviewed AI pipelines with explicit

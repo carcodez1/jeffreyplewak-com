@@ -7,59 +7,54 @@
   gap: 7px;
   padding: 10px 16px;
   border-radius: var(--rMd);
-  border: 1px solid var(--border1);
-  background: color-mix(in srgb, var(--surface1) 85%, transparent);
-  color: var(--text);
+  border: 1px solid var(--ctaSecondaryBorder);
+  background: var(--ctaSecondaryBg);
+  color: var(--ctaSecondaryFg);
   font-size: var(--text1);
   font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition:
-    background   var(--tFast) var(--ease),
-    border-color var(--tFast) var(--ease),
-    transform    var(--tFast) var(--ease),
-    box-shadow   var(--tFast) var(--ease),
-    color        var(--tFast) var(--ease);
+  transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease), box-shadow var(--tFast) var(--ease);
 }
 
-.btn:hover,
-.btn:focus-visible {
-  background: var(--surface2);
-  border-color: var(--border2);
+.btn:hover {
   transform: translateY(-1px);
+  opacity: 0.98;
   box-shadow: var(--shadow1);
   outline: none;
 }
 
-.btn:active { transform: translateY(0); box-shadow: none; }
+.btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 5px var(--ctaRing), var(--shadow1);
+  outline: none;
+}
+
+.btn:active { transform: translateY(1px); box-shadow: none; }
 
 .btnPrimary {
-  background: hsl(var(--accent));
-  border-color: hsla(var(--accent) / 0.40);
-  color: hsl(0 0% 100%);
-  box-shadow: 0 4px 18px hsla(var(--accent) / 0.28);
+  background: var(--ctaBg);
+  border-color: var(--ctaBorder);
+  color: var(--ctaFg);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--ctaBg) 45%, transparent);
 }
 
 .btnPrimary:hover,
 .btnPrimary:focus-visible {
-  background: hsl(var(--accent2));
-  border-color: hsla(var(--accent2) / 0.55);
-  box-shadow: 0 6px 28px hsla(var(--accent) / 0.38);
+  background: var(--ctaHover);
 }
 
 .btnTertiary {
-  background: transparent;
-  border-color: var(--border0);
-  color: var(--muted);
+  background: var(--ctaSecondaryBg);
+  border-color: var(--ctaSecondaryBorder);
+  color: var(--ctaSecondaryFg);
 }
 
 .btnTertiary:hover,
 .btnTertiary:focus-visible {
-  background: color-mix(in srgb, var(--surface1) 60%, transparent);
-  border-color: var(--border1);
-  color: var(--text);
+  background: var(--ctaSecondaryHover);
 }
 
 .btnHeader {
@@ -73,4 +68,14 @@
   padding: 6px 10px;
   font-size: var(--text0);
   border-radius: var(--rSm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:focus-visible,
+  .btn:active {
+    transition: none;
+    transform: none;
+  }
 }

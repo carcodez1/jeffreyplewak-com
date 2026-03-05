@@ -107,7 +107,7 @@ export default async function Page() {
               </ul>
             </div>
 
-            <div className="pCard pCardTight pInlineNote">
+            <div className="pCard pCardTight pInlineNote depthFx">
               <div className="pCalloutTitle">What you get (V1)</div>
               <ul className="pList">
                 <li>
@@ -125,7 +125,7 @@ export default async function Page() {
           </div>
 
           <aside aria-label="Architecture preview">
-            <div className="pCard pCardTight">
+            <div className="pCard pCardTight depthFx">
               <div className="pCardHead">
                 <div className="pCardTitle">Architecture snapshot</div>
                 <div className="pCardHint">V1 pipeline + evidence outputs</div>
@@ -155,13 +155,13 @@ export default async function Page() {
       <section className="pSection">
         <h2 className="pH2">Why this exists</h2>
         <div className="pGrid2">
-          <div className="pCard">
+          <div className="pCard depthFx">
             <p className="pP0">
               Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can't
               reliably reproduce results, explain what happened, or separate human judgment from automation.
             </p>
           </div>
-          <div className="pCard">
+          <div className="pCard depthFx">
             <ul className="pList">
               <li>"What produced this output?" must be answerable with artifacts, not narrative.</li>
               <li>Runs should be reproducible end-to-end (no hidden state, no surprise network calls).</li>
@@ -174,7 +174,7 @@ export default async function Page() {
 
       <section className="pSection">
         <h2 className="pH2">Design constraints (V1)</h2>
-        <div className="pCard">
+        <div className="pCard depthFx">
           <ul className="pList pListMuted">
             <li>Local-first execution (no required external services)</li>
             <li>Deterministic, reproducible pipelines</li>
@@ -188,7 +188,7 @@ export default async function Page() {
       <section className="pSection">
         <h2 className="pH2">Architecture</h2>
         <div className="pGrid2">
-          <div className="pCard">
+          <div className="pCard depthFx">
             <div className="pCalloutTitle">Pipeline</div>
             <ul className="pList">
               <li>
@@ -199,7 +199,7 @@ export default async function Page() {
             </ul>
           </div>
 
-          <div className="pCard">
+          <div className="pCard depthFx">
             <div className="pCalloutTitle">Adapters + evidence layer</div>
             <ul className="pList">
               <li>
@@ -215,7 +215,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <div className="pCard pCardTight pInlineNote">
+        <div className="pCard pCardTight pInlineNote depthFx">
           Full architecture diagrams and governance rules live in the repository.{" "}
           <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
             View architecture and notes →
@@ -225,7 +225,7 @@ export default async function Page() {
 
       <section className="pSection">
         <h2 className="pH2">Evidence outputs (what's actually captured)</h2>
-        <div className="pCard">
+        <div className="pCard depthFx">
           <ul className="pList">
             <li>
               <strong>manifest.json</strong> — file inventory + expected outputs
@@ -248,7 +248,7 @@ export default async function Page() {
 
       <section className="pSection">
         <h2 className="pH2">Intentionally out of scope (V1)</h2>
-        <div className="pCard">
+        <div className="pCard depthFx">
           <ul className="pList pListMuted">
             <li>Hosted or SaaS deployment</li>
             <li>Autonomous or agent-driven behavior</li>
@@ -260,7 +260,7 @@ export default async function Page() {
 
       <section className="pSection">
         <h2 className="pH2">Demo</h2>
-        <div className="pCard">
+        <div className="pCard depthFx">
           <p className="pP0 pMuted">Run the public demo script from the repository root:</p>
           <pre className="pCode">{`# From the KProvEngine repo:
 ./demo.sh

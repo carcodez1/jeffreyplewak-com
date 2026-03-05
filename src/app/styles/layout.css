@@ -119,6 +119,25 @@
   margin-bottom: 8px;
 }
 
+.homePreviewBand { margin-top: 8px; }
+.homePreviewTitle { margin-bottom: 12px; }
+.homePreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.homePreviewCard { display: grid; gap: 10px; }
+.homePreviewMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--rMd);
+  overflow: hidden;
+  border: 1px solid var(--border0);
+  background: var(--surface0);
+}
+.homePreviewImg { object-fit: cover; object-position: center; }
+
 /* ── Avatar ── */
 .homeAvatar {
   width: 80px;
@@ -156,6 +175,23 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.projectsPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.projectsPreviewCard { display: grid; gap: 10px; }
+.projectsPreviewMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--rMd);
+  overflow: hidden;
+  border: 1px solid var(--border0);
+  background: var(--surface0);
+}
+.projectsPreviewImg { object-fit: cover; object-position: center; }
 
 /* ── Overflow guard ── */
 .appMain, .wrap { max-width: 100%; }

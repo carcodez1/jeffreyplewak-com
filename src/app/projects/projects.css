@@ -95,13 +95,24 @@
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   text-decoration: none;
-  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+  transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease), box-shadow var(--tFast) var(--ease);
 }
 .pBtn:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.18);
+  opacity: 0.98;
+  box-shadow: var(--shadow1);
   text-decoration: none;
+}
+
+.pBtn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 5px var(--ctaRing), var(--shadow1);
+  outline: none;
+}
+
+.pBtn:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
 .pBtnPrimary {
@@ -192,6 +203,19 @@
   text-underline-offset: 3px;
 }
 .pLink:hover { opacity: 0.92; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pBtn,
+  .pBtn:hover,
+  .pBtn:focus-visible,
+  .pBtn:active,
+  .pCard,
+  .pCard:hover,
+  .pCard:focus-within {
+    transition: none;
+    transform: none;
+  }
+}
 
 /* Code */
 .pCode {
