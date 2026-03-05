@@ -137,7 +137,6 @@ export default async function Page() {
                   alt="KProvEngine V1 pipeline and evidence flow"
                   fill
                   className="pMediaImg"
-                  priority
                   sizes="(max-width: 980px) 100vw, 420px"
                   style={{ objectFit: "contain" }}
                 />
