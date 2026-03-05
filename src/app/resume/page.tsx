@@ -7,7 +7,11 @@
 //   5. PDF section moved to bottom — doesn't compete above the fold
 
 import type { Metadata } from "next";
+import Image from "next/image";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { LINKS, SITE } from "@/config/site";
+import { EXPERIENCE_LOGOS } from "@/config/experience";
 import { RESUME, type ResumeRole } from "@/content/resume";
 import { ResumeClient } from "@/app/components/ResumeClient";
 
@@ -25,16 +29,71 @@ export const metadata: Metadata = {
 
 // Stats derived from resume data — no hardcoded claims
 function buildStats(roles: readonly ResumeRole[]) {
-  const sorted = [...roles].sort((a, b) => a.start.localeCompare(b.start));
-  const startYear = parseInt(sorted[0]?.start ?? "2011", 10);
-  const years = new Date().getFullYear() - startYear;
-  const employers = new Set(roles.map((r) => r.employerKey)).size;
-  return { years, employers };
+  const sortedByStart = [...roles].sort((a, b) => a.start.localeCompare(b.start));
+  const startYear = parseInt(sortedByStart[0]?.start ?? "2011", 10);
+  const years = Math.max(0, new Date().getFullYear() - startYear);
+
+  const roleCount = roles.length;
+  const employerCounts = new Map<string, number>();
+  for (const r of roles) {
+    const key = r.employerName.trim().toLowerCase();
+    employerCounts.set(key, (employerCounts.get(key) ?? 0) + 1);
+  }
+
+  const uniqueEmployers = employerCounts.size;
+  const repeatEmployers = Array.from(employerCounts.values()).filter((count) => count > 1).length;
+
+  return {
+    years,
+    rolesCount: roleCount,
+    uniqueEmployersCount: uniqueEmployers,
+    repeatEmployersCount: repeatEmployers,
+  };
+}
+
+function roleRange(r: ResumeRole): string {
+  return r.end ? `${r.start} — ${r.end}` : `${r.start} — Present`;
+}
+
+function safeExternalHref(href: string): string | null {
+  const trimmed = href.trim();
+  if (!trimmed || trimmed.startsWith("TODO_")) return null;
+  return trimmed;
+}
+
+function groupRolesByStartYear(roles: readonly ResumeRole[]) {
+  const groups = new Map<string, ResumeRole[]>();
+  for (const role of roles) {
+    const year = role.start.slice(0, 4);
+    const arr = groups.get(year) ?? [];
+    arr.push(role);
+    groups.set(year, arr);
+  }
+  return [...groups.entries()]
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([year, items]) => ({
+      year,
+      roles: [...items].sort((a, b) => b.start.localeCompare(a.start)),
+    }));
+}
+
+const EVIDENCE_CANDIDATES = [
+  { href: "/downloads/resume.json", label: "Evidence JSON" },
+  { href: "/downloads/recruiter-pack/manifest.json", label: "Evidence Manifest" },
+  { href: "/downloads/contact.vcf", label: "Contact VCF" },
+] as const;
+
+function getEvidenceLinks() {
+  return EVIDENCE_CANDIDATES.filter((item) =>
+    existsSync(join(process.cwd(), "public", item.href.replace(/^\//, ""))),
+  );
 }
 
 export default function ResumePage() {
   const roles = [...RESUME.roles].sort((a, b) => b.start.localeCompare(a.start));
-  const stats = buildStats(RESUME.roles);
+  const stats = buildStats(roles);
+  const yearGroups = groupRolesByStartYear(roles);
+  const evidenceLinks = getEvidenceLinks();
 
   return (
     <div className="wrap">
@@ -48,22 +107,22 @@ export default function ResumePage() {
           </div>
           <div className="resumeStatDivider" aria-hidden="true" />
           <div className="resumeStat">
-            <span className="resumeStatNum">{stats.employers}</span>
-            <span className="resumeStatLabel">employers</span>
+            <span className="resumeStatNum">{stats.rolesCount}</span>
+            <span className="resumeStatLabel">roles</span>
           </div>
           <div className="resumeStatDivider" aria-hidden="true" />
           <div className="resumeStat">
-            <span className="resumeStatNum">3</span>
-            <span className="resumeStatLabel">domains</span>
+            <span className="resumeStatNum">{stats.uniqueEmployersCount}</span>
+            <span className="resumeStatLabel">unique employers</span>
           </div>
           <div className="resumeStatDivider" aria-hidden="true" />
           <div className="resumeStat">
-            <span className="resumeStatNum">Senior</span>
-            <span className="resumeStatLabel">level throughout</span>
+            <span className="resumeStatNum">{stats.repeatEmployersCount}</span>
+            <span className="resumeStatLabel">repeat employers</span>
           </div>
         </div>
 
-        <div className="ctaRow resumeCtaRow" aria-label="Resume actions">
+        <div className="ctaRow resumeCtaRow" aria-label="Resume actions and downloads">
           <a className="btn btnPrimary" href={RESUME.pdfHref} target="_blank" rel="noopener noreferrer">
             Open PDF
           </a>
@@ -79,6 +138,11 @@ export default function ResumePage() {
           <a className="btn btnTertiary" href={LINKS.github} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
+          {evidenceLinks.map((item) => (
+            <a key={item.href} className="btn btnSm btnTertiary" href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+            </a>
+          ))}
         </div>
       </header>
 
@@ -89,7 +153,106 @@ export default function ResumePage() {
 
       <section className="section" aria-label="Experience">
         <h2 className="resumeSectionHead">Experience</h2>
-        <ResumeClient roles={roles} pdfHref={RESUME.pdfHref} />
+        <div className="resumeLogoStripWrap" aria-label="Employer logos">
+          <p className="resumeLogoStripLabel">Where I have worked</p>
+          <ul className="resumeLogoStrip" role="list">
+            {EXPERIENCE_LOGOS.map((item) => (
+              <li key={item.key}>
+                <a className="resumeLogoChip depthFx" href={item.href} aria-label={`${item.label} on resume`}>
+                  <Image
+                    src={item.logoSrc}
+                    alt={`${item.label} logo`}
+                    width={item.width ?? 96}
+                    height={item.height ?? 28}
+                    className="resumeLogoChipImg"
+                    loading="lazy"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ResumeClient roles={roles} />
+        <div className="resumeTimeline" aria-label="Full experience timeline (server-rendered)">
+          {yearGroups.map((group) => (
+            <section key={group.year} className="resumeYearGroup" aria-labelledby={`year-${group.year}`}>
+              <h3 id={`year-${group.year}`} className="resumeYearHead">
+                {group.year}
+              </h3>
+              <div className="resumeRoles" role="list">
+                {group.roles.map((r, idx) => {
+                  const employerHref = safeExternalHref(r.employerUrl);
+                  const isMostRecent = group.year === yearGroups[0]?.year && idx === 0;
+                  return (
+                    <article
+                      key={r.id}
+                      id={r.id}
+                      className={`resumeRole panel ${isMostRecent ? "resumeRole--featured" : ""}`}
+                      role="listitem"
+                      aria-label={`${r.employerName} — ${r.title}`}
+                      tabIndex={-1}
+                    >
+                      <header className="resumeRoleHead">
+                        <div className="resumeRoleTop">
+                          <h4 className="resumeRoleEmployer">{r.employerName}</h4>
+                          <div className="resumeRoleMeta">
+                            <time className="resumeRoleDates" dateTime={r.start}>
+                              {roleRange(r)}
+                            </time>
+                            <span className={`resumeRoleType resumeRoleType--${r.workType.toLowerCase()}`}>
+                              {r.workType}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="resumeRoleTitleRow">
+                          <div className="resumeRoleTitle">{r.title}</div>
+                          <div className="resumeRoleLocation">{r.location}</div>
+                        </div>
+
+                        <div className="resumeRoleLinks" aria-label="Role links">
+                          {employerHref ? (
+                            <a className="btn btnSm btnPrimary" href={employerHref} target="_blank" rel="noopener noreferrer">
+                              Employer ↗
+                            </a>
+                          ) : null}
+                          <a className="btn btnSm btnTertiary" href={`/resume#${r.id}`}>
+                            #Link
+                          </a>
+                          <a className="btn btnSm btnTertiary" href={RESUME.pdfHref} target="_blank" rel="noopener noreferrer">
+                            PDF
+                          </a>
+                        </div>
+                      </header>
+
+                      <div className="resumeRoleBody">
+                        <h5 className="resumeRoleSection">Impact</h5>
+                        <ul className="resumeRoleList">
+                          {r.highlights.map((h) => (
+                            <li key={h}>{h}</li>
+                          ))}
+                        </ul>
+
+                        {r.technologies?.length ? (
+                          <>
+                            <h5 className="resumeRoleSection">Technologies</h5>
+                            <ul className="resumeRoleSkills" role="list">
+                              {r.technologies.map((t) => (
+                                <li key={t} className="resumeSkill">
+                                  {t}
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        ) : null}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
       </section>
 
       <section className="section" aria-label="PDF preview">
