@@ -25,6 +25,7 @@
 @import "./styles/components/drawer.css";
 @import "./styles/components/footer.css";
 @import "./styles/components/resume.css";
+@import "./styles/components/recruiter.css";
 
 /* Features */
 @import "./styles/experience.css";

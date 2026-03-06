@@ -29,7 +29,10 @@ body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--bg);
+  background:
+    radial-gradient(1200px 700px at 10% -10%, hsla(var(--accent) / 0.10), transparent 60%),
+    radial-gradient(900px 550px at 95% 0%, hsla(var(--signal) / 0.06), transparent 58%),
+    var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -61,11 +64,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
   letter-spacing: var(--trackTight);
   font-weight: 740;
-  line-height: 1.05;
-  margin-bottom: 16px;
+  line-height: 1.08;
+  margin-bottom: 14px;
 }
 
 h2 {
@@ -78,11 +81,21 @@ h3 {
   margin-bottom: 10px;
 }
 
+.legal h2,
+.legal h3 {
+  display: block;
+}
+
+.legal h2::before,
+.legal h3::before {
+  content: none;
+}
+
 /* ── Body copy ── */
 p {
   margin: 0 0 var(--pSpace);
-  font-size: var(--text2);
-  line-height: var(--lhNormal);
+  font-size: var(--text1);
+  line-height: 1.62;
   color: var(--muted);
 }
 
@@ -90,8 +103,8 @@ p {
 
 /* ── Utility classes ── */
 .lede {
-  font-size: var(--text3);
-  line-height: var(--lhNormal);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.58;
   color: var(--muted);
 }
 

@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const urls = [
     "/",
+    "/r",
     "/projects",
     "/projects/kprovengine",
     "/resume",

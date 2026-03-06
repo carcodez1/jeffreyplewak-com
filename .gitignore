@@ -94,3 +94,5 @@ _audit_bundle.txt
 CONTEXT.txt
 context-output.txt
 collect-context.sh
+artifacts/reasoning/
+logs/checkpoints/

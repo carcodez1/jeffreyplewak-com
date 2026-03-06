@@ -1,20 +1,45 @@
 .card {
-  border: 1px solid var(--border1);
+  border: 1px solid color-mix(in srgb, var(--border1) 82%, transparent);
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--surface1) 90%, transparent), var(--surface0));
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--surface1) 84%, transparent),
+      color-mix(in srgb, var(--surface0) 92%, transparent)
+    );
   border-radius: var(--rLg);
-  padding: 20px 22px;
+  padding: 16px 18px;
   transition:
     transform    var(--tFast) var(--ease),
     border-color var(--tFast) var(--ease),
-    box-shadow   var(--tFast) var(--ease);
+    box-shadow   var(--tFast) var(--ease),
+    background   var(--tMed) var(--ease);
+  position: relative;
+  overflow: clip;
 }
 
 .card:hover,
 .card:focus-within {
   border-color: var(--border2);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--shadow1);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, hsla(var(--accent) / 0.82), hsla(var(--accent2) / 0.34));
+  opacity: 0.2;
+  transition: opacity var(--tFast) var(--ease);
+}
+
+.card:hover::before,
+.card:focus-within::before {
+  opacity: 0.34;
 }
 
 .cardHead {
@@ -26,13 +51,14 @@
 }
 
 .cardTitle {
-  font-size: var(--text4);
-  font-weight: 680;
+  font-size: clamp(1.16rem, 1.8vw, 1.28rem);
+  font-weight: 700;
   letter-spacing: var(--trackNormal);
+  color: var(--text);
 }
 
 .cardTag   { color: var(--muted2); font-size: var(--text1); }
-.cardDesc  { color: var(--muted); margin-top: 8px; }
+.cardDesc  { color: var(--muted); margin-top: 6px; max-width: 58ch; }
 
 .cardBullets { margin-top: 12px; padding-left: 18px; color: var(--muted); }
 .cardBullets li { margin-bottom: 6px; }

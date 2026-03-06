@@ -90,6 +90,16 @@
   background: var(--surface2);
 }
 
+.expTicker--static .expStripe {
+  cursor: default;
+}
+
+.expTicker--static .expStripe:hover {
+  transform: none;
+  border-color: transparent;
+  background: transparent;
+}
+
 .expStripe:focus-visible {
   opacity: 1;
   outline: none;
@@ -103,7 +113,7 @@
   height: 26px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
+  filter: var(--iconFilter);
   opacity: 0.82;
   transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease);
 }

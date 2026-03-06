@@ -1,0 +1,37 @@
+Author: Jeffrey R. Plewak
+Created: 2026-03-06
+License: © 2026 Jeffrey R. Plewak
+
+Read root AGENTS.md and any nearer-scope AGENTS.md first.
+
+Mode: PATCH
+
+Use the PATCH rules from AGENTS.md exactly.
+
+Task:
+[PASTE THE CURRENT APPROVED SLICE HERE]
+
+Patch rules:
+- Stay inside the approved scope only.
+- Reuse existing helpers and data sources where possible.
+- If reuse is not possible, extract the smallest shared helper rather than duplicating logic locally.
+- Automatically run:
+  - npm run -s verify:patch
+- If `verify:patch` does not exist, run:
+  - npm run -s lint
+  - npm run -s typecheck
+  - npm run -s build
+- If verification fails, stop and report the exact failing command and error.
+- If a HITL trigger occurs, stop before patching and ask only the minimum required question.
+
+Return exactly:
+TASK
+FILES
+FACT / INFERENCE / ASSUMPTION / UNKNOWN
+APPLY STATUS
+DIFF SUMMARY
+VERIFY
+RISKS
+ROLLBACK
+NEXT ACTION
+HITL STATUS

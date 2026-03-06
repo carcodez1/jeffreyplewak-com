@@ -22,10 +22,17 @@
 .pBack {
   color: var(--muted);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .pBack:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: hsl(var(--accent));
+}
+
+.pBack::before {
+  content: "↖";
+  color: hsla(var(--accent) / 0.9);
 }
 
 .pHeroGrid {
@@ -33,6 +40,11 @@
   grid-template-columns: 1.25fr 0.75fr;
   gap: 18px;
   align-items: start;
+}
+
+.pHeroGridSingle {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
 }
 
 @media (max-width: 980px) {
@@ -59,7 +71,7 @@
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--border1);
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in srgb, var(--surface1) 80%, transparent);
   color: var(--muted);
   font-size: 12px;
   white-space: nowrap;
@@ -91,8 +103,8 @@
   justify-content: center;
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border1);
+  background: color-mix(in srgb, var(--surface1) 80%, transparent);
   color: var(--text);
   text-decoration: none;
   transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease), box-shadow var(--tFast) var(--ease);
@@ -102,6 +114,19 @@
   opacity: 0.98;
   box-shadow: var(--shadow1);
   text-decoration: none;
+}
+
+.pBtn::after {
+  content: "→";
+  margin-left: 7px;
+  opacity: 0.8;
+  transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease);
+}
+
+.pBtn:hover::after,
+.pBtn:focus-visible::after {
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 .pBtn:focus-visible {
@@ -116,7 +141,7 @@
 }
 
 .pBtnPrimary {
-  background: hsla(var(--accent) / 0.14);
+  background: color-mix(in srgb, hsla(var(--accent) / 0.16), var(--surface2));
   border-color: hsla(var(--accent) / 0.40);
 }
 
@@ -142,7 +167,7 @@
   border-radius: 999px;
   border: 1px solid var(--border1);
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.03);
+  background: color-mix(in srgb, var(--surface0) 90%, transparent);
 }
 
 .pSection { margin-top: 26px; }
@@ -165,10 +190,28 @@
 
 .pCard {
   border-radius: 16px;
-  border: 1px solid var(--border1);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  box-shadow: var(--shadow1);
+  border: 1px solid color-mix(in srgb, var(--border1) 82%, transparent);
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--surface1) 86%, transparent),
+    color-mix(in srgb, var(--surface0) 92%, transparent)
+  );
+  box-shadow: 0 8px 22px hsl(228 40% 3% / 0.34);
   padding: 14px 16px;
+  position: relative;
+  overflow: clip;
+}
+
+.pCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, hsla(var(--accent) / 0.85), hsla(var(--accent2) / 0.35));
+  opacity: 0.45;
 }
 
 .pCardTight { padding: 12px 14px; }
@@ -198,11 +241,17 @@
 .pInlineNote { margin-top: 12px; }
 
 .pLink {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.pLink:hover { opacity: 0.92; }
+.pLink::after {
+  content: "→";
+  color: hsla(var(--accent) / 0.9);
+}
+.pLink:hover { color: hsl(var(--accent)); }
 
 @media (prefers-reduced-motion: reduce) {
   .pBtn,
@@ -222,8 +271,8 @@
   margin: 10px 0 0;
   padding: 12px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border1);
+  background: color-mix(in srgb, var(--surface0) 90%, black 10%);
   overflow-x: auto;
   white-space: pre;
   font-family: var(--fontMono);
@@ -237,8 +286,8 @@
   width: 100%;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(0, 0, 0, 0.20);
+  border: 1px solid var(--border1);
+  background: color-mix(in srgb, var(--surface0) 82%, black 18%);
 }
 
 .pMedia169 { aspect-ratio: 16 / 9; }
@@ -254,7 +303,7 @@
 .pFooter {
   margin-top: 36px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border0);
   color: var(--muted);
 }
 

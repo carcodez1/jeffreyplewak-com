@@ -1,0 +1,12 @@
+Author: Jeffrey R. Plewak
+Created: 2026-03-06
+License: © 2026 Jeffrey R. Plewak
+
+Read root AGENTS.md and any nearer-scope AGENTS.md first.
+
+Mode: INSPECT
+
+Use the INSPECT rules from AGENTS.md exactly.
+
+Task:
+[PASTE THE CURRENT INSPECTION TASK HERE]

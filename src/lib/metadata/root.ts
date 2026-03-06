@@ -1,6 +1,7 @@
 // src/lib/metadata/root.ts
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/jsonld";
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 /**
  * Root metadata:
@@ -23,6 +24,18 @@ export const rootMetadata: Metadata = {
 
   description:
     "Senior software engineer specializing in backend systems, platform architecture, deterministic AI systems, and compliance-focused engineering.",
+  keywords: [
+    "Jeffrey R. Plewak",
+    "senior software engineer",
+    "software architect",
+    "backend engineering",
+    "platform engineering",
+    "distributed systems",
+    "AI systems",
+    "LLM infrastructure",
+    "compliance-focused engineering",
+    "recruiter-ready portfolio",
+  ],
 
   alternates: { canonical: SITE_URL },
   manifest: "/assets/favicon/site.webmanifest",
@@ -55,14 +68,7 @@ export const rootMetadata: Metadata = {
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     siteName: "Jeffrey R. Plewak",
     locale: "en_US",
-    images: [
-      {
-        url: `${SITE_URL}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Jeffrey R. Plewak — Senior Software Engineer",
-      },
-    ],
+    images: DEFAULT_OG_IMAGES,
   },
 
   twitter: {
@@ -70,7 +76,7 @@ export const rootMetadata: Metadata = {
     title: "Jeffrey R. Plewak — Senior Software Engineer",
     description:
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
-    images: [`${SITE_URL}/og-image.png`],
+    images: DEFAULT_TWITTER_IMAGES,
   },
 
   referrer: "strict-origin-when-cross-origin",

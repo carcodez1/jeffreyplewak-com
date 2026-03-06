@@ -1,0 +1,21 @@
+Category,Skill,Usage Context,Evidence Route
+Languages,Python,Backend services and platform automation,/resume
+Languages,Go,Cloud microservices at IBM,/resume
+Languages,C++,Real-time and safety-critical systems,/resume
+Languages,Java,Consulting delivery across enterprise clients,/resume
+Cloud,AWS,Regulated production systems and SRE workflows,/resume
+Cloud,EKS,Kubernetes operations in banking production,/resume
+Cloud,GCP,Cloud architecture evaluations and IAM-aligned workflows,/resume
+Cloud,Azure,Hybrid and multi-cloud architecture evaluations,/resume
+Platform,Kubernetes,Service deployment and operations,/resume
+Platform,Microservices,Service design and internal platform delivery,/resume
+Operations,SRE,Production incident response and reliability ownership,/resume
+Operations,CI/CD,Build/deploy automation across regulated environments,/resume
+Operations,Observability,Telemetry and operations hardening,/resume
+Compliance,Audit-ready delivery,Traceable outputs and change controls,/resume
+Compliance,DO-178 A/B,Certification-aware automation and coverage workflows,/resume
+AI Systems,LLM orchestration,R&D and workflow evaluation under governance constraints,/resume
+AI Systems,NLP pipelines,Production-readiness and deterministic workflow design,/resume
+AI Systems,Vector databases,Retrieval-oriented AI architecture evaluation,/resume
+Networking,RTP/SIP,Real-time communications system delivery,/resume
+Data,MongoDB,Application persistence and platform data workflows,/resume

@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
+import { DownloadMenu } from "./DownloadMenu";
 
 const START_YEAR = 2026;
 
@@ -26,10 +27,11 @@ export function SiteFooter() {
 
           <div className="footerCtas" aria-label="Primary actions">
             <Link className="btn btnPrimary" href="/resume">
-              View resume
+              Open Resume
             </Link>
+            <DownloadMenu iconOnly className="footerDownloadMenu" label="Downloads" />
             <a className="btn" href={LINKS.calendly} {...extLinkProps(true)}>
-              Book a call
+              Book Intro Call
             </a>
           </div>
 
@@ -37,12 +39,12 @@ export function SiteFooter() {
             {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
               <a
                 key={s.key}
-                className="iconBtn"
+                className={`iconBtn iconBtn--${s.key}`}
                 href={s.href}
                 aria-label={s.label}
                 {...extLinkProps(s.external)}
               >
-                <SocialIcon src={s.icon} title={s.label} />
+                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
               </a>
             ))}
           </nav>
@@ -94,20 +96,6 @@ export function SiteFooter() {
             </li>
           </ul>
 
-          <h4 className="footerHead footerHeadSpacer">Downloads</h4>
-          <ul className="footerLinksStack" role="list">
-            <li>
-              <a className="footerLink" href={LINKS.resumePdf} {...extLinkProps(true)}>
-                Resume (PDF)
-              </a>
-            </li>
-            <li>
-              <a className="footerLink" href={LINKS.vcf} download>
-                Contact card (VCF)
-              </a>
-            </li>
-          </ul>
-
           <h4 className="footerHead footerHeadSpacer">Legal</h4>
           <ul className="footerLinksStack" role="list">
             <li>
@@ -119,6 +107,13 @@ export function SiteFooter() {
               <Link className="footerLink" href="/privacy">
                 Privacy Policy
               </Link>
+            </li>
+          </ul>
+
+          <h4 className="footerHead footerHeadSpacer">Writing</h4>
+          <ul className="footerLinksStack" role="list">
+            <li>
+              <span className="footerHint">Blog (coming soon)</span>
             </li>
           </ul>
         </nav>

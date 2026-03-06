@@ -3,7 +3,7 @@
 */
 
 /* Focus reveal helper */
-.focusCard {
+.js .focusCard {
   opacity: 0.01;
   transform: translateY(8px);
   transition: opacity var(--tSlow) var(--ease), transform var(--tSlow) var(--ease);
@@ -14,6 +14,56 @@
   transform: translateY(0);
 }
 
+@keyframes routeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes routeSweep {
+  from {
+    background-position: -120% 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 120% 0, 0 0, 0 0;
+  }
+}
+
+.appMain > .section,
+.wrap > .section {
+  animation: routeFadeIn var(--tMed) var(--ease) both;
+}
+
+.appMain > .section:nth-of-type(2),
+.wrap > .section:nth-of-type(2) {
+  animation-delay: 35ms;
+}
+
+.appMain > .section:nth-of-type(3),
+.wrap > .section:nth-of-type(3) {
+  animation-delay: 70ms;
+}
+
+.appMain > .section:nth-of-type(n + 4),
+.wrap > .section:nth-of-type(n + 4) {
+  animation: none;
+}
+
+.siteHeader {
+  background-size: 200% 100%, auto, auto;
+  animation: routeSweep 1200ms var(--ease) 1;
+}
+
+.no-js .focusCard {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .focusCard,
   .focusCard--visible {
@@ -21,9 +71,13 @@
     transform: none;
     opacity: 1;
   }
-}
+  
+  .appMain > .section,
+  .wrap > .section,
+  .siteHeader {
+    animation: none !important;
+  }
 
-@media (prefers-reduced-motion: reduce) {
   .mobileNav,
   .mobileNavPanel {
     transition: none !important;

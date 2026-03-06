@@ -1,7 +1,9 @@
 /**
  * src/content/resume.ts
  *
- * SINGLE SOURCE OF TRUTH — Jeffrey R. Plewak
+ * CANONICAL NARRATIVE SSOT — Jeffrey R. Plewak
+ * Public identity routes (/resume and /r) render from this file directly.
+ * Machine-readable recruiter exports are generated from src/content/ssot/profile.ssot.jsonld.
  * Last updated: 2026-03-02
  *
  * DATE CONFIDENCE KEY:
@@ -108,7 +110,7 @@ export const RESUME: ResumeData = {
       start: "2024-02", // [CONFIRMED]
       end: "2024-09",   // [CONFIRMED]
       location: "West Palm Beach, FL",
-      logo: { src: "/assets/logos/bae-systems.svg", width: 96, height: 32 },
+      logo: { src: "/assets/logos/placeholder.svg", width: 96, height: 32 },
       highlights: [
         "Delivered a cloud-based SEO and communications platform from concept through MVP and customer deployment, owning system architecture, implementation, and operations.",
         "Built full-stack systems using Python and Node.js with API-driven frontends, MongoDB-backed persistence, and automated ETL pipelines.",
@@ -244,7 +246,7 @@ export const RESUME: ResumeData = {
       location: "Westlake, TX",
       logo: { src: "/assets/logos/fidelity.svg", width: 120, height: 32 },
       highlights: [
-        "Returned to Fidelity to continue enterprise automation program work, maintaining service ownership of production backend systems with emphasis on reliability and rollback capability.",
+        "Returned to Fidelity to continue enterprise automation program work, supporting production backend services with emphasis on reliability and rollback capability.",
         "Extended service-oriented architecture refactoring and API-based integration work initiated in first stint.",
         "Supported distributed teams through SDLC automation improvements and continued mentoring of engineers.",
       ],
@@ -295,10 +297,10 @@ export const RESUME: ResumeData = {
       location: "Westlake, TX",
       logo: { src: "/assets/logos/fidelity.svg", width: 120, height: 32 },
       highlights: [
-        "Built and operated backend systems supporting a large multi-year enterprise automation program, emphasizing reliability, rollback capability, and performance profiling in production environments.",
+        "Built and operated backend services for a large multi-year enterprise automation program, emphasizing reliability, rollback capability, and performance profiling in production environments.",
         "Led refactoring of monolithic applications into service-oriented architectures, introducing clearer service boundaries and API-based integrations to improve scalability and maintainability.",
         "Strengthened SDLC automation reducing friction in build, test, and deployment processes across distributed teams.",
-        "Mentored and onboarded engineers, contributing to technical consistency, shared ownership of production systems, and team capability growth.",
+        "Mentored and onboarded engineers, contributing to technical consistency, shared responsibility for production systems, and team capability growth.",
       ],
       technologies: [
         "Python", "Service-oriented architecture", "API design",

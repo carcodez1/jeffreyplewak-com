@@ -10,6 +10,7 @@ import { SiteFooter } from "@/app/components/SiteFooter";
 import { Haptics } from "@/app/components/Haptics";
 import { BackgroundMotion } from "@/app/components/BackgroundMotion";
 import { BackgroundFx } from "@/app/components/BackgroundFx";
+import { ScrollReveal } from "@/app/components/ScrollReveal";
 
 export { rootMetadata as metadata } from "@/lib/metadata/root";
 
@@ -31,8 +32,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body className="appRoot">
         {/* Preflight:
            - DOES NOT delete localStorage.theme
-           - Defaults to LIGHT when no stored preference
-           - If you want default DARK: change defaultTheme to "dark"
+           - Defaults to DARK when no stored preference
         */}
         <Script
           id="preflight"
@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 (function () {
   try {
     var root = document.documentElement;
-    var defaultTheme = "light";
+    var defaultTheme = "dark";
     var stored = null;
     try { stored = localStorage.getItem("theme"); } catch (e) {}
     var next = (stored === "dark" || stored === "light") ? stored : defaultTheme;
@@ -75,6 +75,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <SiteHeader />
 
         <main id="main" className="appMain">
+          <ScrollReveal selector=".focusCard" visibleClass="focusCard--visible" />
           {children}
         </main>
 

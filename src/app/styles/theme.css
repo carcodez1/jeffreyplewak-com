@@ -6,33 +6,34 @@
 
 :root {
   /* ── Backgrounds ── */
-  --bg:       hsl(228 32% 7%);    /* near-void navy */
-  --bg2:      hsl(228 28% 10%);   /* raised surface */
+  --bg:       hsl(224 34% 8%);    /* deep terminal navy */
+  --bg2:      hsl(224 30% 11%);   /* raised surface */
 
   /* ── Text ── */
-  --text:     hsl(220 22% 93%);   /* warm off-white */
-  --muted:    hsl(220 14% 62%);   /* secondary */
-  --muted2:   hsl(220 10% 48%);   /* tertiary / hints */
+  --text:     hsl(210 24% 94%);   /* warm off-white */
+  --muted:    hsl(214 15% 76%);   /* secondary */
+  --muted2:   hsl(214 11% 61%);   /* tertiary / hints */
 
   /* ── Surfaces ── */
-  --surface0: hsl(228 26% 9%);    /* subtle inset */
-  --surface1: hsl(228 24% 13%);   /* cards default */
-  --surface2: hsl(228 22% 16%);   /* cards hover / raised */
+  --surface0: hsl(224 26% 10%);   /* subtle inset */
+  --surface1: hsl(224 24% 13%);   /* cards default */
+  --surface2: hsl(224 22% 17%);   /* cards hover / raised */
 
   /* ── Borders ── */
-  --border0:  hsl(228 18% 18%);   /* hairline */
-  --border1:  hsl(228 18% 24%);   /* visible */
-  --border2:  hsl(228 18% 32%);   /* active / hover */
+  --border0:  hsl(219 20% 20%);   /* hairline */
+  --border1:  hsl(219 20% 28%);   /* visible */
+  --border2:  hsl(219 24% 40%);   /* active / hover */
 
   /* ── Shadows ── */
-  --shadow1:  0 4px 20px hsl(228 40% 3% / 0.55);
-  --shadow2:  0 12px 50px hsl(228 40% 3% / 0.70);
-  --glowAccent: 0 0 40px hsla(var(--accent) / 0.12);
+  --shadow1:  0 8px 24px hsl(228 40% 3% / 0.40);
+  --shadow2:  0 16px 52px hsl(228 40% 3% / 0.56);
+  --glowAccent: 0 0 28px hsla(var(--accent) / 0.10);
 
   /* ── Accent (HSL components — used with hsla(var(--accent)/x)) ── */
-  --accent:   215 92% 60%;        /* electric blue */
-  --accent2:  215 92% 52%;        /* pressed */
+  --accent:   201 96% 58%;        /* wayfinding cyan */
+  --accent2:  201 96% 50%;        /* pressed */
   --accentFg: hsl(0 0% 100%);
+  --signal:   45 100% 55%;        /* signage amber */
 
   /* ── Glass (semantic) ── */
   --glassBg: color-mix(in srgb, var(--bg2) 84%, transparent);
@@ -86,6 +87,7 @@
   --glowAccent: none;
   --accent:   221 84% 52%;
   --accent2:  221 84% 44%;
+  --signal:   35 96% 46%;
   --glassBg: color-mix(in srgb, var(--bg) 88%, transparent);
   --glassBorder: color-mix(in srgb, var(--border1) 88%, transparent);
   --glassBlur: 10px;

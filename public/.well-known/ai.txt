@@ -1,4 +1,10 @@
-# Jeffrey Plewak Portfolio - www.jeffreyplewak.com
+# Jeffrey R. Plewak Professional Identity
+# Purpose: recruiter-ready, evidence-backed professional identity platform.
 User-agent: *
 Allow: /
 Sitemap: https://www.jeffreyplewak.com/sitemap.xml
+Canonical-Resume: https://www.jeffreyplewak.com/resume
+Recruiter-Route: https://www.jeffreyplewak.com/r
+Proof-Route: https://www.jeffreyplewak.com/projects/kprovengine
+Projects-Route: https://www.jeffreyplewak.com/projects
+Contact: mailto:plewak.jeff@gmail.com

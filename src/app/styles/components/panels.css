@@ -4,6 +4,6 @@
   background: var(--glassBg);
   backdrop-filter: blur(var(--glassBlur));
   -webkit-backdrop-filter: blur(var(--glassBlur));
-  box-shadow: var(--glassShadow);
-  padding: 18px;
+  box-shadow: 0 8px 24px hsl(228 40% 3% / 0.3);
+  padding: 16px;
 }

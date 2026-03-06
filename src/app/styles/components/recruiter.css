@@ -1,0 +1,139 @@
+.recruiterHero {
+  margin-bottom: calc(var(--sectionYSm) + 6px);
+}
+
+.recruiterHeroPanel {
+  padding: 28px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, hsla(var(--accent) / 0.12), var(--surface2)),
+      var(--surface0)
+    );
+  border-color: var(--border2);
+  box-shadow: var(--shadow2);
+}
+
+.recruiterEyebrow {
+  margin: 0 0 10px;
+  color: var(--muted2);
+  font-size: var(--text0);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.recruiterHeroTitle {
+  max-width: 14ch;
+  margin-bottom: 10px;
+}
+
+.recruiterHeroLede {
+  max-width: 48ch;
+  margin-bottom: 8px;
+}
+
+.recruiterHeroSummary {
+  max-width: 62ch;
+}
+
+.recruiterHeroActions {
+  margin-top: 18px;
+  align-items: center;
+}
+
+.recruiterHeroPrimary {
+  min-width: 168px;
+}
+
+.recruiterFlowHint {
+  margin: 8px 0 0;
+  font-size: var(--text0);
+  color: var(--muted2);
+}
+
+.recruiterRouteList .routeRailLink {
+  background: color-mix(in srgb, var(--surface1) 70%, transparent);
+}
+
+.recruiterRouteList .routeRailHint {
+  max-width: 32ch;
+}
+
+.recruiterStatStripSection {
+  margin-top: 0;
+}
+
+.recruiterQuickProfile {
+  margin: 2px 0 10px;
+  max-width: 68ch;
+}
+
+.recruiterStatStrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.recruiterStatItem {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border1) 74%, transparent);
+  background: color-mix(in srgb, var(--surface1) 80%, transparent);
+  color: var(--muted);
+  line-height: 1.42;
+  transition: border-color var(--tFast) var(--ease), background var(--tFast) var(--ease), transform var(--tFast) var(--ease);
+}
+
+.recruiterStatItem:hover,
+.recruiterStatItem:focus-within {
+  border-color: color-mix(in srgb, hsl(var(--accent)) 45%, var(--border1));
+  background: color-mix(in srgb, hsl(var(--accent)) 8%, var(--surface1));
+  transform: translateY(-1px);
+}
+
+.recruiterStatItem strong {
+  color: var(--text);
+}
+
+@supports selector(body:has(.recruiterPage)) {
+  body:has(.recruiterPage) .siteHeader {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, hsla(var(--accent) / 0.20), var(--glassBg)),
+        color-mix(in srgb, var(--bg2) 86%, transparent)
+      );
+    border-bottom-color: color-mix(in srgb, var(--border2) 80%, transparent);
+  }
+
+  body:has(.recruiterPage) .siteFooter {
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, hsla(var(--accent) / 0.06), transparent),
+        color-mix(in srgb, var(--surface0) 40%, transparent)
+      );
+    border-top-color: color-mix(in srgb, var(--border2) 65%, var(--border0));
+  }
+}
+
+@media (max-width: 980px) {
+  .recruiterHeroPanel {
+    padding: 22px;
+  }
+
+  .recruiterHeroPrimary {
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recruiterStatItem,
+  .recruiterStatItem:hover,
+  .recruiterStatItem:focus-within {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,6 +1,4 @@
-/* src/app/styles/components/resume.css
-   Covers: stat bar · filter tabs · role cards · PDF embed
-*/
+/* src/app/styles/components/resume.css */
 
 /* ── Page header ── */
 .resumePageHead { padding-bottom: 0; }
@@ -8,63 +6,6 @@
 .resumeH1 {
   margin-bottom: 20px;
 }
-
-/* ── Stats bar ── */
-.resumeStats {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0;
-  margin-bottom: 24px;
-  padding: 16px 20px;
-  border: 1px solid var(--border1);
-  border-radius: var(--rLg);
-  background: linear-gradient(135deg,
-    color-mix(in srgb, var(--surface1) 90%, transparent),
-    var(--surface0));
-  box-shadow: var(--shadow1);
-}
-
-.resumeStat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 6px 20px;
-  min-width: 0;
-}
-
-.resumeStatNum {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 760;
-  letter-spacing: var(--trackTight);
-  color: var(--text);
-  line-height: 1;
-}
-
-.resumeStatLabel {
-  font-size: var(--text0);
-  color: var(--muted2);
-  white-space: nowrap;
-  letter-spacing: var(--trackLoose);
-  text-transform: uppercase;
-}
-
-.resumeStatDivider {
-  width: 1px;
-  height: 36px;
-  background: var(--border1);
-  flex-shrink: 0;
-}
-
-@media (max-width: 600px) {
-  .resumeStats     { gap: 8px; padding: 14px; }
-  .resumeStat      { padding: 4px 12px; }
-  .resumeStatDivider { display: none; }
-}
-
-/* ── CTA row spacing ── */
-.resumeCtaRow { margin-top: 4px; }
 
 /* ── Section headings ── */
 .resumeSectionHead {
@@ -75,43 +16,15 @@
   color: var(--text);
 }
 
-.resumeLogoStripWrap {
-  margin-bottom: 14px;
+.resumeExperienceNote {
+  margin: 2px 0 14px;
+  max-width: 70ch;
 }
 
-.resumeLogoStripLabel {
-  margin: 0 0 8px;
+.resumeFlowHint {
+  margin: 0 0 10px;
   font-size: var(--text0);
   color: var(--muted2);
-  letter-spacing: var(--trackLoose);
-  text-transform: uppercase;
-}
-
-.resumeLogoStrip {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-}
-
-.resumeLogoChip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  padding: 6px 10px;
-  border: 1px solid var(--border0);
-  border-radius: var(--rSm);
-  background: var(--surface0);
-}
-
-.resumeLogoChipImg {
-  display: block;
-  width: auto;
-  height: auto;
-  max-height: 24px;
 }
 
 /* ── Summary ── */
@@ -120,133 +33,83 @@
   line-height: 1.7;
 }
 
-/* ── Search row (progressive enhancement) ── */
-.resumeEnhancer {
-  margin-bottom: 18px;
-  padding: 14px;
+.resumeProfileSummary {
+  margin-top: 4px;
+  max-width: 74ch;
 }
 
-.resumeSearchRow {
-  display: grid;
+.resumeHeaderActions {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 14px;
-}
-
-.resumeSearchLabel {
-  font-size: var(--text0);
-  color: var(--muted2);
-  letter-spacing: var(--trackLoose);
-  text-transform: uppercase;
-}
-
-.resumeSearchInput {
-  width: 100%;
-  border: 1px solid var(--border1);
-  border-radius: var(--rMd);
-  background: var(--surface1);
-  color: var(--text);
-  padding: 10px 12px;
-}
-
-.resumeSearchLive { margin: 2px 0 0; }
-
-.resumeChipRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 14px;
-}
-
-.resumeChip {
-  border: 1px solid var(--border1);
-  border-radius: 999px;
-  padding: 6px 10px;
-  background: var(--surface0);
-  color: var(--muted);
-  transition: transform var(--tFast) var(--ease);
-}
-
-.resumeChip:hover,
-.resumeChip:focus-visible,
-.resumeChip--active {
-  transform: translateY(-1px);
-}
-
-/* ── Filter tabs ── */
-.resumeFilters {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.resumeFilterTab {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 14px;
-  border-radius: var(--rMd);
-  border: 1px solid var(--border1);
-  background: color-mix(in srgb, var(--surface1) 80%, transparent);
-  color: var(--muted);
-  font-size: var(--text1);
-  font-weight: 500;
-  cursor: pointer;
-  transition: transform var(--tFast) var(--ease);
-}
-
-.resumeFilterTab:hover {
-  transform: translateY(-1px);
-}
-
-.resumeFilterTab--active {
-  background: hsl(var(--accent));
-  border-color: hsla(var(--accent) / 0.40);
-  color: hsl(0 0% 100%);
-}
-
-.resumeFilterTab--active:hover {
-  transform: translateY(-1px);
-}
-
-.resumeFilterTab:focus-visible {
-  transform: translateY(-1px);
-}
-
-.resumeFilterCount {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: color-mix(in srgb, currentColor 15%, transparent);
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
 }
 
 /* ── Role cards list ── */
 .resumeRoles { display: grid; gap: 16px; }
-.resumeTimeline { display: grid; gap: 18px; }
-.resumeYearGroup { display: grid; gap: 10px; }
+.resumeTimeline {
+  display: grid;
+  gap: 18px;
+  position: relative;
+  padding-left: 24px;
+}
+
+.resumeTimeline::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 2px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    hsla(var(--accent) / 0.70),
+    hsla(var(--accent) / 0.18) 66%,
+    transparent
+  );
+}
+
+.resumeYearGroup {
+  display: grid;
+  gap: 10px;
+  position: relative;
+}
 
 .resumeYearHead {
   margin: 0;
-  font-size: var(--text2);
-  color: var(--muted2);
-  letter-spacing: var(--trackLoose);
-  text-transform: uppercase;
+  font-size: var(--text1);
+  color: var(--text);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  width: fit-content;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface2) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border1) 80%, transparent);
+}
+
+.resumeYearHead::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  box-shadow: 0 0 0 3px hsla(var(--accent) / 0.22);
 }
 
 /* ── Single role card ── */
 .resumeRole {
   position: relative;
-  border: 1px solid var(--border0);
+  border: 1px solid color-mix(in srgb, var(--border0) 82%, transparent);
   border-radius: var(--rLg);
-  background: linear-gradient(160deg, var(--surface1), var(--surface0) 100%);
-  padding: 20px 22px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--surface1) 88%, transparent), var(--surface0) 100%);
+  padding: 18px 20px;
+  margin-left: 8px;
   transition: transform var(--tFast) var(--ease);
 }
 
@@ -255,10 +118,91 @@
   transform: translateY(-2px);
 }
 
+.resumeRole::before {
+  content: "";
+  position: absolute;
+  left: -15px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, hsl(var(--accent)) 80%, white 8%);
+  box-shadow:
+    0 0 0 3px hsla(var(--accent) / 0.2),
+    0 0 0 1px hsla(var(--accent) / 0.5);
+}
+
+.resumeRoleDetails {
+  overflow: hidden;
+}
+
+.resumeRoleSummary {
+  list-style: none;
+  cursor: pointer;
+  padding: 2px 20px 2px 0;
+  position: relative;
+  transition: color var(--tFast) var(--ease);
+}
+
+.resumeRoleSummary::-webkit-details-marker {
+  display: none;
+}
+
+.resumeRoleSummary::after {
+  content: "⌄";
+  position: absolute;
+  top: 1px;
+  right: 0;
+  color: hsl(var(--accent));
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.9;
+  transition: transform var(--tFast) var(--ease), color var(--tFast) var(--ease);
+}
+
+.resumeRoleDetails[open] .resumeRoleSummary::after {
+  transform: rotate(180deg);
+  color: hsl(var(--accent));
+}
+
+.resumeRoleSummary:hover .resumeRoleTitle,
+.resumeRoleSummary:focus-visible .resumeRoleTitle {
+  color: var(--text);
+}
+
+.resumeRoleExpandHint {
+  margin-left: auto;
+  font-size: var(--text0);
+  color: var(--muted2);
+  letter-spacing: 0.01em;
+}
+
+.resumeRoleExpandHint::before {
+  content: "Expand";
+}
+
+.resumeRoleDetails[open] .resumeRoleExpandHint::before {
+  content: "Collapse";
+  color: hsl(var(--accent));
+}
+
+.resumeRole:target {
+  border-color: color-mix(in srgb, hsl(var(--accent)) 52%, var(--border0));
+  box-shadow: 0 0 0 2px hsla(var(--accent) / 0.22);
+}
+
 /* Featured (most recent) role gets accent left border */
 .resumeRole--featured {
-  border-left: 3px solid hsl(var(--accent));
-  padding-left: 20px;
+  border-left: 2px solid hsl(var(--accent));
+  padding-left: 18px;
+}
+
+.resumeRoleDetails[open] {
+  border-color: color-mix(in srgb, hsl(var(--accent)) 34%, var(--border0));
+  background:
+    linear-gradient(100deg, hsla(var(--accent) / 0.08), transparent 40%),
+    linear-gradient(160deg, color-mix(in srgb, var(--surface1) 88%, transparent), var(--surface0) 100%);
 }
 
 /* ── Role header ── */
@@ -290,11 +234,27 @@
 }
 
 .resumeEmployerLogo {
-  height: 24px;
+  height: 20px;
   width: auto;
-  opacity: 0.82;
+  opacity: 0.95;
   flex: 0 0 auto;
-  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+
+.resumeEmployerLogoChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 4px 8px;
+  border-radius: var(--rSm);
+  border: 1px solid color-mix(in srgb, var(--border1) 88%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 90%, black 10%),
+    color-mix(in srgb, var(--surface1) 82%, black 18%)
+  );
+  box-shadow: inset 0 1px 0 hsla(0 0% 100% / 0.04);
 }
 
 .resumeRoleMeta {
@@ -302,6 +262,7 @@
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  padding: 2px 0;
 }
 
 .resumeRoleDates {
@@ -352,12 +313,12 @@
 
 .resumeRoleTitle {
   font-size: var(--text3);
-  font-weight: 580;
-  color: var(--muted);
+  font-weight: 620;
+  color: var(--text);
 }
 
 .resumeRoleLocation {
-  font-size: var(--text1);
+  font-size: var(--text0);
   color: var(--muted2);
 }
 
@@ -366,37 +327,8 @@
   display: flex;
   gap: 7px;
   flex-wrap: wrap;
+  margin-top: 2px;
 }
-
-.resumeResultList {
-  list-style: none;
-  margin: 0 0 10px;
-  padding: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.resumeResultBtn {
-  width: 100%;
-  text-align: left;
-  border: 1px solid var(--border0);
-  border-radius: var(--rMd);
-  background: var(--surface0);
-  color: var(--text);
-  padding: 8px 10px;
-  display: grid;
-  gap: 2px;
-  transition: transform var(--tFast) var(--ease);
-}
-
-.resumeResultBtn:hover,
-.resumeResultBtn:focus-visible,
-.resumeResultBtn--active {
-  transform: translateY(-1px);
-}
-
-.resumeResultEmployer { font-weight: 640; }
-.resumeResultMeta { font-size: var(--text0); color: var(--muted); }
 
 /* ── Role body ── */
 .resumeRoleBody  { margin-top: 16px; display: grid; gap: 12px; }
@@ -447,41 +379,79 @@
   color: var(--muted);
 }
 
-/* ── PDF embed ── */
-.resumePdfPanel { overflow: hidden; }
+@media (max-width: 760px) {
+  .resumeTimeline {
+    padding-left: 14px;
+  }
 
-.resumeEmbedObj {
-  width: 100%;
-  height: min(75vh, 780px);
-  border: 1px solid var(--border0);
-  border-radius: var(--rLg);
-  background: var(--surface1);
-}
+  .resumeTimeline::before {
+    left: 5px;
+  }
 
-.resumeNoResults {
-  margin-top: 20px;
+  .resumeRole {
+    margin-left: 4px;
+    padding: 16px 14px;
+  }
+
+  .resumeRole::before {
+    left: -11px;
+    top: 20px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .resumeRoleSummary {
+    padding: 4px 16px 2px 0;
+  }
+
+  .resumeRoleTop {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .resumeRoleMeta {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .resumeRoleTitleRow {
+    gap: 6px;
+    align-items: center;
+  }
+
+  .resumeRoleEmployer {
+    font-size: var(--text3);
+  }
+
+  .resumeRoleTitle {
+    font-size: var(--text2);
+  }
+
+  .resumeRoleBody {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .resumeRoleList {
+    font-size: var(--text1);
+    line-height: 1.55;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .resumeFilterTab,
   .resumeRole,
-  .resumeSkill,
-  .resumeChip,
-  .resumeResultBtn {
+  .resumeSkill {
     transition: none;
   }
 
-  .resumeFilterTab:hover,
-  .resumeFilterTab:focus-visible,
-  .resumeFilterTab--active:hover,
+  .resumeRoleSummary::after {
+    transition: none;
+  }
+
   .resumeRole:hover,
   .resumeRole:focus-within,
-  .resumeSkill:hover,
-  .resumeChip:hover,
-  .resumeChip:focus-visible,
-  .resumeResultBtn:hover,
-  .resumeResultBtn:focus-visible,
-  .resumeResultBtn--active {
+  .resumeSkill:hover {
     transform: none;
   }
 }

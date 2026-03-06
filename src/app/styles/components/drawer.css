@@ -139,14 +139,14 @@
 .mobileNavPanel {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: min(300px, calc(100vw - 32px));
   height: 100vh;
   height: 100dvh;
   background: var(--glassBg);
   padding: 18px 16px;
-  border-right: 1px solid var(--glassBorder);
-  transform: translateX(-100%);
+  border-left: 1px solid var(--glassBorder);
+  transform: translateX(100%);
   transition: transform var(--tMed) var(--ease);
   box-shadow: var(--glassShadow);
   backdrop-filter: blur(var(--glassBlur));
@@ -154,11 +154,39 @@
 }
 .mobileNav--open .mobileNavPanel { transform: translateX(0); }
 
+.mobileNavPrimary {
+  display: grid;
+  margin-top: 6px;
+}
+
+.mobileNavResumeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: var(--rMd);
+  border: 1px solid var(--ctaBorder);
+  background: var(--ctaBg);
+  color: var(--ctaFg);
+  text-decoration: none;
+  font-size: var(--text1);
+  font-weight: 650;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--ctaBg) 42%, transparent);
+}
+
+.mobileNavResumeBtn:hover,
+.mobileNavResumeBtn:focus-visible {
+  background: var(--ctaHover);
+  transform: translateY(-1px);
+  outline: none;
+}
+
 .mobileNavLinks {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .mobileNavLink {

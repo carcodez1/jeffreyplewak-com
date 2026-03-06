@@ -1,11 +1,6 @@
-# .codex/config.toml (repo)
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
+project_root_markers = [".git"]
 
-[profiles.regulated]
-sandbox_mode = "workspace-write"
-approval_policy = "untrusted"
+# Root AGENTS.md is the policy source of truth.
+# Keep project config minimal and stable.
 
-[profiles.readonly]
-sandbox_mode = "read-only"
-approval_policy = "untrusted"
+model = "gpt-5.4"

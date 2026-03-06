@@ -6,7 +6,7 @@
 :root {
   /* ── Layout ── */
   --headerH:  68px;
-  --containerMax: clamp(1120px, 92vw, 1320px);
+  --containerMax: clamp(1020px, 90vw, 1180px);
   --containerPad: clamp(16px, 2.4vw, 28px);
   /* Back-compat aliases */
   --wrapMax: var(--containerMax);
@@ -26,7 +26,7 @@
 
   /* ── Measure / rhythm ── */
   --measure: 66ch;
-  --pSpace:  18px;
+  --pSpace:  16px;
 
   /* ── Type scale ── */
   --text0: 0.875rem;   /* 14px — captions */
@@ -61,8 +61,8 @@
   --tSlow:  340ms;
 
   /* ── Section rhythm ── */
-  --sectionY:   clamp(2rem, 4vw, 3.5rem);
-  --sectionYSm: clamp(1rem, 2.2vw, 1.75rem);
+  --sectionY:   clamp(1.35rem, 2.5vw, 2.2rem);
+  --sectionYSm: clamp(0.8rem, 1.5vw, 1.2rem);
 
   /* ── Hero spacing ── */
   --heroGap: clamp(16px, 2.5vw, 36px);

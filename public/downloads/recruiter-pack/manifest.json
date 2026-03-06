@@ -6,6 +6,18 @@
     "node": "v20.19.6"
   },
   "outputs": {
+    "public/downloads/recruiter-pack/index.html": {
+      "sha256": "29736df594b9edf09e9fb1855d6bdcfaa4e43c3fb8468daa4b1e3af8edb3f6e7"
+    },
+    "public/downloads/recruiter-pack/copy-paste-resume.txt": {
+      "sha256": "53e327fed3069b35e86d02457123c34cca44ca7f4500c24dbbaeee6202edf119"
+    },
+    "public/downloads/recruiter-pack/skills-matrix.csv": {
+      "sha256": "c15b2ab7d2817a53560ea29150ad7449dd81e5ee17282dd3fae0a97b920c826e"
+    },
+    "public/downloads/recruiter-pack/search-report.md": {
+      "sha256": "05e87a9bd2d7a0c17014e7e300983e5116b52aba5de7e2a58ef2b98db801b0ef"
+    },
     "public/downloads/recruiter-pack/resume.pdf": {
       "sha256": "51ff19953f1783c9804382f083de450526bd252c0403e3dd8a4c9ad6f8cebea1"
     },

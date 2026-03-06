@@ -6,6 +6,14 @@ License: CC-BY-4.0
 
 Owned prompt pack for repeatable Codex workflows.
 
+## Execution model
+
+- Prompt files are signed task frames.
+- Codex profiles are execution modes: `inspect`, `patch`, `review`.
+- The local runner combines a signature/policy file and a task prompt file.
+- Root `AGENTS.md` remains the canonical repo policy.
+- Nested `AGENTS.md` add stricter route-local rules only.
+
 ## Ownership headers
 
 Each prompt file must contain:

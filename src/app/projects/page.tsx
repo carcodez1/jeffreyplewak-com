@@ -2,29 +2,49 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { LINKS } from "@/config/site";
+import { SITE } from "@/config/site";
+import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 export const metadata: Metadata = {
-  title: "Projects — Jeffrey R. Plewak",
-  description: "Selected projects and engineering work.",
+  title: `Projects — ${SITE.name}`,
+  description: "Selected projects and proof-linked engineering work.",
+  keywords: [
+    "software engineering projects",
+    "proof-linked case studies",
+    "KProvEngine",
+    "deterministic AI workflows",
+    "engineering architecture decisions",
+  ],
   alternates: { canonical: "/projects" },
+  openGraph: {
+    type: "website",
+    title: `Projects — ${SITE.name}`,
+    description: "Selected projects and proof-linked engineering work.",
+    url: "/projects",
+    images: DEFAULT_OG_IMAGES,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Projects — ${SITE.name}`,
+    description: "Selected projects and proof-linked engineering work.",
+    images: DEFAULT_TWITTER_IMAGES,
+  },
 };
 
 export default function ProjectsPage() {
+  const systemsFocus = [
+    "Backend + platform delivery",
+    "AI workflow proof with deterministic execution",
+    "Evidence you can review quickly",
+  ] as const;
+
   const previews = [
     {
       href: "/projects/kprovengine",
-      src: "/projects/kprovengine/architecture.png",
+      src: "/projects/kprovengine/architecture.webp",
       alt: "KProvEngine architecture preview",
-      title: "KProvEngine architecture",
-      blurb: "Deterministic run stages + audit artifacts.",
-    },
-    {
-      href: "/projects/kprovengine",
-      src: "/projects/kprovengine/og.png",
-      alt: "KProvEngine project preview",
-      title: "KProvEngine overview",
-      blurb: "Governance-first AI workflow engineering.",
+      title: "KProvEngine",
+      blurb: "Deterministic run stages, explicit human review, and audit-grade artifacts.",
     },
   ] as const;
 
@@ -33,29 +53,36 @@ export default function ProjectsPage() {
       <header className="section" aria-label="Projects intro">
         <h1 className="h1">Projects</h1>
 
-        <p className="lede">A focused set of projects with architecture notes and source.</p>
+        <p className="lede">Proof-first project pages for fast technical review.</p>
+        <p className="cardDesc">Open KProvEngine for architecture, decisions, and source links.</p>
 
-        <div className="ctaRow">
-          <Link className="btn btnPrimary" href="/projects/kprovengine">
-            KProvEngine
+        <ul className="projectsSignals" aria-label="Project focus areas">
+          {systemsFocus.map((signal) => (
+            <li key={signal} className="projectsSignal">
+              {signal}
+            </li>
+          ))}
+        </ul>
+
+        <nav className="routeRailList" aria-label="Projects route choices">
+          <Link className="routeRailLink routeRailLinkPrimary" href="/projects/kprovengine">
+            <span className="routeRailIndex" aria-hidden="true">01</span>
+            <span className="routeRailText">Open KProvEngine</span>
+            <span className="routeRailHint">Flagship proof case study</span>
           </Link>
-          <a className="btn" href={LINKS.github} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <Link className="btn" href="/resume">
-            Resume
+          <Link className="routeRailLink" href="/resume">
+            <span className="routeRailIndex" aria-hidden="true">02</span>
+            <span className="routeRailText">Open Resume</span>
+            <span className="routeRailHint">Role history and delivery context</span>
           </Link>
-          <a className="btn btnTertiary" href={LINKS.emailProject}>
-            Email
-          </a>
-        </div>
+        </nav>
       </header>
 
       <section className="section" aria-label="Project previews">
-        <h2 className="h2">Preview</h2>
+        <h2 className="h2">Flagship proof</h2>
         <div className="projectsPreviewGrid">
           {previews.map((item) => (
-            <Link key={item.title} href={item.href} className="card depthFx focusCard projectsPreviewCard">
+            <Link key={item.title} href={item.href} className="card depthFx projectsPreviewCard">
               <div className="projectsPreviewMedia">
                 <Image
                   src={item.src}

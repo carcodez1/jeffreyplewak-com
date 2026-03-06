@@ -1,0 +1,52 @@
+JEFFREY R. PLEWAK
+Senior Software Engineer
+Email: plewak.jeff@gmail.com
+LinkedIn: https://www.linkedin.com/in/jeffreyplewak/
+GitHub: https://github.com/carcodez1
+Portfolio: https://www.jeffreyplewak.com
+
+SUMMARY
+Senior software engineer with 10+ years designing and operating platform systems in compliance-critical, high-reliability environments. Specialized in Python-based distributed systems, cloud automation, and audit-ready delivery across financial, defense, and cloud platforms (J.P. Morgan Chase, Lockheed Martin, IBM). Focus on production correctness, observability, and trusted compliant AI workflows where traceability, security, and reliability are first-class requirements.
+
+CORE FIT
+- Backend and platform systems engineering
+- Compliance-aware and audit-ready delivery
+- Production SRE and reliability operations
+- Deterministic AI workflow design and governance
+
+RECENT EXPERIENCE
+MSTRO / Think Systems | Senior SW R&D Lead | Consulting | 2024-09 to 2025-11
+- Led R&D for next-generation AI and platform capabilities with production-readiness focus.
+- Evaluated LLM orchestration, vector databases, and NLP workflows with reproducibility and observability controls.
+- Guided architecture reviews across CI/CD, telemetry, compliance, and platform hardening.
+
+MyGeo LLC | Python Developer / Member / Owner | Owner | 2024-02 to 2024-09
+- Delivered a cloud SEO and communications platform from concept through MVP and customer deployment.
+- Built Python and Node.js systems with MongoDB and ETL automation.
+- Designed and deployed real-time RTP/SIP push-to-talk systems.
+
+J.P. Morgan Chase | Senior Software Engineer | FTE | 2022-07 to 2023-12
+- Built cloud-native automation tools for regulated global banking systems.
+- Automated environment validation under strict change controls to reduce deployment risk.
+- Served as production SRE for AWS/EKS workloads in compliance and audit-bound environments.
+
+Independent Consulting (Nintendo, Raytheon, AWS, Northrop) | Senior Consultant | Consulting | 2019-09 to 2022-03
+- Delivered backend services and ETL pipelines in Python, Java, and C++.
+- Automated infrastructure provisioning and CI/CD across client environments.
+- Supported DoD software safety certification process improvements.
+
+IBM Cloud | Senior Software Engineer | FTE | 2019-01 to 2019-09
+- Built Kubernetes microservices for cloud storage services in Python and Go.
+- Owned CI/CD pipelines and participated in incident response and operational reliability improvements.
+
+Lockheed Martin | Senior Software Engineer | FTE | 2018-05 to 2018-12
+- Developed real-time C++ avionics software for F-35 mission systems.
+- Led build/test automation and coverage workflows supporting DO-178 A/B compliance.
+
+EARLIER EXPERIENCE
+- Fidelity Investments | Senior Python Engineer | 2017-10 to 2018-04
+- Raytheon | Software Engineer | 2016-11 to 2017-09
+- Fidelity Investments | Senior Python Engineer | 2015-04 to 2016-10
+- Lockheed Martin (Liverpool) | Software Engineer | 2014-06 to 2015-03
+- BAE Systems | Software Engineer | 2013-03 to 2014-06
+- Lockheed Martin | Associate Software Engineer | 2011-11 to 2013-03

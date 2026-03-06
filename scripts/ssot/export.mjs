@@ -12,6 +12,11 @@ const resumeOut = path.join(outDir, "resume.json");
 const contactOut = path.join(outDir, "contact.vcf");
 const resumePdfOut = path.join(outDir, "resume.pdf");
 
+// Current repo model:
+// - src/content/resume.ts is the canonical narrative SSOT for public routes.
+// - src/content/ssot/profile.ssot.jsonld is the claims/export SSOT for recruiter-pack artifacts.
+// This exporter intentionally derives machine-readable artifacts from the JSON-LD source only.
+
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./jsonld";
+import { KPROVENGINE_OG_IMAGES, KPROVENGINE_TWITTER_IMAGES } from "./metadata/images";
 
 export const kprovengineMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -12,10 +13,10 @@ export const kprovengineMetadata: Metadata = {
     title: "KProvEngine",
     description:
       "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows.",
-    images: [{ url: "/projects/kprovengine/opengraph-image.png" }],
+    images: KPROVENGINE_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/projects/kprovengine/opengraph-image.png"],
+    images: KPROVENGINE_TWITTER_IMAGES,
   },
 };

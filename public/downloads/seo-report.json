@@ -1,0 +1,318 @@
+{
+  "generatedAt": "2026-03-06T09:28:05.001Z",
+  "score": {
+    "passed": 45,
+    "total": 45,
+    "percent": 100
+  },
+  "advisoryScore": {
+    "passed": 4,
+    "total": 4,
+    "percent": 100
+  },
+  "status": "strong",
+  "checks": [
+    {
+      "id": "asset:public/og-image.jpg",
+      "description": "Critical asset exists: public/og-image.jpg",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/icon-192.png",
+      "description": "Critical asset exists: public/icon-192.png",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/icon-512.png",
+      "description": "Critical asset exists: public/icon-512.png",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/assets/favicon/site.webmanifest",
+      "description": "Critical asset exists: public/assets/favicon/site.webmanifest",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/assets/favicon/apple-touch-icon.png",
+      "description": "Critical asset exists: public/assets/favicon/apple-touch-icon.png",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/assets/favicon/favicon-16x16.png",
+      "description": "Critical asset exists: public/assets/favicon/favicon-16x16.png",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/assets/favicon/favicon-32x32.png",
+      "description": "Critical asset exists: public/assets/favicon/favicon-32x32.png",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/projects/kprovengine/og.jpg",
+      "description": "Critical asset exists: public/projects/kprovengine/og.jpg",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "asset:public/projects/kprovengine/architecture.webp",
+      "description": "Critical asset exists: public/projects/kprovengine/architecture.webp",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/index.html",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/index.html",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/copy-paste-resume.txt",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/copy-paste-resume.txt",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/skills-matrix.csv",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/skills-matrix.csv",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/search-report.md",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/search-report.md",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/resume.pdf",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/resume.pdf",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/resume.json",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/resume.json",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "recruiter-pack:public/downloads/recruiter-pack/manifest.json",
+      "description": "Recruiter pack artifact exists: public/downloads/recruiter-pack/manifest.json",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "sitemap:/",
+      "description": "Sitemap includes /",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "sitemap:/resume",
+      "description": "Sitemap includes /resume",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "sitemap:/r",
+      "description": "Sitemap includes /r",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "sitemap:/projects",
+      "description": "Sitemap includes /projects",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "sitemap:/projects/kprovengine",
+      "description": "Sitemap includes /projects/kprovengine",
+      "pass": true,
+      "details": "ok"
+    },
+    {
+      "id": "ai-txt:Sitemap: https://www.jeffreyplewak.com/sitemap.xml",
+      "description": "ai.txt contains \"Sitemap: https://www.jeffreyplewak.com/sitemap.xml\"",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "ai-txt:Canonical-Resume: https://www.jeffreyplewak.com/resume",
+      "description": "ai.txt contains \"Canonical-Resume: https://www.jeffreyplewak.com/resume\"",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "ai-txt:Recruiter-Route: https://www.jeffreyplewak.com/r",
+      "description": "ai.txt contains \"Recruiter-Route: https://www.jeffreyplewak.com/r\"",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "ai-txt:Proof-Route: https://www.jeffreyplewak.com/projects/kprovengine",
+      "description": "ai.txt contains \"Proof-Route: https://www.jeffreyplewak.com/projects/kprovengine\"",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:home:canonical",
+      "description": "home has canonical metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:home:openGraph",
+      "description": "home has openGraph metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:home:twitter",
+      "description": "home has twitter metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:resume:canonical",
+      "description": "resume has canonical metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:resume:openGraph",
+      "description": "resume has openGraph metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:resume:twitter",
+      "description": "resume has twitter metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:recruiter:canonical",
+      "description": "recruiter has canonical metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:recruiter:openGraph",
+      "description": "recruiter has openGraph metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:recruiter:twitter",
+      "description": "recruiter has twitter metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:projects:canonical",
+      "description": "projects has canonical metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:projects:openGraph",
+      "description": "projects has openGraph metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:projects:twitter",
+      "description": "projects has twitter metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:kprovengine:canonical",
+      "description": "kprovengine has canonical metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:kprovengine:openGraph",
+      "description": "kprovengine has openGraph metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "metadata:kprovengine:twitter",
+      "description": "kprovengine has twitter metadata",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "jsonld:/#home",
+      "description": "JSON-LD route node includes /#home",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "jsonld:/resume#page",
+      "description": "JSON-LD route node includes /resume#page",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "jsonld:/r#page",
+      "description": "JSON-LD route node includes /r#page",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "jsonld:/projects#page",
+      "description": "JSON-LD route node includes /projects#page",
+      "pass": true,
+      "details": "source scan"
+    },
+    {
+      "id": "jsonld:/projects/kprovengine#page",
+      "description": "JSON-LD route node includes /projects/kprovengine#page",
+      "pass": true,
+      "details": "source scan"
+    }
+  ],
+  "advisories": [
+    {
+      "id": "perf:public/og-image.jpg",
+      "description": "Image budget <= 180000 bytes for public/og-image.jpg",
+      "pass": true,
+      "details": "41319 bytes"
+    },
+    {
+      "id": "perf:public/projects/kprovengine/og.jpg",
+      "description": "Image budget <= 220000 bytes for public/projects/kprovengine/og.jpg",
+      "pass": true,
+      "details": "84070 bytes"
+    },
+    {
+      "id": "perf:public/projects/kprovengine/architecture.webp",
+      "description": "Image budget <= 350000 bytes for public/projects/kprovengine/architecture.webp",
+      "pass": true,
+      "details": "44824 bytes"
+    },
+    {
+      "id": "perf:heavy-public-images",
+      "description": "No public image exceeds 800000 bytes",
+      "pass": true,
+      "details": "ok"
+    }
+  ],
+  "heavyImageFindings": [],
+  "notes": [
+    "This report validates on-repo technical SEO readiness signals only.",
+    "Search ranking position is not guaranteed by code alone.",
+    "External authority and search-console performance remain required."
+  ]
+}

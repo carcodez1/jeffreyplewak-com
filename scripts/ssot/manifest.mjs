@@ -11,6 +11,10 @@ const outDir = path.join(repoRoot, "public/downloads/recruiter-pack");
 const manifestOut = path.join(outDir, "manifest.json");
 
 const files = [
+  "index.html",
+  "copy-paste-resume.txt",
+  "skills-matrix.csv",
+  "search-report.md",
   "resume.pdf",
   "resume.json",
   "contact.vcf",

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
-type NavItem = { href: string; label: string };
+type NavItem = { href: string; label: string; external?: boolean };
 
 interface MobileNavProps {
   nav: readonly NavItem[];
@@ -55,14 +55,16 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
       <button
         ref={toggleRef}
         type="button"
-        className="btn navToggle iconBtn"
+        className="navToggle iconBtn iconBtn--menu"
         aria-expanded={open}
         aria-controls={dialogId}
         aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setOpen((v) => !v)}
       >
-        <span aria-hidden="true" className="navToggleIcon">
-          {open ? "✕" : "☰"}
+        <span aria-hidden="true" className={`navToggleIcon ${open ? "navToggleIcon--open" : ""}`}>
+          <span className="navToggleBar" />
+          <span className="navToggleBar" />
+          <span className="navToggleBar" />
         </span>
       </button>
 
@@ -76,19 +78,46 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
         <div className="mobileNavBackdrop" onClick={() => setOpen(false)} />
 
         <div ref={panelRef} className="mobileNavPanel">
+          <div className="mobileNavPrimary">
+            <Link
+              className="mobileNavResumeBtn"
+              href="/resume"
+              onClick={() => {
+                setOpen(false);
+                onClose?.();
+              }}
+            >
+              Open Resume
+            </Link>
+          </div>
+
           <nav className="mobileNavLinks" aria-label="Mobile navigation">
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                className="mobileNavLink"
-                href={item.href}
-                onClick={() => {
-                  setOpen(false);
-                  onClose?.();
-                }}
-              >
-                {item.label}
-              </Link>
+              item.external ? (
+                <a
+                  key={item.href}
+                  className="mobileNavLink"
+                  href={item.href}
+                  onClick={() => {
+                    setOpen(false);
+                    onClose?.();
+                  }}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  className="mobileNavLink"
+                  href={item.href}
+                  onClick={() => {
+                    setOpen(false);
+                    onClose?.();
+                  }}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
           </nav>
         </div>

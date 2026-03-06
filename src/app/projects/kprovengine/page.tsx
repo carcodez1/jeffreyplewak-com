@@ -1,48 +1,50 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import "../projects.css";
 import { kprovengineSourceCodeJsonLd } from "@/lib/jsonld";
 import { getNonce } from "@/lib/nonce";
+import { KPROVENGINE_OG_IMAGES, KPROVENGINE_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 const KPROV_LINKS = {
-  home: "/",
+  home: "/projects",
   repo: "https://github.com/carcodez1/KProvEngine",
   readme: "https://github.com/carcodez1/KProvEngine#readme",
-  archDoc: "https://github.com/carcodez1/KProvEngine/blob/main/docs/architecture.md",
+  actions: "https://github.com/carcodez1/KProvEngine/actions",
 } as const;
-
-const OG_IMAGE = "/projects/kprovengine/og.png";
-const DIAGRAM = "/projects/kprovengine/architecture.png";
 
 import { SITE_URL } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
+  title: "KProvEngine — Proof Case Study for Human-Reviewed AI Workflows",
   description:
-    "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows. Local-first execution, explicit review, and audit-grade run artifacts.",
+    "Proof-linked case study for deterministic provenance in AI-assisted, human-reviewed workflows with preview guidance for SBOM, provenance, and SLSA-oriented build trust signals.",
+  keywords: [
+    "KProvEngine",
+    "deterministic AI workflows",
+    "provenance",
+    "artifact provenance",
+    "legal ops audit",
+    "SBOM",
+    "SLSA",
+    "software supply chain",
+    "human reviewed AI",
+    "audit-grade artifacts",
+  ],
   alternates: {
     canonical: `${SITE_URL}/projects/kprovengine`,
   },
   openGraph: {
     type: "article",
-    title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
+    title: "KProvEngine — Proof Case Study for Human-Reviewed AI Workflows",
+    description: "Proof-linked case study with explicit human review, deterministic runs, and reviewable artifacts.",
     url: `${SITE_URL}/projects/kprovengine`,
-    images: [
-      {
-        url: `${SITE_URL}${OG_IMAGE}`,
-        width: 1200,
-        height: 630,
-        alt: "KProvEngine",
-      },
-    ],
+    images: KPROVENGINE_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
-    title: "KProvEngine — Deterministic provenance for human-reviewed AI workflows",
-    description: "Governance-first pipeline with explicit human review, deterministic runs, and reviewable artifacts.",
-    images: [`${SITE_URL}${OG_IMAGE}`],
+    title: "KProvEngine — Proof Case Study for Human-Reviewed AI Workflows",
+    description: "Proof-linked case study with explicit human review, deterministic runs, and reviewable artifacts.",
+    images: KPROVENGINE_TWITTER_IMAGES,
   },
 };
 
@@ -65,11 +67,11 @@ export default async function Page() {
       <header className="pHero">
         <div className="pCrumb">
           <Link href={KPROV_LINKS.home} className="pBack">
-            ← Home
+            ← Projects
           </Link>
         </div>
 
-        <div className="pHeroGrid">
+        <div className="pHeroGrid pHeroGridSingle">
           <div>
             <div className="pTitleRow">
               <h1 className="pH1">KProvEngine</h1>
@@ -78,215 +80,54 @@ export default async function Page() {
               </span>
             </div>
 
-            <p className="pSub">Deterministic provenance for AI-assisted workflows that require explicit human review.</p>
+            <p className="pSub">Proof case study for human-reviewed AI workflow delivery.</p>
 
             <p className="pLede">
-              Local-first by design: reproducible runs, captured review decisions, and evidence artifacts you can audit,
-              diff, and defend.
+              Minimal access page: open the repository and README directly.
             </p>
 
             <nav className="pCtas" aria-label="Project links">
               <a className="pBtn pBtnPrimary" href={KPROV_LINKS.repo} target="_blank" rel="noopener noreferrer">
-                GitHub repo
+                Open repo
               </a>
               <a className="pBtn" href={KPROV_LINKS.readme} target="_blank" rel="noopener noreferrer">
-                README
+                Readme
               </a>
-              <a className="pBtn" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
-                Architecture doc
+              <a className="pBtn" href={KPROV_LINKS.actions} target="_blank" rel="noopener noreferrer">
+                Build runs
               </a>
             </nav>
-
-            <div className="pMetaRow" aria-label="Quick tags">
-              <ul className="pPillRow" role="list">
-                <li className="pPill">Python</li>
-                <li className="pPill">Determinism</li>
-                <li className="pPill">Provenance</li>
-                <li className="pPill">Human-in-the-loop</li>
-                <li className="pPill">Audit-ready outputs</li>
-              </ul>
-            </div>
-
-            <div className="pCard pCardTight pInlineNote depthFx">
-              <div className="pCalloutTitle">What you get (V1)</div>
-              <ul className="pList">
-                <li>
-                  <strong>Reproducible run directory</strong> with deterministic stages: normalize → parse → extract →
-                  render
-                </li>
-                <li>
-                  <strong>Evidence artifacts</strong> (manifest + hashes + provenance + toolchain disclosure)
-                </li>
-                <li>
-                  <strong>Explicit review record</strong> captured as an artifact (human accountability)
-                </li>
-              </ul>
-            </div>
           </div>
-
-          <aside aria-label="Architecture preview">
-            <div className="pCard pCardTight depthFx">
-              <div className="pCardHead">
-                <div className="pCardTitle">Architecture snapshot</div>
-                <div className="pCardHint">V1 pipeline + evidence outputs</div>
-              </div>
-
-              <div className="pMedia pMedia169" aria-label="KProvEngine architecture diagram">
-                <Image
-                  src={DIAGRAM}
-                  alt="KProvEngine V1 pipeline and evidence flow"
-                  fill
-                  className="pMediaImg"
-                  sizes="(max-width: 980px) 100vw, 420px"
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-
-              <div className="pMiniLinks">
-                <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
-                  View diagram + notes →
-                </a>
-              </div>
-            </div>
-          </aside>
         </div>
       </header>
 
       <section className="pSection">
-        <h2 className="pH2">Why this exists</h2>
-        <div className="pGrid2">
-          <div className="pCard depthFx">
-            <p className="pP0">
-              Many AI-assisted workflows produce useful output but weak evidence. When provenance is missing, you can't
-              reliably reproduce results, explain what happened, or separate human judgment from automation.
-            </p>
-          </div>
-          <div className="pCard depthFx">
-            <ul className="pList">
-              <li>"What produced this output?" must be answerable with artifacts, not narrative.</li>
-              <li>Runs should be reproducible end-to-end (no hidden state, no surprise network calls).</li>
-              <li>Human responsibility must be captured explicitly, not implied.</li>
-              <li>Audit defense should be evidence-backed and reviewable.</li>
-            </ul>
-          </div>
+        <div className="pCard pCardTight depthFx">
+          <p className="pP0">
+            For full professional context, use <Link href="/resume">Resume</Link> or <Link href="/r">Recruiter Page</Link>.
+          </p>
         </div>
       </section>
 
-      <section className="pSection">
-        <h2 className="pH2">Design constraints (V1)</h2>
-        <div className="pCard depthFx">
-          <ul className="pList pListMuted">
-            <li>Local-first execution (no required external services)</li>
-            <li>Deterministic, reproducible pipelines</li>
-            <li>Explicit human-in-the-loop review</li>
-            <li>No implied certification or automated validation</li>
-            <li>Minimal and defensible dependency surface</li>
-          </ul>
+      <section className="pSection" aria-label="Supply-chain preview">
+        <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">Build and trust preview</h2>
+          <p className="pP0">
+            GitHub links above provide a quick entry to repository activity. This page is a recruiter-facing proof surface, while SBOM,
+            provenance, and SLSA-aligned signals are reviewed in the source repository workflow context.
+          </p>
         </div>
       </section>
 
-      <section className="pSection">
-        <h2 className="pH2">Architecture</h2>
-        <div className="pGrid2">
-          <div className="pCard depthFx">
-            <div className="pCalloutTitle">Pipeline</div>
-            <ul className="pList">
-              <li>
-                <strong>Core stages:</strong> normalize → parse → extract → render
-              </li>
-              <li>Deterministic + side-effect constrained</li>
-              <li>Clear separation between core logic and optional adapters</li>
-            </ul>
-          </div>
-
-          <div className="pCard depthFx">
-            <div className="pCalloutTitle">Adapters + evidence layer</div>
-            <ul className="pList">
-              <li>
-                <strong>Adapters (optional):</strong> OCR and LLM integrations
-              </li>
-              <li>
-                <strong>Non-authoritative by design:</strong> can assist extraction; never treated as source of truth
-              </li>
-              <li>
-                <strong>Evidence artifacts:</strong> manifest, hashes, provenance, toolchain disclosure, review artifacts
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="pCard pCardTight pInlineNote depthFx">
-          Full architecture diagrams and governance rules live in the repository.{" "}
-          <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
-            View architecture and notes →
-          </a>
+      <section className="pSection" aria-label="LegalOps audit preview">
+        <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">LegalOps and provenance audit preview</h2>
+          <p className="pP0">
+            Audit focus areas for handoff review: artifact provenance lineage, SBOM inventory, SLSA-aligned build provenance, and
+            explicit human-review checkpoints for legal and operations workflows.
+          </p>
         </div>
       </section>
-
-      <section className="pSection">
-        <h2 className="pH2">Evidence outputs (what's actually captured)</h2>
-        <div className="pCard depthFx">
-          <ul className="pList">
-            <li>
-              <strong>manifest.json</strong> — file inventory + expected outputs
-            </li>
-            <li>
-              <strong>hashes</strong> — content hashes for inputs/outputs
-            </li>
-            <li>
-              <strong>provenance</strong> — execution metadata (what ran, when, with what versions)
-            </li>
-            <li>
-              <strong>toolchain disclosure</strong> — dependency/tool versions that impact reproducibility
-            </li>
-            <li>
-              <strong>human review artifact</strong> — explicit reviewer decision record
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="pSection">
-        <h2 className="pH2">Intentionally out of scope (V1)</h2>
-        <div className="pCard depthFx">
-          <ul className="pList pListMuted">
-            <li>Hosted or SaaS deployment</li>
-            <li>Autonomous or agent-driven behavior</li>
-            <li>Claims of compliance certification</li>
-            <li>Workflow orchestration beyond a single deterministic run</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="pSection">
-        <h2 className="pH2">Demo</h2>
-        <div className="pCard depthFx">
-          <p className="pP0 pMuted">Run the public demo script from the repository root:</p>
-          <pre className="pCode">{`# From the KProvEngine repo:
-./demo.sh
-
-# Or (editable install):
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
-echo "Hello provenance" > input.txt
-python -m kprovengine.cli input.txt --out runs`}</pre>
-        </div>
-      </section>
-
-      <footer className="pFooter" aria-label="Project footer">
-        <div className="pFooterRow">
-          <a className="pLink" href={KPROV_LINKS.repo} target="_blank" rel="noopener noreferrer">
-            GitHub repository →
-          </a>
-          <span className="pDot">•</span>
-          <a className="pLink" href={KPROV_LINKS.archDoc} target="_blank" rel="noopener noreferrer">
-            Architecture doc →
-          </a>
-        </div>
-        <div className="pFootnote">V1 is intentionally stable. Rich walkthrough media (GIF/video) belongs in V2 after the interface settles.</div>
-      </footer>
     </div>
   );
 }

@@ -1,0 +1,245 @@
+#!/usr/bin/env node
+"use strict";
+
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import crypto from "node:crypto";
+import { execSync } from "node:child_process";
+
+const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "..");
+const packageJsonPath = path.join(repoRoot, "package.json");
+const packageLockPath = path.join(repoRoot, "package-lock.json");
+const outDir = path.join(repoRoot, "artifacts", "reasoning");
+const outJson = path.join(outDir, "context-bundle.json");
+const outMd = path.join(outDir, "context-bundle.md");
+
+const SAFE_ENV_KEYS = [
+  "NODE_ENV",
+  "CI",
+  "VERCEL",
+  "VERCEL_ENV",
+  "VERCEL_URL",
+  "VERCEL_BRANCH_URL",
+  "VERCEL_PROJECT_PRODUCTION_URL",
+  "VERCEL_REGION",
+  "VERCEL_GIT_PROVIDER",
+  "VERCEL_GIT_REPO_SLUG",
+  "VERCEL_GIT_REPO_OWNER",
+  "VERCEL_GIT_COMMIT_SHA",
+  "VERCEL_GIT_COMMIT_REF",
+  "VERCEL_GIT_COMMIT_MESSAGE",
+  "VERCEL_GIT_COMMIT_AUTHOR_LOGIN",
+  "VERCEL_GIT_PULL_REQUEST_ID",
+];
+
+const SAFE_ENV_PREFIXES = ["NEXT_PUBLIC_"];
+
+const TRACKED_FILES = [
+  "src/app/page.tsx",
+  "src/app/resume/page.tsx",
+  "src/content/resume.ts",
+  "public/downloads/recruiter-pack/manifest.json",
+  "public/downloads/recruiter-pack/resume.json",
+  "public/downloads/recruiter-pack/contact.vcf",
+];
+
+function readJson(file) {
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+}
+
+function stableStringify(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
+function tryExec(command) {
+  try {
+    return execSync(command, {
+      cwd: repoRoot,
+      stdio: ["ignore", "pipe", "ignore"],
+      encoding: "utf8",
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
+function bytesToGiB(bytes) {
+  return Number((bytes / (1024 ** 3)).toFixed(2));
+}
+
+function sha256File(filePath) {
+  const data = fs.readFileSync(filePath);
+  return crypto.createHash("sha256").update(data).digest("hex");
+}
+
+function collectSafeEnv() {
+  const safeEntries = Object.entries(process.env)
+    .filter(([key]) => SAFE_ENV_KEYS.includes(key) || SAFE_ENV_PREFIXES.some((prefix) => key.startsWith(prefix)))
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  const env = {};
+  for (const [key, value] of safeEntries) {
+    env[key] = value ?? "";
+  }
+
+  return {
+    keysIncluded: Object.keys(env),
+    values: env,
+    note: "Safe list only. Secrets are intentionally excluded.",
+  };
+}
+
+function collectMacHardware() {
+  const memBytes = Number(os.totalmem());
+  return {
+    platform: os.platform(),
+    arch: os.arch(),
+    release: os.release(),
+    hostname: os.hostname(),
+    cpuModel: tryExec("sysctl -n machdep.cpu.brand_string") ?? "UNKNOWN",
+    cpuCoresLogical: Number(tryExec("sysctl -n hw.logicalcpu") ?? os.cpus().length),
+    cpuCoresPhysical: Number(tryExec("sysctl -n hw.physicalcpu") ?? 0),
+    memoryGiB: bytesToGiB(memBytes),
+    macOSVersion: tryExec("sw_vers -productVersion") ?? "UNKNOWN",
+    macOSBuild: tryExec("sw_vers -buildVersion") ?? "UNKNOWN",
+    modelIdentifier: tryExec("sysctl -n hw.model") ?? "UNKNOWN",
+  };
+}
+
+function collectRuntime() {
+  const pkg = readJson(packageJsonPath);
+  return {
+    node: process.version,
+    npm: tryExec("npm -v") ?? "UNKNOWN",
+    next: pkg.dependencies?.next ?? "UNKNOWN",
+    react: pkg.dependencies?.react ?? "UNKNOWN",
+    scripts: pkg.scripts ?? {},
+    engines: pkg.engines ?? {},
+  };
+}
+
+function collectDependencySbom() {
+  const pkg = readJson(packageJsonPath);
+  const lock = readJson(packageLockPath);
+  const packageEntries = Object.entries(lock.packages ?? {})
+    .filter(([key]) => key.startsWith("node_modules/"))
+    .map(([key, value]) => ({
+      name: key.replace(/^node_modules\//, ""),
+      version: String(value.version ?? ""),
+      resolved: String(value.resolved ?? ""),
+      integrity: String(value.integrity ?? ""),
+      dev: Boolean(value.dev),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    direct: {
+      dependencies: Object.entries(pkg.dependencies ?? {}).map(([name, version]) => ({ name, version })).sort((a, b) => a.name.localeCompare(b.name)),
+      devDependencies: Object.entries(pkg.devDependencies ?? {}).map(([name, version]) => ({ name, version })).sort((a, b) => a.name.localeCompare(b.name)),
+      overrides: Object.entries(pkg.overrides ?? {}).map(([name, version]) => ({ name, version })).sort((a, b) => a.name.localeCompare(b.name)),
+    },
+    transitive: {
+      count: packageEntries.length,
+      packages: packageEntries,
+    },
+    lockfileSha256: sha256File(packageLockPath),
+  };
+}
+
+function collectTrackedFiles() {
+  const out = [];
+  for (const rel of TRACKED_FILES) {
+    const abs = path.join(repoRoot, rel);
+    if (!fs.existsSync(abs)) {
+      continue;
+    }
+
+    const stat = fs.statSync(abs);
+    out.push({
+      path: rel,
+      bytes: stat.size,
+      sha256: sha256File(abs),
+    });
+  }
+
+  return out;
+}
+
+function toMarkdown(bundle) {
+  const lines = [];
+  lines.push("# Reasoning Context Bundle");
+  lines.push("");
+  lines.push("Generated by `scripts/context/build-reasoning-context.mjs`.");
+  lines.push("");
+  lines.push("## Runtime");
+  lines.push("");
+  lines.push(`- Node: ${bundle.runtime.node}`);
+  lines.push(`- npm: ${bundle.runtime.npm}`);
+  lines.push(`- Next: ${bundle.runtime.next}`);
+  lines.push(`- React: ${bundle.runtime.react}`);
+  lines.push("");
+  lines.push("## Vercel/Next Safe Env");
+  lines.push("");
+  for (const key of bundle.env.keysIncluded) {
+    lines.push(`- ${key}: ${bundle.env.values[key]}`);
+  }
+  if (bundle.env.keysIncluded.length === 0) {
+    lines.push("- No safe env vars detected in current shell.");
+  }
+  lines.push("");
+  lines.push("## Mac Hardware");
+  lines.push("");
+  lines.push(`- Model: ${bundle.hardware.modelIdentifier}`);
+  lines.push(`- CPU: ${bundle.hardware.cpuModel}`);
+  lines.push(`- Logical cores: ${bundle.hardware.cpuCoresLogical}`);
+  lines.push(`- Physical cores: ${bundle.hardware.cpuCoresPhysical}`);
+  lines.push(`- Memory (GiB): ${bundle.hardware.memoryGiB}`);
+  lines.push(`- macOS: ${bundle.hardware.macOSVersion} (${bundle.hardware.macOSBuild})`);
+  lines.push("");
+  lines.push("## SBOM Summary");
+  lines.push("");
+  lines.push(`- Direct dependencies: ${bundle.sbom.direct.dependencies.length}`);
+  lines.push(`- Direct devDependencies: ${bundle.sbom.direct.devDependencies.length}`);
+  lines.push(`- Transitive packages: ${bundle.sbom.transitive.count}`);
+  lines.push(`- package-lock sha256: ${bundle.sbom.lockfileSha256}`);
+  lines.push("");
+  lines.push("## Tracked Project Artifacts");
+  lines.push("");
+  for (const file of bundle.trackedArtifacts) {
+    lines.push(`- ${file.path} (${file.bytes} bytes, sha256=${file.sha256})`);
+  }
+  if (bundle.trackedArtifacts.length === 0) {
+    lines.push("- No tracked artifacts found.");
+  }
+  lines.push("");
+  return `${lines.join("\n")}\n`;
+}
+
+function main() {
+  if (!fs.existsSync(packageJsonPath)) {
+    throw new Error(`Missing package.json at ${packageJsonPath}`);
+  }
+
+  if (!fs.existsSync(packageLockPath)) {
+    throw new Error(`Missing package-lock.json at ${packageLockPath}`);
+  }
+
+  const bundle = {
+    generatedBy: "scripts/context/build-reasoning-context.mjs",
+    schemaVersion: 1,
+    runtime: collectRuntime(),
+    env: collectSafeEnv(),
+    hardware: collectMacHardware(),
+    sbom: collectDependencySbom(),
+    trackedArtifacts: collectTrackedFiles(),
+  };
+
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(outJson, stableStringify(bundle), "utf8");
+  fs.writeFileSync(outMd, toMarkdown(bundle), "utf8");
+
+  process.stdout.write(`Reasoning context bundle complete:\n- ${path.relative(repoRoot, outJson)}\n- ${path.relative(repoRoot, outMd)}\n`);
+}
+
+main();

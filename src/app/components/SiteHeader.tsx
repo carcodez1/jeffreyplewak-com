@@ -2,12 +2,13 @@ import Link from "next/link";
 import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
 import { SocialIcon } from "./SocialIcon";
 import { MobileNav } from "./MobileNav";
+import { DownloadMenu } from "./DownloadMenu";
 
 const NAV = [
-  { href: "/projects", label: "Projects" },
-  { href: "/resume", label: "Resume" },
-  { href: "/#work", label: "Work" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/projects", label: "Projects", external: false },
+  { href: "/resume", label: "Resume", external: false },
+  { href: "/r", label: "Recruiter", external: false },
+  { href: `${LINKS.emailConsulting}?subject=Consulting%20Inquiry`, label: "Consulting (Email)", external: true },
 ] as const;
 
 export function SiteHeader() {
@@ -17,25 +18,34 @@ export function SiteHeader() {
 
         <Link className="brand" href="/" aria-label="Home">
           <span className="brandText">
-            <span className="brandHi" aria-hidden="true">Hi, I’m</span> {SITE.shortName}
+            {SITE.name}
           </span>
           <span className="brandSub" aria-hidden="true">{SITE.title}</span>
         </Link>
 
         <nav className="siteNav" aria-label="Primary navigation">
           {NAV.map((n) => (
-            <Link key={n.href} className="navLink" href={n.href}>
-              {n.label}
-            </Link>
+            n.external ? (
+              <a
+                key={n.href}
+                className="navLink"
+                href={n.href}
+                aria-label={n.href.startsWith("mailto:") ? `${n.label} (opens email)` : n.label}
+              >
+                {n.label}
+              </a>
+            ) : (
+              <Link key={n.href} className="navLink" href={n.href}>
+                {n.label}
+              </Link>
+            )
           ))}
         </nav>
 
         <div className="siteActions">
-          <MobileNav nav={NAV} />
-
           <div className="headerCtas">
             <Link className="btn btnPrimary btnHeader" href="/resume" aria-label="Open resume page">
-              Resume
+              Open Resume
             </Link>
             <a className="btn btnHeader" href={LINKS.emailProject} aria-label="Email Jeff">
               Email
@@ -48,7 +58,7 @@ export function SiteHeader() {
             {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
               <a
                 key={s.key}
-                className="iconBtn"
+                className={`iconBtn iconBtn--${s.key}`}
                 href={s.href}
                 aria-label={s.label}
                 {...extLinkProps(s.external)}
@@ -57,6 +67,10 @@ export function SiteHeader() {
               </a>
             ))}
           </div>
+
+          <DownloadMenu compact iconOnly className="headerDownloadMenu" label="Downloads" />
+
+          <MobileNav nav={NAV} />
         </div>
       </div>
     </header>

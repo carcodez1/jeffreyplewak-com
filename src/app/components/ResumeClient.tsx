@@ -35,6 +35,27 @@ function jumpToRoleAnchor(id: string) {
   if (node instanceof HTMLElement) node.focus();
 }
 
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function highlightMatch(text: string, query: string) {
+  const q = query.trim();
+  if (!q) return text;
+  const re = new RegExp(`(${escapeRegExp(q)})`, "ig");
+  const parts = text.split(re);
+  if (parts.length === 1) return text;
+  return parts.map((part, idx) =>
+    idx % 2 === 1 ? (
+      <mark key={`${part}-${idx}`} className="resumeMatch">
+        {part}
+      </mark>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function ResumeClient({ roles }: Props) {
   const [activeFilter, setActiveFilter] = useState<FilterTab>("All");
   const [query, setQuery] = useState("");
@@ -105,8 +126,9 @@ export function ResumeClient({ roles }: Props) {
           value={query}
           onChange={(e) => setQuery(e.currentTarget.value)}
           onKeyDown={onSearchKeyDown}
-          placeholder="Employer, title, highlights, technology"
+          placeholder="Search employer, title, outcomes, or technologies"
         />
+        <p className="muted resumeSearchHint">Use keywords, then press Enter to jump to the highlighted role.</p>
         <button type="button" className="btn btnSm btnTertiary" onClick={clearAll}>
           Clear
         </button>
@@ -156,9 +178,9 @@ export function ResumeClient({ roles }: Props) {
               onFocus={() => setActiveIndex(idx)}
               onClick={() => jumpToRoleAnchor(r.id)}
             >
-              <span className="resumeResultEmployer">{r.employerName}</span>
+              <span className="resumeResultEmployer">{highlightMatch(r.employerName, query)}</span>
               <span className="resumeResultMeta">
-                {r.title} · {roleRange(r)}
+                {highlightMatch(r.title, query)} · {roleRange(r)}
               </span>
             </button>
           </li>
