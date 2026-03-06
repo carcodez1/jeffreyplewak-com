@@ -6,7 +6,7 @@
 }
 
 .siteFooterInner {
-  width: min(var(--wrapMax), calc(100% - (var(--gutter) * 2)));
+  width: min(var(--containerMax), calc(100% - (var(--containerPad) * 2)));
   margin-inline: auto;
   padding-bottom: 44px;
   display: grid;

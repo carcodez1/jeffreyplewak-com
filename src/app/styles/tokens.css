@@ -6,8 +6,11 @@
 :root {
   /* ── Layout ── */
   --headerH:  68px;
-  --wrapMax:  1060px;
-  --gutter:   24px;
+  --containerMax: clamp(1120px, 92vw, 1320px);
+  --containerPad: clamp(16px, 2.4vw, 28px);
+  /* Back-compat aliases */
+  --wrapMax: var(--containerMax);
+  --gutter: var(--containerPad);
 
   /* ── Font stacks ── */
   --fontMono:
@@ -58,8 +61,8 @@
   --tSlow:  340ms;
 
   /* ── Section rhythm ── */
-  --sectionY:   clamp(3rem, 6vw, 5rem);
-  --sectionYSm: clamp(1.5rem, 3vw, 2.5rem);
+  --sectionY:   clamp(2rem, 4vw, 3.5rem);
+  --sectionYSm: clamp(1rem, 2.2vw, 1.75rem);
 
   /* ── Hero spacing ── */
   --heroGap: clamp(16px, 2.5vw, 36px);

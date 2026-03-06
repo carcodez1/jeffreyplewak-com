@@ -114,7 +114,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="section homePreviewBand" aria-label="Quick previews">
+      <section className="homePreviewBand" aria-label="Quick previews">
         <h2 className="homePreviewTitle">Quick previews</h2>
         <div className="homePreviewGrid">
           {HOME_PREVIEWS.map((item) => (
