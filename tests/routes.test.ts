@@ -25,11 +25,10 @@ describe("routes", () => {
     expect(doc.querySelector("h1")?.textContent).toBe("Start here for a quick, honest review.");
     expect(doc.body.textContent).toContain("Start here for a quick, honest review.");
     expect(doc.body.textContent).toContain("Fast recruiter facts");
-    expect(doc.body.textContent).toContain("Quick profile");
     expect(doc.body.textContent).toContain("Open Resume first");
     expect(doc.body.textContent).toMatch(/\d+\+ years in production engineering/);
-    expect(doc.body.textContent).toContain("Resume first");
-    expect(doc.body.textContent).toContain("Recruiter pack");
+    expect(doc.body.textContent).toContain("Recruiter Pack is available for utility files and copy-paste handoff.");
+    expect(doc.body.textContent).toContain("Open Recruiter Pack");
     expect(doc.body.textContent).toContain("KProvEngine");
 
     const links = Array.from(doc.querySelectorAll("a"));
@@ -45,7 +44,14 @@ describe("routes", () => {
     expect(recruiterActions[0]?.text).toContain("Open Resume");
     expect(recruiterActions[1]?.text).toContain("Open Recruiter Pack");
     expect(recruiterActions[1]?.href).toBe("/downloads/recruiter-pack/index.html");
-    expect(recruiterActions.at(-1)?.href).toBe("/projects/kprovengine");
+    expect(recruiterActions).toHaveLength(2);
+
+    const routeRailLinks = Array.from(doc.querySelectorAll('nav[aria-label="Recruiter next actions"] a')).map((a) => ({
+      href: a.getAttribute("href"),
+      text: a.textContent,
+    }));
+    expect(routeRailLinks.at(-1)?.href).toBe("/projects/kprovengine");
+    expect(routeRailLinks.at(-1)?.text).toContain("Open KProvEngine");
   });
 
   it("/r metadata keeps the route indexable and self-canonical", () => {
