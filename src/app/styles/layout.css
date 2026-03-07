@@ -243,6 +243,23 @@
   .homeHeroRight { opacity: 1; }
 }
 
+@media (max-width: 520px) {
+  .homePrimaryActions {
+    align-items: stretch;
+  }
+
+  .homePrimaryActions .btn,
+  .homePrimaryActions .btnPrimary,
+  .homePrimaryActions .btnSecondaryStrong {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .homeStatsStrip {
+    grid-template-columns: 1fr;
+  }
+}
+
 .homePreviewBand { margin-top: 0; }
 .homePreviewTitle {
   margin-bottom: 14px;
