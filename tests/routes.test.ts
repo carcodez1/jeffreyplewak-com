@@ -22,8 +22,8 @@ describe("routes", () => {
     const html = renderToStaticMarkup(createElement(RecruiterPage));
     const doc = parse(html);
 
-    expect(doc.querySelector("h1")?.textContent).toBe("Start here for a quick, honest review.");
-    expect(doc.body.textContent).toContain("Start here for a quick, honest review.");
+    expect(doc.querySelector("h1")?.textContent).toBe("Start here for a quick review.");
+    expect(doc.body.textContent).toContain("Start here for a quick review.");
     expect(doc.body.textContent).toContain("Fast recruiter facts");
     expect(doc.body.textContent).toContain("Open Resume first");
     expect(doc.body.textContent).toMatch(/\d+\+ years in production engineering/);
