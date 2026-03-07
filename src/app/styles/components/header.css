@@ -81,32 +81,15 @@
   outline: none;
 }
 
-.siteActions {
+.siteUtilities {
   display: flex;
   align-items: center;
-  gap: clamp(6px, 1.5vw, 10px);
-}
-
-.headerCtas {
-  display: flex;
   gap: 8px;
-  align-items: center;
-}
-
-body:has(.homePage) .headerCtas .btnPrimary.btnHeader {
-  display: none;
 }
 
 .headerDownloadMenu {
   display: inline-flex;
   margin-left: 2px;
-}
-
-.headerDivider {
-  width: 1px;
-  height: 20px;
-  background: var(--border0);
-  flex-shrink: 0;
 }
 
 .headerIcons {
@@ -232,30 +215,12 @@ body:has(.homePage) .headerCtas .btnPrimary.btnHeader {
   }
 
   .siteNav  { display: none; }
+  .siteUtilities { display: none; }
   .brandSub { display: none; }
   .navToggle { display: inline-flex; }
 }
 
-/* Hide desktop-only elements at mobile */
 @media (max-width: 980px) {
-  .headerCtas {
-    display: inline-flex;
-    gap: 6px;
-  }
-  .headerCtas .btn:not(:first-child) {
-    display: none;
-  }
-  .headerCtas .btn:first-child {
-    min-height: 34px;
-    padding-inline: 11px;
-    font-size: var(--text0);
-  }
-  .headerDivider { display: none; }
-  .headerIcons { display: none; }
-  .headerDownloadMenu { display: none; }
-  .siteActions {
-    gap: 8px;
-  }
   .navToggle {
     display: inline-flex;
   }
@@ -275,12 +240,6 @@ body:has(.homePage) .headerCtas .btnPrimary.btnHeader {
     font-size: 0.88rem;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .headerCtas .btn:first-child {
-    min-height: 32px;
-    padding-inline: 9px;
-    font-size: 0.76rem;
   }
 
   .navToggle {

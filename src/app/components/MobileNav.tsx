@@ -6,11 +6,12 @@ import { useEffect, useId, useRef, useState } from "react";
 type NavItem = { href: string; label: string; external?: boolean };
 
 interface MobileNavProps {
+  primaryAction: NavItem;
   nav: readonly NavItem[];
   onClose?: () => void;
 }
 
-export function MobileNav({ nav, onClose }: MobileNavProps) {
+export function MobileNav({ primaryAction, nav, onClose }: MobileNavProps) {
   const dialogId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -79,16 +80,29 @@ export function MobileNav({ nav, onClose }: MobileNavProps) {
 
         <div ref={panelRef} className="mobileNavPanel">
           <div className="mobileNavPrimary">
-            <Link
-              className="mobileNavResumeBtn"
-              href="/resume"
-              onClick={() => {
-                setOpen(false);
-                onClose?.();
-              }}
-            >
-              Open Resume
-            </Link>
+            {primaryAction.external ? (
+              <a
+                className="mobileNavResumeBtn"
+                href={primaryAction.href}
+                onClick={() => {
+                  setOpen(false);
+                  onClose?.();
+                }}
+              >
+                {primaryAction.label}
+              </a>
+            ) : (
+              <Link
+                className="mobileNavResumeBtn"
+                href={primaryAction.href}
+                onClick={() => {
+                  setOpen(false);
+                  onClose?.();
+                }}
+              >
+                {primaryAction.label}
+              </Link>
+            )}
           </div>
 
           <nav className="mobileNavLinks" aria-label="Mobile navigation">
