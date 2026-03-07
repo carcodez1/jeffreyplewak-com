@@ -18,7 +18,7 @@ function hasPublicFile(href: string) {
 export const metadata: Metadata = {
   title: `Recruiter Decision Page — ${SITE.name}`,
   description:
-    "Recruiter page with resume, recruiter-pack downloads, and a focused KProvEngine case study.",
+    "Recruiter page for a senior software engineer focused on platform systems, compliance-aware delivery, production correctness, and a focused KProvEngine case study.",
   keywords: [
     "recruiter decision page",
     "candidate summary",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     type: "website",
     title: `Recruiter Decision Page — ${SITE.name}`,
     description:
-      "Start here for resume, recruiter-pack downloads, and the KProvEngine case study.",
+      "Start here for a recruiter-focused view of platform systems, compliance-aware delivery, and the KProvEngine case study.",
     url: "/r",
     images: DEFAULT_OG_IMAGES,
   },
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Recruiter Decision Page — ${SITE.name}`,
     description:
-      "Start here for resume, recruiter-pack downloads, and the KProvEngine case study.",
+      "Start here for a recruiter-focused view of platform systems, compliance-aware delivery, and the KProvEngine case study.",
     images: DEFAULT_TWITTER_IMAGES,
   },
 };

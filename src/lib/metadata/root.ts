@@ -23,17 +23,17 @@ export const rootMetadata: Metadata = {
   },
 
   description:
-    "Senior software engineer specializing in backend systems, platform architecture, deterministic AI systems, and compliance-focused engineering.",
+    "Senior software engineer specializing in platform systems, compliance-aware delivery, deterministic AI systems, and production-grade backend engineering.",
   keywords: [
     "Jeffrey R. Plewak",
     "senior software engineer",
-    "software architect",
+    "platform systems",
     "backend engineering",
-    "platform engineering",
+    "production systems",
     "distributed systems",
     "AI systems",
     "LLM infrastructure",
-    "compliance-focused engineering",
+    "compliance-aware delivery",
     "recruiter-ready portfolio",
   ],
 
@@ -65,7 +65,7 @@ export const rootMetadata: Metadata = {
     url: SITE_URL,
     title: "Jeffrey R. Plewak — Senior Software Engineer — Platform, Compliance & Production Systems",
     description:
-      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
+      "Platform systems, compliance-aware delivery, deterministic AI systems, and production-grade backend engineering.",
     siteName: "Jeffrey R. Plewak",
     locale: "en_US",
     images: DEFAULT_OG_IMAGES,
@@ -75,7 +75,7 @@ export const rootMetadata: Metadata = {
     card: "summary_large_image",
     title: "Jeffrey R. Plewak — Senior Software Engineer — Platform, Compliance & Production Systems",
     description:
-      "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
+      "Platform systems, compliance-aware delivery, deterministic AI systems, and production-grade backend engineering.",
     images: DEFAULT_TWITTER_IMAGES,
   },
 

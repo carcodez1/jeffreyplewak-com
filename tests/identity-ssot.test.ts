@@ -27,10 +27,10 @@ describe("identity SSOT model", () => {
     expect(recruiterPackResume.source).toBe("src/content/ssot/profile.ssot.jsonld");
   });
 
-  it("documents src/content/resume.ts as the canonical narrative SSOT", () => {
+  it("documents src/content/resume.ts as the public resume adapter", () => {
     const resumeSource = fs.readFileSync(narrativeSsotPath, "utf8");
 
-    expect(resumeSource).toContain("CANONICAL NARRATIVE SSOT");
-    expect(resumeSource).toContain("Machine-readable recruiter exports are generated from src/content/ssot/profile.ssot.jsonld.");
+    expect(resumeSource).toContain("Public resume adapter for route-facing summary, downloads, and role data.");
+    expect(resumeSource).toContain('import publicRoles from "@/content/employment.public.json";');
   });
 });
