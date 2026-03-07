@@ -93,6 +93,10 @@
   align-items: center;
 }
 
+body:has(.homePage) .headerCtas .btnPrimary.btnHeader {
+  display: none;
+}
+
 .headerDownloadMenu {
   display: inline-flex;
   margin-left: 2px;

@@ -69,10 +69,6 @@ export default function HomePage() {
             <p className="lede homeLede">
               I build <span className="homeInlineEm">reliable backend and platform software</span> teams can run with confidence.
             </p>
-            <p className="cardDesc homeIntroNote">
-              Open Resume first. For fast screening, open Recruiter Page.
-            </p>
-
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">
                 Open Resume
@@ -81,9 +77,6 @@ export default function HomePage() {
                 Open Recruiter Page
               </Link>
             </nav>
-            <p className="homeFlowHint">
-              Need technical proof next? <Link href="/projects">Open Projects</Link>.
-            </p>
           </div>
 
           <aside className="homeHeroRight" aria-label="Portrait">
