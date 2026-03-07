@@ -29,10 +29,6 @@ export function SiteFooter() {
             <Link className="btn btnPrimary" href="/resume">
               Open Resume
             </Link>
-            <DownloadMenu iconOnly className="footerDownloadMenu" label="Downloads" />
-            <a className="btn" href={LINKS.calendly} {...extLinkProps(true)}>
-              Book Intro Call
-            </a>
           </div>
 
           <nav className="footerIcons" aria-label="Social links">
@@ -48,6 +44,13 @@ export function SiteFooter() {
               </a>
             ))}
           </nav>
+
+          <div className="footerUtilities" aria-label="Support actions">
+            <DownloadMenu compact className="footerDownloadMenu" label="Downloads" />
+            <a className="footerLink footerUtilityLink" href={LINKS.calendly} {...extLinkProps(true)}>
+              Book Intro Call
+            </a>
+          </div>
 
           <div className="footerCopy">
             © {copyrightLine(year)} {SITE.name}. All rights reserved.
