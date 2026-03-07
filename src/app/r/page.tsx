@@ -65,7 +65,7 @@ export default function RecruiterPage() {
           <p className="recruiterEyebrow">For recruiters</p>
           <h1 className="h1 recruiterHeroTitle">Start here for a quick, honest review.</h1>
           <p className="lede recruiterHeroLede">
-            Open Resume first. If you need utility files, open Recruiter Pack. For technical depth, open KProvEngine.
+            Open Resume first. Recruiter Pack is available for utility files and copy-paste handoff.
           </p>
           <p className="cardDesc recruiterHeroSummary">{recruiterSummary}</p>
 

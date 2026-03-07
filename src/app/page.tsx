@@ -64,7 +64,6 @@ export default function HomePage() {
               <div className="homeIdText">
                 <h1 className="h1">{SITE.name}</h1>
                 <p className="lede homeRole">{SITE.title}</p>
-                <p className="homeRoleNote">Platform systems • Compliance-aware delivery • AI workflow systems</p>
               </div>
             </div>
             <p className="lede homeLede">
