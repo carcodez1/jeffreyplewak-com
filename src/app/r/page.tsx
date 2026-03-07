@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SITE } from "@/config/site";
 import { RESUME } from "@/content/resume";
 import { buildResumeStats, buildResumeWorkTypeStats, getRecruiterPackLinks } from "@/lib/resume";
-import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images";
+import { RECRUITER_OG_IMAGES, RECRUITER_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 const KPROVENGINE_LINKS = {
   proof: "/projects/kprovengine",
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     description:
       "Start here for a recruiter-focused view of platform systems, compliance-aware delivery, and the KProvEngine case study.",
     url: "/r",
-    images: DEFAULT_OG_IMAGES,
+    images: RECRUITER_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: `Recruiter Decision Page — ${SITE.name}`,
     description:
       "Start here for a recruiter-focused view of platform systems, compliance-aware delivery, and the KProvEngine case study.",
-    images: DEFAULT_TWITTER_IMAGES,
+    images: RECRUITER_TWITTER_IMAGES,
   },
 };
 
@@ -69,7 +69,7 @@ export default function RecruiterPage() {
 
           <nav className="ctaRow recruiterHeroActions" aria-label="Recruiter actions">
             <Link className="btn btnPrimary recruiterHeroPrimary" href="/resume">
-              View Resume
+              Resume
             </Link>
             {recruiterPackPrimaryLink ? (
               <a
@@ -78,7 +78,7 @@ export default function RecruiterPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Recruiter Pack
+                Open Bundle
               </a>
             ) : null}
           </nav>

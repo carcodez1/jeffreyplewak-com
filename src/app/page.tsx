@@ -71,7 +71,7 @@ export default function HomePage() {
             </p>
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">
-                View Resume
+                Resume
               </Link>
               <Link className="btn btnTertiary" href="/r">
                 For Recruiters

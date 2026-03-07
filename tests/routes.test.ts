@@ -25,15 +25,15 @@ describe("routes", () => {
     expect(doc.querySelector("h1")?.textContent).toBe("Start here for a quick review.");
     expect(doc.body.textContent).toContain("Start here for a quick review.");
     expect(doc.body.textContent).toContain("Fast recruiter facts");
-    expect(doc.body.textContent).toContain("Open Resume first");
+    expect(doc.body.textContent).toContain("Resume first");
     expect(doc.body.textContent).toMatch(/\d+\+ years in production engineering/);
-    expect(doc.body.textContent).toContain("Recruiter Pack is available for utility files and copy-paste handoff.");
-    expect(doc.body.textContent).toContain("Open Recruiter Pack");
+    expect(doc.body.textContent).toContain("Recruiter Pack is available for copy-paste files and downloads.");
+    expect(doc.body.textContent).toContain("Open Bundle");
     expect(doc.body.textContent).toContain("KProvEngine");
 
     const links = Array.from(doc.querySelectorAll("a"));
-    expect(links.some((a) => a.getAttribute("href") === "/resume" && a.textContent?.includes("Open Resume"))).toBe(true);
-    expect(links.some((a) => a.textContent?.includes("Open Recruiter Pack"))).toBe(true);
+    expect(links.some((a) => a.getAttribute("href") === "/resume" && a.textContent?.includes("Resume"))).toBe(true);
+    expect(links.some((a) => a.textContent?.includes("Open Bundle"))).toBe(true);
     expect(links.some((a) => a.getAttribute("href") === "/projects/kprovengine")).toBe(true);
 
     const recruiterActions = Array.from(doc.querySelectorAll('nav[aria-label="Recruiter actions"] a')).map((a) => ({
@@ -41,8 +41,8 @@ describe("routes", () => {
       text: a.textContent,
     }));
     expect(recruiterActions[0]?.href).toBe("/resume");
-    expect(recruiterActions[0]?.text).toContain("Open Resume");
-    expect(recruiterActions[1]?.text).toContain("Open Recruiter Pack");
+    expect(recruiterActions[0]?.text).toContain("Resume");
+    expect(recruiterActions[1]?.text).toContain("Open Bundle");
     expect(recruiterActions[1]?.href).toBe("/downloads/recruiter-pack/index.html");
     expect(recruiterActions).toHaveLength(2);
 

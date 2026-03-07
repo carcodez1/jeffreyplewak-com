@@ -3,7 +3,7 @@ import Image from "next/image";
 import { SITE } from "@/config/site";
 import { RESUME, type ResumeRole } from "@/content/resume";
 import { DownloadMenu } from "@/app/components/DownloadMenu";
-import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images";
+import { RESUME_OG_IMAGES, RESUME_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 export const metadata: Metadata = {
   title: `Resume — ${SITE.name}`,
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     title: `Resume — ${SITE.name}`,
     description: `Résumé and experience for ${SITE.name}.`,
     url: "/resume",
-    images: DEFAULT_OG_IMAGES,
+    images: RESUME_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: `Resume — ${SITE.name}`,
     description: `Résumé and experience for ${SITE.name}.`,
-    images: DEFAULT_TWITTER_IMAGES,
+    images: RESUME_TWITTER_IMAGES,
   },
 };
 
@@ -92,7 +92,6 @@ export default function ResumePage() {
       <section className="section" aria-label="Experience">
         <h2 className="resumeSectionHead">Timeline</h2>
         <p className="cardDesc resumeExperienceNote">Most recent first. Expand any role for highlights and technologies.</p>
-        <p className="resumeFlowHint">Tip: select any row to expand details.</p>
         <div className="resumeTimeline" aria-label="Full experience timeline (server-rendered)">
           {yearGroups.map((group) => (
             <section key={group.year} className="resumeYearGroup" aria-labelledby={`year-${group.year}`}>

@@ -440,6 +440,14 @@
 }
 
 @media (max-width: 520px) {
+  .resumeHeaderActions {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+
   .resumeTimeline {
     padding-left: 10px;
   }
@@ -493,7 +501,7 @@
   }
 
   .resumeRoleExpandHint {
-    margin-left: 0;
+    display: none;
   }
 
   .resumeEmployerLogoChip {

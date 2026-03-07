@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/config/site";
-import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images";
+import { PROJECTS_OG_IMAGES, PROJECTS_TWITTER_IMAGES } from "@/lib/metadata/images";
 
 export const metadata: Metadata = {
   title: `Projects — ${SITE.name}`,
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     title: `Projects — ${SITE.name}`,
     description: "Selected projects and proof-linked engineering work.",
     url: "/projects",
-    images: DEFAULT_OG_IMAGES,
+    images: PROJECTS_OG_IMAGES,
   },
   twitter: {
     card: "summary_large_image",
     title: `Projects — ${SITE.name}`,
     description: "Selected projects and proof-linked engineering work.",
-    images: DEFAULT_TWITTER_IMAGES,
+    images: PROJECTS_TWITTER_IMAGES,
   },
 };
 
