@@ -67,14 +67,14 @@ export default function HomePage() {
               </div>
             </div>
             <p className="lede homeLede">
-              I build <span className="homeInlineEm">production-ready platform and backend systems</span> for regulated, high-reliability environments.
+              I build <span className="homeInlineEm">reliable platform and backend systems</span> for regulated environments.
             </p>
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">
-                Open Resume
+                View Resume
               </Link>
-              <Link className="btn btnSecondaryStrong" href="/r">
-                Open Recruiter Page
+              <Link className="btn btnTertiary" href="/r">
+                For Recruiters
               </Link>
             </nav>
           </div>

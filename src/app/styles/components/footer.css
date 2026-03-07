@@ -33,16 +33,6 @@
 .footerSub  { margin: 0; color: var(--muted); max-width: 56ch; }
 .footerHint { margin: 0; color: var(--muted2); font-size: var(--text1); }
 
-.footerCtas  { display: flex; flex-wrap: wrap; gap: 10px; }
-.footerIcons { display: flex; flex-wrap: wrap; gap: 8px; }
-.footerUtilities {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-}
-.footerDownloadMenu { display: inline-flex; }
-
 .footerAddr { margin: 0; font-style: normal; }
 
 .footerLinksStack {
@@ -70,10 +60,6 @@
   opacity: 0.9;
 }
 
-.footerUtilityLink::before {
-  content: none;
-}
-
 .footerLink:hover,
 .footerLink:focus-visible {
   color: hsl(var(--accent));
@@ -91,7 +77,4 @@
 
 @media (max-width: 980px) {
   .siteFooterInner { grid-template-columns: 1fr; }
-  .footerUtilities {
-    gap: 10px;
-  }
 }

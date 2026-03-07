@@ -108,6 +108,8 @@
   display: flex;
   justify-content: flex-end;
   opacity: 0.92;
+  max-width: 360px;
+  margin-left: auto;
 }
 
 .homeHeroLeft :where(p, .homeLede, .lede) { max-width: 58ch; }
@@ -170,7 +172,7 @@
 }
 
 .homePrimaryActions {
-  margin-top: 14px;
+  margin-top: 12px;
   align-items: center;
 }
 
@@ -236,6 +238,15 @@
 .homeSupportBand {
   margin-top: 0;
   margin-bottom: clamp(20px, 3vw, 34px);
+}
+
+@media (max-width: 980px) {
+  .homeHeroRight {
+    max-width: 320px;
+    justify-content: center;
+    margin-inline: auto;
+    opacity: 1;
+  }
 }
 
 @media (max-width: 980px) {

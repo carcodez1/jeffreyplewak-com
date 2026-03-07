@@ -2,9 +2,7 @@
 // Server Component: Zero JS, static rendering, SEO/A11y oriented.
 
 import Link from "next/link";
-import { LINKS, SITE, SOCIALS, extLinkProps } from "@/config/site";
-import { SocialIcon } from "./SocialIcon";
-import { DownloadMenu } from "./DownloadMenu";
+import { LINKS, SITE, extLinkProps } from "@/config/site";
 
 const START_YEAR = 2026;
 
@@ -24,33 +22,6 @@ export function SiteFooter() {
             {SITE.name}
           </h3>
           <p className="footerSub">{SITE.footerBlurb}</p>
-
-          <div className="footerCtas" aria-label="Primary actions">
-            <Link className="btn btnPrimary" href="/resume">
-              Open Resume
-            </Link>
-          </div>
-
-          <nav className="footerIcons" aria-label="Social links">
-            {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
-              <a
-                key={s.key}
-                className={`iconBtn iconBtn--${s.key}`}
-                href={s.href}
-                aria-label={s.label}
-                {...extLinkProps(s.external)}
-              >
-                <SocialIcon src={s.icon} title={s.label} className="icon--social" />
-              </a>
-            ))}
-          </nav>
-
-          <div className="footerUtilities" aria-label="Support actions">
-            <DownloadMenu compact className="footerDownloadMenu" label="Downloads" />
-            <a className="footerLink footerUtilityLink" href={LINKS.calendly} {...extLinkProps(true)}>
-              Schedule Call
-            </a>
-          </div>
 
           <div className="footerCopy">
             © {copyrightLine(year)} {SITE.name}. All rights reserved.
@@ -110,13 +81,6 @@ export function SiteFooter() {
               <Link className="footerLink" href="/privacy">
                 Privacy Policy
               </Link>
-            </li>
-          </ul>
-
-          <h4 className="footerHead footerHeadSpacer">Writing</h4>
-          <ul className="footerLinksStack" role="list">
-            <li>
-              <span className="footerHint">Blog (coming soon)</span>
             </li>
           </ul>
         </nav>

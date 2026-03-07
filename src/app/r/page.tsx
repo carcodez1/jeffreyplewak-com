@@ -63,24 +63,22 @@ export default function RecruiterPage() {
       <header className="section recruiterHero" aria-label="Recruiter overview">
         <div className="recruiterHeroPanel card">
           <p className="recruiterEyebrow">For recruiters</p>
-          <h1 className="h1 recruiterHeroTitle">Start here for a quick, honest review.</h1>
-          <p className="lede recruiterHeroLede">
-            Open Resume first. Recruiter Pack is available for utility files and copy-paste handoff.
-          </p>
+          <h1 className="h1 recruiterHeroTitle">Start here for a quick review.</h1>
+          <p className="lede recruiterHeroLede">Resume first. Recruiter Pack is available for copy-paste files and downloads.</p>
           <p className="cardDesc recruiterHeroSummary">{recruiterSummary}</p>
 
           <nav className="ctaRow recruiterHeroActions" aria-label="Recruiter actions">
             <Link className="btn btnPrimary recruiterHeroPrimary" href="/resume">
-              Open Resume
+              View Resume
             </Link>
             {recruiterPackPrimaryLink ? (
               <a
-                className="btn btnSecondaryStrong"
+                className="btn btnTertiary"
                 href={recruiterPackPrimaryLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open Recruiter Pack
+                Recruiter Pack
               </a>
             ) : null}
           </nav>
