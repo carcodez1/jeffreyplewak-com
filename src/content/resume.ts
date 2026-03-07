@@ -274,8 +274,7 @@ export const RESUME: ResumeData = {
       location: "McKinney, TX",
       logo: { src: "/assets/logos/raytheon.svg", width: 120, height: 32 },
       highlights: [
-        "Full-time software engineering role at Raytheon in McKinney, TX; contributed to defense software programs between two periods at Fidelity Investments.",
-        // TODO: Replace with 2-3 specific bullets describing your actual work here.
+        "Software engineering role at Raytheon in McKinney, TX.",
       ],
       technologies: [],
     },
