@@ -11,7 +11,7 @@ import { DEFAULT_OG_IMAGES, DEFAULT_TWITTER_IMAGES } from "@/lib/metadata/images
 export const metadata: Metadata = {
   title: `${SITE.name} — ${SITE.title}`,
   description:
-    "Recruiter-ready, evidence-backed professional identity platform for a senior software engineer and architect: canonical resume, proof-linked projects, and machine-readable clarity without spam.",
+    "Recruiter-ready, evidence-backed professional identity platform for a senior software engineer focused on platform systems, compliance-aware delivery, and production-grade engineering.",
   keywords: [
     "senior software engineer portfolio",
     "software architect portfolio",
@@ -63,11 +63,11 @@ export default function HomePage() {
               <div className="homeIdText">
                 <h1 className="h1">{SITE.name}</h1>
                 <p className="lede homeRole">{SITE.title}</p>
-                <p className="homeRoleNote">Backend • Platform • AI workflow systems</p>
+                <p className="homeRoleNote">Platform systems • Compliance-aware delivery • AI workflow systems</p>
               </div>
             </div>
             <p className="lede homeLede">
-              I build <span className="homeInlineEm">reliable backend and platform software</span> teams can run with confidence.
+              I build <span className="homeInlineEm">production-ready platform and backend systems</span> for regulated, high-reliability environments.
             </p>
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">

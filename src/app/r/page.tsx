@@ -56,7 +56,7 @@ export default function RecruiterPage() {
     recruiterPackLinks[0] ??
     null;
   const recruiterSummary =
-    "Senior software engineer with 10+ years delivering backend and platform software in regulated, high-reliability environments.";
+    "Senior software engineer with 10+ years delivering platform and backend systems in regulated, high-reliability environments, with emphasis on compliance-aware delivery and production correctness.";
 
   return (
     <div className="wrap recruiterPage">
