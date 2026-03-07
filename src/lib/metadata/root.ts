@@ -18,7 +18,7 @@ export const rootMetadata: Metadata = {
   publisher: "Jeffrey R. Plewak",
 
   title: {
-    default: "Jeffrey R. Plewak — Senior Software Engineer",
+    default: "Jeffrey R. Plewak — Senior Software Engineer — Platform, Compliance & Production Systems",
     template: "%s — Jeffrey R. Plewak",
   },
 
@@ -63,7 +63,7 @@ export const rootMetadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: "Jeffrey R. Plewak — Senior Software Engineer",
+    title: "Jeffrey R. Plewak — Senior Software Engineer — Platform, Compliance & Production Systems",
     description:
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     siteName: "Jeffrey R. Plewak",
@@ -73,7 +73,7 @@ export const rootMetadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Jeffrey R. Plewak — Senior Software Engineer",
+    title: "Jeffrey R. Plewak — Senior Software Engineer — Platform, Compliance & Production Systems",
     description:
       "Platform engineering, deterministic AI systems, and compliance-focused backend architecture.",
     images: DEFAULT_TWITTER_IMAGES,

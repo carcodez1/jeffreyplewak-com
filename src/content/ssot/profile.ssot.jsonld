@@ -21,7 +21,7 @@
     "constraints": "ssot:constraints"
   },
   "@type": "Person",
-  "@id": "https://jeffreyplewak.com/#jeffrey-r-plewak",
+  "@id": "https://www.jeffreyplewak.com/#jeffrey-r-plewak",
   "name": "Jeffrey R. Plewak",
   "jobTitle": "Senior Software Engineer — Platform, Compliance & Production Systems",
   "address": {
@@ -32,10 +32,10 @@
   },
   "email": "mailto:plewak.jeff@gmail.com",
   "telephone": "+1-919-402-6624",
-  "url": "https://jeffreyplewak.com/",
+  "url": "https://www.jeffreyplewak.com/",
   "sameAs": [
-    "LINKEDIN_URL_UNKNOWN",
-    "GITHUB_URL_UNKNOWN"
+    "https://www.linkedin.com/in/jeffreyplewak",
+    "https://github.com/carcodez1"
   ],
   "nationality": "US",
   "knowsAbout": [
@@ -56,7 +56,7 @@
   "hasPart": [
     {
       "@type": "CreativeWork",
-      "@id": "https://jeffreyplewak.com/#project-portfolio-site",
+      "@id": "https://www.jeffreyplewak.com/#project-portfolio-site",
       "name": "jeffreyplewak-com (Portfolio Site V1)",
       "description": "Static-first personal portfolio and project showcase. Minimal structure; recruiter-friendly; strong SEO defaults; performance and accessibility; low operational complexity.",
       "keywords": [
@@ -79,7 +79,7 @@
     },
     {
       "@type": "SoftwareSourceCode",
-      "@id": "https://jeffreyplewak.com/#project-support-agent",
+      "@id": "https://www.jeffreyplewak.com/#project-support-agent",
       "name": "Customer Support Agent",
       "description": "Deterministic multi-tool support workflow with RBAC, verification gates, HITL approval before mutation, and structured audit envelopes (timestamp, decision, action, actor, why).",
       "keywords": [
@@ -100,7 +100,7 @@
     },
     {
       "@type": "SoftwareSourceCode",
-      "@id": "https://jeffreyplewak.com/#project-kprovengine",
+      "@id": "https://www.jeffreyplewak.com/#project-kprovengine",
       "name": "KProvEngine",
       "description": "Governance-locked OSS core for deterministic execution and evidence-ready pipelines with identity guard, artifact guard, Python runtime policy, and CI parity (make preflight).",
       "keywords": [

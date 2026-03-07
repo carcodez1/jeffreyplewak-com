@@ -4,7 +4,7 @@ import { LINKS, SITE } from "@/config/site";
 export const SITE_URL = SITE.url;
 export const LINKEDIN_URL = LINKS.linkedin;
 export const GITHUB_URL = LINKS.github;
-export const PERSON_ID = `${SITE_URL.replace(/\/+$/, "")}/#person`;
+export const PERSON_ID = `${SITE_URL.replace(/\/+$/, "")}/#jeffrey-r-plewak`;
 export const WEBSITE_ID = `${SITE_URL.replace(/\/+$/, "")}/#website`;
 
 /**

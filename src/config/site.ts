@@ -3,7 +3,7 @@ export const SITE = {
   url: "https://www.jeffreyplewak.com",
   name: "Jeffrey R. Plewak",
   shortName: "Jeffrey",
-  title: "Senior Software Engineer",
+  title: "Senior Software Engineer — Platform, Compliance & Production Systems",
   locationLine: "Remote first • North Carolina",
   locale: "en_US",
   footerBlurb: "Senior Software Engineer. Platform, full stack, and compliance focused systems.",

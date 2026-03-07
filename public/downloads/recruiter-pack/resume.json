@@ -2,12 +2,12 @@
   "generatedBy": "scripts/ssot/export.mjs",
   "source": "src/content/ssot/profile.ssot.jsonld",
   "person": {
-    "id": "https://jeffreyplewak.com/#jeffrey-r-plewak",
+    "id": "https://www.jeffreyplewak.com/#jeffrey-r-plewak",
     "name": "Jeffrey R. Plewak",
     "jobTitle": "Senior Software Engineer — Platform, Compliance & Production Systems",
     "email": "mailto:plewak.jeff@gmail.com",
     "telephone": "+1-919-402-6624",
-    "url": "https://jeffreyplewak.com/",
+    "url": "https://www.jeffreyplewak.com/",
     "locality": "New Bern",
     "region": "NC",
     "country": "US"
@@ -37,7 +37,7 @@
     ],
     "projects": [
       {
-        "id": "https://jeffreyplewak.com/#project-portfolio-site",
+        "id": "https://www.jeffreyplewak.com/#project-portfolio-site",
         "type": "CreativeWork",
         "name": "jeffreyplewak-com (Portfolio Site V1)",
         "description": "Static-first personal portfolio and project showcase. Minimal structure; recruiter-friendly; strong SEO defaults; performance and accessibility; low operational complexity.",
@@ -54,7 +54,7 @@
         "claimStatus": "SUPPORTED"
       },
       {
-        "id": "https://jeffreyplewak.com/#project-support-agent",
+        "id": "https://www.jeffreyplewak.com/#project-support-agent",
         "type": "SoftwareSourceCode",
         "name": "Customer Support Agent",
         "description": "Deterministic multi-tool support workflow with RBAC, verification gates, HITL approval before mutation, and structured audit envelopes (timestamp, decision, action, actor, why).",
@@ -69,7 +69,7 @@
         "claimStatus": "SUPPORTED"
       },
       {
-        "id": "https://jeffreyplewak.com/#project-kprovengine",
+        "id": "https://www.jeffreyplewak.com/#project-kprovengine",
         "type": "SoftwareSourceCode",
         "name": "KProvEngine",
         "description": "Governance-locked OSS core for deterministic execution and evidence-ready pipelines with identity guard, artifact guard, Python runtime policy, and CI parity (make preflight).",
