@@ -92,9 +92,6 @@ export function siteGraphJsonLd() {
 }
 
 export function kprovengineSourceCodeJsonLd() {
-  const base = baseUrl();
-  const personId = `${base}/#person`;
-
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
@@ -103,7 +100,7 @@ export function kprovengineSourceCodeJsonLd() {
       "Deterministic provenance pipelines for AI-assisted, human-reviewed workflows with local-first execution and audit-grade artifacts.",
     codeRepository: "https://github.com/carcodez1/KProvEngine",
     programmingLanguage: "Python",
-    author: { "@id": personId },
+    author: { "@id": PERSON_ID },
     // NOTE: keep or remove; you should only assert dates you can defend.
     datePublished: "2025-01-15",
     license: "https://github.com/carcodez1/KProvEngine/blob/main/LICENSE",
