@@ -31,12 +31,8 @@ function main() {
     fail("SSOT missing required field: name");
   }
 
-  if (!Array.isArray(ssot.skillsMap)) {
-    fail("SSOT missing required field: skillsMap[]");
-  }
-
   const statuses = new Set(
-    ssot.skillsMap.map((s) => String(s.claimStatus ?? "")),
+    (Array.isArray(ssot.skillsMap) ? ssot.skillsMap : []).map((s) => String(s.claimStatus ?? "")),
   );
   for (const status of statuses) {
     if (!["SUPPORTED", "UNKNOWN", "UNSUPPORTED"].includes(status)) {
@@ -54,6 +50,18 @@ function main() {
     );
     if (badSkillClaims.length > 0 || badProjectClaims.length > 0) {
       fail("Exported resume.json contains non-SUPPORTED claims.");
+    }
+
+    if (resume.resume) {
+      if (typeof resume.resume.summary !== "string" || resume.resume.summary.length === 0) {
+        fail("Exported resume.json missing resume.summary.");
+      }
+      if (typeof resume.resume.pdfHref !== "string" || resume.resume.pdfHref.length === 0) {
+        fail("Exported resume.json missing resume.pdfHref.");
+      }
+      if (!Array.isArray(resume.resume.roles)) {
+        fail("Exported resume.json missing resume.roles[].");
+      }
     }
   }
 

@@ -6,6 +6,8 @@ import path from "node:path";
 
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "..");
 const ssotPath = path.join(repoRoot, "src/content/ssot/profile.ssot.jsonld");
+const publicEmploymentPath = path.join(repoRoot, "src/content/employment.public.json");
+const publicResumePath = path.join(repoRoot, "src/content/resume.ts");
 const sourceResumePdf = path.join(repoRoot, "public/downloads/jeffrey-plewak-resume.pdf");
 const outDir = path.join(repoRoot, "public/downloads/recruiter-pack");
 const resumeOut = path.join(outDir, "resume.json");
@@ -30,8 +32,33 @@ function stableStringify(value) {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
+function readText(file) {
+  return fs.readFileSync(file, "utf8");
+}
+
 function isSupported(status) {
   return status === "SUPPORTED";
+}
+
+function readPublicResumeFields() {
+  const source = readText(publicResumePath);
+
+  const pdfHrefMatch = source.match(/pdfHref:\s*"([^"]+)"/);
+  const summaryMatch = source.match(/summary:\s*"([\s\S]*?)",\s*\n\s*roles,/);
+
+  if (!pdfHrefMatch) {
+    throw new Error(`Unable to extract pdfHref from ${publicResumePath}`);
+  }
+  if (!summaryMatch) {
+    throw new Error(`Unable to extract summary from ${publicResumePath}`);
+  }
+
+  const summary = JSON.parse(`"${summaryMatch[1].replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`);
+
+  return {
+    pdfHref: pdfHrefMatch[1],
+    summary,
+  };
 }
 
 function collectReferences(ssot) {
@@ -45,6 +72,8 @@ function collectReferences(ssot) {
 }
 
 function buildResume(ssot) {
+  const publicRoles = readJson(publicEmploymentPath);
+  const publicResume = readPublicResumeFields();
   const supportedSkills = (ssot.skillsMap ?? [])
     .filter((s) => isSupported(s.claimStatus))
     .map((s) => ({
@@ -83,6 +112,11 @@ function buildResume(ssot) {
     claims: {
       skills: supportedSkills,
       projects: supportedProjects,
+    },
+    resume: {
+      summary: publicResume.summary,
+      pdfHref: publicResume.pdfHref,
+      roles: Array.isArray(publicRoles) ? publicRoles : [],
     },
     references: collectReferences(ssot),
   };
