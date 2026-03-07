@@ -97,6 +97,15 @@ export default async function Page() {
                 Build runs
               </a>
             </nav>
+
+            <div className="pMetaRow" aria-label="Proof summary">
+              <ul className="pPillRow" role="list">
+                <li className="pPill">Deterministic runs</li>
+                <li className="pPill">Explicit human review</li>
+                <li className="pPill">Audit-grade artifacts</li>
+                <li className="pPill">SBOM / provenance / SLSA-aligned signals</li>
+              </ul>
+            </div>
           </div>
         </div>
       </header>
