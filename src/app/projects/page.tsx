@@ -54,7 +54,7 @@ export default function ProjectsPage() {
         <h1 className="h1">Projects</h1>
 
         <p className="lede">Proof-first project pages for fast technical review.</p>
-        <p className="cardDesc">Open KProvEngine for architecture, decisions, and source links.</p>
+        <p className="cardDesc">KProvEngine is the flagship proof surface for deterministic AI workflow delivery and reviewable build trust signals.</p>
 
         <ul className="projectsSignals" aria-label="Project focus areas">
           {systemsFocus.map((signal) => (
