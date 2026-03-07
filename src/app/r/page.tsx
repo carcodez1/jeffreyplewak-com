@@ -83,19 +83,11 @@ export default function RecruiterPage() {
                 Open Recruiter Pack
               </a>
             ) : null}
-            <Link className="btn btnTertiary" href={KPROVENGINE_LINKS.proof}>
-              Open KProvEngine
-            </Link>
           </nav>
-          <p className="recruiterFlowHint">
-            Flow: Resume first, Recruiter pack for copy-paste/downloads, KProvEngine for proof depth.
-          </p>
         </div>
       </header>
 
       <section className="section recruiterStatStripSection" aria-label="Fast recruiter facts">
-        <h2 className="resumeSectionHead">Quick profile</h2>
-        <p className="cardDesc recruiterQuickProfile">{recruiterSummary}</p>
         <h2 className="resumeSectionHead">Fast recruiter facts</h2>
         <div className="recruiterStatStrip" role="list">
           <p className="recruiterStatItem" role="listitem"><strong>{stats.years}+ years</strong> in production engineering</p>
