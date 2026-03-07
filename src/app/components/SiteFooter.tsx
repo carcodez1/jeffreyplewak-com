@@ -48,7 +48,7 @@ export function SiteFooter() {
           <div className="footerUtilities" aria-label="Support actions">
             <DownloadMenu compact className="footerDownloadMenu" label="Downloads" />
             <a className="footerLink footerUtilityLink" href={LINKS.calendly} {...extLinkProps(true)}>
-              Book Intro Call
+              Schedule Call
             </a>
           </div>
 

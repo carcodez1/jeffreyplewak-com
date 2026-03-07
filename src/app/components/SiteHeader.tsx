@@ -4,11 +4,18 @@ import { SocialIcon } from "./SocialIcon";
 import { MobileNav } from "./MobileNav";
 import { DownloadMenu } from "./DownloadMenu";
 
-const NAV = [
-  { href: "/projects", label: "Projects", external: false },
+const DESKTOP_NAV = [
   { href: "/resume", label: "Resume", external: false },
   { href: "/r", label: "Recruiter", external: false },
-  { href: `${LINKS.emailConsulting}?subject=Consulting%20Inquiry`, label: "Consulting (Email)", external: true },
+  { href: "/projects", label: "Projects", external: false },
+] as const;
+
+const MOBILE_PRIMARY = { href: "/resume", label: "Open Resume", external: false } as const;
+
+const MOBILE_NAV = [
+  { href: "/r", label: "Recruiter", external: false },
+  { href: "/projects", label: "Projects", external: false },
+  { href: `${LINKS.emailConsulting}?subject=Consulting%20Inquiry`, label: "Consulting", external: true },
 ] as const;
 
 export function SiteHeader() {
@@ -24,7 +31,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="siteNav" aria-label="Primary navigation">
-          {NAV.map((n) => (
+          {DESKTOP_NAV.map((n) => (
             n.external ? (
               <a
                 key={n.href}
@@ -42,18 +49,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="siteActions">
-          <div className="headerCtas">
-            <Link className="btn btnPrimary btnHeader" href="/resume" aria-label="Open resume page">
-              Open Resume
-            </Link>
-            <a className="btn btnHeader" href={LINKS.emailProject} aria-label="Email Jeff">
-              Email
-            </a>
-          </div>
-
-          <span className="headerDivider" aria-hidden="true" />
-
+        <div className="siteUtilities">
           <div className="headerIcons" aria-label="Social links">
             {SOCIALS.filter((s) => s.key !== "calendly").map((s) => (
               <a
@@ -69,9 +65,9 @@ export function SiteHeader() {
           </div>
 
           <DownloadMenu compact iconOnly className="headerDownloadMenu" label="Downloads" />
-
-          <MobileNav nav={NAV} />
         </div>
+
+        <MobileNav primaryAction={MOBILE_PRIMARY} nav={MOBILE_NAV} />
       </div>
     </header>
   );
