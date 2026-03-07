@@ -105,78 +105,78 @@ export default function ResumePage() {
                   const logoSrc = safeLogoSrc(r);
                   const isMostRecent = group.year === yearGroups[0]?.year && idx === 0;
                   return (
-                    <details
-                      key={r.id}
-                      id={r.id}
-                      className={`resumeRole panel resumeRoleDetails ${isMostRecent ? "resumeRole--featured" : ""}`}
-                      role="listitem"
-                      open={isMostRecent}
-                    >
-                      <summary className="resumeRoleSummary" aria-label={`${r.employerName} — ${r.title}`}>
-                        <div className="resumeRoleHead">
-                          <div className="resumeRoleTop">
-                            <div className="resumeEmployerRow">
-                              <h4 className="resumeRoleEmployer">{r.employerName}</h4>
-                              {logoSrc ? (
-                                <span className="resumeEmployerLogoChip">
-                                  <Image
-                                    src={logoSrc}
-                                    alt={`${r.employerName} logo`}
-                                    width={r.logo.width}
-                                    height={r.logo.height}
-                                    className="resumeEmployerLogo"
-                                    loading="lazy"
-                                  />
+                    <div key={r.id} role="listitem">
+                      <details
+                        id={r.id}
+                        className={`resumeRole panel resumeRoleDetails ${isMostRecent ? "resumeRole--featured" : ""}`}
+                        open={isMostRecent}
+                      >
+                        <summary className="resumeRoleSummary" aria-label={`${r.employerName} — ${r.title}`}>
+                          <div className="resumeRoleHead">
+                            <div className="resumeRoleTop">
+                              <div className="resumeEmployerRow">
+                                <h4 className="resumeRoleEmployer">{r.employerName}</h4>
+                                {logoSrc ? (
+                                  <span className="resumeEmployerLogoChip">
+                                    <Image
+                                      src={logoSrc}
+                                      alt={`${r.employerName} logo`}
+                                      width={r.logo.width}
+                                      height={r.logo.height}
+                                      className="resumeEmployerLogo"
+                                      loading="lazy"
+                                    />
+                                  </span>
+                                ) : null}
+                              </div>
+                              <div className="resumeRoleMeta">
+                                <time className="resumeRoleDates" dateTime={r.start}>
+                                  {roleRange(r)}
+                                </time>
+                                <span className={`resumeRoleType resumeRoleType--${r.workType.toLowerCase()}`}>
+                                  {r.workType}
                                 </span>
-                              ) : null}
+                              </div>
                             </div>
-                            <div className="resumeRoleMeta">
-                              <time className="resumeRoleDates" dateTime={r.start}>
-                                {roleRange(r)}
-                              </time>
-                              <span className={`resumeRoleType resumeRoleType--${r.workType.toLowerCase()}`}>
-                                {r.workType}
-                              </span>
-                            </div>
-                          </div>
 
-                          <div className="resumeRoleTitleRow">
-                            <div className="resumeRoleTitle">{r.title}</div>
-                            <div className="resumeRoleLocation">{r.location}</div>
-                            <span className="resumeRoleExpandHint" aria-hidden="true" />
+                            <div className="resumeRoleTitleRow">
+                              <div className="resumeRoleTitle">{r.title}</div>
+                              <div className="resumeRoleLocation">{r.location}</div>
+                              <span className="resumeRoleExpandHint" aria-hidden="true" />
+                            </div>
                           </div>
+                        </summary>
+
+                        <div className="resumeRoleBody">
+                          {employerHref ? (
+                            <div className="resumeRoleLinks" aria-label="Role links">
+                              <a className="btn btnSm btnPrimary" href={employerHref} target="_blank" rel="noopener noreferrer">
+                                Employer
+                              </a>
+                            </div>
+                          ) : null}
+                          <h5 className="resumeRoleSection">Key outcomes</h5>
+                          <ul className="resumeRoleList">
+                            {r.highlights.map((h) => (
+                              <li key={h}>{h}</li>
+                            ))}
+                          </ul>
+
+                          {r.technologies?.length ? (
+                            <>
+                              <h5 className="resumeRoleSection">Technologies</h5>
+                              <ul className="resumeRoleSkills" role="list">
+                                {r.technologies.map((t) => (
+                                  <li key={t} className="resumeSkill">
+                                    {t}
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          ) : null}
                         </div>
-                      </summary>
-
-                      <div className="resumeRoleBody">
-                        {employerHref ? (
-                          <div className="resumeRoleLinks" aria-label="Role links">
-                            <a className="btn btnSm btnPrimary" href={employerHref} target="_blank" rel="noopener noreferrer">
-                              Employer
-                            </a>
-                          </div>
-                        ) : null}
-                        <h5 className="resumeRoleSection">Key outcomes</h5>
-                        <ul className="resumeRoleList">
-                          {r.highlights.map((h) => (
-                            <li key={h}>{h}</li>
-                          ))}
-                        </ul>
-
-                        {r.technologies?.length ? (
-                          <>
-                            <h5 className="resumeRoleSection">Technologies</h5>
-                            <ul className="resumeRoleSkills" role="list">
-                              {r.technologies.map((t) => (
-                                <li key={t} className="resumeSkill">
-                                  {t}
-                                </li>
-                              ))}
-                            </ul>
-                          </>
-                        ) : null}
-                      </div>
-                    </details>
+                      </details>
+                    </div>
                   );
                 })}
               </div>

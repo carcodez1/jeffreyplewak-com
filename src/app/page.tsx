@@ -14,8 +14,9 @@ export const metadata: Metadata = {
     "Recruiter-ready, evidence-backed professional identity platform for a senior software engineer focused on platform systems, compliance-aware delivery, and production-grade engineering.",
   keywords: [
     "senior software engineer portfolio",
-    "software architect portfolio",
     "backend platform engineer",
+    "production systems engineer",
+    "compliance-aware engineering",
     "AI workflow systems",
     "resume",
     "recruiter page",
@@ -79,7 +80,7 @@ export default function HomePage() {
             </nav>
           </div>
 
-          <aside className="homeHeroRight" aria-label="Portrait">
+          <div className="homeHeroRight" aria-label="Portrait">
             <div className="homePortraitFrame">
               <Image
                 src={PORTRAIT_SRC}
@@ -90,7 +91,7 @@ export default function HomePage() {
                 priority
               />
             </div>
-          </aside>
+          </div>
         </div>
       </header>
 
