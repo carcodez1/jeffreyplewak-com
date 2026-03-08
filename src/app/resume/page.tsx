@@ -122,7 +122,7 @@ export default function ResumePage() {
                                       alt={`${r.employerName} logo`}
                                       width={r.logo.width}
                                       height={r.logo.height}
-                                      className="resumeEmployerLogo"
+                                      className={`resumeEmployerLogo${logoSrc.endsWith(".svg") ? " resumeEmployerLogo--svg" : ""}`}
                                       loading="lazy"
                                     />
                                   </span>

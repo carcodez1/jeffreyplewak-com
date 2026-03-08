@@ -12,6 +12,12 @@ function toStringValue(value: unknown): string {
   return "";
 }
 
+function toKeywordList(value: unknown): string[] {
+  if (Array.isArray(value)) return value.map((entry) => String(entry).toLowerCase());
+  if (typeof value === "string") return [value.toLowerCase()];
+  return [];
+}
+
 function assertRouteMetadataParity(label: string, metadata: Record<string, unknown>) {
   const title = toStringValue(metadata.title);
   const canonical = toStringValue((metadata.alternates as { canonical?: unknown } | undefined)?.canonical);
@@ -38,9 +44,9 @@ describe("route metadata parity", () => {
 
   it("removes stale architect positioning from root and home metadata", () => {
     const rootDescription = toStringValue(rootMetadata.description);
-    const rootKeywords = (rootMetadata.keywords ?? []).map((value) => String(value).toLowerCase());
+    const rootKeywords = toKeywordList(rootMetadata.keywords);
     const homeDescription = toStringValue(homeMetadata.description);
-    const homeKeywords = (homeMetadata.keywords ?? []).map((value) => String(value).toLowerCase());
+    const homeKeywords = toKeywordList(homeMetadata.keywords);
 
     expect(rootDescription.toLowerCase()).not.toContain("architect");
     expect(homeDescription.toLowerCase()).not.toContain("architect");

@@ -25,6 +25,10 @@
   padding-bottom: var(--sectionY);
 }
 
+.wrap.homePage {
+  padding-bottom: clamp(20px, 4vw, 40px);
+}
+
 /* ── Scroll target offset ── */
 :where(section[id], main[id], div[id]) {
   scroll-margin-top: calc(var(--headerH) + 20px);
@@ -207,6 +211,7 @@
 
 .homeBrandStrip {
   margin-top: 0;
+  margin-bottom: clamp(16px, 3vw, 26px);
 }
 
 .homeStatsStrip {
@@ -233,6 +238,7 @@
 
 .homeBrandTicker {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .homeSupportBand {

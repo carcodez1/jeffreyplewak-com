@@ -100,7 +100,7 @@ export default function HomePage() {
           <p className="homeStatItem" role="listitem"><strong>{stats.rolesCount} roles</strong> delivered</p>
           <p className="homeStatItem" role="listitem"><strong>{stats.uniqueEmployersCount} employers</strong> across finance, defense, and cloud</p>
         </div>
-        <ExperienceTicker interactive={false} className="homeBrandTicker" />
+        <ExperienceTicker interactive className="homeBrandTicker" />
       </section>
     </div>
   );
