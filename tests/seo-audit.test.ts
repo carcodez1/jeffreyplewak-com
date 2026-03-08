@@ -58,7 +58,7 @@ describe("seo audit guardrails", () => {
       "/assets/favicon/favicon-16x16.png",
       "/assets/favicon/favicon-32x32.png",
       "/projects/kprovengine/og.jpg",
-      "/projects/kprovengine/architecture.webp",
+      "/projects/kprovengine/architecture.svg",
     ];
 
     for (const p of required) {

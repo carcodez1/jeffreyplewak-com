@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import "../projects.css";
@@ -10,6 +11,7 @@ const KPROV_LINKS = {
   repo: "https://github.com/carcodez1/KProvEngine",
   readme: "https://github.com/carcodez1/KProvEngine#readme",
   actions: "https://github.com/carcodez1/KProvEngine/actions",
+  architecture: "/projects/kprovengine/architecture.svg",
 } as const;
 
 import { SITE_URL } from "@/lib/jsonld";
@@ -80,10 +82,12 @@ export default async function Page() {
               </span>
             </div>
 
-            <p className="pSub">Proof case study for human-reviewed AI workflow delivery.</p>
+            <p className="pSub">
+              KProvEngine turns each run into structured, reviewable evidence so teams can trust the process, not just the final output.
+            </p>
 
             <p className="pLede">
-              Minimal access page: open the repository and README directly.
+              I built it as a capstone around provenance, release trust, reproducibility, and reviewer-friendly evidence.
             </p>
 
             <nav className="pCtas" aria-label="Project links">
@@ -106,34 +110,141 @@ export default async function Page() {
                 <li className="pPill">SBOM / provenance / SLSA-aligned signals</li>
               </ul>
             </div>
+
+            <div className="pCard pCardTight depthFx" style={{ marginTop: "18px" }}>
+              <h2 className="pH2">Quick value</h2>
+              <ul className="pList pListMuted">
+                <li>Explains what happened in a run without digging through logs.</li>
+                <li>Produces evidence files a reviewer can inspect quickly.</li>
+                <li>Makes provenance and release trust visible in plain artifacts.</li>
+                <li>Keeps local execution and CI behavior aligned.</li>
+                <li>Shows practical supply-chain-aware engineering discipline.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </header>
 
-      <section className="pSection">
+      <section className="pSection" aria-label="What it solves">
         <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">What it solves</h2>
           <p className="pP0">
+            In real engineering environments, the risk often is not the final output. It is everything around it: inconsistent execution, weak traceability, and poor visibility into how an artifact was produced.
+          </p>
+          <ul className="pList pListMuted">
+            <li>Runtime behavior varies across environments</li>
+            <li>Artifact lineage is hard to reconstruct</li>
+            <li>Release trust signals are weak</li>
+            <li>Human- and AI-assisted workflows are hard to review after the fact</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="pSection" aria-label="What it does">
+        <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">What it does</h2>
+          <p className="pP0">
+            KProvEngine provides a deterministic pipeline with stable output contracts, explicit stages, and evidence files that make each run inspectable from start to finish.
+          </p>
+          <ul className="pList pListMuted">
+            <li>Deterministic CLI behavior with stable output contracts</li>
+            <li>A clear pipeline: normalize -&gt; parse -&gt; extract -&gt; render</li>
+            <li>Per-run evidence artifacts such as <code>run_summary.json</code>, <code>manifest.json</code>, <code>provenance.json</code>, and <code>human_review.json</code></li>
+            <li>Guardrails for identity, artifact hygiene, and Python version policy</li>
+            <li>CI parity and release discipline workflows</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="pSection" aria-label="Architecture">
+        <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">Architecture</h2>
+          <p className="pP0">
+            High-level view of the pipeline, reviewer checkpoints, and the evidence each run leaves behind.
+          </p>
+
+          <div className="pMedia" style={{ marginTop: "14px" }}>
+            <Image
+              src={KPROV_LINKS.architecture}
+              alt="KProvEngine architecture diagram showing workflow stages, review checkpoints, and evidence outputs."
+              width={1800}
+              height={1132}
+              className="pMediaImg"
+            />
+          </div>
+
+          <p className="pMuted pInlineNote">
+            The diagram keeps the workflow in the middle and the evidence surfaces around it, which is how the project is meant to be reviewed.
+          </p>
+        </div>
+      </section>
+
+      <section className="pSection" aria-label="Project proof details">
+        <div className="pGrid2">
+          <div className="pCard pCardTight depthFx">
+            <h2 className="pH2">What it produces</h2>
+            <ul className="pList pListMuted">
+              <li><code>run_summary.json</code> for execution summary</li>
+              <li><code>manifest.json</code> for produced artifacts</li>
+              <li><code>provenance.json</code> for workflow lineage</li>
+              <li><code>human_review.json</code> for reviewer checkpoints</li>
+            </ul>
+          </div>
+
+          <div className="pCard pCardTight depthFx">
+            <h2 className="pH2">Tech stack</h2>
+            <ul className="pList pListMuted">
+              <li>Python and CLI packaging for local-first execution</li>
+              <li>JSON output contracts for machine-readable review surfaces</li>
+              <li>GitHub Actions for CI and release checks</li>
+              <li><code>tox</code> and <code>make preflight</code> for local gate parity</li>
+              <li>MIT license for the open-source core</li>
+            </ul>
+          </div>
+
+          <div className="pCard pCardTight depthFx">
+            <h2 className="pH2">Technical highlights</h2>
+            <ul className="pList pListMuted">
+              <li>Deterministic exit codes and stable output contracts</li>
+              <li>Run-scoped evidence layout and review surfaces</li>
+              <li>Multi-version CI with coverage gates</li>
+              <li>Release discipline around stable public interfaces</li>
+            </ul>
+          </div>
+
+          <div className="pCard pCardTight depthFx">
+            <h2 className="pH2">Why this matters</h2>
+            <p className="pP0">
+              This project shows how I think about engineering quality: reproducible behavior, clear contracts, reviewable evidence, and release trust that holds up outside a demo.
+            </p>
+            <ul className="pList pListMuted pInlineNote">
+              <li>Reproducibility is treated as a product feature.</li>
+              <li>Traceability is visible in the artifacts, not implied in docs.</li>
+              <li>Reviewer-friendly evidence is built into the workflow itself.</li>
+              <li>Supply-chain-aware release discipline is part of the engineering model.</li>
+            </ul>
+          </div>
+
+          <div className="pCard pCardTight depthFx">
+            <h2 className="pH2">Open source model</h2>
+            <p className="pP0">
+              KProvEngine is published as an MIT-licensed open-source core with maintainer-led governance.
+            </p>
+            <p className="pMuted pInlineNote">
+              Changes flow through issues, pull requests, and local gates so public contract surfaces stay stable as the project evolves.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="pSection" aria-label="Outcome">
+        <div className="pCard pCardTight depthFx">
+          <h2 className="pH2">Outcome</h2>
+          <p className="pP0">
+            This capstone demonstrates production-minded software engineering: systems that can show what they did, under defined constraints, with reviewer-ready evidence.
+          </p>
+          <p className="pMuted pInlineNote">
             For full professional context, use <Link href="/resume">Resume</Link> or <Link href="/r">Recruiter Page</Link>.
-          </p>
-        </div>
-      </section>
-
-      <section className="pSection" aria-label="Supply-chain preview">
-        <div className="pCard pCardTight depthFx">
-          <h2 className="pH2">Build and trust preview</h2>
-          <p className="pP0">
-            GitHub links above provide a quick entry to repository activity. This page is a recruiter-facing proof surface, while SBOM,
-            provenance, and SLSA-aligned signals are reviewed in the source repository workflow context.
-          </p>
-        </div>
-      </section>
-
-      <section className="pSection" aria-label="LegalOps audit preview">
-        <div className="pCard pCardTight depthFx">
-          <h2 className="pH2">LegalOps and provenance audit preview</h2>
-          <p className="pP0">
-            Audit focus areas for handoff review: artifact provenance lineage, SBOM inventory, SLSA-aligned build provenance, and
-            explicit human-review checkpoints for legal and operations workflows.
           </p>
         </div>
       </section>

@@ -41,10 +41,10 @@ export default function ProjectsPage() {
   const previews = [
     {
       href: "/projects/kprovengine",
-      src: "/projects/kprovengine/architecture.webp",
+      src: "/projects/kprovengine/architecture.svg",
       alt: "KProvEngine architecture preview",
       title: "KProvEngine",
-      blurb: "Deterministic run stages, explicit human review, and audit-grade artifacts.",
+      blurb: "Deterministic workflow runs with reviewer-friendly evidence and release trust signals.",
     },
   ] as const;
 
