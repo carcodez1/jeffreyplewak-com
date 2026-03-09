@@ -4,7 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
-import { EXPERIENCE_LOGOS, type ExperienceLogo } from "@/config/experience";
+import { getCareerSurfaceLogos, type CareerSurfaceLogo } from "@/lib/career";
 
 // Two identical copies → -50% transform is always correct
 function twoPass<T>(items: readonly T[]): readonly T[] {
@@ -18,7 +18,7 @@ type ExperienceTickerProps = {
 };
 
 export function ExperienceTicker({ interactive = true, className }: ExperienceTickerProps) {
-  const items = useMemo(() => EXPERIENCE_LOGOS, []);
+  const items = useMemo(() => getCareerSurfaceLogos("homepageTicker"), []);
   const loopItems = useMemo(() => twoPass(items), [items]);
 
   if (!items.length) return null;
@@ -26,7 +26,7 @@ export function ExperienceTicker({ interactive = true, className }: ExperienceTi
   return (
     <div className={`expTicker ${interactive ? "" : "expTicker--static"} ${className ?? ""}`.trim()} aria-label="Experience across organizations">
       <div className="expTrack" aria-label="Scrolling logo track">
-        {loopItems.map((item: ExperienceLogo, index: number) => (
+        {loopItems.map((item: CareerSurfaceLogo, index: number) => (
           interactive ? (
             <Link
               key={`${item.key}-${index}`}
@@ -38,7 +38,7 @@ export function ExperienceTicker({ interactive = true, className }: ExperienceTi
               <Image
                 src={item.logoSrc}
                 alt={item.label}
-                className="expLogo"
+                className={`expLogo${item.logoSrc.endsWith(".svg") ? " expLogo--svg" : ""}`}
                 width={item.width ?? 96}
                 height={item.height ?? 28}
                 loading="lazy"
@@ -50,7 +50,7 @@ export function ExperienceTicker({ interactive = true, className }: ExperienceTi
               <Image
                 src={item.logoSrc}
                 alt={item.label}
-                className="expLogo"
+                className={`expLogo${item.logoSrc.endsWith(".svg") ? " expLogo--svg" : ""}`}
                 width={item.width ?? 96}
                 height={item.height ?? 28}
                 loading="lazy"

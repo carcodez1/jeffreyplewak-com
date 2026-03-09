@@ -236,7 +236,7 @@
 .resumeEmployerLogo {
   height: 20px;
   width: auto;
-  opacity: 0.98;
+  opacity: 0.96;
   flex: 0 0 auto;
   object-fit: contain;
 }
@@ -249,10 +249,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 30px;
-  padding: 4px 8px;
+  min-height: 34px;
+  padding: 6px 10px;
   border-radius: var(--rSm);
-  border: 1px solid color-mix(in srgb, var(--border2) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border2) 58%, transparent);
   background: linear-gradient(
     180deg,
     color-mix(in srgb, var(--surface2) 94%, white 6%),

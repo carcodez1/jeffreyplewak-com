@@ -4,6 +4,7 @@ import { SITE } from "@/config/site";
 import { RESUME, type ResumeRole } from "@/content/resume";
 import { DownloadMenu } from "@/app/components/DownloadMenu";
 import { RESUME_OG_IMAGES, RESUME_TWITTER_IMAGES } from "@/lib/metadata/images";
+import { getResumeLogoDisplay } from "@/lib/career";
 
 export const metadata: Metadata = {
   title: `Resume — ${SITE.name}`,
@@ -52,12 +53,6 @@ function safeExternalHref(href: string): string | null {
   return trimmed;
 }
 
-function safeLogoSrc(role: ResumeRole): string | null {
-  const src = role.logo?.src?.trim() ?? "";
-  if (!src || src.startsWith("TODO_") || src.includes("placeholder")) return null;
-  return src;
-}
-
 function groupRolesByStartYear(roles: readonly ResumeRole[]) {
   const groups = new Map<string, ResumeRole[]>();
   for (const role of roles) {
@@ -101,7 +96,7 @@ export default function ResumePage() {
               <div className="resumeRoles" role="list">
                 {group.roles.map((r, idx) => {
                   const employerHref = safeExternalHref(r.employerUrl);
-                  const logoSrc = safeLogoSrc(r);
+                  const logo = getResumeLogoDisplay(r);
                   const isMostRecent = group.year === yearGroups[0]?.year && idx === 0;
                   return (
                     <div key={r.id} role="listitem">
@@ -115,14 +110,14 @@ export default function ResumePage() {
                             <div className="resumeRoleTop">
                               <div className="resumeEmployerRow">
                                 <h4 className="resumeRoleEmployer">{r.employerName}</h4>
-                                {logoSrc ? (
+                                {logo ? (
                                   <span className="resumeEmployerLogoChip">
                                     <Image
-                                      src={logoSrc}
+                                      src={logo.src}
                                       alt={`${r.employerName} logo`}
-                                      width={r.logo.width}
-                                      height={r.logo.height}
-                                      className={`resumeEmployerLogo${logoSrc.endsWith(".svg") ? " resumeEmployerLogo--svg" : ""}`}
+                                      width={logo.width}
+                                      height={logo.height}
+                                      className={`resumeEmployerLogo${logo.tone === "light" ? " resumeEmployerLogo--svg" : ""}`}
                                       loading="lazy"
                                     />
                                   </span>

@@ -71,11 +71,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 34px;
   border-radius: var(--rSm);
-  padding: 8px 10px;
-  border: 1px solid transparent;
-  background: transparent;
-  opacity: 0.9;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--border2) 58%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 94%, white 6%),
+    color-mix(in srgb, var(--surface1) 88%, white 4%)
+  );
+  box-shadow:
+    inset 0 1px 0 hsla(0 0% 100% / 0.06),
+    0 0 0 1px hsla(0 0% 100% / 0.02);
+  opacity: 0.96;
   transition:
     opacity      var(--tFast) var(--ease),
     transform    var(--tFast) var(--ease),
@@ -86,8 +94,12 @@
 .expStripe:hover {
   opacity: 1;
   transform: translateY(-2px);
-  border-color: var(--border1);
-  background: var(--surface2);
+  border-color: color-mix(in srgb, var(--border2) 78%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 100%, white 8%),
+    color-mix(in srgb, var(--surface1) 92%, white 6%)
+  );
 }
 
 .expTicker--static .expStripe {
@@ -96,8 +108,12 @@
 
 .expTicker--static .expStripe:hover {
   transform: none;
-  border-color: transparent;
-  background: transparent;
+  border-color: color-mix(in srgb, var(--border2) 58%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface2) 94%, white 6%),
+    color-mix(in srgb, var(--surface1) 88%, white 4%)
+  );
 }
 
 .expStripe:focus-visible {
@@ -110,12 +126,15 @@
 
 /* Logo image — invert to white on dark */
 .expLogo {
-  height: 26px;
+  height: 20px;
   width: auto;
   display: block;
-  filter: var(--iconFilter);
   opacity: 0.96;
   transition: transform var(--tFast) var(--ease), opacity var(--tFast) var(--ease);
+}
+
+.expLogo--svg {
+  filter: var(--iconFilter);
 }
 
 .expStripe:hover .expLogo,

@@ -1,5 +1,6 @@
 // src/lib/resume.ts
 import { RESUME, type ResumeRole } from "@/content/resume";
+import { getResumeLogoDisplay, getRoleResumeHref } from "@/lib/career";
 
 export type ExperienceStripItem = {
   key: string; // employerKey (string SSOT)
@@ -75,10 +76,6 @@ function uniqueNewestRolePerEmployer(roles: readonly ResumeRole[]): ResumeRole[]
   return out;
 }
 
-function isTodoPath(p: string | undefined): boolean {
-  return !!p && (p.startsWith("TODO_") || p.includes("TODO_") || p.includes("TODO/") || p.includes("TODO_"));
-}
-
 function filterAvailableLinks(
   items: readonly ResumeDownloadLink[],
   hasFile: (href: string) => boolean,
@@ -135,28 +132,31 @@ export function getResumeEvidenceLinks(hasFile: (href: string) => boolean): read
 export function getExperienceStripItems(): readonly ExperienceStripItem[] {
   const roles = uniqueNewestRolePerEmployer(RESUME.roles);
 
-  return roles.map((r) => ({
-    key: r.employerKey,
-    name: r.employerName,
-    href: r.employerUrl || undefined,
+  return roles.map((r) => {
+    const logo = getResumeLogoDisplay(r);
 
-    // Do not render TODO logo paths (avoid runtime/image errors).
-    logoSrc: isTodoPath(r.logo?.src) ? undefined : r.logo?.src,
-    logoWidth: r.logo?.width,
-    logoHeight: r.logo?.height,
+    return {
+      key: r.employerKey,
+      name: r.employerName,
+      href: r.employerUrl || undefined,
+      logoSrc: logo?.src,
+      logoWidth: logo?.width,
+      logoHeight: logo?.height,
+      logoTone: logo?.tone,
 
-    resume: {
-      id: r.id,
-      pageHref: `/resume#${r.id}`,
-      pdfHref: RESUME.pdfHref,
-      title: r.title,
-      location: r.location,
-      workType: r.workType,
-      start: r.start,
-      end: r.end,
-    },
+      resume: {
+        id: r.id,
+        pageHref: getRoleResumeHref(r),
+        pdfHref: RESUME.pdfHref,
+        title: r.title,
+        location: r.location,
+        workType: r.workType,
+        start: r.start,
+        end: r.end,
+      },
 
-    highlights: r.highlights,
-    technologies: r.technologies,
-  }));
+      highlights: r.highlights,
+      technologies: r.technologies,
+    };
+  });
 }

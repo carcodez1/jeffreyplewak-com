@@ -61,7 +61,7 @@ const criticalAssets = [
   "public/assets/favicon/favicon-16x16.png",
   "public/assets/favicon/favicon-32x32.png",
   "public/projects/kprovengine/og.jpg",
-  "public/projects/kprovengine/architecture.webp",
+  "public/projects/kprovengine/architecture.svg",
 ];
 
 for (const relPath of criticalAssets) {
@@ -72,7 +72,7 @@ for (const relPath of criticalAssets) {
 const imageBudgetChecks = [
   { relPath: "public/og-image.jpg", maxBytes: 180_000 },
   { relPath: "public/projects/kprovengine/og.jpg", maxBytes: 220_000 },
-  { relPath: "public/projects/kprovengine/architecture.webp", maxBytes: 350_000 },
+  { relPath: "public/projects/kprovengine/architecture.svg", maxBytes: 350_000 },
 ];
 
 for (const budget of imageBudgetChecks) {

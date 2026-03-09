@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-06T20:37:38.512Z",
+  "generatedAt": "2026-03-09T00:46:15.763Z",
   "score": {
     "passed": 45,
     "total": 45,
@@ -61,8 +61,8 @@
       "details": "ok"
     },
     {
-      "id": "asset:public/projects/kprovengine/architecture.webp",
-      "description": "Critical asset exists: public/projects/kprovengine/architecture.webp",
+      "id": "asset:public/projects/kprovengine/architecture.svg",
+      "description": "Critical asset exists: public/projects/kprovengine/architecture.svg",
       "pass": true,
       "details": "ok"
     },
@@ -288,19 +288,19 @@
       "id": "perf:public/og-image.jpg",
       "description": "Image budget <= 180000 bytes for public/og-image.jpg",
       "pass": true,
-      "details": "41319 bytes"
+      "details": "64201 bytes"
     },
     {
       "id": "perf:public/projects/kprovengine/og.jpg",
       "description": "Image budget <= 220000 bytes for public/projects/kprovengine/og.jpg",
       "pass": true,
-      "details": "84070 bytes"
+      "details": "37422 bytes"
     },
     {
-      "id": "perf:public/projects/kprovengine/architecture.webp",
-      "description": "Image budget <= 350000 bytes for public/projects/kprovengine/architecture.webp",
+      "id": "perf:public/projects/kprovengine/architecture.svg",
+      "description": "Image budget <= 350000 bytes for public/projects/kprovengine/architecture.svg",
       "pass": true,
-      "details": "44824 bytes"
+      "details": "276664 bytes"
     },
     {
       "id": "perf:heavy-public-images",
