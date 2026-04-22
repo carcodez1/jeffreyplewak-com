@@ -5,6 +5,7 @@ import { metadata as homeMetadata } from "@/app/page";
 import { metadata as resumeMetadata } from "@/app/resume/page";
 import { metadata as recruiterMetadata } from "@/app/r/page";
 import { metadata as projectsMetadata } from "@/app/projects/page";
+import { metadata as codexMetadata } from "@/app/projects/codex/page";
 import { metadata as kprovMetadata } from "@/app/projects/kprovengine/page";
 import { SITE } from "@/config/site";
 import { siteGraphJsonLd } from "@/lib/jsonld";
@@ -51,6 +52,7 @@ describe("seo route contract", () => {
       resumeMetadata,
       recruiterMetadata,
       projectsMetadata,
+      codexMetadata,
       kprovMetadata,
     ];
 
@@ -73,6 +75,7 @@ describe("seo route contract", () => {
         `${SITE.url}/resume#page`,
         `${SITE.url}/r#page`,
         `${SITE.url}/projects#page`,
+        `${SITE.url}/projects/codex#page`,
         `${SITE.url}/projects/kprovengine#page`,
       ]),
     );

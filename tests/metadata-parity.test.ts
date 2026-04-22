@@ -3,6 +3,7 @@ import { metadata as homeMetadata } from "@/app/page";
 import { metadata as resumeMetadata } from "@/app/resume/page";
 import { metadata as recruiterMetadata } from "@/app/r/page";
 import { metadata as projectsMetadata } from "@/app/projects/page";
+import { metadata as codexMetadata } from "@/app/projects/codex/page";
 import { metadata as kprovMetadata } from "@/app/projects/kprovengine/page";
 import { rootMetadata } from "@/lib/metadata/root";
 
@@ -39,6 +40,7 @@ describe("route metadata parity", () => {
     assertRouteMetadataParity("resume", resumeMetadata as Record<string, unknown>);
     assertRouteMetadataParity("recruiter", recruiterMetadata as Record<string, unknown>);
     assertRouteMetadataParity("projects", projectsMetadata as Record<string, unknown>);
+    assertRouteMetadataParity("codex", codexMetadata as Record<string, unknown>);
     assertRouteMetadataParity("kprovengine", kprovMetadata as Record<string, unknown>);
   });
 

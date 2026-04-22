@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 import { siteGraphJsonLd } from "@/lib/jsonld";
+import { isPublicProductionObservabilityEnv } from "@/lib/observability";
 import { getNonce } from "@/lib/nonce";
 import { SiteHeader } from "@/app/components/SiteHeader";
 import { SiteFooter } from "@/app/components/SiteFooter";
@@ -11,6 +12,7 @@ import { Haptics } from "@/app/components/Haptics";
 import { BackgroundMotion } from "@/app/components/BackgroundMotion";
 import { BackgroundFx } from "@/app/components/BackgroundFx";
 import { ScrollReveal } from "@/app/components/ScrollReveal";
+import { Observability } from "@/app/components/Observability";
 
 export { rootMetadata as metadata } from "@/lib/metadata/root";
 
@@ -26,6 +28,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const nonce = await getNonce();
   const nonceAttr = nonce || undefined;
+  const observabilityEnabled = isPublicProductionObservabilityEnv();
 
   return (
     <html lang="en" className="no-js" suppressHydrationWarning>
@@ -80,6 +83,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         </main>
 
         <SiteFooter />
+        {observabilityEnabled ? <Observability /> : null}
       </body>
     </html>
   );
