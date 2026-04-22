@@ -25,7 +25,8 @@ export default function TermsPage() {
         </p>
         <p className="muted">
           Downloadable resume files, recruiter-pack artifacts, and contact-card exports are provided for professional
-          evaluation, recruiting, and standard business contact use.
+          evaluation, recruiting, and standard business contact use. These materials should be treated as current only
+          as of the version you downloaded.
         </p>
 
         <h2 className="h3">2. Intellectual property</h2>

@@ -163,6 +163,28 @@
   font-weight: 700;
 }
 
+.homeHeroMiniStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 0;
+}
+
+.homeHeroMiniStat {
+  margin: 0;
+  padding: 7px 9px;
+  border-radius: var(--rSm);
+  border: 1px solid color-mix(in srgb, var(--border1) 74%, transparent);
+  background: color-mix(in srgb, var(--surface1) 70%, transparent);
+  color: var(--muted);
+  font-size: var(--text0);
+  line-height: 1.35;
+}
+
+.homeHeroMiniStat strong {
+  color: var(--text);
+}
+
 .heroHome .ctaRow {
   margin-top: 10px;
   margin-bottom: 8px;

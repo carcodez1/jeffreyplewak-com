@@ -50,6 +50,7 @@ export default function HomePage() {
       <header className="section heroHome" aria-label="Introduction">
         <div className="homeHeroGrid">
           <div className="homeHeroLeft homeHeroShell">
+            <p className="homeEyebrow">Platform systems · regulated delivery · AI workflow proof</p>
             <div className="homeIdRow">
               <div className="homeAvatar" aria-hidden="true">
                 <Image
@@ -67,8 +68,13 @@ export default function HomePage() {
               </div>
             </div>
             <p className="lede homeLede">
-              I build <span className="homeInlineEm">reliable platform and backend systems</span> for regulated environments.
+              I build <span className="homeInlineEm">reliable platform and backend systems</span> with deployment safety,
+              observability, and reviewable delivery paths for regulated environments.
             </p>
+            <div className="homeHeroMiniStats" role="list" aria-label="Homepage proof points">
+              <p className="homeHeroMiniStat" role="listitem"><strong>{stats.years}+ years</strong> production engineering</p>
+              <p className="homeHeroMiniStat" role="listitem"><strong>{stats.uniqueEmployersCount} employers</strong> finance, defense, cloud</p>
+            </div>
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
               <Link className="btn btnPrimary" href="/resume">
                 Resume

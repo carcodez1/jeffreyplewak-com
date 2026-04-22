@@ -36,15 +36,17 @@ export default function PrivacyPage() {
         <p className="muted">
           Analytics and performance data are used in a privacy-conscious way to understand which pages are useful, where
           traffic comes from, and how the site performs in real browsers. The goal is aggregate usage and performance
-          insight, not ad targeting or cross-site profiling. Any operational logs are used for security, debugging, and
-          reliability. If you email, your message is used solely to respond to your inquiry.
+          insight, not ad targeting or cross-site profiling. Analytics events are filtered for download paths before
+          they are sent, including resume files and recruiter-pack artifacts. Any operational logs are used for security,
+          debugging, and reliability. If you email, your message is used solely to respond to your inquiry.
         </p>
 
         <h2 className="h3">4. Public downloads and contact data</h2>
         <p className="muted">
           This site intentionally offers downloadable resume and recruiter materials, including machine-readable exports
           and contact files, for professional evaluation and recruiting workflows. Those files may include public
-          professional contact details such as email, phone number, and location.
+          professional contact details such as email, phone number, and location. Download links are ordinary static
+          files; the site does not use analytics events to profile which resume or recruiter-pack files you open.
         </p>
 
         <h2 className="h3">5. Sharing</h2>

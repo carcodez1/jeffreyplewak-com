@@ -120,12 +120,15 @@ describe("routes", () => {
     expect(privacyDoc.body.textContent).toContain("machine-readable exports");
     expect(privacyDoc.body.textContent).toContain("email, phone number, and location");
     expect(privacyDoc.body.textContent).toContain("aggregate usage and performance insight");
+    expect(privacyDoc.body.textContent).toContain("filtered for download paths");
+    expect(privacyDoc.body.textContent).toContain("does not use analytics events to profile");
 
     expect(termsDoc.querySelector("h1")?.textContent).toBe("Terms of Service");
     expect(termsDoc.body.textContent).toContain("Effective date: 2026-02-28");
     expect(termsDoc.body.textContent).toContain("professional portfolio and informational site");
     expect(termsDoc.body.textContent).toContain("recruiter-pack artifacts");
     expect(termsDoc.body.textContent).toContain("professional evaluation, recruiting, and standard business contact use");
+    expect(termsDoc.body.textContent).toContain("current only as of the version you downloaded");
     expect(termsDoc.body.textContent).toContain("current, available, or error-free");
   });
 

@@ -16,7 +16,7 @@ const BLOCKED_PATH_PREFIXES = [
   "/_next",
   "/_vercel",
   "/__vitest",
-  "/downloads/recruiter-pack",
+  "/downloads",
 ] as const;
 
 function matchesBlockedPrefix(pathname: string): boolean {

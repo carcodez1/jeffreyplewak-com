@@ -23,6 +23,8 @@ describe("observability guards", () => {
     expect(filterObservabilityEvent({ type: "pageview", url: "/api/health" })).toBeNull();
     expect(filterObservabilityEvent({ type: "pageview", url: "/admin" })).toBeNull();
     expect(filterObservabilityEvent({ type: "pageview", url: "/private/dashboard" })).toBeNull();
+    expect(filterObservabilityEvent({ type: "pageview", url: "/downloads/jeffrey-plewak-resume.pdf" })).toBeNull();
+    expect(filterObservabilityEvent({ type: "pageview", url: "/downloads/resume.json" })).toBeNull();
     expect(filterObservabilityEvent({ type: "pageview", url: "/downloads/recruiter-pack/index.html" })).toBeNull();
     expect(filterObservabilityEvent({ type: "vital", url: "/_vercel/speed-insights/script.js" })).toBeNull();
   });
