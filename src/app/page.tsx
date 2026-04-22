@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { SITE } from "@/config/site";
+import { LINKS, SITE } from "@/config/site";
 import { RESUME } from "@/content/resume";
 import { buildResumeStats } from "@/lib/resume";
 import { ExperienceTicker } from "@/app/components/ExperienceTicker";
@@ -50,7 +50,6 @@ export default function HomePage() {
       <header className="section heroHome" aria-label="Introduction">
         <div className="homeHeroGrid">
           <div className="homeHeroLeft homeHeroShell">
-            <p className="homeEyebrow">Platform systems · regulated delivery · AI workflow proof</p>
             <div className="homeIdRow">
               <div className="homeAvatar" aria-hidden="true">
                 <Image
@@ -64,25 +63,32 @@ export default function HomePage() {
 
               <div className="homeIdText">
                 <h1 className="h1">{SITE.name}</h1>
-                <p className="lede homeRole">{SITE.title}</p>
+                <p className="lede homeRole">Senior/Staff Software Engineer — Platform, Compliance & Production Systems</p>
               </div>
             </div>
             <p className="lede homeLede">
-              I build <span className="homeInlineEm">reliable platform and backend systems</span> with deployment safety,
-              observability, and reviewable delivery paths for regulated environments.
+              I build <span className="homeInlineEm">reliable platform and backend systems</span> for regulated
+              environments, with strong deployment safety, observability, and reviewable delivery paths across finance,
+              defense, and cloud.
             </p>
-            <div className="homeHeroMiniStats" role="list" aria-label="Homepage proof points">
-              <p className="homeHeroMiniStat" role="listitem"><strong>{stats.years}+ years</strong> production engineering</p>
-              <p className="homeHeroMiniStat" role="listitem"><strong>{stats.uniqueEmployersCount} employers</strong> finance, defense, cloud</p>
-            </div>
             <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
-              <Link className="btn btnPrimary" href="/resume">
-                Resume
-              </Link>
-              <Link className="btn btnTertiary" href="/r">
-                For Recruiters
-              </Link>
+              <a className="btn btnPrimary" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
+                Download Resume PDF
+              </a>
+              <a className="btn btnTertiary" href={LINKS.emailProject}>
+                Contact Me
+              </a>
             </nav>
+            <div className="homeSecondaryActions" aria-label="Secondary actions">
+              <a href={LINKS.vcf}>Download vCard</a>
+              <Link href="/r">For Recruiters</Link>
+            </div>
+            <p className="homeFreshness">Resume and site content reviewed Apr 2026</p>
+            <div className="homeStatsStrip" role="list" aria-label="Career snapshot">
+              <p className="homeStatItem" role="listitem"><strong>{stats.years}+ years</strong> experience</p>
+              <p className="homeStatItem" role="listitem"><strong>{stats.rolesCount} roles</strong> delivered</p>
+              <p className="homeStatItem" role="listitem"><strong>{stats.uniqueEmployersCount} employers</strong> across finance, defense, and cloud</p>
+            </div>
           </div>
 
           <div className="homeHeroRight" aria-label="Portrait">
@@ -100,12 +106,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="section homeBrandStrip" aria-label="Career snapshot and brand logos">
-        <div className="homeStatsStrip" role="list">
-          <p className="homeStatItem" role="listitem"><strong>{stats.years}+ years</strong> experience</p>
-          <p className="homeStatItem" role="listitem"><strong>{stats.rolesCount} roles</strong> delivered</p>
-          <p className="homeStatItem" role="listitem"><strong>{stats.uniqueEmployersCount} employers</strong> across finance, defense, and cloud</p>
-        </div>
+      <section className="section homeBrandStrip" aria-label="Employer logo strip">
         <ExperienceTicker interactive className="homeBrandTicker" />
       </section>
     </div>

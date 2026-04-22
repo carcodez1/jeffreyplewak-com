@@ -72,11 +72,29 @@
   color: var(--muted2);
 }
 
+.heroHome {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(8px, 1.6vw, 18px);
+}
+
+.heroHome::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: clamp(-10px, -1.4vw, -4px) auto auto clamp(-18px, -2vw, -8px);
+  width: min(560px, 78vw);
+  height: min(300px, 42vw);
+  border-radius: 999px;
+  background: radial-gradient(closest-side, color-mix(in srgb, hsl(var(--accent)) 9%, transparent), transparent 68%);
+  pointer-events: none;
+}
+
 /* ── Hero grid ── */
 .homeHeroGrid {
   display: grid;
-  gap: var(--heroGap);
-  grid-template-columns: 1.28fr 0.72fr;
+  gap: clamp(14px, 2.6vw, 30px);
+  grid-template-columns: minmax(0, 1.24fr) minmax(220px, 0.62fr);
   align-items: center;
 }
 
@@ -84,14 +102,14 @@
   .homeHeroGrid { grid-template-columns: 1fr; }
 }
 
-.heroHome.section { margin-bottom: clamp(20px, 4vw, 38px); }
+.heroHome.section { margin-bottom: clamp(14px, 3vw, 26px); }
 
 .homeHeroLeft {
   max-width: 760px;
   display: grid;
-  gap: 4px;
+  gap: 2px;
   min-width: 0;
-  padding: 8px 4px 8px;
+  padding: 6px 4px 4px;
 }
 
 .homeHeroShell {
@@ -111,8 +129,8 @@
   min-width: 0;
   display: flex;
   justify-content: flex-end;
-  opacity: 0.92;
-  max-width: 360px;
+  opacity: 0.96;
+  max-width: 300px;
   margin-left: auto;
 }
 
@@ -123,13 +141,13 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .homeIdText { min-width: 0; }
 .homeRole {
-  margin: 6px 0 0;
-  font-size: clamp(1.1rem, 1.8vw, 1.32rem);
+  margin: 4px 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   color: var(--text);
 }
 
@@ -150,11 +168,11 @@
 }
 
 .homeLede {
-  margin-top: 12px;
-  margin-bottom: 8px;
-  max-width: 40ch;
-  font-size: clamp(1.08rem, 1.9vw, 1.32rem);
-  line-height: 1.46;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  max-width: 44ch;
+  font-size: clamp(1.04rem, 1.6vw, 1.22rem);
+  line-height: 1.42;
   color: var(--text);
 }
 
@@ -163,31 +181,9 @@
   font-weight: 700;
 }
 
-.homeHeroMiniStats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 4px 0 0;
-}
-
-.homeHeroMiniStat {
-  margin: 0;
-  padding: 7px 9px;
-  border-radius: var(--rSm);
-  border: 1px solid color-mix(in srgb, var(--border1) 74%, transparent);
-  background: color-mix(in srgb, var(--surface1) 70%, transparent);
-  color: var(--muted);
-  font-size: var(--text0);
-  line-height: 1.35;
-}
-
-.homeHeroMiniStat strong {
-  color: var(--text);
-}
-
 .heroHome .ctaRow {
   margin-top: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .homeIntroNote {
@@ -198,7 +194,7 @@
 }
 
 .homePrimaryActions {
-  margin-top: 12px;
+  margin-top: 8px;
   align-items: center;
 }
 
@@ -213,6 +209,31 @@
 
 .homePrimaryActions .btnSecondaryStrong {
   min-width: 210px;
+}
+
+.homeSecondaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 3px 0 10px;
+  font-size: var(--text0);
+  color: var(--muted2);
+}
+
+.homeSecondaryActions a {
+  color: var(--muted);
+  text-underline-offset: 2px;
+}
+
+.homeSecondaryActions a:hover,
+.homeSecondaryActions a:focus-visible {
+  color: hsl(var(--accent));
+}
+
+.homeFreshness {
+  margin: -2px 0 8px;
+  font-size: var(--text0);
+  color: var(--muted2);
 }
 
 .homeFlowHint {
@@ -232,15 +253,16 @@
 }
 
 .homeBrandStrip {
-  margin-top: 0;
+  margin-top: clamp(18px, 5vw, 44px);
   margin-bottom: clamp(16px, 3vw, 26px);
 }
 
 .homeStatsStrip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin-bottom: 10px;
+  margin-top: 4px;
+  margin-bottom: 0;
 }
 
 .homeStatItem {
@@ -270,7 +292,7 @@
 
 @media (max-width: 980px) {
   .homeHeroRight {
-    max-width: 320px;
+    max-width: 220px;
     justify-content: center;
     margin-inline: auto;
     opacity: 1;
@@ -278,8 +300,18 @@
 }
 
 @media (max-width: 980px) {
-  .homeHeroLeft { padding: 20px 18px 18px; }
+  .homeHeroLeft { padding: 12px 10px 8px; }
   .homeHeroRight { opacity: 1; }
+}
+
+@media (max-width: 760px) {
+  .homeHeroRight {
+    display: none;
+  }
+
+  .homeStatsStrip {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 }
 
 @media (max-width: 520px) {
@@ -296,6 +328,7 @@
 
   .homeStatsStrip {
     grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
 

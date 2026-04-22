@@ -2,12 +2,13 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import HomePage from "@/app/page";
 import RecruiterPage, { metadata as recruiterMetadata } from "@/app/r/page";
 import ProjectsPage, { metadata as projectsMetadata } from "@/app/projects/page";
 import CodexPage, { metadata as codexMetadata } from "@/app/projects/codex/page";
 import PrivacyPage, { metadata as privacyMetadata } from "@/app/privacy/page";
 import TermsPage, { metadata as termsMetadata } from "@/app/terms/page";
-import { SITE } from "@/config/site";
+import { LINKS, SITE } from "@/config/site";
 import { buildResumeWorkTypeStats, getMostRecentResumeRole, getRecruiterPackLinks, getResumeEvidenceLinks } from "@/lib/resume";
 import { RESUME } from "@/content/resume";
 
@@ -20,6 +21,44 @@ describe("routes", () => {
     const html = `<!doctype html><html><body><h1>ok</h1></body></html>`;
     const doc = parse(html);
     expect(doc.querySelector("h1")?.textContent).toBe("ok");
+  });
+
+  it("/ renders a focused hero CTA hierarchy", () => {
+    const html = renderToStaticMarkup(createElement(HomePage));
+    const doc = parse(html);
+    const actions = Array.from(doc.querySelectorAll('nav[aria-label="Primary actions"] a')).map((a) => ({
+      href: a.getAttribute("href"),
+      text: a.textContent,
+    }));
+    const secondaryActions = Array.from(doc.querySelectorAll('[aria-label="Secondary actions"] a')).map((a) => ({
+      href: a.getAttribute("href"),
+      text: a.textContent,
+    }));
+    const statItems = Array.from(doc.querySelectorAll('[aria-label="Career snapshot"] [role="listitem"]')).map((item) => item.textContent);
+
+    expect(doc.querySelector("h1")?.textContent).toBe("Jeffrey R. Plewak");
+    expect(doc.querySelector(".homeRole")?.textContent).toBe("Senior/Staff Software Engineer — Platform, Compliance & Production Systems");
+    expect(doc.body.textContent).toContain(
+      "I build reliable platform and backend systems for regulated environments, with strong deployment safety, observability, and reviewable delivery paths across finance, defense, and cloud.",
+    );
+    expect(actions).toEqual([
+      expect.objectContaining({ href: LINKS.resumePdf, text: "Download Resume PDF" }),
+      expect.objectContaining({ href: LINKS.emailProject, text: "Contact Me" }),
+    ]);
+    expect(actions).toHaveLength(2);
+    expect(secondaryActions).toEqual([
+      expect.objectContaining({ href: LINKS.vcf, text: "Download vCard" }),
+      expect.objectContaining({ href: "/r", text: "For Recruiters" }),
+    ]);
+    expect(secondaryActions).toHaveLength(2);
+    expect(doc.querySelector(".homeHeroMiniStats")).toBeNull();
+    expect(doc.body.textContent).toContain("Resume and site content reviewed Apr 2026");
+    expect(statItems).toEqual([
+      "15+ years experience",
+      "11 roles delivered",
+      "9 employers across finance, defense, and cloud",
+    ]);
+    expect(doc.querySelector('section[aria-label="Employer logo strip"]')).not.toBeNull();
   });
 
   it("/r renders the recruiter answer rail and CTA priorities", () => {
