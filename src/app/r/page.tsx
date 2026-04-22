@@ -56,15 +56,15 @@ export default function RecruiterPage() {
     recruiterPackLinks[0] ??
     null;
   const recruiterSummary =
-    "Senior software engineer with 10+ years delivering platform and backend systems in regulated, high-reliability environments, with emphasis on compliance-aware delivery and production correctness.";
+    "Senior/Staff software engineer with 10+ years delivering cloud-native platform and distributed systems in regulated banking, defense, and cloud environments, with focus on deployment safety, observability, resilience, and policy-controlled AI execution.";
 
   return (
     <div className="wrap recruiterPage">
       <header className="section recruiterHero" aria-label="Recruiter overview">
         <div className="recruiterHeroPanel card">
           <p className="recruiterEyebrow">For recruiters</p>
-          <h1 className="h1 recruiterHeroTitle">Start here for a quick review.</h1>
-          <p className="lede recruiterHeroLede">Resume first. Recruiter Pack is available for copy-paste files and downloads.</p>
+          <h1 className="h1 recruiterHeroTitle">Senior/Staff Software Engineer for Distributed Platform Systems</h1>
+          <p className="lede recruiterHeroLede">Start with the canonical resume, then open the recruiter pack, then review KProvEngine for focused technical proof.</p>
           <p className="cardDesc recruiterHeroSummary">{recruiterSummary}</p>
 
           <nav className="ctaRow recruiterHeroActions" aria-label="Recruiter actions">
@@ -78,7 +78,7 @@ export default function RecruiterPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open Bundle
+                Open Recruiter Pack
               </a>
             ) : null}
           </nav>
@@ -116,8 +116,8 @@ export default function RecruiterPage() {
           ) : null}
           <Link className="routeRailLink" href={KPROVENGINE_LINKS.proof}>
             <span className="routeRailIndex" aria-hidden="true">{recruiterPackPrimaryLink ? "03" : "02"}</span>
-            <span className="routeRailText">Open KProvEngine</span>
-            <span className="routeRailHint">One focused technical case study</span>
+            <span className="routeRailText">View KProvEngine Proof</span>
+            <span className="routeRailHint">Focused proof of production platform and compliance-aware AI execution decisions</span>
           </Link>
         </nav>
       </section>
