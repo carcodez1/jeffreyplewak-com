@@ -1,4 +1,3 @@
-// tests/jsonld.test.ts
 import { describe, expect, it } from "vitest";
 import { siteGraphJsonLd, SITE_URL, PERSON_ID, WEBSITE_ID } from "@/lib/jsonld";
 
@@ -14,6 +13,9 @@ describe("JSON-LD", () => {
 
     expect(website).toBeTruthy();
     expect(person).toBeTruthy();
+    if (!website || !person) {
+      throw new Error("Expected WebSite and Person nodes to exist in the JSON-LD graph.");
+    }
 
     expect(website["@type"]).toBe("WebSite");
     expect(website.url).toBe(SITE_URL);

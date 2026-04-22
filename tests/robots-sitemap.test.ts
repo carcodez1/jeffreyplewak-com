@@ -48,6 +48,7 @@ describe("robots and sitemap contract", () => {
   it("keeps sitemap URLs on canonical host", () => {
     const entries = sitemap();
     expect(entries.length).toBeGreaterThan(0);
+    expect(entries.some((entry) => entry.url === `${SITE.url}/projects/codex`)).toBe(true);
 
     for (const entry of entries) {
       expect(entry.url.startsWith(`${SITE.url}/`)).toBe(true);

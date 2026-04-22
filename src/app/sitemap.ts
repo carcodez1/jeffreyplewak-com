@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/r",
     "/projects",
+    "/projects/codex",
     "/projects/kprovengine",
     "/resume",
     "/privacy",

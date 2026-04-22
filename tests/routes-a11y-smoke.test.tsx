@@ -6,8 +6,12 @@ import { axe } from "vitest-axe";
 import * as matchers from "vitest-axe/matchers";
 import type { AxeMatchers } from "vitest-axe";
 import HomePage from "@/app/page";
+import PrivacyPage from "@/app/privacy/page";
+import ProjectsPage from "@/app/projects/page";
+import CodexPage from "@/app/projects/codex/page";
 import ResumePage from "@/app/resume/page";
 import RecruiterPage from "@/app/r/page";
+import TermsPage from "@/app/terms/page";
 import KProvEnginePage from "@/app/projects/kprovengine/page";
 
 expect.extend(matchers);
@@ -39,6 +43,26 @@ describe("route a11y smoke", () => {
 
   it("has no obvious accessibility violations on the recruiter page", async () => {
     const container = await renderMarkup(createElement(RecruiterPage));
+    expectAxe(await axe(container)).toHaveNoViolations();
+  });
+
+  it("has no obvious accessibility violations on the privacy page", async () => {
+    const container = await renderMarkup(createElement(PrivacyPage));
+    expectAxe(await axe(container)).toHaveNoViolations();
+  });
+
+  it("has no obvious accessibility violations on the terms page", async () => {
+    const container = await renderMarkup(createElement(TermsPage));
+    expectAxe(await axe(container)).toHaveNoViolations();
+  });
+
+  it("has no obvious accessibility violations on the projects page", async () => {
+    const container = await renderMarkup(createElement(ProjectsPage));
+    expectAxe(await axe(container)).toHaveNoViolations();
+  });
+
+  it("has no obvious accessibility violations on the codex project page", async () => {
+    const container = await renderMarkup(createElement(CodexPage));
     expectAxe(await axe(container)).toHaveNoViolations();
   });
 

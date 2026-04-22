@@ -41,10 +41,9 @@ export function extLinkProps(external: boolean) {
 }
 export const PROJECT_LINKS = {
   kprovengine: {
-    // Fill these with the exact values currently in src/app/projects/kprovengine/page.tsx
     home: "/projects",
-    repo: "REPLACE_ME",
-    readme: "REPLACE_ME",
-    archDoc: "REPLACE_ME",
+    repo: "https://github.com/carcodez1/KProvEngine",
+    readme: "https://github.com/carcodez1/KProvEngine#readme",
+    archDoc: "/projects/kprovengine/architecture.svg",
   },
 } as const;

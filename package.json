@@ -14,8 +14,10 @@
     "typecheck:tests": "tsc --noEmit -p tsconfig.tests.json",
     "check:types": "npm run -s typecheck && npm run -s typecheck:tests",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:ci": "CI=1 vitest run",
+    "check:coverage": "npm run -s test:coverage",
     "check:test": "npm run -s test:ci",
     "check:lint": "npm run -s lint",
     "check:build": "npm run -s build",
@@ -24,6 +26,8 @@
     "ssot:manifest": "node scripts/ssot/manifest.mjs",
     "ssot:pack": "npm run -s ssot:validate && npm run -s ssot:export && npm run -s ssot:manifest",
     "ssot:verify": "node scripts/ssot/verify-claims.mjs",
+    "codex:skills": "node scripts/codex/skills-manifest.mjs",
+    "check:codex": "npm run -s codex:skills && test -s artifacts/codex/skills-inventory.json",
     "context:reasoning": "node scripts/context/build-reasoning-context.mjs",
     "context:reasoning:check": "npm run -s context:reasoning && test -s artifacts/reasoning/context-bundle.json && test -s artifacts/reasoning/context-bundle.md",
     "check:ssot": "npm run -s ssot:export && npm run -s ssot:verify",
@@ -36,6 +40,8 @@
     "prepush": "npm run -s check && npm run -s diagrams:check"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"

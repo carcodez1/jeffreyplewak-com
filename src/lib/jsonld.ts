@@ -81,6 +81,14 @@ export function siteGraphJsonLd() {
       },
       {
         "@type": "WebPage",
+        "@id": `${base}/projects/codex#page`,
+        url: `${base}/projects/codex`,
+        name: "Codex Developer Journey — Interactive Workflow Tutorial",
+        isPartOf: { "@id": websiteId },
+        inLanguage: "en-US",
+      },
+      {
+        "@type": "WebPage",
         "@id": `${base}/projects/kprovengine#page`,
         url: `${base}/projects/kprovengine`,
         name: "KProvEngine — Proof Case Study for Human-Reviewed AI Workflows",

@@ -4,7 +4,7 @@ import { SITE } from "@/config/site";
 
 export const metadata: Metadata = {
   title: `Terms of Service — ${SITE.name}`,
-  description: "Terms of Service for this website.",
+  description: "Terms for using this professional portfolio, downloadable materials, and external links.",
   alternates: { canonical: "/terms" },
 };
 
@@ -19,8 +19,13 @@ export default function TermsPage() {
       <section className="section legal">
         <h2 className="h3">1. Use of this website</h2>
         <p className="muted">
-          This website is provided for informational purposes. You may browse, link to, and share pages using standard
-          web practices. You may not misuse the site, attempt to disrupt service, or attempt unauthorized access.
+          This website is a professional portfolio and informational site. You may browse, link to, and share pages
+          using standard web practices. You may not misuse the site, attempt to disrupt service, scrape it abusively,
+          or attempt unauthorized access.
+        </p>
+        <p className="muted">
+          Downloadable resume files, recruiter-pack artifacts, and contact-card exports are provided for professional
+          evaluation, recruiting, and standard business contact use.
         </p>
 
         <h2 className="h3">2. Intellectual property</h2>
@@ -33,7 +38,8 @@ export default function TermsPage() {
         <h2 className="h3">3. No warranties</h2>
         <p className="muted">
           This site is provided “as is” without warranties of any kind. While reasonable effort is made to keep
-          information accurate, no guarantee is made that content is complete, current, or error-free.
+          information accurate, no guarantee is made that content, downloads, or external references are complete,
+          current, available, or error-free.
         </p>
 
         <h2 className="h3">4. Limitation of liability</h2>
