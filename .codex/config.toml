@@ -1,6 +1,14 @@
-project_root_markers = [".git"]
-
-# Root AGENTS.md is the policy source of truth.
-# Keep project config minimal and stable.
-
 model = "gpt-5.4"
+approval_policy = "on-request"
+
+[profiles.inspect]
+model = "gpt-5.4"
+approval_policy = "on-request"
+
+[profiles.patch]
+model = "gpt-5.4"
+approval_policy = "on-request"
+
+[profiles.review]
+model = "gpt-5.4"
+approval_policy = "never"
