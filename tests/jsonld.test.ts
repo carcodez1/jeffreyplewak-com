@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { metadata as codexMetadata } from "@/app/projects/codex/page";
 import { siteGraphJsonLd, SITE_URL, PERSON_ID, WEBSITE_ID } from "@/lib/jsonld";
 
 describe("JSON-LD", () => {
@@ -22,5 +23,13 @@ describe("JSON-LD", () => {
 
     expect(person["@type"]).toBe("Person");
     expect(person.url).toBe(SITE_URL);
+  });
+
+  it("keeps Codex route JSON-LD name aligned with route metadata", () => {
+    const g = siteGraphJsonLd();
+    const codexPage = g["@graph"].find((n) => n["@id"] === `${SITE_URL}/projects/codex#page`);
+
+    expect(codexPage).toBeTruthy();
+    expect(codexPage?.name).toBe(codexMetadata.title);
   });
 });

@@ -1,8 +1,8 @@
 {
-  "date": "2026-03-05",
+  "date": "2026-04-22",
   "summary": {
-    "total": 31,
-    "ok": 31,
+    "total": 27,
+    "ok": 27,
     "missing": 0,
     "wrongPath": 0,
     "duplicate": 0
@@ -31,13 +31,13 @@
     {"ref": "/favicon.ico", "status": "OK", "resolved": ["src/app/favicon.ico"]},
     {"ref": "/icon-192.png", "status": "OK", "resolved": ["public/icon-192.png"]},
     {"ref": "/icon-512.png", "status": "OK", "resolved": ["public/icon-512.png"]},
+    {"ref": "/og-image.jpg", "status": "OK", "resolved": ["public/og-image.jpg"]},
     {"ref": "/og-image.png", "status": "OK", "resolved": ["public/og-image.png"]},
-    {"ref": "/projects/kprovengine/architecture.png", "status": "OK", "resolved": ["public/projects/kprovengine/architecture.png"]},
-    {"ref": "/projects/kprovengine/og.png", "status": "OK", "resolved": ["public/projects/kprovengine/og.png"]},
-    {"ref": "/projects/kprovengine/opengraph-image.png", "status": "OK", "resolved": ["src/app/projects/kprovengine/opengraph-image.png"]}
+    {"ref": "/projects/kprovengine/architecture.svg", "status": "OK", "resolved": ["public/projects/kprovengine/architecture.svg"]},
+    {"ref": "/projects/kprovengine/og.jpg", "status": "OK", "resolved": ["public/projects/kprovengine/og.jpg"]}
   ],
   "risk": {
-    "seoCritical": ["/assets/favicon/site.webmanifest", "/favicon.ico", "/og-image.png", "/projects/kprovengine/opengraph-image.png"],
+    "seoCritical": ["/assets/favicon/site.webmanifest", "/favicon.ico", "/og-image.jpg", "/og-image.png", "/projects/kprovengine/og.jpg"],
     "lcpCandidates": ["/assets/images/jeffrey-plewak-portrait.webp"],
     "clsSensitiveFillWrappers": ["homePortraitFrame", "pMedia", "homePreviewMedia", "projectsPreviewMedia"],
     "a11yNotes": [

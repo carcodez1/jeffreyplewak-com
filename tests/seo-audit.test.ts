@@ -48,6 +48,27 @@ function iconUrlsFromRootMetadata(): string[] {
 }
 
 describe("seo audit guardrails", () => {
+  it("keeps public image audit entries resolvable", () => {
+    const auditPath = path.join(repoRoot, "public", "downloads", "image-audit.json");
+    const audit = JSON.parse(fs.readFileSync(auditPath, "utf8")) as {
+      summary: { total: number; ok: number; missing: number; wrongPath: number };
+      entries: Array<{ ref: string; status: string; resolved: string[] }>;
+    };
+
+    expect(audit.summary.total).toBe(audit.entries.length);
+    expect(audit.summary.ok).toBe(audit.entries.length);
+    expect(audit.summary.missing).toBe(0);
+    expect(audit.summary.wrongPath).toBe(0);
+
+    for (const entry of audit.entries) {
+      expect(entry.status).toBe("OK");
+      expect(resolveStaticPath(entry.ref)).not.toBeNull();
+      for (const resolved of entry.resolved) {
+        expect(fs.existsSync(path.join(repoRoot, resolved))).toBe(true);
+      }
+    }
+  });
+
   it("keeps critical OG/icon assets present", () => {
     const required = [
       "/og-image.jpg",

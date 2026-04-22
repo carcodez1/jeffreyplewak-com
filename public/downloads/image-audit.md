@@ -1,9 +1,9 @@
 # Image Audit (Deterministic)
-Date: 2026-03-05
+Date: 2026-04-22
 
 ## Summary
-- Total references: 31
-- OK: 31
+- Total references: 27
+- OK: 27
 - MISSING: 0
 - WRONG-PATH: 0
 - DUPLICATE: 0
@@ -34,10 +34,10 @@ Date: 2026-03-05
 | `/favicon.ico` | OK | `src/app/favicon.ico` |
 | `/icon-192.png` | OK | `public/icon-192.png` |
 | `/icon-512.png` | OK | `public/icon-512.png` |
+| `/og-image.jpg` | OK | `public/og-image.jpg` |
 | `/og-image.png` | OK | `public/og-image.png` |
-| `/projects/kprovengine/architecture.png` | OK | `public/projects/kprovengine/architecture.png` |
-| `/projects/kprovengine/og.png` | OK | `public/projects/kprovengine/og.png` |
-| `/projects/kprovengine/opengraph-image.png` | OK | `src/app/projects/kprovengine/opengraph-image.png` |
+| `/projects/kprovengine/architecture.svg` | OK | `public/projects/kprovengine/architecture.svg` |
+| `/projects/kprovengine/og.jpg` | OK | `public/projects/kprovengine/og.jpg` |
 
 ## Risk Classification
 - SEO critical: favicon, manifest, OG, Twitter image paths are present.

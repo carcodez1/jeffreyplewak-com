@@ -208,6 +208,6 @@ For engineers:
 
 ## License Status
 
-There is no standalone `LICENSE` file committed in this repository.
+This repository includes a standalone `LICENSE` file.
 
-Unless a file or artifact states otherwise, treat this repository as not open-licensed and all rights reserved.
+Unless a file or artifact states otherwise, repository source is distributed under the MIT License.
