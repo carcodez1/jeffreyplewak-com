@@ -1,121 +1,156 @@
 # Jeffrey R. Plewak Portfolio
 
-Public, recruiter-ready portfolio and proof site built with Next.js App Router, TypeScript, and a structured source-of-truth model for resume, recruiter, and project surfaces.
+Public, recruiter-ready portfolio for Jeffrey R. Plewak. The site is a Next.js App Router application with HTML-first resume, recruiter, proof, and legal routes backed by local verification scripts.
 
-## TL;DR
+## What This Repo Is
 
-- Purpose: a calm, evidence-backed professional identity site for senior/staff software engineering roles.
-- Stack: Next.js 16, React 19, TypeScript, hand-authored CSS, Vercel-native deployment.
-- Core routes: `/`, `/resume`, `/r`, `/projects`, `/projects/kprovengine`, `/projects/codex`, `/privacy`, `/terms`.
-- System surfaces: App Router metadata, JSON-LD, `robots.txt`, `sitemap.xml`, recruiter/download artifacts, and repo-local Codex skills.
-- Observability: Vercel Web Analytics and Vercel Speed Insights, enabled only for public production traffic with filtering for internal and non-public paths.
+- A professional identity and proof site for senior/staff software engineering review.
+- A canonical HTML resume route plus downloadable resume and recruiter-pack artifacts.
+- A set of proof routes for project and workflow review.
+- A Codex-aware repo with explicit agent, skill, and verification surfaces.
 
-## Who This Is For
+This is not a generic template. It is also not the canonical source repository for every project described here. For example, `/projects/kprovengine` is a proof page in this site; the KProvEngine source lives in its own repository.
 
-- Recruiters and hiring managers who need a fast, credible overview plus downloadable recruiting artifacts.
-- Engineers reviewing technical judgment, metadata hygiene, testing, and proof-oriented project pages.
-- Maintainers working on a portfolio repo with explicit Codex workflow surfaces and deterministic verification.
-
-## Why This Exists
-
-This repository is the public implementation of a professional identity platform for Jeffrey R. Plewak. It is designed to keep visible claims grounded, routes legible, and recruiter-facing artifacts easy to verify and maintain.
-
-It is not a generic template and it is not the canonical source repository for every project mentioned here. For example, `/projects/kprovengine` is a proof page in this repo, while the actual KProvEngine source lives in its own GitHub repository.
-
-## Features
-
-- HTML-first public routes for identity, resume, recruiter funnel, project proof, and legal pages.
-- Structured metadata using the Next.js Metadata API plus route-aware Open Graph and Twitter cards.
-- Site-level JSON-LD graph for identity and primary public routes.
-- Environment-aware `robots.txt` and generated `sitemap.xml`.
-- Resume and recruiter download surfaces, including PDF, JSON, VCF, and recruiter-pack artifacts.
-- Focused proof pages for KProvEngine and the Codex workflow tutorial.
-- Privacy-conscious observability via Vercel Web Analytics and Vercel Speed Insights.
-- Vitest, Testing Library, route smoke checks, accessibility smoke checks, and coverage enforcement.
-- Repo-local Codex workflow surfaces through `AGENTS.md`, `.codex/config.toml`, and `.agents/skills/`.
-
-## Quick Start
-
-Requirements:
-
-- Node.js `>=20.19.0 <21`
-- npm `>=10`
-
-Install and run locally:
-
-```bash
-npm ci
-npm run dev
-```
-
-Open the app at `http://localhost:3000`.
-
-## Verification
-
-Core patch verification:
-
-```bash
-npm run -s verify:patch
-npm run -s test:ci
-npm run -s test:coverage
-```
-
-Useful repo checks:
-
-```bash
-npm run -s check:types
-npm run -s check:build
-npm run -s check:ssot
-npm run -s seo:report
-npm run -s codex:skills
-npm run -s check:codex
-```
-
-## Route Surface
+## Main Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Identity and landing surface |
-| `/resume` | Canonical HTML resume |
-| `/r` | Recruiter-first decision page |
-| `/projects` | Public proof index |
-| `/projects/kprovengine` | Flagship technical proof page |
-| `/projects/codex` | Guided Codex workflow tutorial |
-| `/privacy` | Privacy policy |
-| `/terms` | Terms of service |
-| `/robots.txt` | Crawl policy |
+| `/` | Landing page with current role positioning, resume/contact CTAs, proof stats, and employer context |
+| `/resume` | Canonical HTML resume with role timeline and downloads |
+| `/r` | Recruiter decision route; start with resume, recruiter-pack artifacts, then KProvEngine proof |
+| `/projects` | Index for public proof routes |
+| `/projects/kprovengine` | Technical proof page for KProvEngine decisions and evidence |
+| `/projects/codex` | Proof page for how this repo uses Codex, AGENTS.md, skills, verification, and human review |
+| `/privacy` | Privacy policy for analytics, downloads, contact, and hosting surfaces |
+| `/terms` | Terms for using the site and public materials |
+| `/robots.txt` | Environment-aware crawl policy |
 | `/sitemap.xml` | Public route inventory |
 
-## Architecture And Repo Surfaces
-
-### App stack
+## Tech Stack
 
 - Next.js 16 App Router
 - React 19
 - TypeScript
-- Hand-authored CSS with route-local styling where appropriate
-- `next/image` for controlled image delivery
+- Hand-authored CSS
+- Next Metadata API, route-level metadata, and site JSON-LD
+- Vercel Web Analytics and Vercel Speed Insights
+- Vitest, jsdom, React Testing Library, and `vitest-axe`
+- Mermaid diagram rendering for checked diagram artifacts
 
-### Metadata and discovery
+## Local Setup
 
-- Root metadata in `src/lib/metadata/root.ts`
-- Site JSON-LD in `src/lib/jsonld.ts`
-- Crawl and route discovery in `src/app/robots.ts` and `src/app/sitemap.ts`
+Requirements:
 
-### Resume and recruiter artifacts
+- Node.js `>=20.19.0 <21`
+- npm `10.x`
 
-- Public downloads live under `public/downloads/`
-- Recruiter-pack artifacts live under `public/downloads/recruiter-pack/`
-- The structured export and recruiter-pack checks are validated by the SSOT and recruiter-pack test suites
+Install dependencies:
 
-### Testing and coverage
+```bash
+npm ci
+```
 
-- Vitest + jsdom
-- React Testing Library for interactive component coverage
-- `vitest-axe` for route-level accessibility smoke coverage
-- Coverage enforcement is configured in `vitest.config.ts`
+Run locally:
 
-### Codex and local automation
+```bash
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+## Verification
+
+Default patch gate:
+
+```bash
+npm run -s verify:patch
+```
+
+What it runs:
+
+- `npm run -s lint`
+- `npm run -s typecheck`
+- `npm run -s build`
+
+Broader local gates:
+
+```bash
+npm run -s check
+npm run -s prepush
+```
+
+Focused checks used by this repo:
+
+```bash
+npm run -s check:ssot
+npm run -s check:codex
+npm run -s context:reasoning:check
+npm run -s diagrams:check
+npm run -s test:ci
+npm run -s test:coverage
+```
+
+Notes:
+
+- `check:ssot` exports and verifies recruiter/resume artifacts.
+- `check:codex` builds the repo-local skills inventory.
+- `prepush` runs the aggregate check plus diagram validation.
+- `verify:patch` and tests can update generated local outputs such as Next type references or SEO report timestamps; keep those changes intentional.
+
+## Resume And Recruiter Artifacts
+
+Source-of-truth split:
+
+- `src/content/resume.ts` is the canonical narrative source for public resume and route-facing summary content.
+- `src/content/ssot/profile.ssot.jsonld` is the claims/export source for recruiter-pack machine-readable artifacts.
+- PDFs and public downloads are derived artifacts and should be regenerated or verified through the SSOT scripts when changed.
+
+Public downloads live under `public/downloads/`.
+
+Recruiter-pack artifacts live under `public/downloads/recruiter-pack/` and include:
+
+- recruiter-pack index
+- copy-paste resume text
+- skills matrix CSV
+- search report
+- PDF resume copy
+- JSON resume export
+- manifest
+- contact VCF
+
+The export and verification scripts live in `scripts/ssot/`.
+
+## Metadata, SEO, And Discovery
+
+The site keeps core content routes server-rendered and indexable.
+
+Relevant surfaces:
+
+- root metadata: `src/lib/metadata/root.ts`
+- route metadata: App Router page files
+- Open Graph/Twitter image lists: `src/lib/metadata/images.ts`
+- JSON-LD graph: `src/lib/jsonld.ts`
+- robots: `src/app/robots.ts`
+- sitemap: `src/app/sitemap.ts`
+- SEO report script: `scripts/seo/report.mjs`
+
+Tests cover metadata parity, JSON-LD rendering, robots/sitemap behavior, route rendering, and accessibility smoke checks.
+
+## Analytics And Privacy
+
+Analytics are centralized through `src/app/components/Observability.tsx` and mounted from the root layout only when `isPublicProductionObservabilityEnv()` allows it.
+
+Current behavior:
+
+- enabled for public production builds
+- disabled for development and Vercel preview/development environments
+- filters internal paths such as `/api`, `/_next`, `/_vercel`, private/admin paths, and all `/downloads/*` paths
+- uses Vercel Web Analytics and Vercel Speed Insights
+- does not add advertising trackers
+
+The site stores local theme preference in browser storage.
+
+## Codex Workflow Surfaces
 
 Official repo-local Codex surfaces:
 
@@ -123,66 +158,56 @@ Official repo-local Codex surfaces:
 - `.codex/config.toml`
 - `.agents/skills/`
 
-The repo also includes scripts for:
+Local Codex agent profiles are configured under `.codex/agents/`:
 
-- Codex skill inventory generation
-- SSOT export and claim verification
-- reasoning-context bundle generation
-- SEO reporting
-- recruiter/download artifact checks
+- `repo-triage`
+- `proof-route`
+- `recruiter-route`
 
-## Analytics And Privacy Note
+Repo-local skills include focused workflows for accessibility, cleanup, gitignore hygiene, project pages, metadata polish, SEO, source-claim auditing, SSOT export, reasoning context, and test confidence.
 
-This site uses:
-
-- Vercel Web Analytics for privacy-conscious traffic and referrer insight
-- Vercel Speed Insights for real-user performance monitoring
-
-The integration is centralized in the root layout and only enabled for public production traffic. Internal and non-public paths such as `/api`, admin/private paths, framework internals, and recruiter-pack download surfaces are filtered out before events are sent.
-
-The site does not add ad-tech trackers or a cookie banner. It does use browser local storage for theme preference. Public contact and recruiter artifacts are intentionally exposed because the site is built for professional evaluation and hiring workflows.
+Legacy prompt/signature materials also exist under `codex/`, `prompts/`, and `docs/`, but current repeatable workflows should prefer the official surfaces listed above.
 
 ## Deployment
 
 The intended deployment target is Vercel.
 
-Production behavior:
+Production posture:
 
-- Public production deploys are indexable.
-- Preview and development deploys are blocked from indexing by `robots.txt`.
-- Vercel Analytics and Speed Insights are mounted only in public production environments.
+- production routes are indexable
+- preview/development robots output blocks indexing
+- analytics and speed insights mount only for public production behavior
+- downloads are public by design, but analytics events for `/downloads/*` are filtered before sending
 
-Typical deployment flow:
+Recommended local merge check before deployment:
 
 ```bash
-npm run -s verify:patch
-npm run -s test:ci
-npm run -s check:build
+npm run -s prepush
+npm run -s check:ssot
+npm run -s check:codex
 ```
 
-Then deploy to Vercel and verify:
+For README-only changes, `npm run -s check:codex` and `npm run -s verify:patch` are enough unless package scripts, routes, metadata, generated artifacts, or Codex surfaces changed.
 
-- canonical host configuration
-- `robots.txt`
-- `sitemap.xml`
-- Open Graph images and metadata
-- public download artifact availability
+## Reviewer Starting Points
 
-## Contact / Hiring
-
-- Email: `plewak.jeff@gmail.com`
-- LinkedIn: `https://www.linkedin.com/in/jeffreyplewak/`
-- GitHub: `https://github.com/carcodez1`
-- Calendly: `https://calendly.com/plewak-jeff`
-
-If you are reviewing this repository for hiring, start with:
+For recruiters:
 
 1. `/r`
 2. `/resume`
-3. `/projects/kprovengine`
+3. recruiter-pack downloads
+4. `/projects/kprovengine`
+
+For engineers:
+
+1. `src/app/`
+2. `src/lib/metadata/`, `src/lib/jsonld.ts`, `src/app/robots.ts`, `src/app/sitemap.ts`
+3. `scripts/ssot/`, `scripts/seo/`, `scripts/codex/`
+4. `tests/`
+5. `AGENTS.md`, `.codex/agents/`, `.agents/skills/`
 
 ## License Status
 
-There is currently no standalone `LICENSE` file committed in this repository.
+There is no standalone `LICENSE` file committed in this repository.
 
-Unless a file or artifact says otherwise, treat this repository as not open-licensed and all rights reserved.
+Unless a file or artifact states otherwise, treat this repository as not open-licensed and all rights reserved.
