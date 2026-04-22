@@ -6,6 +6,7 @@ const outDir = path.join(repoRoot, "public", "downloads");
 const outJson = path.join(outDir, "seo-report.json");
 const outMd = path.join(outDir, "seo-report.md");
 const publicDir = path.join(repoRoot, "public");
+const generatedAt = process.env.SEO_REPORT_GENERATED_AT ?? "2026-04-22T21:25:39.255Z";
 
 function readUtf8(relPath) {
   return fs.readFileSync(path.join(repoRoot, relPath), "utf8");
@@ -174,7 +175,7 @@ const total = checks.length;
 const scorePct = total ? Math.round((passed / total) * 100) : 0;
 
 const report = {
-  generatedAt: new Date().toISOString(),
+  generatedAt,
   score: {
     passed,
     total,
