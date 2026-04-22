@@ -46,6 +46,13 @@ export default function ProjectsPage() {
       title: "KProvEngine",
       blurb: "Deterministic workflow runs with reviewer-friendly evidence and release trust signals.",
     },
+    {
+      href: "/projects/codex",
+      src: "/og-image.jpg",
+      alt: "Codex workflow proof preview",
+      title: "Codex in This Repo",
+      blurb: "Repo-local guardrails, skills, verification, and human review for agentic coding work.",
+    },
   ] as const;
 
   return (
@@ -70,8 +77,13 @@ export default function ProjectsPage() {
             <span className="routeRailText">Open KProvEngine</span>
             <span className="routeRailHint">Flagship proof case study</span>
           </Link>
-          <Link className="routeRailLink" href="/resume">
+          <Link className="routeRailLink" href="/projects/codex">
             <span className="routeRailIndex" aria-hidden="true">02</span>
+            <span className="routeRailText">Open Codex Workflow Proof</span>
+            <span className="routeRailHint">Repo guardrails and verification workflow</span>
+          </Link>
+          <Link className="routeRailLink" href="/resume">
+            <span className="routeRailIndex" aria-hidden="true">03</span>
             <span className="routeRailText">Open Resume</span>
             <span className="routeRailHint">Role history and delivery context</span>
           </Link>

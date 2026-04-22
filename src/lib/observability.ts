@@ -38,4 +38,3 @@ export function getObservabilityPathname(url: string): string {
 export function filterObservabilityEvent<T extends ObservabilityEvent>(event: T): T | null {
   return matchesBlockedPrefix(getObservabilityPathname(event.url)) ? null : event;
 }
-

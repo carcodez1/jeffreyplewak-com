@@ -5,6 +5,7 @@ coverage/
 logs/
 artifacts/
 .tmp/
+*.tsbuildinfo
 
 # local scans / snapshots / checkpoints
 snapshots/

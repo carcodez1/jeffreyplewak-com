@@ -75,7 +75,7 @@ print_cmd "NPM SCRIPTS" node -e '
 const fs=require("fs");
 const p=JSON.parse(fs.readFileSync("package.json","utf8"));
 console.log(JSON.stringify(p.scripts ?? {}, null, 2));
-' 
+'
 
 print_cmd "DEPENDENCIES" node -e '
 const fs=require("fs");
