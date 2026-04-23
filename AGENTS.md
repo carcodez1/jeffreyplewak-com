@@ -41,6 +41,11 @@ Nested `AGENTS.md` files are route-specific exceptions only.
 - Use planning first for non-trivial work such as audits, metadata changes, routing, or multi-file patches.
 - Treat generated artifacts separately from durable source files.
 
+# Mandatory Skill Usage
+
+- Use `worktree-task-start` before creating a new task branch or worktree.
+- Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs.
+
 # Verification
 
 Default patch verification:
