@@ -43,13 +43,9 @@ Nested `AGENTS.md` files are route-specific exceptions only.
 
 # Mandatory Skill Usage
 
-<<<<<<< HEAD
-- Use `worktree-task-start` before creating a new task branch or worktree.
-- Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs.
-=======
 - Use `worktree-task-start` before creating a new task branch or worktree. It should call `bash scripts/git/new-worktree.sh ...`.
 - Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs. It should call `npm run -s codex:verify-scope`.
->>>>>>> 772a33c (chore(codex): trim policy duplication and add exec-based runner)
+- Use `generated-artifact-hygiene` when generated files appear in the worktree. It should call `node scripts/codex/check-generated-churn.mjs`.
 
 # Verification
 
