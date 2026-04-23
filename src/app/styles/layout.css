@@ -181,7 +181,7 @@
   font-weight: 700;
 }
 
-.heroHome .ctaRow {
+.heroHome .homePrimaryActions {
   margin-top: 10px;
   margin-bottom: 2px;
 }
@@ -195,7 +195,79 @@
 
 .homePrimaryActions {
   margin-top: 8px;
+  display: inline-flex;
   align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  position: relative;
+  isolation: isolate;
+}
+
+.homePrimaryActions :where(.btn) {
+  box-shadow: 0 10px 24px color-mix(in srgb, black 14%, transparent);
+}
+
+.homeActionMenu {
+  position: relative;
+}
+
+.homeActionMenuTrigger {
+  min-width: 0;
+  min-height: 38px;
+  padding: 7px 11px;
+  border-color: color-mix(in srgb, var(--border1) 78%, transparent);
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+  cursor: pointer;
+  list-style: none;
+}
+
+.homeActionMenuTrigger::-webkit-details-marker {
+  display: none;
+}
+
+.homeActionMenuTrigger::after {
+  content: "▾";
+  margin-left: 7px;
+  font-size: 0.78em;
+}
+
+.homeActionMenu[open] .homeActionMenuTrigger::after {
+  content: "▴";
+}
+
+.homeActionMenuPanel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: min(250px, calc(100vw - 32px));
+  padding: 6px;
+  border: 1px solid var(--border1);
+  border-radius: var(--rMd);
+  background: color-mix(in srgb, var(--surface0) 96%, black 4%);
+  box-shadow: var(--shadow2);
+}
+
+.homeActionMenuPanel a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: calc(var(--rMd) - 2px);
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--text0);
+  font-weight: 650;
+}
+
+.homeActionMenuPanel a:hover,
+.homeActionMenuPanel a:focus-visible {
+  background: color-mix(in srgb, var(--surface2) 78%, transparent);
+  color: hsl(var(--accent));
 }
 
 .homePrimaryActions .btn {
@@ -205,6 +277,10 @@
 .homePrimaryActions .btnPrimary {
   min-width: 190px;
   min-height: 44px;
+}
+
+.homeContactPrimary {
+  justify-content: center;
 }
 
 .homePrimaryActions .btnSecondaryStrong {
@@ -316,14 +392,33 @@
 
 @media (max-width: 520px) {
   .homePrimaryActions {
-    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 360px;
   }
 
-  .homePrimaryActions .btn,
-  .homePrimaryActions .btnPrimary,
-  .homePrimaryActions .btnSecondaryStrong {
+  .homeActionMenu {
     min-width: 0;
-    width: 100%;
+  }
+
+  .homeContactPrimary {
+    flex: 1 1 190px;
+  }
+
+  .homeActionMenuTrigger {
+    min-width: 0;
+    min-height: 38px;
+    justify-content: center;
+  }
+
+  .homeActionMenuPanel {
+    position: static;
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    left: 0;
+    right: 0;
+    min-width: 100%;
   }
 
   .homeStatsStrip {
