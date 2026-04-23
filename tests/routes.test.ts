@@ -26,13 +26,18 @@ describe("routes", () => {
   it("/ renders a focused hero CTA hierarchy", () => {
     const html = renderToStaticMarkup(createElement(HomePage));
     const doc = parse(html);
-    const actions = Array.from(doc.querySelectorAll('nav[aria-label="Primary actions"] a')).map((a) => ({
+    const actions = Array.from(doc.querySelectorAll('nav[aria-label="Primary actions"] > a')).map((a) => ({
       href: a.getAttribute("href"),
       text: a.textContent,
+      target: a.getAttribute("target"),
     }));
-    const secondaryActions = Array.from(doc.querySelectorAll('[aria-label="Secondary actions"] a')).map((a) => ({
+    const actionMenu = doc.querySelector('nav[aria-label="Primary actions"] details.homeActionMenu');
+    const menuTrigger = doc.querySelector('nav[aria-label="Primary actions"] summary');
+    const secondaryActions = Array.from(doc.querySelectorAll('[aria-label="Secondary action menu"] a')).map((a) => ({
       href: a.getAttribute("href"),
       text: a.textContent,
+      target: a.getAttribute("target"),
+      rel: a.getAttribute("rel"),
     }));
     const statItems = Array.from(doc.querySelectorAll('[aria-label="Career snapshot"] [role="listitem"]')).map((item) => item.textContent);
 
@@ -42,15 +47,24 @@ describe("routes", () => {
       "I build reliable platform and backend systems for regulated environments, with strong deployment safety, observability, and reviewable delivery paths across finance, defense, and cloud.",
     );
     expect(actions).toEqual([
-      expect.objectContaining({ href: LINKS.resumePdf, text: "Download Resume PDF" }),
-      expect.objectContaining({ href: LINKS.emailProject, text: "Contact Me" }),
+      expect.objectContaining({ href: LINKS.emailProject, text: "Contact Me", target: null }),
     ]);
-    expect(actions).toHaveLength(2);
+    expect(actions).toHaveLength(1);
+    expect(actionMenu).not.toBeNull();
+    expect(menuTrigger?.textContent).toContain("Options");
+    expect(menuTrigger?.getAttribute("aria-label")).toBe("Open secondary actions");
     expect(secondaryActions).toEqual([
+      expect.objectContaining({ href: LINKS.emailProject, text: "Email Me" }),
+      expect.objectContaining({
+        href: LINKS.resumePdf,
+        text: "Download Resume PDF",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      }),
       expect.objectContaining({ href: LINKS.vcf, text: "Download vCard" }),
       expect.objectContaining({ href: "/r", text: "For Recruiters" }),
     ]);
-    expect(secondaryActions).toHaveLength(2);
+    expect(secondaryActions).toHaveLength(4);
     expect(doc.querySelector(".homeHeroMiniStats")).toBeNull();
     expect(doc.body.textContent).toContain("Resume and site content reviewed Apr 2026");
     expect(statItems).toEqual([

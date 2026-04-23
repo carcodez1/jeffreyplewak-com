@@ -71,18 +71,24 @@ export default function HomePage() {
               environments, with strong deployment safety, observability, and reviewable delivery paths across finance,
               defense, and cloud.
             </p>
-            <nav className="ctaRow homePrimaryActions" aria-label="Primary actions">
-              <a className="btn btnPrimary" href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
-                Download Resume PDF
-              </a>
-              <a className="btn btnTertiary" href={LINKS.emailProject}>
+            <nav className="homePrimaryActions" aria-label="Primary actions">
+              <a className="btn btnPrimary homeContactPrimary" href={LINKS.emailProject}>
                 Contact Me
               </a>
+              <details className="homeActionMenu">
+                <summary className="btn btnTertiary homeActionMenuTrigger" aria-label="Open secondary actions">
+                  Options
+                </summary>
+                <div className="homeActionMenuPanel" aria-label="Secondary action menu">
+                  <a href={LINKS.emailProject}>Email Me</a>
+                  <a href={LINKS.resumePdf} target="_blank" rel="noopener noreferrer">
+                    Download Resume PDF
+                  </a>
+                  <a href={LINKS.vcf}>Download vCard</a>
+                  <Link href="/r">For Recruiters</Link>
+                </div>
+              </details>
             </nav>
-            <div className="homeSecondaryActions" aria-label="Secondary actions">
-              <a href={LINKS.vcf}>Download vCard</a>
-              <Link href="/r">For Recruiters</Link>
-            </div>
             <p className="homeFreshness">Resume and site content reviewed Apr 2026</p>
             <div className="homeStatsStrip" role="list" aria-label="Career snapshot">
               <p className="homeStatItem" role="listitem"><strong>{stats.years}+ years</strong> experience</p>
