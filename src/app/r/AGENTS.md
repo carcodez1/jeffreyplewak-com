@@ -1,7 +1,7 @@
 Root `AGENTS.md` applies first; this file adds stricter recruiter-route rules only.
 
 Role of `/r`:
-- `/r` is the recruiter funnel / decision page
+- `/r` is the recruiter decision route
 - it is not the canonical resume
 - it is not a redirect
 - it should route a recruiter quickly to the correct next action
