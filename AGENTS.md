@@ -43,8 +43,9 @@ Nested `AGENTS.md` files are route-specific exceptions only.
 
 # Mandatory Skill Usage
 
-- Use `worktree-task-start` before creating a new task branch or worktree.
-- Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs.
+- Use `worktree-task-start` before creating a new task branch or worktree. It should call `bash scripts/git/new-worktree.sh ...`.
+- Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs. It should call `npm run -s codex:verify-scope`.
+
 
 # Verification
 
@@ -68,46 +69,9 @@ Stop for approval before patching when any of the following apply:
 - visible-claim or source-of-truth uncertainty
 - verification failure
 
-# Modes
+# Execution Notes
 
-## INSPECT
-
-Inspection only. No edits.
-
-Return exactly:
-TASK
-FILES
-FACT / INFERENCE / ASSUMPTION / UNKNOWN
-OPEN QUESTIONS
-RECOMMENDED PATH
-PLAN
-
-## PATCH
-
-Apply the smallest correct patch directly unless a HITL trigger fires. Run verification after patching.
-
-Return exactly:
-TASK
-FILES
-FACT / INFERENCE / ASSUMPTION / UNKNOWN
-APPLY STATUS
-DIFF SUMMARY
-VERIFY
-RISKS
-ROLLBACK
-NEXT ACTION
-HITL STATUS
-
-## REVIEW
-
-Review diffs for regressions and residual risk. Do not patch.
-
-Return exactly:
-TASK
-FILES
-FACT / INFERENCE / ASSUMPTION / UNKNOWN
-VERIFY
-RISKS
-ROLLBACK
-NEXT ACTION
-HITL STATUS
+- INSPECT means no edits.
+- PATCH means apply the smallest correct patch and verify it.
+- REVIEW means inspect diffs for regressions and residual risk without patching.
+- Use concise structured output. If the user specifies an exact return format, follow that format.

@@ -2,16 +2,6 @@ name = "recruiter-route"
 description = "Inspects and patches the /r recruiter decision route with minimal recruiter-focused diffs."
 
 developer_instructions = """
-Start every task with repo-state inspection:
-- pwd
-- git status -sb
-- git branch --show-current
-- node -v
-- npm -v
-
-Read only the minimum files needed for the requested /r task.
-Prefer copy-only changes unless a tiny structural fix is clearly required.
-
 Treat /r as:
 - a recruiter decision route
 - not the canonical resume
@@ -28,39 +18,9 @@ Content rules:
 - prioritize identity, fit, credibility, proof, then downloads
 - keep visible copy calm, direct, and human
 - avoid brochure language and internal architecture jargon in hero copy
-- preserve SSR, accessibility, SEO, metadata, and JSON-LD integrity
 - do not create claim drift against visible content or SSOT-backed resume content
 
-Patch rules:
-- do not redesign
-- do not add dependencies
-- do not change route order
-- do not modify metadata, canonical, sitemap, robots, or JSON-LD unless explicitly requested
-- do not patch other files unless clearly required by the task
-
-Verification:
-- after patching, run: npm run -s verify:patch
-- if verification fails, clearly distinguish in-scope failures from unrelated failures
-
-Return format for inspect:
-- TASK
-- FILES
-- FACT / INFERENCE / ASSUMPTION / UNKNOWN
-- OPEN QUESTIONS
-- RECOMMENDED PATH
-- PLAN
-
-Return format for patch:
-- TASK
-- FILES
-- FACT / INFERENCE / ASSUMPTION / UNKNOWN
-- APPLY STATUS
-- DIFF SUMMARY
-- VERIFY
-- RISKS
-- ROLLBACK
-- NEXT ACTION
-- HITL STATUS
-
-Always return unified diffs for code changes.
+- Keep route order unchanged.
+- Prefer copy-only changes unless a tiny structural fix is clearly required.
+- Do not redesign or touch unrelated files unless clearly required by the task.
 """

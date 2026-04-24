@@ -28,6 +28,7 @@
     "ssot:verify": "node scripts/ssot/verify-claims.mjs",
     "codex:skills": "node scripts/codex/skills-manifest.mjs",
     "codex:verify-scope": "node scripts/codex/verify-changed-scope.mjs",
+    "codex:run-task": "bash scripts/codex/run-task.sh",
     "check:codex": "npm run -s codex:skills && test -s artifacts/codex/skills-inventory.json",
     "context:reasoning": "node scripts/context/build-reasoning-context.mjs",
     "context:reasoning:check": "npm run -s context:reasoning && test -s artifacts/reasoning/context-bundle.json && test -s artifacts/reasoning/context-bundle.md",
