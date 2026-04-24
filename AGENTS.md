@@ -45,7 +45,7 @@ Nested `AGENTS.md` files are route-specific exceptions only.
 
 - Use `worktree-task-start` before creating a new task branch or worktree. It should call `bash scripts/git/new-worktree.sh ...`.
 - Use `scoped-verify` before choosing verification for non-trivial or mixed-scope diffs. It should call `npm run -s codex:verify-scope`.
-- Use `generated-artifact-hygiene` when generated files appear in the worktree. It should call `node scripts/codex/check-generated-churn.mjs`.
+- Use `generated-artifact-hygiene` when generated files appear in the worktree. It should call `node scripts/codex/check-generated-churn.mjs`.ß
 
 # Verification
 

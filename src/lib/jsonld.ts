@@ -83,7 +83,7 @@ export function siteGraphJsonLd() {
         "@type": "WebPage",
         "@id": `${base}/projects/codex#page`,
         url: `${base}/projects/codex`,
-        name: "Codex Developer Journey — Interactive Workflow Tutorial",
+        name: "Codex in This Repo — Workflow Proof",
         isPartOf: { "@id": websiteId },
         inLanguage: "en-US",
       },
