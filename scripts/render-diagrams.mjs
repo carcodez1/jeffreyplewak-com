@@ -74,6 +74,11 @@ for (const file of files) {
       "scripts/config/puppeteer-mermaid-ci.json",
     );
 
+    const mermaidConfig = path.resolve(
+      repoRoot,
+      "scripts/config/mermaid-render-config.json",
+    );
+
     execFileSync(
       "npx",
       [
@@ -81,6 +86,8 @@ for (const file of files) {
         "@mermaid-js/mermaid-cli",
         "-p",
         puppeteerConfig,
+        "-c",
+        mermaidConfig,
         "-i",
         input,
         "-o",
