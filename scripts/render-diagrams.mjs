@@ -69,9 +69,23 @@ for (const file of files) {
   const output = path.join(outputDir, `${base}.svg`);
 
   try {
+    const puppeteerConfig = path.resolve(
+      repoRoot,
+      "scripts/config/puppeteer-mermaid-ci.json",
+    );
+
     execFileSync(
       "npx",
-      ["--no-install", "@mermaid-js/mermaid-cli", "-i", input, "-o", output],
+      [
+        "--no-install",
+        "@mermaid-js/mermaid-cli",
+        "-p",
+        puppeteerConfig,
+        "-i",
+        input,
+        "-o",
+        output,
+      ],
       { stdio: "inherit" },
     );
 
